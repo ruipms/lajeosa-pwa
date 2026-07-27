@@ -1,4 +1,5 @@
 const CACHE_NAME = "lajeosa-cache-v9"; // muda sempre que fizeres deploy
+
 const FILES_TO_CACHE = [
   "index.html",
   "noticias.html",
@@ -12,7 +13,7 @@ const FILES_TO_CACHE = [
 
 // Instala o service worker e guarda os ficheiros em cache
 self.addEventListener("install", event => {
-  self.skipWaiting(); // força a ativação imediata
+  self.skipWaiting(); // ativa imediatamente
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return cache.addAll(FILES_TO_CACHE);
@@ -33,15 +34,32 @@ self.addEventListener("activate", event => {
       );
     })
   );
-  clients.claim(); // força a atualização da PWA
+  clients.claim(); // força atualização da PWA
 });
 
-// Intercepta pedidos e responde com cache quando possível
+// Estratégia network-first para HTML
 self.addEventListener("fetch", event => {
+  const request = event.request;
+
+  // Se for HTML → network-first
+  if (request.headers.get("accept").includes("text/html")) {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          // Atualiza cache com versão nova
+          const cloned = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, cloned));
+          return response;
+        })
+        .catch(() => caches.match(request)) // offline → usa cache
+    );
+    return;
+  }
+
+  // Para imagens, CSS, JS → cache-first
   event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
+    caches.match(request).then(response => {
+      return response || fetch(request);
     })
   );
 });
-
