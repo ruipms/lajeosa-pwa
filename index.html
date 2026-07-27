@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lajeosa do Mondego</title>
+
+    <!-- Manifest PWA -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Ícone da app -->
+    <link rel="icon" href="assets/brasao.png">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0F3D2E; /* Verde escuro */
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        header img {
+            width: 140px;
+        }
+
+        h1 {
+            margin-top: 10px;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #1F5C45; /* Verde claro */
+            padding: 20px;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            background-color: #2a7a5e;
+        }
+
+        .card i {
+            font-size: 40px;
+            color: #D4AF37; /* Dourado */
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 10px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    </style>
+
+    <!-- Ícones -->
+    <script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+<header>
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
+    <h1>Lajeosa do Mondego</h1>
+</header>
+
+<div class="grid">
+    <div class="card" onclick="openPage('noticias.html')">
+        <i class="fas fa-newspaper"></i>
+        <p>Notícias</p>
+    </div>
+
+    <div class="card" onclick="openPage('eventos.html')">
+        <i class="fas fa-calendar-alt"></i>
+        <p>Eventos</p>
+    </div>
+
+    <div class="card" onclick="openPage('pontos.html')">
+        <i class="fas fa-map-marker-alt"></i>
+        <p>Pontos de Interesse</p>
+    </div>
+
+    <div class="card" onclick="openPage('historia.html')">
+        <i class="fas fa-book"></i>
+        <p>História e Tradições</p>
+    </div>
+
+    <div class="card" onclick="openPage('contactos.html')">
+        <i class="fas fa-phone"></i>
+        <p>Contactos</p>
+    </div>
+
+    <div class="card" onclick="openPage('meteorologia.html')">
+        <i class="fas fa-cloud"></i>
+        <p>Meteorologia</p>
+    </div>
+</div>
+
+<footer>
+    © 2026 Lajeosa do Mondego — Website oficial
+</footer>
+
+<script>
+    function openPage(page) {
+        window.location.href = page;
+    }
+
+    // Registar o service worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js');
+    }
+</script>
+
+</body>
+</html>
