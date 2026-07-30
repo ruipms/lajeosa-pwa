@@ -9,7 +9,7 @@
     body {
         background-color: #0F3D2E;
         color: white;
-        font-family: Arial;
+        font-family: Arial, sans-serif;
         padding: 20px;
     }
 
@@ -17,17 +17,24 @@
         margin-bottom: 10px;
     }
 
+    h3 {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        color: #D4AF37;
+    }
+
     p {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     ul {
         list-style: none;
         padding: 0;
+        margin-bottom: 10px;
     }
 
     li {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         background-color: #134C3A;
         padding: 10px;
         border-radius: 6px;
@@ -36,7 +43,7 @@
     a {
         color: #D4AF37;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 16px;
     }
 
     a:hover {
@@ -49,20 +56,83 @@
         color: #D4AF37;
         font-size: 18px;
     }
+
+    .mensagem {
+        font-size: 14px;
+        color: #cccccc;
+    }
 </style>
 </head>
 <body>
 
 <h2>Notícias da Região</h2>
-<p>Aqui podes ver as últimas publicações do portal Beira.pt.</p>
+<p>Aqui podes ver as últimas publicações de vários portais e meios da região.</p>
 
-<ul id="noticias">
+<!-- Beira.pt -->
+<h3>Beira.pt</h3>
+<p>Últimas notícias do portal Beira.pt.</p>
+<ul id="noticias-beira">
     <li>A carregar notícias...</li>
 </ul>
 
+<!-- Município de Celorico da Beira -->
+<h3>Município de Celorico da Beira</h3>
+<p>Notícias do Município de Celorico da Beira.</p>
+<ul id="noticias-celorico">
+    <li class="mensagem">À espera de feed RSS alternativo. Por agora, esta secção está em preparação.</li>
+</ul>
+
+<!-- Município da Guarda -->
+<h3>Município da Guarda</h3>
+<p>Notícias do Município da Guarda.</p>
+<ul id="noticias-guarda">
+    <li class="mensagem">À espera do URL do feed RSS oficial. Quando o tiveres, podemos ativar esta secção.</li>
+</ul>
+
+<!-- Rádio Altitude -->
+<h3>Rádio Altitude</h3>
+<p>Últimas notícias da Rádio Altitude.</p>
+<ul id="noticias-altitude">
+    <li class="mensagem">À espera do URL do feed RSS. Secção pronta para ativar.</li>
+</ul>
+
+<!-- Rádio F -->
+<h3>Rádio F</h3>
+<p>Últimas notícias da Rádio F.</p>
+<ul id="noticias-radiof">
+    <li class="mensagem">À espera do URL do feed RSS. Secção pronta para ativar.</li>
+</ul>
+
+<!-- Terras da Beira -->
+<h3>Terras da Beira</h3>
+<p>Últimas notícias do jornal Terras da Beira.</p>
+<ul id="noticias-terras">
+    <li class="mensagem">À espera do URL do feed RSS. Secção pronta para ativar.</li>
+</ul>
+
+<!-- O Interior -->
+<h3>O Interior</h3>
+<p>Últimas notícias do jornal O Interior.</p>
+<ul id="noticias-interior">
+    <li class="mensagem">À espera do URL do feed RSS. Secção pronta para ativar.</li>
+</ul>
+
+<!-- Facebook da Lajeosa -->
+<h3>Facebook da Lajeosa</h3>
+<p>Publicações recentes da página da Lajeosa no Facebook.</p>
+<ul id="noticias-facebook">
+    <li class="mensagem">À espera de feed alternativo para Facebook. Secção em preparação.</li>
+</ul>
+
+<a class="voltar" href="index.html">← Voltar</a>
+
 <script>
-async function carregarRSS() {
-    const url = "https://rss.app/feeds/pChXcF6RcAGHnL02.xml";
+async function carregarFeed(url, elementoId, maxItems = 3) {
+    if (!url) {
+        return; // se não houver URL, não tenta carregar
+    }
+
+    const lista = document.getElementById(elementoId);
 
     try {
         const resposta = await fetch(url);
@@ -72,31 +142,50 @@ async function carregarRSS() {
         const xml = parser.parseFromString(texto, "text/xml");
 
         const items = xml.querySelectorAll("item");
-        const lista = document.getElementById("noticias");
 
-        lista.innerHTML = ""; // limpa o "A carregar..."
+        lista.innerHTML = ""; // limpa mensagem inicial
 
         items.forEach((item, index) => {
-            if (index < 3) {
-                const titulo = item.querySelector("title").textContent;
-                const link = item.querySelector("link").textContent;
+            if (index < maxItems) {
+                const titulo = item.querySelector("title")?.textContent || "Sem título";
+                const link = item.querySelector("link")?.textContent || "#";
 
                 const li = document.createElement("li");
                 li.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
                 lista.appendChild(li);
             }
         });
+
+        if (items.length === 0) {
+            lista.innerHTML = "<li class='mensagem'>Não foram encontradas notícias neste feed.</li>";
+        }
     } catch (erro) {
-        document.getElementById("noticias").innerHTML =
-            "<li>Não foi possível carregar as notícias.</li>";
+        lista.innerHTML = "<li class='mensagem'>Não foi possível carregar as notícias desta fonte.</li>";
     }
 }
 
-carregarRSS();
-</script>
+// Aqui colocamos os feeds que já tens garantidos.
+// Beira.pt já sabemos:
+carregarFeed(
+    "https://rss.app/feeds/pChXcF6RcAGHnL02.xml",
+    "noticias-beira",
+    3
+);
 
-<a class="voltar" href="index.html">← Voltar</a>
+// Quando tiveres os outros feeds, basta substituir os URLs abaixo
+// Exemplo (quando souberes o URL do feed da Guarda):
+// carregarFeed("URL_DO_FEED_DA_GUARDA", "noticias-guarda", 3);
+
+// Exemplo para Altitude, Rádio F, Terras da Beira, O Interior:
+// carregarFeed("URL_DO_FEED_ALTITUDE", "noticias-altitude", 3);
+// carregarFeed("URL_DO_FEED_RADIOF", "noticias-radiof", 3);
+// carregarFeed("URL_DO_FEED_TERRAS", "noticias-terras", 3);
+// carregarFeed("URL_DO_FEED_INTERIOR", "noticias-interior", 3);
+
+// Quando tiveres feeds alternativos para Celorico e Facebook da Lajeosa:
+// carregarFeed("URL_FEED_CELORICO", "noticias-celorico", 3);
+// carregarFeed("URL_FEED_FACEBOOK_LAJEOSA", "noticias-facebook", 3);
+</script>
 
 </body>
 </html>
-
