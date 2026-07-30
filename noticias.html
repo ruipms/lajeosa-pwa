@@ -17,6 +17,12 @@
         margin-bottom: 10px;
     }
 
+    h3 {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        color: #D4AF37;
+    }
+
     p {
         margin-bottom: 20px;
     }
@@ -59,9 +65,17 @@
 <body>
 
 <h2>Notícias da Região</h2>
-<p>Últimas publicações do portal Beira.pt.</p>
+<p>Últimas publicações de fontes regionais.</p>
 
+<!-- Beira.pt -->
+<h3>Beira.pt</h3>
 <ul id="noticias-beira">
+    <li>A carregar notícias...</li>
+</ul>
+
+<!-- Freguesia da Guarda -->
+<h3>Freguesia da Guarda</h3>
+<ul id="noticias-freguesia">
     <li>A carregar notícias...</li>
 </ul>
 
@@ -101,8 +115,12 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
     }
 }
 
-// Apenas Beira.pt ativo
+// Beira.pt
 carregarFeed("https://rss.app/feeds/pChXcF6RcAGHnL02.xml", "noticias-beira", 3);
+
+// Freguesia da Guarda
+carregarFeed("https://www.freguesiadaguarda.pt/rss-feed", "noticias-freguesia", 3);
+
 </script>
 
 </body>
