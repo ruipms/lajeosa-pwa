@@ -1,43 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notícias</title>
-    <style>
-        body {
-            background-color: #0F3D2E;
-            color: white;
-            font-family: Arial;
-            padding: 20px;
-        }
-        a {
-            color: #D4AF37;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        h2 {
-            margin-bottom: 10px;
-        }
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-            margin-top: 20px;
-            background-color: #0F3D2E;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notícias</title>
+
+<style>
+    body {
+        background-color: #0F3D2E;
+        color: white;
+        font-family: Arial;
+        padding: 20px;
+    }
+
+    h2 {
+        margin-bottom: 10px;
+    }
+
+    p {
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 15px;
+        background-color: #134C3A;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    a {
+        color: #D4AF37;
+        text-decoration: none;
+        font-size: 18px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .voltar {
+        display: inline-block;
+        margin-top: 30px;
+        color: #D4AF37;
+        font-size: 18px;
+    }
+</style>
 </head>
 <body>
 
 <h2>Notícias da Região</h2>
 <p>Aqui podes ver as últimas publicações do portal Beira.pt.</p>
 
-<!-- Widget RSS -->
-<iframe src="https://rss.app/r/feed/pChXcF6RcAGHnL02/embed?tab=list"></iframe>
+<ul id="noticias">
+    <li>A carregar notícias...</li>
+</ul>
 
-<br><br>
-<a href="index.html">← Voltar</a>
+<script>
+async function carregarRSS() {
+    const url = "https://rss.app/feeds/pChXcF6RcAGHnL02.xml";
+
+    try {
+        const resposta = await fetch(url);
+        const texto = await resposta.text();
+
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(texto, "text/xml");
+
+        const items = xml.querySelectorAll("item");
+        const lista = document.getElementById("noticias");
+
+        lista.innerHTML = ""; // limpa o "A carregar..."
+
+        items.forEach((item, index) => {
+            if (index < 3) {
+                const titulo = item.querySelector("title").textContent;
+                const link = item.querySelector("link").textContent;
+
+                const li = document.createElement("li");
+                li.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
+                lista.appendChild(li);
+            }
+        });
+    } catch (erro) {
+        document.getElementById("noticias").innerHTML =
+            "<li>Não foi possível carregar as notícias.</li>";
+    }
+}
+
+carregarRSS();
+</script>
+
+<a class="voltar" href="index.html">← Voltar</a>
 
 </body>
 </html>
+
