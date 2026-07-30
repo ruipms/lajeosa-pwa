@@ -1,4 +1,4 @@
-const CACHE_NAME = "lajeosa-cache-alterar falar comigo"; // muda sempre que fizeres deploy
+const CACHE_NAME = "lajeosa-cache-alterar redes sociais"; // muda sempre que fizeres deploy
 
 const FILES_TO_CACHE = [
   "index.html",
