@@ -79,58 +79,56 @@
 <h3>Município de Celorico da Beira</h3>
 <p>Notícias do Município de Celorico da Beira.</p>
 <ul id="noticias-celorico">
-    <li class="mensagem">À espera de feed RSS alternativo. Por agora, esta secção está em preparação.</li>
+    <li class="mensagem">Secção em preparação (sem feed oficial).</li>
 </ul>
 
 <!-- Município da Guarda -->
 <h3>Município da Guarda</h3>
 <p>Notícias do Município da Guarda.</p>
 <ul id="noticias-guarda">
-    <li class="mensagem">À espera do URL do feed RSS oficial. Quando o tiveres, podemos ativar esta secção.</li>
+    <li>A carregar notícias...</li>
 </ul>
 
 <!-- Rádio Altitude -->
 <h3>Rádio Altitude</h3>
 <p>Últimas notícias da Rádio Altitude.</p>
 <ul id="noticias-altitude">
-    <li class="mensagem">À espera do URL do feed RSS. Secção pronta para ativar.</li>
+    <li>A carregar notícias...</li>
 </ul>
 
 <!-- Rádio F -->
 <h3>Rádio F</h3>
 <p>Últimas notícias da Rádio F.</p>
 <ul id="noticias-radiof">
-    <li class="mensagem">À espera do URL do feed RSS. Secção pronta para ativar.</li>
+    <li>A carregar notícias...</li>
 </ul>
 
 <!-- Terras da Beira -->
 <h3>Terras da Beira</h3>
 <p>Últimas notícias do jornal Terras da Beira.</p>
 <ul id="noticias-terras">
-    <li class="mensagem">À espera do URL do feed RSS. Secção pronta para ativar.</li>
+    <li>A carregar notícias...</li>
 </ul>
 
 <!-- O Interior -->
 <h3>O Interior</h3>
 <p>Últimas notícias do jornal O Interior.</p>
 <ul id="noticias-interior">
-    <li class="mensagem">À espera do URL do feed RSS. Secção pronta para ativar.</li>
+    <li>A carregar notícias...</li>
 </ul>
 
 <!-- Facebook da Lajeosa -->
 <h3>Facebook da Lajeosa</h3>
 <p>Publicações recentes da página da Lajeosa no Facebook.</p>
 <ul id="noticias-facebook">
-    <li class="mensagem">À espera de feed alternativo para Facebook. Secção em preparação.</li>
+    <li class="mensagem">Secção em preparação (sem feed oficial).</li>
 </ul>
 
 <a class="voltar" href="index.html">← Voltar</a>
 
 <script>
 async function carregarFeed(url, elementoId, maxItems = 3) {
-    if (!url) {
-        return; // se não houver URL, não tenta carregar
-    }
+    if (!url) return;
 
     const lista = document.getElementById(elementoId);
 
@@ -143,7 +141,7 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
 
         const items = xml.querySelectorAll("item");
 
-        lista.innerHTML = ""; // limpa mensagem inicial
+        lista.innerHTML = "";
 
         items.forEach((item, index) => {
             if (index < maxItems) {
@@ -157,34 +155,22 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
         });
 
         if (items.length === 0) {
-            lista.innerHTML = "<li class='mensagem'>Não foram encontradas notícias neste feed.</li>";
+            lista.innerHTML = "<li class='mensagem'>Nenhuma notícia encontrada.</li>";
         }
     } catch (erro) {
-        lista.innerHTML = "<li class='mensagem'>Não foi possível carregar as notícias desta fonte.</li>";
+        lista.innerHTML = "<li class='mensagem'>Erro ao carregar notícias.</li>";
     }
 }
 
-// Aqui colocamos os feeds que já tens garantidos.
-// Beira.pt já sabemos:
-carregarFeed(
-    "https://rss.app/feeds/pChXcF6RcAGHnL02.xml",
-    "noticias-beira",
-    3
-);
+// FEEDS OFICIAIS ATIVOS
+carregarFeed("https://rss.app/feeds/pChXcF6RcAGHnL02.xml", "noticias-beira", 3);
+carregarFeed("https://www.mun-guarda.pt/feed/", "noticias-guarda", 3);
+carregarFeed("https://www.altitude.fm/feed/", "noticias-altitude", 3);
+carregarFeed("https://www.radiof.pt/feed/", "noticias-radiof", 3);
+carregarFeed("https://www.terrasdabeira.pt/feed/", "noticias-terras", 3);
+carregarFeed("https://www.ointerior.pt/feed/", "noticias-interior", 3);
 
-// Quando tiveres os outros feeds, basta substituir os URLs abaixo
-// Exemplo (quando souberes o URL do feed da Guarda):
-// carregarFeed("URL_DO_FEED_DA_GUARDA", "noticias-guarda", 3);
-
-// Exemplo para Altitude, Rádio F, Terras da Beira, O Interior:
-// carregarFeed("URL_DO_FEED_ALTITUDE", "noticias-altitude", 3);
-// carregarFeed("URL_DO_FEED_RADIOF", "noticias-radiof", 3);
-// carregarFeed("URL_DO_FEED_TERRAS", "noticias-terras", 3);
-// carregarFeed("URL_DO_FEED_INTERIOR", "noticias-interior", 3);
-
-// Quando tiveres feeds alternativos para Celorico e Facebook da Lajeosa:
-// carregarFeed("URL_FEED_CELORICO", "noticias-celorico", 3);
-// carregarFeed("URL_FEED_FACEBOOK_LAJEOSA", "noticias-facebook", 3);
+// Secções sem feed (ficam como estão)
 </script>
 
 </body>
