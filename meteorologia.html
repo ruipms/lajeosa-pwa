@@ -4,41 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meteorologia</title>
+
     <style>
         body {
             background-color: #0F3D2E;
             color: white;
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             padding: 20px;
         }
+
+        h2 {
+            text-align: center;
+            font-size: 32px;
+            color: #D4AF37;
+            margin-bottom: 10px;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: #134C3A;
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        iframe {
+            width: 100%;
+            max-width: 320px;
+            height: 318px;
+            border: 1px solid #10658E;
+            border-radius: 8px;
+        }
+
         a {
             color: #D4AF37;
             text-decoration: none;
             font-size: 18px;
         }
-        p {
-            margin-top: 20px;
-            line-height: 1.5;
-        }
-        iframe {
-            width: 100%;
-            height: 600px;
-            border: none;
-            border-radius: 10px;
-            margin-top: 20px;
+
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
 
 <h2>Meteorologia na Lajeosa do Mondego</h2>
-
 <p>Previsão atual do tempo na aldeia.</p>
 
-<!-- Widget Tempo e Radar -->
-<iframe src="https://www.tempoeradar.pt/tempo/lajeosa/5279078"></iframe>
+<div class="card">
+    <iframe 
+        src="https://api.wo-cloud.com/content/widget/?geoObjectKey=5279078&language=pt&region=PT&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius"
+        scrolling="no"
+        frameborder="0">
+    </iframe>
+</div>
 
-<br><br>
+<br>
 <a href="index.html">← Voltar</a>
 
 </body>
