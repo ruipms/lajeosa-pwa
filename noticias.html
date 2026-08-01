@@ -14,11 +14,13 @@
     }
 
     h2 {
-        margin-bottom: 10px;
+        margin-bottom: 20px;
     }
 
-    p {
-        margin-bottom: 20px;
+    h3 {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        color: #D4AF37;
     }
 
     ul {
@@ -54,15 +56,88 @@
         font-size: 14px;
         color: #cccccc;
     }
+
+    .rss-widget {
+        background-color: #134C3A;
+        padding: 10px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+    }
 </style>
 </head>
 <body>
 
 <h2>Notícias da Região</h2>
-<p>Últimas publicações do portal Beira.pt.</p>
 
+<!-- ========================= -->
+<!-- 1) BEIRA.PT (RSS REAL) -->
+<!-- ========================= -->
+
+<h3>Beira.pt</h3>
 <ul id="noticias-beira">
     <li>A carregar notícias...</li>
+</ul>
+
+<!-- ========================= -->
+<!-- 2) MAIS BEIRAS (WIDGET) -->
+<!-- ========================= -->
+
+<h3>Mais Beiras – Celorico da Beira</h3>
+<div class="rss-widget">
+    <rssapp-list id="ya8GBx5QDR2Qgeb1"></rssapp-list>
+</div>
+<script src="https://widget.rss.app/v1/list.js" async></script>
+
+<!-- ========================= -->
+<!-- 3) CELORICO DA BEIRA (LINK) -->
+<!-- ========================= -->
+
+<h3>Celorico da Beira</h3>
+<ul>
+    <li>
+        <a href="https://www.cm-celoricodabeira.pt/informacoes/noticias/" target="_blank">
+            Ver notícias no site oficial
+        </a>
+    </li>
+</ul>
+
+<!-- ========================= -->
+<!-- 4) O INTERIOR (LINK) -->
+<!-- ========================= -->
+
+<h3>O Interior</h3>
+<ul>
+    <li>
+        <a href="https://www.ointerior.pt/" target="_blank">
+            Ver notícias no site oficial
+        </a>
+    </li>
+</ul>
+
+<!-- ========================= -->
+<!-- 5) RÁDIO F (LINK) -->
+<!-- ========================= -->
+
+<h3>Rádio F</h3>
+<ul>
+    <li>
+        <a href="https://www.radiof.pt/" target="_blank">
+            Ver notícias no site oficial
+        </a>
+    </li>
+</ul>
+
+<!-- ========================= -->
+<!-- 6) FREGUESIA DA GUARDA (LINK) -->
+<!-- ========================= -->
+
+<h3>Freguesia da Guarda</h3>
+<ul>
+    <li>
+        <a href="https://www.freguesiadaguarda.pt/" target="_blank">
+            Ver notícias no site oficial
+        </a>
+    </li>
 </ul>
 
 <a class="voltar" href="index.html">← Voltar</a>
@@ -101,9 +176,10 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
     }
 }
 
-// Apenas Beira.pt ativo
+// Feed RSS real
 carregarFeed("https://rss.app/feeds/pChXcF6RcAGHnL02.xml", "noticias-beira", 3);
 </script>
 
 </body>
 </html>
+
