@@ -5,76 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRC Lajeosa do Mondego</title>
 
-  <!-- Estilos embutidos iguais ao resto da PWA -->
+  <!-- Estilos iguais ao index -->
   <style>
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: #ffffff; /* igual ao index */
+      font-family: Arial, sans-serif;
+      background-color: #0F3D2E; /* Verde escuro igual ao index */
+      color: white;
+      text-align: center;
     }
 
     header {
-      text-align: center;
       padding: 20px;
-      background: #ffffff;
-      border-bottom: 1px solid #ddd;
+    }
+
+    /* Tamanho igual ao brasão do index */
+    .club-logo {
+      width: 140px;
     }
 
     .back-button {
       display: inline-block;
       margin-top: 10px;
       text-decoration: none;
-      color: #2b7cff;
+      color: #D4AF37; /* Dourado igual aos ícones */
       font-weight: bold;
     }
 
-    /* Tamanho igual ao símbolo da Lajeosa no index */
-    .club-logo {
-      width: 110px;      /* ajustado para ficar igual ao index */
-      display: block;
-      margin: 10px auto 20px auto;
-    }
-
     .content {
-      padding: 15px;
+      padding: 20px;
     }
 
+    /* Cartões iguais ao index */
     .card {
-      background: #ffffff;
-      padding: 15px;
+      background-color: #1F5C45; /* Verde claro */
+      padding: 14px;
+      border-radius: 18px;
       margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* igual ao estilo das outras páginas */
+      text-align: left;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
     .card h3 {
       margin-top: 0;
+      color: #D4AF37; /* Dourado */
+    }
+
+    .card ul {
+      padding-left: 20px;
     }
 
     .club-notice {
       width: 100%;
-      border-radius: 8px;
-      margin: 10px 0;
+      border-radius: 10px;
+      margin-top: 10px;
     }
   </style>
 </head>
 
 <body>
 
-  <header>
-    <h2>⚽ CRC Lajeosa do Mondego</h2>
-
-    <!-- Logótipo do Clube -->
-    <img src="assets/CRC Lajeosa logo.jpg" 
-         alt="Símbolo CRC Lajeosa do Mondego" 
-         class="club-logo">
+<header>
+    <img src="assets/CRC Lajeosa logo.jpg" alt="Símbolo CRC Lajeosa do Mondego" class="club-logo">
+    <h1>CRC Lajeosa do Mondego</h1>
 
     <a href="index.html" class="back-button">⬅ Voltar</a>
-  </header>
+</header>
 
-  <div class="content">
+<div class="content">
 
+    <!-- Direção -->
     <div class="card">
       <h3>📋 Direção</h3>
       <ul>
@@ -86,6 +87,7 @@
       </ul>
     </div>
 
+    <!-- Plantel Masculino -->
     <div class="card">
       <h3>👨‍🦱 Plantel Masculino</h3>
       <ul>
@@ -97,6 +99,7 @@
       </ul>
     </div>
 
+    <!-- Plantel Feminino -->
     <div class="card">
       <h3>👩 Plantel Feminino</h3>
       <ul>
@@ -108,6 +111,7 @@
       </ul>
     </div>
 
+    <!-- Calendário -->
     <div class="card">
       <h3>📅 Calendário de Jogos</h3>
       <ul>
@@ -118,17 +122,17 @@
       </ul>
     </div>
 
+    <!-- Avisos (Imagens) -->
     <div class="card">
       <h3>📢 Avisos do Clube</h3>
 
-      <!-- Aqui colocas as imagens dos avisos -->
+      <!-- Aqui colocas as imagens -->
       <img src="assets/aviso1.jpg" alt="Aviso 1" class="club-notice">
       <img src="assets/aviso2.jpg" alt="Aviso 2" class="club-notice">
       <img src="assets/aviso3.jpg" alt="Aviso 3" class="club-notice">
     </div>
 
-  </div>
+</div>
 
 </body>
 </html>
-
