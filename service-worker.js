@@ -1,4 +1,4 @@
-const CACHE_NAME = "lajeosa-cache alteraracoes novas"; // muda sempre que fizeres deploy
+const CACHE_NAME = "lajeosa-cache alteraracoes contactos 2"; // muda sempre que fizeres deploy
 
 const FILES_TO_CACHE = [
   "index.html",
