@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Junta de Freguesia</title>
+
+  <!-- Ícones FontAwesome -->
+  <script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0F3D2E; /* Verde escuro */
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #D4AF37; /* Dourado */
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #1F5C45; /* Verde claro */
+      padding: 14px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      text-align: left;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      color: #D4AF37; /* Dourado */
+    }
+
+    .card ul {
+      padding-left: 20px;
+      list-style: none;
+    }
+
+    .card li {
+      margin-bottom: 8px;
+    }
+
+    .notice-img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    a {
+      color: #D4AF37;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+    <h1><i class="fas fa-landmark"></i> Junta de Freguesia</h1>
+    <a href="index.html" class="back-button">⬅ Voltar</a>
+</header>
+
+<div class="content">
+
+    <!-- Executivo -->
+    <div class="card">
+      <h3><i class="fas fa-users"></i> Executivo da Junta</h3>
+      <ul>
+        <li><strong>Presidente:</strong> Rui Ascensão — 
+            <a href="tel:966313773">966 313 773</a>
+        </li>
+
+        <li><strong>Secretária:</strong> Maria Ana Costa — 
+            <a href="tel:968023993">968 023 993</a>
+        </li>
+
+        <li><strong>Tesoureiro:</strong> Paulo Santos — 
+            <a href="tel:963255536">963 255 536</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Horário -->
+    <div class="card">
+      <h3><i class="fas fa-clock"></i> Horário de Funcionamento</h3>
+      <p>Terça-feira — 19:00 às 20:30</p>
+    </div>
+
+    <!-- Contactos -->
+    <div class="card">
+      <h3><i class="fas fa-address-book"></i> Contactos</h3>
+      <ul>
+        <li><i class="fas fa-phone"></i> 
+            <strong>Telefone:</strong> 
+            <a href="tel:271741880">271 741 880</a>
+        </li>
+
+        <li><i class="fas fa-envelope"></i> 
+            <strong>Email:</strong> 
+            <a href="mailto:juntalageosamondego@hotmail.com">
+              juntalageosamondego@hotmail.com
+            </a>
+        </li>
+
+        <li><i class="fas fa-map-marker-alt"></i> 
+            <strong>Morada:</strong> Rua de São Martinho, 6360-511 Lajeosa do Mondego
+        </li>
+      </ul>
+    </div>
+
+    <!-- Avisos -->
+    <div class="card">
+      <h3><i class="fas fa-bullhorn"></i> Avisos da Junta</h3>
+
+      <!-- Aqui colocas as imagens dos avisos -->
+      <img src="assets/junta.jpeg" alt="Aviso 1" class="notice-img">
+      <img src="assets/aviso_junta2.jpg" alt="Aviso 2" class="notice-img">
+      <img src="assets/aviso_junta3.jpg" alt="Aviso 3" class="notice-img">
+
+      <!-- Podes adicionar mais -->
+    </div>
+
+</div>
+
+</body>
+</html>
