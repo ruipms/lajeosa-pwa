@@ -1,4 +1,4 @@
-const CACHE_NAME = "lajeosa-cache novo indexs"; // muda sempre que fizeres deploy
+const CACHE_NAME = "lajeosa-cache index corrigido"; // muda sempre que fizeres deploy
 
 const FILES_TO_CACHE = [
   "index.html",
