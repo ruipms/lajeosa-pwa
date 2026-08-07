@@ -63,7 +63,7 @@
 <h2>Notícias da Região</h2>
 
 <!-- ========================= -->
-<!-- 1) BEIRA.PT (via Worker) -->
+<!-- 1) BEIRA.PT -->
 <!-- ========================= -->
 
 <h3>Beira.pt</h3>
@@ -72,7 +72,43 @@
 </ul>
 
 <!-- ========================= -->
-<!-- 2) MAIS BEIRAS (link direto) -->
+<!-- 2) RÁDIO ALTITUDE -->
+<!-- ========================= -->
+
+<h3>Rádio Altitude</h3>
+<ul id="noticias-altitude">
+    <li>A carregar notícias...</li>
+</ul>
+
+<!-- ========================= -->
+<!-- 3) O INTERIOR -->
+<!-- ========================= -->
+
+<h3>O Interior</h3>
+<ul id="noticias-ointerior">
+    <li>A carregar notícias...</li>
+</ul>
+
+<!-- ========================= -->
+<!-- 4) RÁDIO F -->
+<!-- ========================= -->
+
+<h3>Rádio F</h3>
+<ul id="noticias-radiof">
+    <li>A carregar notícias...</li>
+</ul>
+
+<!-- ========================= -->
+<!-- 5) CÂMARA MUNICIPAL DA GUARDA -->
+<!-- ========================= -->
+
+<h3>Câmara Municipal da Guarda</h3>
+<ul id="noticias-guarda">
+    <li>A carregar notícias...</li>
+</ul>
+
+<!-- ========================= -->
+<!-- LINKS DIRETOS -->
 <!-- ========================= -->
 
 <h3>Mais Beiras – Celorico da Beira</h3>
@@ -84,41 +120,10 @@
     </li>
 </ul>
 
-<!-- ========================= -->
-<!-- 3) Rádio Altitude (via Worker) -->
-<!-- ========================= -->
-
-<h3>Rádio Altitude</h3>
-<ul id="noticias-altitude">
-    <li>A carregar notícias...</li>
-</ul>
-
-<!-- ========================= -->
-<!-- LINKS EXTERNOS (mantidos) -->
-<!-- ========================= -->
-
 <h3>Celorico da Beira</h3>
 <ul>
     <li>
         <a href="https://www.cm-celoricodabeira.pt/informacoes/noticias/" target="_blank">
-            Ver notícias no site oficial
-        </a>
-    </li>
-</ul>
-
-<h3>O Interior</h3>
-<ul>
-    <li>
-        <a href="https://www.ointerior.pt/" target="_blank">
-            Ver notícias no site oficial
-        </a>
-    </li>
-</ul>
-
-<h3>Rádio F</h3>
-<ul>
-    <li>
-        <a href="https://www.radiof.pt/" target="_blank">
             Ver notícias no site oficial
         </a>
     </li>
@@ -169,11 +174,14 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
     }
 }
 
-// Beira.pt via Cloudflare Worker
-carregarFeed("https://small-glade-3bb9.ruijpms.workers.dev/?feed=beira", "noticias-beira", 3);
+// CHAMADAS AO WORKER
+const worker = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=";
 
-// Rádio Altitude via Cloudflare Worker
-carregarFeed("https://small-glade-3bb9.ruijpms.workers.dev/?feed=altitude", "noticias-altitude", 3);
+carregarFeed(worker + "beira", "noticias-beira", 3);
+carregarFeed(worker + "altitude", "noticias-altitude", 3);
+carregarFeed(worker + "ointerior", "noticias-ointerior", 3);
+carregarFeed(worker + "radiof", "noticias-radiof", 3);
+carregarFeed(worker + "guarda", "noticias-guarda", 3);
 
 </script>
 
