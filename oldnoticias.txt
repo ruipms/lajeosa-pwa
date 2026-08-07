@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notícias</title>
+
+<style>
+    body {
+        background-color: #0F3D2E;
+        color: white;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        color: #D4AF37;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+        background-color: #134C3A;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    a {
+        color: #D4AF37;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .voltar {
+        display: inline-block;
+        margin-top: 30px;
+        color: #D4AF37;
+        font-size: 18px;
+    }
+
+    .mensagem {
+        font-size: 14px;
+        color: #cccccc;
+    }
+</style>
+</head>
+<body>
+
+<h2>Notícias da Região</h2>
+
+<!-- ========================= -->
+<!-- 1) BEIRA.PT (via Worker) -->
+<!-- ========================= -->
+
+<h3>Beira.pt</h3>
+<ul id="noticias-beira">
+    <li>A carregar notícias...</li>
+</ul>
+
+<!-- ========================= -->
+<!-- 2) MAIS BEIRAS (link direto) -->
+<!-- ========================= -->
+
+<h3>Mais Beiras – Celorico da Beira</h3>
+<ul>
+    <li>
+        <a href="https://maisbeiras.sapo.pt/category/guarda/celorico-da-beira" target="_blank">
+            Ver notícias de Celorico da Beira
+        </a>
+    </li>
+</ul>
+
+<!-- ========================= -->
+<!-- 3) Rádio Altitude (via Worker) -->
+<!-- ========================= -->
+
+<h3>Rádio Altitude</h3>
+<ul id="noticias-altitude">
+    <li>A carregar notícias...</li>
+</ul>
+
+<!-- ========================= -->
+<!-- LINKS EXTERNOS (mantidos) -->
+<!-- ========================= -->
+
+<h3>Celorico da Beira</h3>
+<ul>
+    <li>
+        <a href="https://www.cm-celoricodabeira.pt/informacoes/noticias/" target="_blank">
+            Ver notícias no site oficial
+        </a>
+    </li>
+</ul>
+
+<h3>O Interior</h3>
+<ul>
+    <li>
+        <a href="https://www.ointerior.pt/" target="_blank">
+            Ver notícias no site oficial
+        </a>
+    </li>
+</ul>
+
+<h3>Rádio F</h3>
+<ul>
+    <li>
+        <a href="https://www.radiof.pt/" target="_blank">
+            Ver notícias no site oficial
+        </a>
+    </li>
+</ul>
+
+<h3>Freguesia da Guarda</h3>
+<ul>
+    <li>
+        <a href="https://www.freguesiadaguarda.pt/" target="_blank">
+            Ver notícias no site oficial
+        </a>
+    </li>
+</ul>
+
+<a class="voltar" href="index.html">← Voltar</a>
+
+<script>
+async function carregarFeed(url, elementoId, maxItems = 3) {
+    const lista = document.getElementById(elementoId);
+
+    try {
+        const resposta = await fetch(url);
+        const texto = await resposta.text();
+
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(texto, "text/xml");
+
+        const items = xml.querySelectorAll("item");
+
+        lista.innerHTML = "";
+
+        items.forEach((item, index) => {
+            if (index < maxItems) {
+                const titulo = item.querySelector("title")?.textContent || "Sem título";
+                const link = item.querySelector("link")?.textContent || "#";
+
+                const li = document.createElement("li");
+                li.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
+                lista.appendChild(li);
+            }
+        });
+
+        if (items.length === 0) {
+            lista.innerHTML = "<li class='mensagem'>Nenhuma notícia encontrada.</li>";
+        }
+    } catch (erro) {
+        lista.innerHTML = "<li class='mensagem'>Erro ao carregar notícias.</li>";
+    }
+}
+
+// Beira.pt via Cloudflare Worker
+carregarFeed("https://small-glade-3bb9.ruijpms.workers.dev/?feed=beira", "noticias-beira", 3);
+
+// Rádio Altitude via Cloudflare Worker
+carregarFeed("https://small-glade-3bb9.ruijpms.workers.dev/?feed=altitude", "noticias-altitude", 3);
+
+</script>
+
+</body>
+</html>
