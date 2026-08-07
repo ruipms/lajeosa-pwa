@@ -72,12 +72,16 @@
 </ul>
 
 <!-- ========================= -->
-<!-- 2) MAIS BEIRAS (RSS XML via RSSApp) -->
+<!-- 2) MAIS BEIRAS (LINK DIRETO) -->
 <!-- ========================= -->
 
 <h3>Mais Beiras – Celorico da Beira</h3>
-<ul id="noticias-maisbeiras">
-    <li>A carregar notícias...</li>
+<ul>
+    <li>
+        <a href="https://maisbeiras.sapo.pt/category/guarda/celorico-da-beira" target="_blank">
+            Ver notícias de Celorico da Beira
+        </a>
+    </li>
 </ul>
 
 <!-- ========================= -->
@@ -85,7 +89,7 @@
 <!-- ========================= -->
 
 <h3>Rádio Altitude</h3>
-<ul id="noticias-rssapp">
+<ul id="noticias-altitude">
     <li>A carregar notícias...</li>
 </ul>
 
@@ -168,11 +172,8 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
 // Feed RSS real do Beira.pt
 carregarFeed("https://beira.pt/feed/", "noticias-beira", 3);
 
-// Feed RSS do Mais Beiras (mantém RSSApp até termos Worker)
-carregarFeed("https://rss.app/feeds/8nT5V5FOQCX9ZXky.xml", "noticias-maisbeiras", 3);
-
 // Feed RSS real da Rádio Altitude
-carregarFeed("https://www.altitude.fm/feed/", "noticias-rssapp", 3);
+carregarFeed("https://www.altitude.fm/feed/", "noticias-altitude", 3);
 
 </script>
 
