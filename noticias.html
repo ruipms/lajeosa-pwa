@@ -63,7 +63,7 @@
 <h2>Notícias da Região</h2>
 
 <!-- ========================= -->
-<!-- 1) BEIRA.PT (RSS REAL) -->
+<!-- 1) BEIRA.PT (via Worker) -->
 <!-- ========================= -->
 
 <h3>Beira.pt</h3>
@@ -72,7 +72,7 @@
 </ul>
 
 <!-- ========================= -->
-<!-- 2) MAIS BEIRAS (LINK DIRETO) -->
+<!-- 2) MAIS BEIRAS (link direto) -->
 <!-- ========================= -->
 
 <h3>Mais Beiras – Celorico da Beira</h3>
@@ -85,7 +85,7 @@
 </ul>
 
 <!-- ========================= -->
-<!-- 3) Rádio Altitude (RSS REAL) -->
+<!-- 3) Rádio Altitude (via Worker) -->
 <!-- ========================= -->
 
 <h3>Rádio Altitude</h3>
@@ -169,13 +169,14 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
     }
 }
 
-// Feed RSS real do Beira.pt
-carregarFeed("https://beira.pt/feed/", "noticias-beira", 3);
+// Beira.pt via Cloudflare Worker
+carregarFeed("https://small-glade-3bb9.ruijpms.workers.dev/?feed=beira", "noticias-beira", 3);
 
-// Feed RSS real da Rádio Altitude
-carregarFeed("https://www.altitude.fm/feed/", "noticias-altitude", 3);
+// Rádio Altitude via Cloudflare Worker
+carregarFeed("https://small-glade-3bb9.ruijpms.workers.dev/?feed=altitude", "noticias-altitude", 3);
 
 </script>
 
 </body>
 </html>
+
