@@ -151,14 +151,29 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
         const parser = new DOMParser();
         const xml = parser.parseFromString(texto, "text/xml");
 
-        const items = xml.querySelectorAll("item");
+        // RSS (item) ou ATOM (entry)
+        let items = xml.querySelectorAll("item");
+        if (items.length === 0) {
+            items = xml.querySelectorAll("entry");
+        }
 
         lista.innerHTML = "";
 
         items.forEach((item, index) => {
             if (index < maxItems) {
-                const titulo = item.querySelector("title")?.textContent || "Sem título";
-                const link = item.querySelector("link")?.textContent || "#";
+
+                const titulo =
+                    item.querySelector("title")?.textContent ||
+                    "Sem título";
+
+                // RSS usa <link>texto</link>
+                // ATOM usa <link href="...">
+                let link = item.querySelector("link")?.textContent;
+
+                if (!link) {
+                    const atomLink = item.querySelector("link");
+                    link = atomLink?.getAttribute("href") || "#";
+                }
 
                 const li = document.createElement("li");
                 li.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
@@ -174,7 +189,6 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
     }
 }
 
-// CHAMADAS AO WORKER
 const worker = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=";
 
 carregarFeed(worker + "beira", "noticias-beira", 3);
@@ -182,8 +196,8 @@ carregarFeed(worker + "altitude", "noticias-altitude", 3);
 carregarFeed(worker + "ointerior", "noticias-ointerior", 3);
 carregarFeed(worker + "radiof", "noticias-radiof", 3);
 carregarFeed(worker + "guarda", "noticias-guarda", 3);
-
 </script>
+
 
 </body>
 </html>
