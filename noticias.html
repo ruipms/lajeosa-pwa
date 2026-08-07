@@ -148,42 +148,42 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
         const resposta = await fetch(url);
         const texto = await resposta.text();
 
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(texto, "text/xml");
+        // Extrair <item> manualmente (RSS)
+        let items = [...texto.matchAll(/<item>([\s\S]*?)<\/item>/g)];
 
-        // RSS (item) ou ATOM (entry)
-        let items = xml.querySelectorAll("item");
+        // Se não houver <item>, tentar <entry> (ATOM)
         if (items.length === 0) {
-            items = xml.querySelectorAll("entry");
+            items = [...texto.matchAll(/<entry>([\s\S]*?)<\/entry>/g)];
         }
 
         lista.innerHTML = "";
 
-        items.forEach((item, index) => {
-            if (index < maxItems) {
+        items.slice(0, maxItems).forEach(match => {
+            const bloco = match[1];
 
-                const titulo =
-                    item.querySelector("title")?.textContent ||
-                    "Sem título";
+            // Extrair título
+            const tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
+            const titulo = tituloMatch ? tituloMatch[1] : "Sem título";
 
-                // RSS usa <link>texto</link>
-                // ATOM usa <link href="...">
-                let link = item.querySelector("link")?.textContent;
+            // Extrair link (RSS)
+            let linkMatch = bloco.match(/<link>([\s\S]*?)<\/link>/);
+            let link = linkMatch ? linkMatch[1] : null;
 
-                if (!link) {
-                    const atomLink = item.querySelector("link");
-                    link = atomLink?.getAttribute("href") || "#";
-                }
-
-                const li = document.createElement("li");
-                li.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
-                lista.appendChild(li);
+            // Extrair link (ATOM)
+            if (!link) {
+                const atomMatch = bloco.match(/<link[^>]*href="([^"]+)"/);
+                link = atomMatch ? atomMatch[1] : "#";
             }
+
+            const li = document.createElement("li");
+            li.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
+            lista.appendChild(li);
         });
 
         if (items.length === 0) {
             lista.innerHTML = "<li class='mensagem'>Nenhuma notícia encontrada.</li>";
         }
+
     } catch (erro) {
         lista.innerHTML = "<li class='mensagem'>Erro ao carregar notícias.</li>";
     }
