@@ -11,6 +11,7 @@
             color: white;
             font-family: Arial, sans-serif;
             padding: 20px;
+            margin: 0;
         }
 
         h2 {
@@ -20,36 +21,46 @@
             margin-bottom: 10px;
         }
 
-        p {
+        p.subtitle {
             text-align: center;
             font-size: 18px;
             margin-bottom: 30px;
+            opacity: 0.9;
         }
 
+        /* Cabeçalho de cada mês */
+        .month-title {
+            font-size: 26px;
+            color: #D4AF37;
+            margin: 30px 0 10px 0;
+            text-align: left;
+            border-left: 6px solid #D4AF37;
+            padding-left: 12px;
+        }
+
+        /* Cartão de eventos */
         .card {
             background-color: #134C3A;
             padding: 18px;
-            border-radius: 10px;
+            border-radius: 14px;
             margin-bottom: 20px;
             box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
         }
 
-        .card h3 {
-            color: #D4AF37;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .card p {
+        .event-item {
             font-size: 18px;
-            margin: 6px 0;
-            line-height: 1.6;
+            margin: 8px 0;
+            padding-left: 10px;
+            border-left: 3px solid #D4AF37;
         }
 
         a {
             color: #D4AF37;
             text-decoration: none;
             font-size: 18px;
+            display: block;
+            text-align: center;
+            margin-top: 30px;
         }
 
         a:hover {
@@ -61,59 +72,59 @@
 <body>
 
 <h2>Eventos da Lajeosa do Mondego — 2026/2027</h2>
-<p>Algumas datas poderão estar sujeitas a alterações.</p>
+<p class="subtitle">Algumas datas poderão estar sujeitas a alterações.</p>
 
 <!-- Agosto -->
+<h3 class="month-title">📅 Agosto 2026</h3>
 <div class="card">
-    <h3>Agosto 2026</h3>
-    <p>• 22 — Corrida da Cerveja e Noite Branca</p>
+    <p class="event-item">22 — Corrida da Cerveja e Noite Branca</p>
 </div>
 
 <!-- Setembro -->
+<h3 class="month-title">📅 Setembro 2026</h3>
 <div class="card">
-    <h3>Setembro 2026</h3>
-    <p>• Ida de bicicletas a Fátima 12 e 13</p>
-    <p>• Feira Celorico da Beira, "É Bom, é Nosso" 12 e 13</p>
+    <p class="event-item">Ida de bicicletas a Fátima — 12 e 13</p>
+    <p class="event-item">Feira Celorico da Beira "É Bom, é Nosso" — 12 e 13</p>
 </div>
 
 <!-- Novembro -->
+<h3 class="month-title">📅 Novembro 2026</h3>
 <div class="card">
-    <h3>Novembro 2026</h3>
-    <p>• São Martinho — 13, 14 e 15</p>
+    <p class="event-item">São Martinho — 13, 14 e 15</p>
 </div>
 
 <!-- Dezembro -->
+<h3 class="month-title">📅 Dezembro 2026</h3>
 <div class="card">
-    <h3>Dezembro 2026</h3>
-    <p>• 19 — Jantar de Natal dos Homens</p>
+    <p class="event-item">19 — Jantar de Natal dos Homens</p>
 </div>
 
 <!-- Janeiro -->
+<h3 class="month-title">📅 Janeiro 2027</h3>
 <div class="card">
-    <h3>Janeiro 2027</h3>
-    <p>• 9 — Jantar das Rainhas</p>
+    <p class="event-item">9 — Jantar das Rainhas</p>
 </div>
 
 <!-- Abril -->
+<h3 class="month-title">📅 Abril 2027</h3>
 <div class="card">
-    <h3>Abril 2027/h3>
-    <p>• 3 e 4 — Festa da Nossa Senhora dos Prazeres</p>
+    <p class="event-item">3 e 4 — Festa da Nossa Senhora dos Prazeres</p>
 </div>
 
 <!-- Junho -->
+<h3 class="month-title">📅 Junho 2027</h3>
 <div class="card">
-    <h3>Junho 2027</h3>
-    <p>• 10 — Solteiros e Casados (Homens) e Convívio das Mulheres</p>
+    <p class="event-item">10 — Solteiros e Casados (Homens) e Convívio das Mulheres</p>
 </div>
 
 <!-- Julho -->
+<h3 class="month-title">📅 Julho 2027</h3>
 <div class="card">
-    <h3>Julho</h3>
-    <p>• 3 — Sardinhada 2027</p>
+    <p class="event-item">3 — Sardinhada 2027</p>
 </div>
 
-<br>
 <a href="index.html">← Voltar</a>
 
 </body>
 </html>
+
