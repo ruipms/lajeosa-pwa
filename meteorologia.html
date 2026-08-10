@@ -75,6 +75,16 @@
 <h2>Meteorologia na Lajeosa do Mondego</h2>
 <p class="subtitle">Dados atualizados automaticamente.</p>
 
+<!-- Widget primeiro -->
+<div class="card">
+    <h3>📡 Previsão Oficial — Tempo & Radar</h3>
+    <iframe 
+        src="https://api.wo-cloud.com/content/widget/?geoObjectKey=5279078&language=pt&region=PT&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius"
+        scrolling="no"
+        frameborder="0">
+    </iframe>
+</div>
+
 <!-- Temperatura -->
 <div class="card">
     <h3>🌡️ Temperatura Atual</h3>
@@ -114,26 +124,14 @@
     <div id="previsao"></div>
 </div>
 
-<!-- Widget Tempo & Radar -->
-<div class="card">
-    <h3>📡 Widget Tempo & Radar</h3>
-    <iframe 
-        src="https://api.wo-cloud.com/content/widget/?geoObjectKey=5279078&language=pt&region=PT&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius"
-        scrolling="no"
-        frameborder="0">
-    </iframe>
-</div>
-
 <a href="index.html">← Voltar</a>
 
 <script>
     async function carregarDados() {
 
-        // Coordenadas da Lajeosa do Mondego
         const lat = 40.605;
         const lon = -7.445;
 
-        // API Open-Meteo
         const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,wind_speed_10m,uv_index&hourly=uv_index&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FLisbon`;
 
         const aqiURL = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&hourly=pm10,pm2_5&timezone=Europe%2FLisbon`;
@@ -142,7 +140,6 @@
             const meteo = await fetch(url).then(r => r.json());
             const aqi = await fetch(aqiURL).then(r => r.json());
 
-            // Dados atuais
             const temp = meteo.current.temperature_2m;
             const sensacao = meteo.current.apparent_temperature;
             const humidade = meteo.current.relativehumidity_2m;
@@ -150,17 +147,14 @@
             const vento = meteo.current.wind_speed_10m;
             const uv = meteo.current.uv_index;
 
-            // Min e Max
             const tmax = meteo.daily.temperature_2m_max[0];
             const tmin = meteo.daily.temperature_2m_min[0];
 
-            // AQI simples (PM2.5)
             const pm25 = aqi.hourly.pm2_5[0];
             let qualidade = "Boa";
             if (pm25 > 50) qualidade = "Moderada";
             if (pm25 > 100) qualidade = "Má";
 
-            // Previsão 3 dias
             let previsaoHTML = "";
             for (let i = 0; i < 3; i++) {
                 previsaoHTML += `
@@ -170,7 +164,6 @@
                 `;
             }
 
-            // Atualizar HTML
             document.getElementById("temp").innerText = `${temp}°C`;
             document.getElementById("sensacao").innerText = `Sensação térmica: ${sensacao}°C`;
             document.getElementById("minmax").innerText = `Mínima: ${tmin}°C • Máxima: ${tmax}°C`;
@@ -195,4 +188,3 @@
 
 </body>
 </html>
-
