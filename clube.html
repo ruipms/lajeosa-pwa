@@ -49,13 +49,34 @@
       color: #D4AF37;
     }
 
-    .card ul {
-      padding-left: 20px;
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
     }
 
-    .pos {
+    .menu-card {
+      background-color: #1F5C45;
+      padding: 20px;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: 0.2s;
+      text-align: center;
+    }
+
+    .menu-card:hover {
+      background-color: #2a7a5e;
+    }
+
+    .menu-card i {
+      font-size: 40px;
       color: #D4AF37;
-      font-weight: bold;
+    }
+
+    .menu-card p {
+      margin-top: 10px;
+      font-size: 18px;
     }
 
     .club-notice {
@@ -69,7 +90,7 @@
 <body>
 
 <header>
-    <img src="assets/CRC Lajeosa logo.jpg" alt="Símbolo CRC Lajeosa do Mondego" class="club-logo">
+    <img src="assets/CRC Lajeosa logo.jpg" class="club-logo">
     <h1>CRC Lajeosa do Mondego</h1>
     <a href="index.html" class="back-button">⬅ Voltar</a>
 </header>
@@ -106,138 +127,44 @@
   </ul>
 </div>
 
-<!-- Equipa Técnica – Formação -->
-<div class="card">
-  <h3>📋 Equipa Técnica — Futsal de Formação</h3>
-  <ul>
-    <li><strong>Treinador Principal:</strong> Joel Martins</li>
-    <li><strong>Treinadora Adjunta:</strong> Lara</li>
-    <li><strong>Treinadora Adjunta e Diretora:</strong> Joana Brás</li>
-    <li><strong>Técnica SBV/DAE:</strong> Mónica</li>
-  </ul>
+<!-- Menu das Equipas -->
+<h3 style="color:#D4AF37; margin-top:30px;">⚽ Equipas do Clube</h3>
+
+<div class="grid">
+
+  <div class="menu-card" onclick="openPage('clube_formacao.html')">
+    <i class="fas fa-users"></i>
+    <p>Futsal Formação</p>
+  </div>
+
+  <div class="menu-card" onclick="openPage('clube_masculino.html')">
+    <i class="fas fa-male"></i>
+    <p>Sénior Masculino</p>
+  </div>
+
+  <div class="menu-card" onclick="openPage('clube_feminino.html')">
+    <i class="fas fa-female"></i>
+    <p>Sénior Feminino</p>
+  </div>
+
 </div>
 
-<!-- Equipa Técnica – Sénior Masculino -->
-<div class="card">
-  <h3>👨‍🦱 Equipa Técnica — Futsal Sénior Masculino</h3>
-  <ul>
-    <li><strong>Treinador:</strong> Hugo Almeida</li>
-    <li><strong>Treinador Adjunto:</strong> Paulo Burcio</li>
-    <li><strong>Diretor Desportivo:</strong> Davide Rodrigues</li>
-  </ul>
-</div>
-
-<!-- Equipa Técnica – Sénior Feminino -->
-<div class="card">
-  <h3>👩 Equipa Técnica — Futsal Sénior Feminino</h3>
-  <ul>
-    <li><strong>Treinador:</strong> Joel Martins</li>
-    <li><strong>Treinador Adjunto:</strong> Nuno Azevedo</li>
-    <li><strong>Diretora Desportiva:</strong> Dulce Afonso</li>
-    <li><strong>Técnica SBV/DAE:</strong> Fátima Nunes</li>
-  </ul>
-</div>
-
-<!-- Plantel — Futsal Formação -->
-<div class="card">
-  <h3>👨‍🦱 Plantel — Futsal Formação</h3>
-  <ul>
-    <li>Margarida Costa</li>
-    <li>Maria Pinheiro</li>
-    <li>Martim</li>
-    <li>Tomás Lopes</li>
-    <li>Inês Martins</li>
-    <li>Tina Martins</li>
-    <li>Tomás Alves</li>
-    <li>Beatriz Búrcio</li>
-    <li>Rui Varandas</li>
-    <li>Sofia Tomás</li>
-    <li>Ana Margarida</li>
-  </ul>
-</div>
-
-<!-- Plantel — Futsal Sénior Masculino -->
-<div class="card">
-  <h3>👨‍🦱 Plantel — Futsal Masculino</h3>
-
-  <h4 style="color:#D4AF37;">Guarda‑Redes</h4>
-  <ul>
-    <li>Rui Pedro — <span class="pos">#1</span></li>
-  </ul>
-
-  <h4 style="color:#D4AF37;">Jogadores</h4>
-  <ul>
-    <li>Dylan Almeida</li>
-    <li>Guilherme — <span class="pos">#16</span></li>
-    <li>David Varandas</li>
-    <li>Rodrigo Búrcio — <span class="pos">#5</span></li>
-    <li>João Amorim — <span class="pos">#10</span></li>
-    <li>Oscar — <span class="pos">#7</span></li>
-    <li>Tiço — <span class="pos">#12</span></li>
-    <li>Alexandre — <span class="pos">#6</span></li>
-    <li>João Fiúza — <span class="pos">#3</span></li>
-  </ul>
-</div>
-
-<!-- Plantel — Futsal Sénior Feminino -->
-<div class="card">
-  <h3>👩 Plantel — Futsal Feminino</h3>
-
-  <h4 style="color:#D4AF37;">Guarda‑Redes / Universal</h4>
-  <ul>
-    <li>Mariana — <span class="pos">#3 • Guarda‑Redes / Universal</span></li>
-    <li>Elaine — <span class="pos">#8 • Guarda‑Redes / Universal</span></li>
-  </ul>
-
-  <h4 style="color:#D4AF37;">Fixa</h4>
-  <ul>
-    <li>Joana Brás — <span class="pos">#4 • Fixa</span></li>
-    <li>Ana Lúcia — <span class="pos">#15 • Fixo</span></li>
-  </ul>
-
-  <h4 style="color:#D4AF37;">Ala</h4>
-  <ul>
-    <li>Catarina — <span class="pos">#2 • Ala</span></li>
-    <li>Alexandra — <span class="pos">#9 • Ala</span></li>
-    <li>Lara Sequeira — <span class="pos">#16 • Ala</span></li>
-  </ul>
-
-  <h4 style="color:#D4AF37;">Ala / Pivot</h4>
-  <ul>
-    <li>Pisca — <span class="pos">#6 • Ala / Pivot</span></li>
-  </ul>
-
-  <h4 style="color:#D4AF37;">Pivot</h4>
-  <ul>
-    <li>Beatriz Caldeira — <span class="pos">#10 • Pivot</span></li>
-  </ul>
-
-  <h4 style="color:#D4AF37;">Ala / Fixo</h4>
-  <ul>
-    <li>Susana Tomaz — <span class="pos">#11 • Ala / Fixo</span></li>
-  </ul>
-</div>
-
-<!-- Calendário -->
-<div class="card">
-  <h3>📅 Calendário — Pré‑Época (Equipa Feminina)</h3>
-  <ul>
-    <li><strong>30/8 — Penacova (tarde)</strong><br>Torneio Triangular</li>
-    <li><strong>4/9 (sexta) — 21h — Celorico</strong><br>CRCLM × Sernancelhe</li>
-    <li><strong>12/9 (sábado) — 20h — Viseu</strong><br>Lusitano × CRCLM</li>
-    <li><strong>19/9 (sábado) — 20h — Sernancelhe</strong><br>Sernancelhe × CRCLM</li>
-    <li><strong>26/9 (sábado) — 20h — Celorico</strong><br>CRCLM × Lusitano</li>
-  </ul>
-</div>
-
-<!-- Avisos -->
+<!-- Avisos do Clube -->
 <div class="card">
   <h3>📢 Avisos do Clube</h3>
-  <img src="assets/aviso1.jpg" class="club-notice">
-  <img src="assets/aviso2.jpg" class="club-notice">
-  <img src="assets/aviso3.jpg" class="club-notice">
+
+  <img src="assets/aviso1.jpg" alt="Aviso 1" class="club-notice">
+  <img src="assets/aviso2.jpg" alt="Aviso 2" class="club-notice">
+  <img src="assets/aviso3.jpg" alt="Aviso 3" class="club-notice">
 </div>
 
 </div>
+
+<script>
+function openPage(page) {
+    window.location.href = page;
+}
+</script>
+
 </body>
 </html>
