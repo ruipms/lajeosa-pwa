@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meteorologia</title>
+    <title>Meteorologia — Lajeosa do Mondego</title>
 
     <style>
         body {
@@ -11,6 +11,7 @@
             color: white;
             font-family: Arial, sans-serif;
             padding: 20px;
+            margin: 0;
         }
 
         h2 {
@@ -20,19 +21,30 @@
             margin-bottom: 10px;
         }
 
-        p {
+        p.subtitle {
             text-align: center;
             font-size: 18px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
 
         .card {
             background-color: #134C3A;
             padding: 18px;
-            border-radius: 10px;
+            border-radius: 14px;
             margin-bottom: 20px;
             box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
-            text-align: center;
+        }
+
+        .card h3 {
+            color: #D4AF37;
+            margin-top: 0;
+        }
+
+        .forecast-item {
+            margin: 8px 0;
+            padding-left: 10px;
+            border-left: 3px solid #D4AF37;
         }
 
         iframe {
@@ -47,6 +59,9 @@
             color: #D4AF37;
             text-decoration: none;
             font-size: 18px;
+            display: block;
+            text-align: center;
+            margin-top: 30px;
         }
 
         a:hover {
@@ -58,9 +73,50 @@
 <body>
 
 <h2>Meteorologia na Lajeosa do Mondego</h2>
-<p>Previsão atual do tempo na aldeia.</p>
+<p class="subtitle">Dados atualizados automaticamente.</p>
 
+<!-- Temperatura -->
 <div class="card">
+    <h3>🌡️ Temperatura Atual</h3>
+    <p id="temp">A carregar...</p>
+    <p id="sensacao"></p>
+    <p id="minmax"></p>
+</div>
+
+<!-- Condições -->
+<div class="card">
+    <h3>⛅ Condições Atmosféricas</h3>
+    <p id="humidade"></p>
+    <p id="chuva"></p>
+</div>
+
+<!-- Vento -->
+<div class="card">
+    <h3>💨 Vento</h3>
+    <p id="vento"></p>
+</div>
+
+<!-- UV -->
+<div class="card">
+    <h3>☀️ Índice UV</h3>
+    <p id="uv"></p>
+</div>
+
+<!-- Qualidade do Ar -->
+<div class="card">
+    <h3>🌬️ Qualidade do Ar</h3>
+    <p id="aqi"></p>
+</div>
+
+<!-- Previsão 3 dias -->
+<div class="card">
+    <h3>📅 Previsão para 3 dias</h3>
+    <div id="previsao"></div>
+</div>
+
+<!-- Widget Tempo & Radar -->
+<div class="card">
+    <h3>📡 Widget Tempo & Radar</h3>
     <iframe 
         src="https://api.wo-cloud.com/content/widget/?geoObjectKey=5279078&language=pt&region=PT&timeFormat=HH:mm&windUnit=kmh&systemOfMeasurement=metric&temperatureUnit=celsius"
         scrolling="no"
@@ -68,8 +124,75 @@
     </iframe>
 </div>
 
-<br>
 <a href="index.html">← Voltar</a>
+
+<script>
+    async function carregarDados() {
+
+        // Coordenadas da Lajeosa do Mondego
+        const lat = 40.605;
+        const lon = -7.445;
+
+        // API Open-Meteo
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relativehumidity_2m,apparent_temperature,precipitation_probability,wind_speed_10m,uv_index&hourly=uv_index&daily=temperature_2m_max,temperature_2m_min&timezone=Europe%2FLisbon`;
+
+        const aqiURL = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}&hourly=pm10,pm2_5&timezone=Europe%2FLisbon`;
+
+        try {
+            const meteo = await fetch(url).then(r => r.json());
+            const aqi = await fetch(aqiURL).then(r => r.json());
+
+            // Dados atuais
+            const temp = meteo.current.temperature_2m;
+            const sensacao = meteo.current.apparent_temperature;
+            const humidade = meteo.current.relativehumidity_2m;
+            const chuva = meteo.current.precipitation_probability;
+            const vento = meteo.current.wind_speed_10m;
+            const uv = meteo.current.uv_index;
+
+            // Min e Max
+            const tmax = meteo.daily.temperature_2m_max[0];
+            const tmin = meteo.daily.temperature_2m_min[0];
+
+            // AQI simples (PM2.5)
+            const pm25 = aqi.hourly.pm2_5[0];
+            let qualidade = "Boa";
+            if (pm25 > 50) qualidade = "Moderada";
+            if (pm25 > 100) qualidade = "Má";
+
+            // Previsão 3 dias
+            let previsaoHTML = "";
+            for (let i = 0; i < 3; i++) {
+                previsaoHTML += `
+                    <p class="forecast-item">
+                        Dia ${i+1}: ${meteo.daily.temperature_2m_max[i]}°C / ${meteo.daily.temperature_2m_min[i]}°C
+                    </p>
+                `;
+            }
+
+            // Atualizar HTML
+            document.getElementById("temp").innerText = `${temp}°C`;
+            document.getElementById("sensacao").innerText = `Sensação térmica: ${sensacao}°C`;
+            document.getElementById("minmax").innerText = `Mínima: ${tmin}°C • Máxima: ${tmax}°C`;
+
+            document.getElementById("humidade").innerText = `Humidade: ${humidade}%`;
+            document.getElementById("chuva").innerText = `Probabilidade de chuva: ${chuva}%`;
+
+            document.getElementById("vento").innerText = `Velocidade do vento: ${vento} km/h`;
+            document.getElementById("uv").innerText = `Índice UV: ${uv}`;
+
+            document.getElementById("aqi").innerText = `Qualidade do ar: ${qualidade} (PM2.5: ${pm25})`;
+
+            document.getElementById("previsao").innerHTML = previsaoHTML;
+
+        } catch (e) {
+            console.log("Erro ao carregar dados:", e);
+        }
+    }
+
+    carregarDados();
+</script>
 
 </body>
 </html>
+
