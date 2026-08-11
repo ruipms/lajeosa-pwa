@@ -4,39 +4,97 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Falar comigo</title>
+
     <style>
         body {
             background-color: #0F3D2E;
             color: white;
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             padding: 20px;
+            margin: 0;
+            text-align: center;
         }
-        a {
+
+        h2 {
             color: #D4AF37;
-            text-decoration: none;
-            font-size: 18px;
+            margin-bottom: 10px;
         }
-        p {
+
+        p.subtitle {
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #1F5C45;
+            padding: 18px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        }
+
+        .card h3 {
+            color: #D4AF37;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .card a {
+            color: #D4AF37;
             font-size: 18px;
-            line-height: 1.5;
+            text-decoration: none;
+        }
+
+        .card a:hover {
+            text-decoration: underline;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 30px;
+            color: #D4AF37;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .voltar:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
 
 <h2>Falar comigo</h2>
+<p class="subtitle">Sugestões, ideias, opiniões ou críticas — estou sempre disponível.</p>
 
-<p>Se quiserem entrar em contacto comigo, enviar sugestões, opiniões ou críticas sobre este projeto, podem fazê-lo através do meu email:</p>
+<!-- Email -->
+<div class="card">
+    <h3>📧 Contacto por Email</h3>
+    <p>Se quiserem enviar sugestões, opiniões ou falar sobre o projeto, podem escrever-me diretamente:</p>
+    <p>
+        <strong>Email:</strong><br>
+        <a href="mailto:ruijpms@gmail.com">ruijpms@gmail.com</a>
+    </p>
+</div>
 
-<p><strong>Email:</strong> <a href="mailto:ruijpms@gmail.com">ruijpms@gmail.com</a></p>
+<!-- Redes Sociais -->
+<div class="card">
+    <h3>🌐 Redes Sociais</h3>
+    <p>Também podem falar comigo através das minhas redes sociais:</p>
 
-<p>Também podem usar as minhas redes sociais para falar comigo ou acompanhar novidades:</p>
+    <p><strong>Facebook:</strong><br>
+        <a href="https://www.facebook.com/" target="_blank">facebook.com</a>
+    </p>
 
-<p><strong>Facebook:</strong> <a href="https://www.facebook.com/">facebook.com/</a></p>
-<p><strong>Instagram:</strong> <a href="https://www.instagram.com/">instagram.com/</a></p>
+    <p><strong>Instagram:</strong><br>
+        <a href="https://www.instagram.com/" target="_blank">instagram.com</a>
+    </p>
+</div>
 
-<br>
-<a href="index.html">← Voltar</a>
+<a class="voltar" href="index.html">← Voltar</a>
 
 </body>
 </html>
+
