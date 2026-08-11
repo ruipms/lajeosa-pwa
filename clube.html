@@ -63,6 +63,7 @@
       cursor: pointer;
       transition: 0.2s;
       text-align: center;
+      margin-bottom: 20px; /* Espaço entre cartões */
     }
 
     .menu-card:hover {
@@ -83,6 +84,10 @@
       width: 100%;
       border-radius: 10px;
       margin-top: 10px;
+    }
+
+    .avisos {
+      margin-top: 30px; /* Espaço antes dos avisos */
     }
   </style>
 </head>
@@ -111,7 +116,7 @@
   <ul>
     <li><strong>Presidente:</strong> Davide Rodrigues</li>
     <li><strong>Vice‑Presidente:</strong> Joel Martins</li>
-    <li><strong>Tesoureiro:</strong> Carlos Cunha</li>
+    <li><strong>Tesoureeiro:</strong> Carlos Cunha</li>
     <li><strong>Secretário:</strong> Nuno Azevedo</li>
     <li><strong>Vogal:</strong> Beatriz Caldeira</li>
   </ul>
@@ -145,18 +150,18 @@
 
   <div class="menu-card" onclick="openPage('clube_masculino.html')">
     <i class="fas fa-male"></i>
-    <p>Sénior Masculino</p>
+    <p>Equipa Masculina</p>
   </div>
 
   <div class="menu-card" onclick="openPage('clube_feminino.html')">
     <i class="fas fa-female"></i>
-    <p>Sénior Feminino</p>
+    <p>Equipa Feminina</p>
   </div>
 
 </div>
 
 <!-- Avisos do Clube -->
-<div class="card">
+<div class="card avisos">
   <h3>📢 Avisos do Clube</h3>
 
   <img src="assets/aviso1.jpg" alt="Aviso 1" class="club-notice">
@@ -174,4 +179,3 @@ function openPage(page) {
 
 </body>
 </html>
-
