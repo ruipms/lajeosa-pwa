@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Texto</title>
+
+    <style>
+        body {
+            background-color: #0F3D2E;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #D4AF37;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background-color: #1F5C45;
+            padding: 18px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        }
+
+        .card h3 {
+            color: #D4AF37;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 250px;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            background-color: #D4AF37;
+            color: #0F3D2E;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 30px;
+            color: #D4AF37;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .voltar:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Editar Texto</h2>
+<p>Escreve abaixo o novo texto para a página selecionada.</p>
+
+<div class="card">
+    <h3>📝 Novo texto</h3>
+    <textarea id="texto" placeholder="Escreve aqui o texto que queres colocar na página..."></textarea>
+
+    <button onclick="guardarTexto()">Guardar Texto</button>
+</div>
+
+<a class="voltar" href="admin.html">← Voltar ao Backoffice</a>
+
+<script>
+function guardarTexto() {
+    const texto = document.getElementById("texto").value;
+
+    if (!texto.trim()) {
+        alert("O texto está vazio.");
+        return;
+    }
+
+    // FUTURO:
+    // Aqui vamos enviar o texto para o GitHub ou Firebase.
+    // Por agora, apenas mostramos uma mensagem.
+    alert("Texto guardado (simulação). No futuro será enviado para o servidor.");
+}
+</script>
+
+</body>
+</html>
