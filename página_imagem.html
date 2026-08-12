@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Imagem</title>
+
+    <style>
+        body {
+            background-color: #0F3D2E;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #D4AF37;
+            margin-bottom: 10px;
+        }
+
+        .card {
+            background-color: #1F5C45;
+            padding: 18px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        }
+
+        .card h3 {
+            color: #D4AF37;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: none;
+            background-color: #fff;
+            font-size: 16px;
+        }
+
+        #preview {
+            display: none;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 15px;
+            border-radius: 10px;
+            border: 2px solid #D4AF37;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            background-color: #D4AF37;
+            color: #0F3D2E;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 30px;
+            color: #D4AF37;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .voltar:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Alterar Imagem</h2>
+<p>Escolhe uma nova imagem para substituir a imagem da página selecionada.</p>
+
+<div class="card">
+    <h3>🖼️ Nova imagem</h3>
+
+    <input type="file" id="imagem" accept="image/*" onchange="mostrarPreview()">
+
+    <img id="preview" alt="Pré-visualização da imagem">
+    
+    <button onclick="guardarImagem()">Guardar Imagem</button>
+</div>
+
+<a class="voltar" href="admin.html">← Voltar ao Backoffice</a>
+
+<script>
+function mostrarPreview() {
+    const file = document.getElementById("imagem").files[0];
+    const preview = document.getElementById("preview");
+
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = "block";
+    }
+}
+
+function guardarImagem() {
+    const file = document.getElementById("imagem").files[0];
+
+    if (!file) {
+        alert("Escolhe uma imagem primeiro.");
+        return;
+    }
+
+    // FUTURO:
+    // Aqui vamos enviar a imagem para o GitHub ou Firebase.
+    alert("Imagem guardada (simulação). No futuro será enviada para o servidor.");
+}
+</script>
+
+</body>
+</html>
