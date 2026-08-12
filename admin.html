@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backoffice — Administração</title>
+
+    <style>
+        body {
+            background-color: #0F3D2E;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #D4AF37;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background-color: #1F5C45;
+            padding: 18px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        }
+
+        .card h3 {
+            color: #D4AF37;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #D4AF37;
+            color: #0F3D2E;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .voltar {
+            display: inline-block;
+            margin-top: 30px;
+            color: #D4AF37;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .voltar:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Backoffice — Administração</h2>
+<p class="subtitle">Escolhe a página que queres alterar.</p>
+
+<!-- Seleção da página -->
+<div class="card">
+    <h3>📄 Selecionar página</h3>
+
+    <select id="pagina">
+        <option value="">— Escolher página —</option>
+        <option value="junta">Junta de Freguesia</option>
+        <option value="crc">CRC Lajeosa</option>
+        <option value="historia">História da Lajeosa</option>
+        <option value="eventos">Eventos</option>
+        <option value="noticias">Notícias</option>
+        <option value="equipas">Equipas</option>
+    </select>
+
+    <button onclick="mostrarOpcoes()">Continuar</button>
+</div>
+
+<!-- Opções de edição -->
+<div id="opcoes" class="card" style="display:none;">
+    <h3>⚙️ Alterar conteúdo</h3>
+
+    <button onclick="alert('Futuro: editar texto desta página')">
+        Alterar Texto
+    </button>
+
+    <button onclick="alert('Futuro: enviar imagem para esta página')">
+        Alterar Imagem
+    </button>
+</div>
+
+<a class="voltar" href="index.html">← Voltar</a>
+
+<script>
+function mostrarOpcoes() {
+    const pagina = document.getElementById("pagina").value;
+
+    if (!pagina) {
+        alert("Escolhe uma página primeiro.");
+        return;
+    }
+
+    // No futuro: carregar dados da página selecionada
+    document.getElementById("opcoes").style.display = "block";
+}
+</script>
+
+</body>
+</html>
