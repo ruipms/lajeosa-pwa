@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — Administração</title>
+
+    <style>
+        body {
+            background-color: #0F3D2E;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin: 0;
+            text-align: center;
+        }
+
+        h2 {
+            color: #D4AF37;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background-color: #1F5C45;
+            padding: 18px;
+            border-radius: 18px;
+            margin: auto;
+            max-width: 350px;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+        }
+
+        label {
+            font-weight: bold;
+            color: #D4AF37;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            background-color: #D4AF37;
+            color: #0F3D2E;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .erro {
+            color: #ffcccc;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Área Administrativa</h2>
+
+<div class="card">
+    <label>Username</label>
+    <input type="text" id="user">
+
+    <label>Password</label>
+    <input type="password" id="pass">
+
+    <button onclick="login()">Entrar</button>
+
+    <p id="erro" class="erro"></p>
+</div>
+
+<script>
+function login() {
+    const u = document.getElementById("user").value;
+    const p = document.getElementById("pass").value;
+
+    // Username e password definidos por ti
+    const USERNAME = "admin";
+    const PASSWORD = "lajeosa2026";
+
+    if (u === USERNAME && p === PASSWORD) {
+        localStorage.setItem("admin", "true");
+        window.location.href = "admin.html";
+    } else {
+        document.getElementById("erro").innerText = "Credenciais incorretas.";
+    }
+}
+</script>
+
+</body>
+</html>
