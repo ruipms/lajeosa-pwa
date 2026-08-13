@@ -115,6 +115,23 @@ document.getElementById("tituloEdicao").innerText =
 document.getElementById("descricaoEdicao").innerText =
     "Estás a editar o texto da página: " + paginaNome;
 
+
+
+/* ⭐ AQUI — função para carregar o texto do JSON */
+async function carregarTexto() {
+    const resposta = await fetch("data/junta.json");
+    const dados = await resposta.json();
+
+    document.getElementById("texto").value = dados.texto || "";
+}
+
+/* ⭐ Chamar a função se o target for junta */
+if (target === "junta") {
+    carregarTexto();
+}
+
+
+
 function guardarTexto() {
     const texto = document.getElementById("texto").value;
 
@@ -126,6 +143,7 @@ function guardarTexto() {
     alert("Texto guardado (simulação). No futuro será enviado para o servidor.");
 }
 </script>
+
 
 
 </body>
