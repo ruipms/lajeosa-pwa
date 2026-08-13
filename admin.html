@@ -75,6 +75,11 @@
 </head>
 
 <body>
+<script>
+if (localStorage.getItem("admin") !== "true") {
+    window.location.href = "login.html";
+}
+</script>
 
 <h2>Backoffice — Administração</h2>
 <p class="subtitle">Escolhe a página que queres alterar.</p>
