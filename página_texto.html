@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -81,7 +82,6 @@
 <h2 id="tituloEdicao">Editar Texto</h2>
 <p id="descricaoEdicao">Escreve abaixo o novo texto.</p>
 
-
 <div class="card">
     <h3>📝 Novo texto</h3>
     <textarea id="texto" placeholder="Escreve aqui o texto que queres colocar na página..."></textarea>
@@ -117,21 +117,20 @@ document.getElementById("descricaoEdicao").innerText =
 
 
 
-/* ⭐ AQUI — função para carregar o texto do JSON */
-async function carregarTexto() {
-    const resposta = await fetch("data/junta.json");
-    const dados = await resposta.json();
-
-    document.getElementById("texto").value = dados.texto || "";
+/* ⭐ TESTE LOCAL — carregar texto guardado no navegador */
+function carregarTexto() {
+    const textoGuardado = localStorage.getItem("junta_texto");
+    document.getElementById("texto").value = textoGuardado || "";
 }
 
-/* ⭐ Chamar a função se o target for junta */
+/* ⭐ Só carregar texto se o target for junta */
 if (target === "junta") {
     carregarTexto();
 }
 
 
 
+/* ⭐ TESTE LOCAL — guardar texto no navegador */
 function guardarTexto() {
     const texto = document.getElementById("texto").value;
 
@@ -140,11 +139,11 @@ function guardarTexto() {
         return;
     }
 
-    alert("Texto guardado (simulação). No futuro será enviado para o servidor.");
+    localStorage.setItem("junta_texto", texto);
+
+    alert("Texto guardado localmente (teste).");
 }
 </script>
-
-
 
 </body>
 </html>
