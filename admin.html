@@ -79,7 +79,13 @@
 if (localStorage.getItem("admin") !== "true") {
     window.location.href = "login.html";
 }
+
+function logout() {
+    localStorage.removeItem("admin");
+    window.location.href = "login.html";
+}
 </script>
+
 
 <h2>Backoffice — Administração</h2>
 <p class="subtitle">Escolhe a página que queres alterar.</p>
@@ -113,6 +119,9 @@ if (localStorage.getItem("admin") !== "true") {
         Alterar Imagem
     </button>
 </div>
+<button onclick="logout()" style="margin-top:20px;">
+    Logout
+</button>
 
 <a class="voltar" href="index.html">← Voltar</a>
 
