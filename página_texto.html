@@ -78,8 +78,9 @@
 
 <body>
 
-<h2>Editar Texto</h2>
-<p>Escreve abaixo o novo texto para a página selecionada.</p>
+<h2 id="tituloEdicao">Editar Texto</h2>
+<p id="descricaoEdicao">Escreve abaixo o novo texto.</p>
+
 
 <div class="card">
     <h3>📝 Novo texto</h3>
@@ -91,6 +92,29 @@
 <a class="voltar" href="admin.html">← Voltar ao Backoffice</a>
 
 <script>
+const params = new URLSearchParams(window.location.search);
+const target = params.get("target");
+
+function nomePagina(target) {
+    switch(target) {
+        case "junta": return "Junta de Freguesia";
+        case "servicos": return "Serviços";
+        case "eventos": return "Eventos";
+        case "equipa_masc": return "Equipa Sénior Masculina";
+        case "equipa_fem": return "Equipa Sénior Feminina";
+        case "contactos": return "Contactos";
+        default: return "Página Desconhecida";
+    }
+}
+
+const paginaNome = nomePagina(target);
+
+document.getElementById("tituloEdicao").innerText =
+    "Editar Texto — " + paginaNome;
+
+document.getElementById("descricaoEdicao").innerText =
+    "Estás a editar o texto da página: " + paginaNome;
+
 function guardarTexto() {
     const texto = document.getElementById("texto").value;
 
@@ -99,12 +123,10 @@ function guardarTexto() {
         return;
     }
 
-    // FUTURO:
-    // Aqui vamos enviar o texto para o GitHub ou Firebase.
-    // Por agora, apenas mostramos uma mensagem.
     alert("Texto guardado (simulação). No futuro será enviado para o servidor.");
 }
 </script>
+
 
 </body>
 </html>
