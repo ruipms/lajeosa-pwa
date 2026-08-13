@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alterar Imagem</title>
+    <title>Editar Imagem</title>
 
     <style>
         body {
@@ -38,20 +38,10 @@
         input[type="file"] {
             width: 100%;
             padding: 12px;
-            margin-top: 10px;
             border-radius: 10px;
-            border: none;
             background-color: #fff;
-            font-size: 16px;
-        }
-
-        #preview {
-            display: none;
-            width: 100%;
-            max-width: 300px;
-            margin-top: 15px;
-            border-radius: 10px;
-            border: 2px solid #D4AF37;
+            color: #000;
+            margin-bottom: 10px;
         }
 
         button {
@@ -87,42 +77,51 @@
 
 <body>
 
-<h2>Alterar Imagem</h2>
-<p>Escolhe uma nova imagem para substituir a imagem da página selecionada.</p>
+<h2 id="tituloEdicao">Editar Imagem</h2>
+<p id="descricaoEdicao">Escolhe uma imagem para adicionar à página.</p>
 
 <div class="card">
-    <h3>🖼️ Nova imagem</h3>
+    <h3>📸 Nova imagem</h3>
 
-    <input type="file" id="imagem" accept="image/*" onchange="mostrarPreview()">
+    <input type="file" id="imagem" accept="image/*">
 
-    <img id="preview" alt="Pré-visualização da imagem">
-    
     <button onclick="guardarImagem()">Guardar Imagem</button>
 </div>
 
 <a class="voltar" href="admin.html">← Voltar ao Backoffice</a>
 
 <script>
-function mostrarPreview() {
-    const file = document.getElementById("imagem").files[0];
-    const preview = document.getElementById("preview");
+const params = new URLSearchParams(window.location.search);
+const target = params.get("target");
 
-    if (file) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = "block";
+function nomePagina(target) {
+    switch(target) {
+        case "junta": return "Junta de Freguesia";
+        case "servicos": return "Serviços";
+        case "eventos": return "Eventos";
+        case "equipa_masc": return "Equipa Sénior Masculina";
+        case "equipa_fem": return "Equipa Sénior Feminina";
+        case "contactos": return "Contactos";
+        default: return "Página Desconhecida";
     }
 }
 
-function guardarImagem() {
-    const file = document.getElementById("imagem").files[0];
+const paginaNome = nomePagina(target);
 
-    if (!file) {
+document.getElementById("tituloEdicao").innerText =
+    "Editar Imagem — " + paginaNome;
+
+document.getElementById("descricaoEdicao").innerText =
+    "Estás a editar as imagens da página: " + paginaNome;
+
+function guardarImagem() {
+    const ficheiro = document.getElementById("imagem").files[0];
+
+    if (!ficheiro) {
         alert("Escolhe uma imagem primeiro.");
         return;
     }
 
-    // FUTURO:
-    // Aqui vamos enviar a imagem para o GitHub ou Firebase.
     alert("Imagem guardada (simulação). No futuro será enviada para o servidor.");
 }
 </script>
