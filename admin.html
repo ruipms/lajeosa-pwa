@@ -97,12 +97,13 @@ function logout() {
     <select id="pagina">
         <option value="">— Escolher página —</option>
         <option value="junta">Junta de Freguesia</option>
-        <option value="crc">CRC Lajeosa</option>
-        <option value="historia">História da Lajeosa</option>
+        <option value="servicos">Serviços</option>
         <option value="eventos">Eventos</option>
-        <option value="noticias">Notícias</option>
-        <option value="equipas">Equipas</option>
+        <option value="equipa_masc">Equipa Sénior Masculina</option>
+        <option value="equipa_fem">Equipa Sénior Feminina</option>
+        <option value="contactos">Contactos</option>
     </select>
+
 
     <button onclick="mostrarOpcoes()">Continuar</button>
 </div>
@@ -111,21 +112,26 @@ function logout() {
 <div id="opcoes" class="card" style="display:none;">
     <h3>⚙️ Alterar conteúdo</h3>
 
-   <button onclick="window.location.href='página_texto.html'">
-    Alterar Texto
-   </button>
+    <p id="paginaEscolhida" style="color:#D4AF37; font-weight:bold; margin-bottom:15px;"></p>
 
-    <button onclick="window.location.href='página_imagem.html'">
-        Alterar Imagem
-    </button>
+    <button onclick="editarTexto()">Alterar Texto</button>
+    <button onclick="editarImagem()">Alterar Imagem</button>
 </div>
+
 <button onclick="logout()" style="margin-top:20px;">
     Logout
 </button>
 
+
 <a class="voltar" href="index.html">← Voltar</a>
 
 <script>
+if (localStorage.getItem("admin") !== "true") {
+    window.location.replace("login.html");
+}
+
+let paginaSelecionada = "";
+
 function mostrarOpcoes() {
     const pagina = document.getElementById("pagina").value;
 
@@ -134,10 +140,27 @@ function mostrarOpcoes() {
         return;
     }
 
-    // No futuro: carregar dados da página selecionada
+    paginaSelecionada = pagina;
     document.getElementById("opcoes").style.display = "block";
+    document.getElementById("paginaEscolhida").innerText =
+    "Página selecionada: " + paginaSelecionada.replace("_", " ");
+
+}
+
+function editarTexto() {
+    window.location.href = "pagina_texto.html?target=" + paginaSelecionada;
+}
+
+function editarImagem() {
+    window.location.href = "pagina_imagem.html?target=" + paginaSelecionada;
+}
+
+function logout() {
+    localStorage.removeItem("admin");
+    window.location.href = "login.html";
 }
 </script>
+
 
 </body>
 </html>
