@@ -39,6 +39,19 @@
       font-weight: bold;
     }
 
+    /* Aviso no topo */
+    .alert-avisos {
+      background-color: #154f3c;
+      color: #D4AF37;
+      padding: 12px;
+      margin: 10px 20px;
+      border-radius: 12px;
+      font-size: 18px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+    }
+
     .content {
       padding: 20px;
     }
@@ -148,6 +161,11 @@
     <a href="index.html" class="back-button">⬅ Voltar</a>
 </header>
 
+<!-- Aviso no topo -->
+<div class="alert-avisos">
+  📢 Existem avisos ativos no final da página.
+</div>
+
 <div class="content">
 
 <!-- História do Clube -->
@@ -213,10 +231,8 @@
   <h3>📢 Avisos do Clube</h3>
 
   <img src="assets/FB_IMG_1786535076454.jpg" alt="Aviso 1" class="notice-img" onclick="openModal(this.src)">
-  <!-- <img src="assets/aviso2.jpg" alt="Aviso 2" class="notice-img" onclick="openModal(this.src)"> -->
-  <!--<img src="assets/aviso3.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)"> -->
-  <p style="text-align:center; font-size:18px; color:#D4AF37; margin-top:10px;"> Não há mais avisos no momento. </p>
-
+  <img src="assets/aviso2.jpg" alt="Aviso 2" class="notice-img" onclick="openModal(this.src)">
+  <img src="assets/aviso3.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)">
 </div>
 
 </div>
@@ -244,5 +260,6 @@ function closeModal() {
 
 </body>
 </html>
+
 
 
