@@ -114,16 +114,17 @@
       align-items: center;
     }
 
+    /* Imagem grande */
     #imgModal img {
       max-width: 90%;
       max-height: 90%;
       border-radius: 10px;
-      pointer-events: none; /* IMPORTANTE para Edge */
+      pointer-events: none; /* compatibilidade Edge */
     }
 
     /* Botão X */
     .close-btn {
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 25px;
       font-size: 32px;
@@ -212,8 +213,10 @@
   <h3>📢 Avisos do Clube</h3>
 
   <img src="assets/FB_IMG_1786535076454.jpg" alt="Aviso 1" class="notice-img" onclick="openModal(this.src)">
-  <img src="assets/aviso2.jpg" alt="Aviso 2" class="notice-img" onclick="openModal(this.src)">
-  <img src="assets/aviso3.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)">
+  <!-- <img src="assets/aviso2.jpg" alt="Aviso 2" class="notice-img" onclick="openModal(this.src)"> -->
+  <!--<img src="assets/aviso3.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)"> -->
+  <p style="text-align:center; font-size:18px; color:#D4AF37; margin-top:10px;"> Não há mais avisos no momento. </p>
+
 </div>
 
 </div>
@@ -241,4 +244,5 @@ function closeModal() {
 
 </body>
 </html>
+
 
