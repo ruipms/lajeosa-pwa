@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRC Lajeosa do Mondego</title>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
@@ -12,7 +13,8 @@
   gtag('js', new Date());
   gtag('config', 'G-FTEGNRDBJW');
 </script>
-  <style>
+
+<style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -70,7 +72,7 @@
       cursor: pointer;
       transition: 0.2s;
       text-align: center;
-      margin-bottom: 20px; /* Espaço entre cartões */
+      margin-bottom: 20px;
     }
 
     .menu-card:hover {
@@ -87,55 +89,41 @@
       font-size: 18px;
     }
 
-    .club-notice {
-      width: 100%;
+    /* Imagens pequenas dos avisos */
+    .notice-img {
+      width: 60%;
+      max-width: 250px;
       border-radius: 10px;
-      margin-top: 10px;
+      margin: 10px auto;
+      display: block;
+      cursor: pointer;
+      border: 2px solid #D4AF37;
+    }
+
+    /* Modal */
+    #imgModal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    #imgModal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
     }
 
     .avisos {
-      margin-top: 30px; /* Espaço antes dos avisos */
+      margin-top: 30px;
     }
-    /* Imagens pequenas */
-.notice-img {
-  width: 60%;
-  max-width: 250px;
-  border-radius: 10px;
-  margin: 10px auto;
-  display: block;
-  cursor: pointer;
-  border: 2px solid #D4AF37;
-}
-
-/* Modal para ampliar imagem */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-}
-
-.modal img {
-  display: block;
-  max-width: 90%;
-  margin: 60px auto;
-  border-radius: 10px;
-}
-
-.modal-close {
-  color: white;
-  font-size: 26px;
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  cursor: pointer;
-}
-
-  </style>
+</style>
 </head>
 
 <body>
@@ -213,29 +201,30 @@
   <img src="assets/FB_IMG_1786535076454.jpg" alt="Aviso 1" class="notice-img" onclick="openModal(this.src)">
   <img src="assets/aviso2.jpg" alt="Aviso 2" class="notice-img" onclick="openModal(this.src)">
   <img src="assets/aviso3.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)">
+</div>
 
 </div>
 
+<!-- Modal -->
+<div id="imgModal" onclick="closeModal()">
+  <img id="modalImg" src="">
 </div>
 
 <script>
 function openPage(page) {
     window.location.href = page;
 }
-  function openModal(src) {
-    document.getElementById("modalImg").src = src;
-    document.getElementById("imgModal").style.display = "block";
+
+function openModal(src) {
+  document.getElementById("modalImg").src = src;
+  document.getElementById("imgModal").style.display = "flex";
 }
 
 function closeModal() {
-    document.getElementById("imgModal").style.display = "none";
+  document.getElementById("imgModal").style.display = "none";
 }
-
 </script>
-<div id="imgModal" class="modal" onclick="closeModal()">
-    <span class="modal-close">&times;</span>
-    <img id="modalImg">
-</div>
 
 </body>
 </html>
+
