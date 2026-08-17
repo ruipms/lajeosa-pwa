@@ -118,6 +118,19 @@
       max-width: 90%;
       max-height: 90%;
       border-radius: 10px;
+      pointer-events: none; /* IMPORTANTE para Edge */
+    }
+
+    /* Botão X */
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
     }
 
     .avisos {
@@ -207,6 +220,7 @@
 
 <!-- Modal -->
 <div id="imgModal" onclick="closeModal()">
+  <span class="close-btn" onclick="closeModal()">✖</span>
   <img id="modalImg" src="">
 </div>
 
