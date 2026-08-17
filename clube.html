@@ -39,7 +39,7 @@
       font-weight: bold;
     }
 
-    /* Aviso no topo */
+    /* Aviso no topo (dinâmico) */
     .alert-avisos {
       background-color: #154f3c;
       color: #D4AF37;
@@ -50,6 +50,7 @@
       text-align: center;
       font-weight: bold;
       box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+      display: none; /* começa escondido */
     }
 
     .content {
@@ -161,8 +162,8 @@
     <a href="index.html" class="back-button">⬅ Voltar</a>
 </header>
 
-<!-- Aviso no topo -->
-<div class="alert-avisos">
+<!-- Aviso no topo (dinâmico) -->
+<div id="alertAvisos" class="alert-avisos">
   📢 Existem avisos ativos no final da página.
 </div>
 
@@ -231,8 +232,8 @@
   <h3>📢 Avisos do Clube</h3>
 
   <img src="assets/FB_IMG_1786535076454.jpg" alt="Aviso 1" class="notice-img" onclick="openModal(this.src)">
-  <img src="assets/aviso2.jpg" alt="Aviso 2" class="notice-img" onclick="openModal(this.src)">
-  <img src="assets/aviso3.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)">
+ <!-- <img src="assets/aviso2.jpg" alt="Aviso 2" class="notice-img" onclick="openModal(this.src)"> -->
+  <!--<img src="assets/aviso3.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)"> -->
 </div>
 
 </div>
@@ -256,10 +257,19 @@ function openModal(src) {
 function closeModal() {
   document.getElementById("imgModal").style.display = "none";
 }
+
+/* Aviso dinâmico */
+window.onload = function() {
+    const avisos = document.querySelectorAll(".notice-img");
+    const alerta = document.getElementById("alertAvisos");
+
+    if (avisos.length > 0) {
+        alerta.style.display = "block"; // mostra aviso
+    } else {
+        alerta.style.display = "none"; // esconde aviso
+    }
+};
 </script>
 
 </body>
 </html>
-
-
-
