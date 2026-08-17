@@ -49,6 +49,7 @@
       text-align: center;
       font-weight: bold;
       box-shadow: 0 2px 5px rgba(0,0,0,0.25);
+      display: none; /* começa escondido */
     }
 
     .content {
@@ -132,8 +133,8 @@
     <a href="index.html" class="back-button">⬅ Voltar</a>
 </header>
 
-<!-- Aviso no topo -->
-<div class="alert-avisos">
+<!-- Aviso no topo (dinâmico) -->
+<div id="alertAvisos" class="alert-avisos">
   📢 Existem avisos ativos no final da página.
 </div>
 
@@ -215,8 +216,19 @@ function openModal(src) {
 function closeModal() {
     document.getElementById("imgModal").style.display = "none";
 }
+
+/* Aviso dinâmico */
+window.onload = function() {
+    const avisos = document.querySelectorAll(".notice-img");
+    const alerta = document.getElementById("alertAvisos");
+
+    if (avisos.length > 0) {
+        alerta.style.display = "block"; // mostra aviso
+    } else {
+        alerta.style.display = "none"; // esconde aviso
+    }
+};
 </script>
 
 </body>
 </html>
-
