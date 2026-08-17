@@ -96,6 +96,45 @@
     .avisos {
       margin-top: 30px; /* Espaço antes dos avisos */
     }
+    /* Imagens pequenas */
+.notice-img {
+  width: 60%;
+  max-width: 250px;
+  border-radius: 10px;
+  margin: 10px auto;
+  display: block;
+  cursor: pointer;
+  border: 2px solid #D4AF37;
+}
+
+/* Modal para ampliar imagem */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+}
+
+.modal img {
+  display: block;
+  max-width: 90%;
+  margin: 60px auto;
+  border-radius: 10px;
+}
+
+.modal-close {
+  color: white;
+  font-size: 26px;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+}
+
   </style>
 </head>
 
@@ -171,9 +210,10 @@
 <div class="card avisos">
   <h3>📢 Avisos do Clube</h3>
 
-  <img src="assets/FB_IMG_1786535076454.jpg" alt="Aviso 1" class="club-notice">
-  <img src="assets/aviso2.jpg" alt="Aviso 2" class="club-notice">
-  <img src="assets/aviso3.jpg" alt="Aviso 3" class="club-notice">
+  <img src="assets/FB_IMG_1786535076454.jpg" alt="Aviso 1" class="notice-img" onclick="openModal(this.src)">
+  <img src="assets/aviso2.jpg" alt="Aviso 2" class="notice-img" onclick="openModal(this.src)">
+  <img src="assets/aviso3.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)">
+
 </div>
 
 </div>
@@ -182,7 +222,20 @@
 function openPage(page) {
     window.location.href = page;
 }
+  function openModal(src) {
+    document.getElementById("modalImg").src = src;
+    document.getElementById("imgModal").style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById("imgModal").style.display = "none";
+}
+
 </script>
+<div id="imgModal" class="modal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img id="modalImg">
+</div>
 
 </body>
 </html>
