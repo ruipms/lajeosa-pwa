@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Junta de Freguesia</title>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
@@ -12,10 +13,11 @@
   gtag('js', new Date());
   gtag('config', 'G-FTEGNRDBJW');
 </script>
-  <!-- Ícones FontAwesome -->
-  <script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
 
-  <style>
+<!-- Ícones FontAwesome -->
+<script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
+
+<style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -34,6 +36,19 @@
       text-decoration: none;
       color: #D4AF37;
       font-weight: bold;
+    }
+
+    /* Aviso no topo */
+    .alert-avisos {
+      background-color: #154f3c;
+      color: #D4AF37;
+      padding: 12px;
+      margin: 10px 20px;
+      border-radius: 12px;
+      font-size: 18px;
+      text-align: center;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.25);
     }
 
     .content {
@@ -75,7 +90,7 @@
       border: 2px solid #D4AF37;
     }
 
-    /* Modal para ampliar imagem */
+    /* Modal */
     .modal {
       display: none;
       position: fixed;
@@ -107,7 +122,7 @@
       color: #D4AF37;
       font-weight: bold;
     }
-  </style>
+</style>
 </head>
 
 <body>
@@ -116,6 +131,11 @@
     <h1><i class="fas fa-landmark"></i> Junta de Freguesia</h1>
     <a href="index.html" class="back-button">⬅ Voltar</a>
 </header>
+
+<!-- Aviso no topo -->
+<div class="alert-avisos">
+  📢 Existem avisos ativos no final da página.
+</div>
 
 <div class="content">
 
@@ -169,12 +189,13 @@
     <div class="card">
       <h3><i class="fas fa-bullhorn"></i> Avisos da Junta</h3>
 
-      <!-- Imagens pequenas com clique -->
+      <!-- Imagem ativa -->
       <img src="assets/junta.jpeg" class="notice-img" onclick="openModal(this.src)">
-      <!-- <img src="assets/FB_IMG_1786535076454.jpg" class="notice-img" onclick="openModal(this.src)"> -->
-      <p style="text-align:center; font-size:18px; color:#D4AF37; margin-top:10px;"> Não há mais avisos no momento. </p>
-   
-     
+
+      <!-- Mensagem -->
+      <p style="text-align:center; font-size:18px; color:#D4AF37; margin-top:10px;">
+        Não há mais avisos no momento.
+      </p>
     </div>
 
 </div>
