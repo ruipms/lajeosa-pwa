@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sénior Masculino — CRC Lajeosa</title>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
@@ -12,7 +13,8 @@
   gtag('js', new Date());
   gtag('config', 'G-FTEGNRDBJW');
 </script>
-  <style>
+
+<style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -63,7 +65,66 @@
       color: #D4AF37;
       font-weight: bold;
     }
-  </style>
+
+    /* Nome clicável */
+    .player-link {
+      cursor: pointer;
+      padding: 6px 0;
+    }
+
+    .player-link:hover {
+      color: #D4AF37;
+    }
+
+    /* Frase de instrução */
+    .player-hint {
+      text-align: left;
+      font-size: 16px;
+      color: #D4AF37;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    /* Modal */
+    #imgModal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #imgModal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    #imgModal p {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
+    }
+</style>
 </head>
 
 <body>
@@ -91,37 +152,101 @@
   <div class="card">
     <h3>👨‍🦱 Plantel — Sénior Masculino</h3>
 
+    <p class="player-hint">📸 Clique no nome para ver a foto</p>
+
     <h4 style="color:#D4AF37;">Guarda‑Redes</h4>
     <ul>
-      <li>Rui Pedro — <span class="pos">Guarda‑Redes #1</span></li>
-      <li>Dylan Almeida — <span class="pos">Guarda‑Redes</span></li>
-      <li>Carlos Cunha — <span class="pos">Guarda‑Redes</span></li>
+      <li class="player-link" onclick="openModal('assets/jogadores/Rui_Pedro_1.jpg')">
+        Rui Pedro — <span class="pos">Guarda‑Redes #1</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadores/Dylan_Almeida_GR.jpg')">
+        Dylan Almeida — <span class="pos">Guarda‑Redes</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('missing')">
+        Carlos Cunha — <span class="pos">Guarda‑Redes</span>
+      </li>
     </ul>
 
     <h4 style="color:#D4AF37;">Fixo / Fixo‑Ala / Pivô‑Fixo</h4>
     <ul>
-      <li>Óscar — <span class="pos">Fixo #7</span></li>
-      <li>David Varandas — <span class="pos">Fixo #9</span></li>
-      <li>Alexandre Custódio — <span class="pos">Fixo/Ala #6</span></li>
-      <li>João Fiúza — <span class="pos">Pivô/Fixo #3</span></li>
+      <li class="player-link" onclick="openModal('assets/jogadores/Oscar_7.jpg')">
+        Óscar — <span class="pos">Fixo #7</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadores/David_Varandas_9.jpg')">
+        David Varandas — <span class="pos">Fixo #9</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadores/Alexandre_6.jpg')">
+        Alexandre Custódio — <span class="pos">Fixo/Ala #6</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadores/Joao_Fiuza_3.jpg')">
+        João Fiúza — <span class="pos">Pivô/Fixo #3</span>
+      </li>
     </ul>
 
     <h4 style="color:#D4AF37;">Alas</h4>
     <ul>
-      <li>Rodrigo Búrcio — <span class="pos">Ala #5</span></li>
-      <li>Guilherme — <span class="pos">Ala #16</span></li>
-      <li>Serafim — <span class="pos">Ala #8</span></li>
+      <li class="player-link" onclick="openModal('assets/jogadores/Rodrigo_Burcio_5.jpg')">
+        Rodrigo Búrcio — <span class="pos">Ala #5</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadores/Guilherme_16.jpg')">
+        Guilherme — <span class="pos">Ala #16</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadores/Serafim_8.jpg')">
+        Serafim — <span class="pos">Ala #8</span>
+      </li>
     </ul>
 
     <h4 style="color:#D4AF37;">Pivô / Ala‑Pivô</h4>
     <ul>
-      <li>Luís Santos — <span class="pos">Ala/Pivô #12</span></li>
-      <li>João Amorim — <span class="pos">Pivô #10</span></li>
+      <li class="player-link" onclick="openModal('missing')">
+        Luís Santos — <span class="pos">Ala/Pivô #12</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadores/Joao_Amorim_10.jpg')">
+        João Amorim — <span class="pos">Pivô #10</span>
+      </li>
     </ul>
 
   </div>
 
 </div>
+
+<!-- Modal -->
+<div id="imgModal" onclick="closeModal()">
+  <span class="close-btn" onclick="closeModal()">✖</span>
+  <img id="modalImg" src="">
+  <p id="modalMsg"></p>
+</div>
+
+<script>
+function openModal(src) {
+  const modal = document.getElementById("imgModal");
+  const img = document.getElementById("modalImg");
+  const msg = document.getElementById("modalMsg");
+
+  if (src === "missing") {
+    img.style.display = "none";
+    msg.textContent = "📸 Foto indisponível";
+  } else {
+    img.style.display = "block";
+    img.src = src;
+    msg.textContent = "";
+  }
+
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("imgModal").style.display = "none";
+}
+</script>
 
 </body>
 </html>
