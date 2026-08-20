@@ -4,16 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lajeosa do Mondego</title>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FTEGNRDBJW');
-</script>
 
-
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FTEGNRDBJW');
+    </script>
 
     <!-- Manifest PWA -->
     <link rel="manifest" href="manifest.json">
@@ -25,7 +24,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0F3D2E; /* Verde escuro */
+            background-color: #0F3D2E;
             color: white;
             text-align: center;
         }
@@ -48,13 +47,13 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 16px; /* reduzido */
+            gap: 16px;
             padding: 20px;
         }
 
         .card {
-            background-color: #1F5C45; /* Verde claro */
-            padding: 14px; /* reduzido */
+            background-color: #1F5C45;
+            padding: 14px;
             border-radius: 18px;
             cursor: pointer;
             transition: 0.2s;
@@ -65,13 +64,13 @@
         }
 
         .card i {
-            font-size: 34px; /* reduzido */
-            color: #D4AF37; /* Dourado */
+            font-size: 34px;
+            color: #D4AF37;
         }
 
         .card p {
-            font-size: 17px; /* ligeiramente menor */
-            margin-top: 8px; /* reduzido */
+            font-size: 17px;
+            margin-top: 8px;
         }
 
         footer {
@@ -91,87 +90,70 @@
 <header>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
     <h1>Lajeosa do Mondego</h1>
+
+    <!-- NOVA LINHA DE VERSÃO -->
+    <p style="color:#D4AF37; font-size:14px; font-weight:bold; margin-top:4px;">
+        Versão 3.2.0 — 20/08/2026
+    </p>
 </header>
 
 <div class="grid">
 
-    <!-- Junta -->
     <div class="card" onclick="openPage('junta.html')">
         <i class="fas fa-landmark"></i>
         <p>Junta de Freguesia</p>
     </div>
- <!-- Serviços -->
+
     <div class="card" onclick="openPage('servicos.html')">
         <i class="fas fa-landmark"></i>
         <p>Serviços na Freguesia</p>
     </div>
-    <!-- Notícias -->
+
     <div class="card" onclick="openPage('noticias.html')">
         <i class="fas fa-newspaper"></i>
         <p>Notícias</p>
     </div>
 
-    <!-- Eventos -->
     <div class="card" onclick="openPage('eventos.html')">
         <i class="fas fa-calendar-alt"></i>
         <p>Eventos</p>
     </div>
 
-    <!-- Clube 
-    <div class="card" onclick="alert('Página em desenvolvimento');">
-        <i class="fas fa-futbol"></i>
-        <p>Clube de Futebol</p>
-    </div> -->
-
-   <div class="card" onclick="openPage('clube.html')">
+    <div class="card" onclick="openPage('clube.html')">
         <i class="fas fa-futbol"></i>
         <p>CRC Lajeosa do Mondego</p>
-    </div> 
+    </div>
 
-    <!-- Pontos de Interesse -->
     <div class="card" onclick="openPage('pontos.html')">
         <i class="fas fa-map-marker-alt"></i>
         <p>Pontos de Interesse</p>
     </div>
 
-    <!-- História -->
     <div class="card" onclick="openPage('historia.html')">
         <i class="fas fa-book"></i>
         <p>História e Tradições</p>
     </div>
 
-    <!-- Meteorologia -->
     <div class="card" onclick="openPage('meteorologia.html')">
         <i class="fas fa-cloud"></i>
         <p>Meteorologia</p>
     </div>
 
-    <!-- Redes Sociais -->
     <div class="card" onclick="openPage('redessociais.html')">
         <i class="fas fa-share-alt"></i>
         <p>Lajeosa nas redes sociais</p>
     </div>
 
-    <!-- Contactos -->
     <div class="card" onclick="openPage('contactos.html')">
         <i class="fas fa-phone"></i>
         <p>Contactos</p>
     </div>
 
-    <!-- Falar comigo -->
-   <!-- <div class="card" onclick="openPage('falarcomigo.html')">
-        <i class="fas fa-envelope"></i>
-        <p>Falar comigo</p>
-    </div> -->
-
 </div>
 
-
-
-    <div class="card" onclick="openPage('falarcomigo.html')">
-        <i class="fas fa-envelope"></i>
-        <p>Falar comigo</p>
-    </div>
+<div class="card" onclick="openPage('falarcomigo.html')" style="padding:14px; margin:20px;">
+    <i class="fas fa-envelope"></i>
+    <p>Falar comigo</p>
 </div>
 
 <!-- Cartão compacto para instalar como PWA -->
@@ -194,20 +176,9 @@
         • Partilhar → “Adicionar ao ecrã principal”
     </p>
 </div>
-<!-- Cartão compacto para instalar como PWA -->
-<div class="card" style="padding:14px; margin:20px;">
-    ...
-</div>
 
-<!-- Cartão de Versão do Site -->
+<!-- Cartão de Versão (limpo) -->
 <div class="card" style="padding:14px; margin:20px; text-align:center;">
-    <h3 style="font-size:20px; margin-bottom:10px;">🛠️ Versão do Site</h3>
-    <p style="font-size:18px; margin:6px 0;">
-        <strong style="color:#D4AF37;">Versão 3.1.4</strong>
-    </p>
-    <p style="margin:0;">
-        Atualizado em: <span style="color:#D4AF37;">17/08/2026</span>
-    </p>
     <p style="font-size:14px; opacity:0.8; margin-top:8px;">
         Site em manutenção ativa
     </p>
@@ -222,7 +193,6 @@
         window.location.href = page;
     }
 
-    // Registar o service worker
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js');
     }
