@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Futsal Formação — CRC Lajeosa</title>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
@@ -12,7 +13,8 @@
   gtag('js', new Date());
   gtag('config', 'G-FTEGNRDBJW');
 </script>
-  <style>
+
+<style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -59,11 +61,68 @@
       padding-left: 20px;
     }
 
-    .pos {
+    .card ul li {
+      margin-bottom: 12px; /* espaçamento entre nomes */
+    }
+
+    .player-link {
+      display: block;
+      padding: 10px 0;
+      cursor: pointer;
+    }
+
+    .player-link:hover {
       color: #D4AF37;
+    }
+
+    .player-hint {
+      text-align: left;
+      font-size: 16px;
+      color: #D4AF37;
+      margin-bottom: 10px;
       font-weight: bold;
     }
-  </style>
+
+    /* Modal */
+    #imgModal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #imgModal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    #imgModal p {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
+    }
+</style>
 </head>
 
 <body>
@@ -90,24 +149,57 @@
   <!-- Plantel -->
   <div class="card">
     <h3>👨‍🦱 Plantel — Formação</h3>
+
+    <p class="player-hint">📸 Clique no nome para ver a foto</p>
+
     <ul>
-      <li>Margarida Costa</li>
-      <li>Maria Pinheiro</li>
-      <li>Martim</li>
-      <li>Tomás Lopes</li>
-      <li>Inês Martins</li>
-      <li>Tina Martins</li>
-      <li>Tomás Alves</li>
-      <li>Beatriz Búrcio</li>
-      <li>Rui Varandas</li>
-      <li>Sofia Tomás</li>
-      <li>Ana Margarida</li>
-      <li>Gerson</li>
-      <li>Érica Marques</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Margarida_Costa.jpg')">Margarida Costa</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Maria_Pinheiro.jpg')">Maria Pinheiro</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Martim.jpg')">Martim</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Tomas_Lopes.jpg')">Tomás Lopes</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Ines_Martins.jpg')">Inês Martins</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Tina_Martins.jpg')">Tina Martins</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Tomas_Alves.jpg')">Tomás Alves</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Beatriz_Burcio.jpg')">Beatriz Búrcio</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Rui.jpg')">Rui Varandas</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Sofia_Tomaz.jpg')">Sofia Tomás</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Ana_Margarida.jpg')">Ana Margarida</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Gerson.jpg')">Gerson</li>
+      <li class="player-link" onclick="openModal('assets/formacao/Erica_Marques.jpg')">Érica Marques</li>
     </ul>
   </div>
 
 </div>
+
+<!-- Modal -->
+<div id="imgModal" onclick="closeModal()">
+  <span class="close-btn" onclick="closeModal()">✖</span>
+  <img id="modalImg" src="">
+  <p id="modalMsg"></p>
+</div>
+
+<script>
+function openModal(src) {
+  const modal = document.getElementById("imgModal");
+  const img = document.getElementById("modalImg");
+  const msg = document.getElementById("modalMsg");
+
+  if (src === "missing") {
+    img.style.display = "none";
+    msg.textContent = "📸 Foto indisponível";
+  } else {
+    img.style.display = "block";
+    img.src = src;
+    msg.textContent = "";
+  }
+
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("imgModal").style.display = "none";
+}
+</script>
 
 </body>
 </html>
