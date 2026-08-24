@@ -39,6 +39,18 @@
       font-weight: bold;
     }
 
+    .alert-avisos {
+      background-color:#154f3c;
+      color:#D4AF37;
+      padding:12px;
+      margin:10px 20px;
+      border-radius:12px;
+      font-size:18px;
+      text-align:center;
+      font-weight:bold;
+      box-shadow:0 2px 5px rgba(0,0,0,0.25);
+    }
+
     .content {
       padding: 20px;
     }
@@ -62,7 +74,7 @@
     }
 
     .card ul li {
-      margin-bottom: 12px; /* espaçamento entre nomes */
+      margin-bottom: 12px;
     }
 
     .player-link {
@@ -133,6 +145,11 @@
   <a href="clube.html" class="back-button">⬅ Voltar ao Clube</a>
 </header>
 
+<!-- Aviso no topo -->
+<div class="alert-avisos">
+  📢 Aviso ativo no fim da página
+</div>
+
 <div class="content">
 
   <!-- Equipa Técnica -->
@@ -168,11 +185,19 @@
       <li class="player-link" onclick="openModal('assets/formacao/Erica_Marques.jpg')">Érica Marques</li>
     </ul>
   </div>
-<!-- Entrevista Lara Sequeira -->
-<div class="menu-card" onclick="window.open('https://www.facebook.com/share/v/14nnSEhB2Xy/', '_blank')">
-  <i class="fas fa-video"></i>
-  <p>Entrevista — Lara Sequeira</p>
-</div>
+
+  <!-- Entrevista Lara Sequeira -->
+  <div class="card">
+    <h3>🎤 Entrevista — Lara Sequeira</h3>
+    <p>Assista à entrevista completa da treinadora adjunta Lara Sequeira.</p>
+
+    <a href="https://www.facebook.com/share/v/14nnSEhB2Xy/" 
+       target="_blank"
+       style="color:#D4AF37; font-weight:bold;">
+       Ver entrevista no Facebook
+    </a>
+  </div>
+
 </div>
 
 <!-- Modal -->
