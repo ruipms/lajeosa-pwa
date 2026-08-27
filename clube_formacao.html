@@ -95,6 +95,20 @@
       font-weight: bold;
     }
 
+    /* Avisos - corrigido */
+    .aviso-img {
+      width: 90%;
+      max-width: 600px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .aviso-img:hover {
+      transform: scale(1.02);
+    }
+
     /* Modal */
     #imgModal {
       display: none;
@@ -185,7 +199,8 @@
       <li class="player-link" onclick="openModal('assets/formacao/Erica_Marques.jpg')">Érica Marques</li>
     </ul>
   </div>
-<!-- Avisos -->
+
+  <!-- Avisos -->
   <div style="margin-top:30px; text-align:center;">
     <h3 style="color:#D4AF37;">📢 Avisos</h3>
 
@@ -193,9 +208,8 @@
          alt="Aviso de treino"
          class="aviso-img"
          onclick="openModal('assets/formacao/treinoformacao.jpg')">
-
-  
   </div>
+
   <!-- Entrevista Lara Sequeira -->
   <div class="card">
     <h3>🎤 Entrevista — Lara Sequeira</h3>
