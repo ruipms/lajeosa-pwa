@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lajeosa do Mondego</title>
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -14,10 +14,10 @@
       gtag('config', 'G-FTEGNRDBJW');
     </script>
 
-    <!-- Manifest PWA -->
+    <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
 
-    <!-- Ícone da app -->
+    <!-- Ícone -->
     <link rel="icon" href="assets/brasao.png">
 
     <style>
@@ -80,6 +80,25 @@
             margin-top: 8px;
         }
 
+        /* Cartões ao comprido */
+        .card-full {
+            background-color: #1F5C45;
+            padding: 18px;
+            border-radius: 18px;
+            margin: 16px 20px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .card-full:hover {
+            background-color: #2a7a5e;
+        }
+
+        .card-full i {
+            font-size: 36px;
+            color: #D4AF37;
+        }
+
         footer {
             margin-top: 30px;
             padding: 10px;
@@ -98,16 +117,15 @@
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
     <h1>Lajeosa do Mondego</h1>
 
-    <!-- Versão -->
     <p style="color:#D4AF37; font-size:14px; font-weight:bold; margin-top:4px;">
         Versão 3.6.0 — 31/08/2026
     </p>
 
-    <!-- Link para histórico -->
     <p style="color:#D4AF37; font-size:13px; margin-top:2px; cursor:pointer;"
        onclick="openPage('changelog.html')">
         📜 Clique para ver histórico de versões
     </p>
+
     <p style="color:#D4AF37; font-size:13px; margin-top:6px; opacity:0.9;">
         Continue a deslizar para ver mais conteúdos
     </p>
@@ -120,14 +138,17 @@
         <i class="fas fa-landmark"></i>
         <p>Junta de Freguesia</p>
     </div>
+
     <div class="card" onclick="openPage('servicos.html')">
         <i class="fas fa-briefcase"></i>
         <p>Serviços na Freguesia</p>
     </div>
+
     <div class="card" onclick="openPage('noticias.html')">
         <i class="fas fa-newspaper"></i>
         <p>Notícias</p>
     </div>
+
     <div class="card" onclick="openPage('eventos.html')">
         <i class="fas fa-calendar-alt"></i>
         <p>Eventos</p>
@@ -141,14 +162,17 @@
         <i class="fas fa-map-marker-alt"></i>
         <p>Pontos de Interesse</p>
     </div>
+
     <div class="card" onclick="openPage('historia.html')">
         <i class="fas fa-book"></i>
         <p>História e Tradições</p>
     </div>
+
     <div class="card" onclick="openPage('meteorologia.html')">
         <i class="fas fa-cloud-sun"></i>
         <p>Meteorologia</p>
     </div>
+
     <div class="card" onclick="openPage('redessociais.html')">
         <i class="fas fa-share-alt"></i>
         <p>Lajeosa nas redes sociais</p>
@@ -171,18 +195,20 @@
         <i class="fas fa-phone"></i>
         <p>Comércio e serviços</p>
     </div>
-    <div class="card" onclick="openPage('aplicacao.html')">
-        <i class="fas fa-mobile-alt"></i>
-        <p>Instalar como Aplicação</p>
-    </div>
-    <div class="card" onclick="openPage('falarcomigo.html')">
-        <i class="fas fa-envelope"></i>
-        <p>Sobre mim / Falar comigo</p>
-    </div>
 </div>
 
-<!-- Cartão de Versão -->
-<div class="card" style="padding:14px; margin:20px; text-align:center;">
+<!-- Cartões ao comprido -->
+<div class="card-full" onclick="openPage('aplicacao.html')">
+    <i class="fas fa-mobile-alt"></i>
+    <p>Instalar como Aplicação</p>
+</div>
+
+<div class="card-full" onclick="openPage('falarcomigo.html')">
+    <i class="fas fa-envelope"></i>
+    <p>Sobre mim / Falar comigo</p>
+</div>
+
+<div class="card-full" style="text-align:center;">
     <p style="font-size:14px; opacity:0.8; margin-top:8px;">
         Site em manutenção ativa
     </p>
