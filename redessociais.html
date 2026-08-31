@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lajeosa nas Redes Sociais</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FTEGNRDBJW');
-</script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FTEGNRDBJW');
+    </script>
+
+    <!-- Ícones Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         body {
             background-color: #0F3D2E;
@@ -30,31 +35,37 @@
         p.subtitle {
             opacity: 0.9;
             margin-bottom: 30px;
+            font-size: 18px;
         }
 
-        .card {
+        .icon-card {
             background-color: #1F5C45;
-            padding: 18px;
+            padding: 20px;
             border-radius: 18px;
-            margin-bottom: 20px;
-            text-align: left;
+            margin: 20px auto;
+            width: 160px;
+            cursor: pointer;
+            transition: 0.2s;
             box-shadow: 0 2px 5px rgba(0,0,0,0.25);
         }
 
-        .card h3 {
-            color: #D4AF37;
-            margin-top: 0;
-            margin-bottom: 10px;
+        .icon-card:hover {
+            background-color: #2a7a5e;
         }
 
-        .card a {
+        .icon-card i {
+            font-size: 60px;
             color: #D4AF37;
+        }
+
+        .icon-label {
+            margin-top: 10px;
             font-size: 18px;
-            text-decoration: none;
         }
 
-        .card a:hover {
-            text-decoration: underline;
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
         .voltar {
@@ -74,76 +85,64 @@
 <body>
 
 <h2>Lajeosa do Mondego nas Redes Sociais</h2>
-<p class="subtitle">Páginas e grupos dedicados à freguesia e ao CRC.</p>
+<p class="subtitle">Carregue no símbolo da rede social para abrir a respetiva página.</p>
 
 <!-- Grupo da Lajeosa -->
-<div class="card">
-    <h3>📘 Grupo da Lajeosa no Facebook</h3>
-    <p>
-        <a href="https://www.facebook.com/groups/178632112150037" target="_blank">
-            facebook.com/groups/178632112150037
-        </a>
-    </p>
-</div>
+<a href="https://www.facebook.com/groups/178632112150037" target="_blank">
+    <div class="icon-card">
+        <i class="fab fa-facebook"></i>
+        <div class="icon-label">Grupo da Lajeosa</div>
+    </div>
+</a>
 
 <!-- Junta de Freguesia -->
-<div class="card">
-    <h3>📘 Junta de Freguesia da Lajeosa</h3>
-    <p>
-        <a href="https://www.facebook.com/lajeosadomondego" target="_blank">
-            facebook.com/lajeosadomondego
-        </a>
-    </p>
-</div>
+<a href="https://www.facebook.com/lajeosadomondego" target="_blank">
+    <div class="icon-card">
+        <i class="fab fa-facebook"></i>
+        <div class="icon-label">Junta de Freguesia</div>
+    </div>
+</a>
 
 <!-- CRC -->
-<div class="card">
-    <h3>📘 CRC Lajeosa do Mondego</h3>
-    <p>
-        <a href="https://www.facebook.com/p/CRC-Lajeosa-do-Mondego-61576945611396/" target="_blank">
-            facebook CRC Lajeosa do Mondego
-        </a>
-    </p>
-</div>
+<a href="https://www.facebook.com/p/CRC-Lajeosa-do-Mondego-61576945611396/" target="_blank">
+    <div class="icon-card">
+        <i class="fab fa-facebook"></i>
+        <div class="icon-label">CRC Lajeosa</div>
+    </div>
+</a>
 
 <!-- Página não oficial -->
-<div class="card">
-    <h3>📘 Página não oficial da Lajeosa</h3>
-    <p>
-        <a href="https://www.facebook.com/lageosamondego/" target="_blank">
-            facebook.com/lageosamondego
-        </a>
-    </p>
-</div>
+<a href="https://www.facebook.com/lageosamondego/" target="_blank">
+    <div class="icon-card">
+        <i class="fab fa-facebook"></i>
+        <div class="icon-label">Página não oficial</div>
+    </div>
+</a>
 
 <!-- X -->
-<div class="card">
-    <h3>🐦 Página na rede X</h3>
-    <p>
-        <a href="https://x.com/Lagmondego" target="_blank">
-            x.com/Lagmondego
-        </a>
-    </p>
-</div>
+<a href="https://x.com/Lagmondego" target="_blank">
+    <div class="icon-card">
+        <i class="fab fa-x-twitter"></i>
+        <div class="icon-label">Rede X</div>
+    </div>
+</a>
 
 <!-- Instagram -->
-<div class="card">
-    <h3>📸 Instagram da Lajeosa</h3>
-    <p>
-        <a href="https://www.instagram.com/lageosa_do_mondego?igsh=MXAyMHZmb2ludGt2aw==" target="_blank">
-            instagram.com/lageosa_do_mondego
-        </a>
-    </p>
-</div>
+<a href="https://www.instagram.com/lageosa_do_mondego?igsh=MXAyMHZmb2ludGt2aw==" target="_blank">
+    <div class="icon-card">
+        <i class="fab fa-instagram"></i>
+        <div class="icon-label">Instagram</div>
+    </div>
+</a>
+
 <!-- WhatsApp -->
-<div class="card">
-    <h3>📸 Canal do WhatsApp</h3>
-    <p>
-        <a href="https://whatsapp.com/channel/0029Vb82Q4v8PgsKSqxQHb46" target="_blank">
-            Canal do WhatsApp 
-        </a>
-    </p>
-</div>
+<a href="https://whatsapp.com/channel/0029Vb82Q4v8PgsKSqxQHb46" target="_blank">
+    <div class="icon-card">
+        <i class="fab fa-whatsapp"></i>
+        <div class="icon-label">Canal WhatsApp</div>
+    </div>
+</a>
+
 <a class="voltar" href="index.html">← Voltar</a>
 
 </body>
