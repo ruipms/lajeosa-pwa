@@ -43,17 +43,24 @@
             font-weight: bold;
         }
 
-        /* Versão média dos cartões */
+        .sec-title {
+            color: #D4AF37;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 16px;
-            padding: 20px;
+            padding: 10px 20px;
         }
 
         .card {
             background-color: #1F5C45;
-            padding: 14px;
+            padding: 18px;
             border-radius: 18px;
             cursor: pointer;
             transition: 0.2s;
@@ -64,7 +71,7 @@
         }
 
         .card i {
-            font-size: 34px;
+            font-size: 36px;
             color: #D4AF37;
         }
 
@@ -93,7 +100,7 @@
 
     <!-- Versão -->
     <p style="color:#D4AF37; font-size:14px; font-weight:bold; margin-top:4px;">
-        Versão 3.5.0 — 31/08/2026
+        Versão 3.6.0 — 31/08/2026
     </p>
 
     <!-- Link para histórico -->
@@ -102,83 +109,84 @@
         📜 Clique para ver histórico de versões
     </p>
     <p style="color:#D4AF37; font-size:13px; margin-top:6px; opacity:0.9;">
-           Continue a deslizar para ver mais conteúdos
+        Continue a deslizar para ver mais conteúdos
     </p>
 </header>
 
-
+<!-- Secção Instituições -->
+<h2 class="sec-title">Instituições</h2>
 <div class="grid">
-
     <div class="card" onclick="openPage('junta.html')">
         <i class="fas fa-landmark"></i>
         <p>Junta de Freguesia</p>
     </div>
-
     <div class="card" onclick="openPage('servicos.html')">
-        <i class="fas fa-landmark"></i>
+        <i class="fas fa-briefcase"></i>
         <p>Serviços na Freguesia</p>
     </div>
-
     <div class="card" onclick="openPage('noticias.html')">
         <i class="fas fa-newspaper"></i>
         <p>Notícias</p>
     </div>
-
     <div class="card" onclick="openPage('eventos.html')">
         <i class="fas fa-calendar-alt"></i>
         <p>Eventos</p>
     </div>
+</div>
 
-    <div class="card" onclick="openPage('clube.html')">
-        <i class="fas fa-futbol"></i>
-        <p>CRC Lajeosa do Mondego</p>
-    </div>
-
+<!-- Secção Aldeia -->
+<h2 class="sec-title">Aldeia</h2>
+<div class="grid">
     <div class="card" onclick="openPage('pontos.html')">
         <i class="fas fa-map-marker-alt"></i>
         <p>Pontos de Interesse</p>
     </div>
-
     <div class="card" onclick="openPage('historia.html')">
         <i class="fas fa-book"></i>
         <p>História e Tradições</p>
     </div>
-
     <div class="card" onclick="openPage('meteorologia.html')">
-        <i class="fas fa-cloud"></i>
+        <i class="fas fa-cloud-sun"></i>
         <p>Meteorologia</p>
     </div>
-
     <div class="card" onclick="openPage('redessociais.html')">
         <i class="fas fa-share-alt"></i>
         <p>Lajeosa nas redes sociais</p>
     </div>
+</div>
 
+<!-- Secção Clube -->
+<h2 class="sec-title">Clube</h2>
+<div class="grid">
+    <div class="card" onclick="openPage('clube.html')">
+        <i class="fas fa-futbol"></i>
+        <p>CRC Lajeosa do Mondego</p>
+    </div>
+</div>
+
+<!-- Secção Utilidade -->
+<h2 class="sec-title">Utilidade</h2>
+<div class="grid">
     <div class="card" onclick="openPage('contactos.html')">
         <i class="fas fa-phone"></i>
         <p>Comércio e serviços</p>
     </div>
-
+    <div class="card" onclick="openPage('aplicacao.html')">
+        <i class="fas fa-mobile-alt"></i>
+        <p>Instalar como Aplicação</p>
+    </div>
+    <div class="card" onclick="openPage('falarcomigo.html')">
+        <i class="fas fa-envelope"></i>
+        <p>Sobre mim / Falar comigo</p>
+    </div>
 </div>
 
-<div class="card" onclick="openPage('falarcomigo.html')" style="padding:14px; margin:20px;">
-    <i class="fas fa-envelope"></i>
-    <p>Sobre mim / Falar comigo</p>
-</div>
-
-<div class="card" onclick="openPage('aplicacao.html')" style="padding:14px; margin:20px;">
-    <i class="fas fa-mobile-alt"></i>
-    <p>Instalar como Aplicação</p>
-</div>
-
-
-<!-- Cartão de Versão (limpo) -->
+<!-- Cartão de Versão -->
 <div class="card" style="padding:14px; margin:20px; text-align:center;">
     <p style="font-size:14px; opacity:0.8; margin-top:8px;">
         Site em manutenção ativa
     </p>
 </div>
-
 
 <footer>
     2026 Lajeosa do Mondego — ©RMS
