@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Interativo — Lajeosa do Mondego</title>
+
+<!-- Google tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+    body {
+        margin: 0;
+        background-color: #0F3D2E;
+        color: white;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+
+    h1 {
+        color: #D4AF37;
+        margin: 20px 0;
+    }
+
+    #map {
+        height: 75vh;
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    .voltar {
+        display: inline-block;
+        margin: 20px;
+        color: #D4AF37;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    .voltar:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>🗺️ Mapa Interativo da Lajeosa do Mondego</h1>
+<p style="opacity:0.9; margin-bottom:10px;">Toque nos marcadores para ver detalhes e abrir navegação.</p>
+
+<div id="map"></div>
+
+<a class="voltar" href="index.html">← Voltar</a>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+// Inicializar mapa centrado na Lajeosa
+var map = L.map('map').setView([40.5415, -7.4930], 15);
+
+// Carregar tiles (gratuitos)
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+}).addTo(map);
+
+// Função para criar marcadores
+function addMarker(lat, lon, titulo, descricao) {
+    L.marker([lat, lon]).addTo(map)
+        .bindPopup(`
+            <b>${titulo}</b><br>
+            ${descricao}<br><br>
+            <a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank" style="color:#D4AF37;">
+                📍 Como chegar
+            </a>
+        `);
+}
+
+// Marcadores principais da Lajeosa
+addMarker(40.54150, -7.49300, "Centro da Lajeosa", "Localização central da aldeia.");
+addMarker(40.54195, -7.49240, "Igreja Matriz", "Igreja principal da Lajeosa do Mondego.");
+addMarker(40.54260, -7.49180, "Junta de Freguesia", "Edifício da Junta.");
+addMarker(40.54310, -7.49290, "CRC Lajeosa", "Clube Recreativo e Cultural.");
+addMarker(40.54080, -7.49420, "Capela", "Pequena capela tradicional.");
+addMarker(40.53990, -7.49510, "Piscinas / Zona de Lazer", "Espaço de convívio e descanso.");
+
+</script>
+
+</body>
+</html>
