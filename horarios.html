@@ -95,6 +95,20 @@
         border-radius: 18px;
         margin: 20px;
         text-align: center;
+        transition: 0.3s;
+    }
+
+    .proxima.alerta {
+        background-color: #D4AF37 !important;
+        color: #0F3D2E !important;
+    }
+
+    .proxima.alerta h2 {
+        color: #0F3D2E !important;
+    }
+
+    .proxima.alerta p {
+        color: #0F3D2E !important;
     }
 
     .proxima p {
@@ -116,6 +130,7 @@
 <div class="proxima" id="proximaBox">
     <h2 style="color:#D4AF37;">Próxima camioneta na Lajeosa</h2>
     <p id="proximaTexto">A calcular…</p>
+    <p id="faltamTexto" style="font-size:16px; opacity:0.9; margin-top:6px;"></p>
 </div>
 
 <!-- IDA -->
@@ -214,8 +229,8 @@
 <script>
     // Horários da Lajeosa
     const horariosLajeosa = [
-        "08:28", // manhã (volta)
-        "17:16"  // tarde (ida)
+        "08:28", // manhã
+        "17:16"  // tarde
     ];
 
     function toDate(hora) {
@@ -234,17 +249,49 @@
             .filter(h => h.date > agora);
 
         const texto = document.getElementById("proximaTexto");
+        const faltam = document.getElementById("faltamTexto");
+        const box = document.getElementById("proximaBox");
 
         if (futuras.length === 0) {
             texto.innerHTML = "Não há mais camionetas a passar na Lajeosa hoje.";
+            faltam.innerHTML = "";
+            box.classList.remove("alerta");
             return;
         }
 
-        texto.innerHTML = `A próxima camioneta passa às <strong>${futuras[0].hora}</strong>.`;
+        const proxima = futuras[0];
+        texto.innerHTML = `A próxima camioneta passa às <strong>${proxima.hora}</strong>.`;
+
+        // Calcular diferença
+        const diffMs = proxima.date - agora;
+        const diffSec = Math.floor(diffMs / 1000);
+        const diffMin = Math.floor(diffSec / 60);
+        const diffHoras = Math.floor(diffMin / 60);
+        const diffMinRestantes = diffMin % 60;
+        const diffSecRestantes = diffSec % 60;
+
+        // Mostrar contagem decrescente
+        if (diffHoras > 0) {
+            faltam.innerHTML = `Faltam ${diffHoras}h ${diffMinRestantes}min ${diffSecRestantes}s.`;
+        } else if (diffMin > 0) {
+            faltam.innerHTML = `Faltam ${diffMin}min ${diffSecRestantes}s.`;
+        } else {
+            faltam.innerHTML = `Faltam ${diffSecRestantes}s.`;
+        }
+
+        // Se faltar 10 minutos ou menos → cartão dourado
+        if (diffMin <= 10) {
+            box.classList.add("alerta");
+        } else {
+            box.classList.remove("alerta");
+        }
     }
 
+    // Atualizar segundo a segundo
     calcularProxima();
+    setInterval(calcularProxima, 1000);
 </script>
 
 </body>
 </html>
+
