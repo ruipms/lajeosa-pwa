@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Horários da Camioneta</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #0F3D2E;
+        color: white;
+        text-align: center;
+    }
+
+    header {
+        padding: 20px;
+    }
+
+    h1 {
+        margin-top: 10px;
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    .card {
+        background-color: #1F5C45;
+        padding: 18px;
+        border-radius: 18px;
+        margin: 20px;
+        text-align: left;
+    }
+
+    .card h2 {
+        margin-top: 0;
+        color: #D4AF37;
+        font-size: 22px;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    th, td {
+        padding: 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    th {
+        color: #D4AF37;
+        font-size: 18px;
+    }
+
+    .lajeosa {
+        background-color: rgba(212,175,55,0.25);
+        font-weight: bold;
+    }
+
+    .nota {
+        margin-top: 10px;
+        font-size: 14px;
+        opacity: 0.8;
+        text-align: center;
+    }
+
+    .voltar {
+        margin: 20px;
+        padding: 15px;
+        background-color: #1F5C45;
+        border-radius: 18px;
+        cursor: pointer;
+        transition: 0.2s;
+        display: inline-block;
+    }
+
+    .voltar:hover {
+        background-color: #2a7a5e;
+    }
+
+    .voltar i {
+        color: #D4AF37;
+        font-size: 20px;
+        margin-right: 8px;
+    }
+
+    .proxima {
+        background-color: #1F5C45;
+        padding: 18px;
+        border-radius: 18px;
+        margin: 20px;
+        text-align: center;
+    }
+
+    .proxima p {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <i class="fas fa-bus" style="font-size:48px; color:#D4AF37;"></i>
+    <h1>Horários da Camioneta</h1>
+    <p style="color:#D4AF37; font-size:14px; opacity:0.9;">Guarda ⇄ Seia / São Romão</p>
+</header>
+
+<!-- Próxima camioneta -->
+<div class="proxima" id="proximaBox">
+    <h2 style="color:#D4AF37;">Próxima camioneta na Lajeosa</h2>
+    <p id="proximaTexto">A calcular…</p>
+</div>
+
+<!-- IDA -->
+<div class="card">
+    <h2>Guarda → São Romão</h2>
+    <p class="nota">A - Não se efetua aos sábados, domingos e feriados</p>
+
+    <table>
+        <tr><th>Local</th><th>Hora</th></tr>
+
+        <tr><td>Guarda</td><td>16:45</td></tr>
+        <tr><td>Maçainhas Baixo</td><td>16:51</td></tr>
+        <tr><td>Cubo</td><td>16:53</td></tr>
+        <tr><td>Prado</td><td>16:54</td></tr>
+        <tr><td>Chaos</td><td>16:56</td></tr>
+        <tr><td>Mirante</td><td>16:57</td></tr>
+        <tr><td>Quinta Nova</td><td>17:00</td></tr>
+        <tr><td>Ramalhosa</td><td>17:02</td></tr>
+        <tr><td>Cavadoude</td><td>17:05</td></tr>
+        <tr><td>Porto da Carne</td><td>17:08</td></tr>
+        <tr><td>Vila Cortez Mondego</td><td>17:12</td></tr>
+
+        <tr class="lajeosa"><td>Lajeosa do Mondego</td><td>17:16</td></tr>
+
+        <tr><td>Ratoeira</td><td>17:20</td></tr>
+        <tr><td>Celorico da Beira</td><td>17:30</td></tr>
+        <tr><td>Cortico da Serra</td><td>17:38</td></tr>
+        <tr><td>Carvalheda</td><td>17:42</td></tr>
+        <tr><td>Mesquitela</td><td>17:45</td></tr>
+        <tr><td>Vale da Ribeira</td><td>17:48</td></tr>
+        <tr><td>Carrapichana</td><td>17:52</td></tr>
+        <tr><td>Vila Cortes da Serra</td><td>17:57</td></tr>
+        <tr><td>Salgueiro</td><td>18:01</td></tr>
+        <tr><td>São Paio</td><td>18:08</td></tr>
+        <tr><td>Gouveia</td><td>18:12</td></tr>
+        <tr><td>Vinho</td><td>18:20</td></tr>
+        <tr><td>Moimenta da Serra</td><td>18:25</td></tr>
+        <tr><td>Paços da Serra</td><td>18:30</td></tr>
+        <tr><td>Eiro</td><td>18:32</td></tr>
+        <tr><td>Santa Marinha</td><td>18:35</td></tr>
+        <tr><td>Arrifana</td><td>18:40</td></tr>
+        <tr><td>Seia</td><td>18:47</td></tr>
+        <tr><td>São Romão</td><td>18:54</td></tr>
+    </table>
+</div>
+
+<!-- VOLTA -->
+<div class="card">
+    <h2>São Romão → Guarda</h2>
+    <p class="nota">A - Não se efetua aos sábados, domingos e feriados</p>
+
+    <table>
+        <tr><th>Local</th><th>Hora</th></tr>
+
+        <tr><td>São Romão</td><td>06:50</td></tr>
+        <tr><td>Seia</td><td>06:57</td></tr>
+        <tr><td>Arrifana</td><td>07:04</td></tr>
+        <tr><td>Santa Marinha</td><td>07:09</td></tr>
+        <tr><td>Eiro</td><td>07:12</td></tr>
+        <tr><td>Paços da Serra</td><td>07:14</td></tr>
+        <tr><td>Moimenta da Serra</td><td>07:19</td></tr>
+        <tr><td>Vinho</td><td>07:24</td></tr>
+        <tr><td>Gouveia</td><td>07:32</td></tr>
+        <tr><td>São Paio</td><td>07:36</td></tr>
+        <tr><td>Salgueiro</td><td>07:43</td></tr>
+        <tr><td>Vila Cortes da Serra</td><td>07:47</td></tr>
+        <tr><td>Carrapichana</td><td>07:52</td></tr>
+        <tr><td>Vale da Ribeira</td><td>07:56</td></tr>
+        <tr><td>Mesquitela</td><td>07:59</td></tr>
+        <tr><td>Carvalheda</td><td>08:02</td></tr>
+        <tr><td>Cortico da Serra</td><td>08:06</td></tr>
+        <tr><td>Celorico da Beira</td><td>08:14</td></tr>
+        <tr><td>Ratoeira</td><td>08:24</td></tr>
+
+        <tr class="lajeosa"><td>Lajeosa do Mondego</td><td>08:28</td></tr>
+
+        <tr><td>Vila Cortez Mondego</td><td>08:32</td></tr>
+        <tr><td>Porto da Carne</td><td>08:36</td></tr>
+        <tr><td>Cavadoude</td><td>08:39</td></tr>
+        <tr><td>Ramalhosa</td><td>08:42</td></tr>
+        <tr><td>Quinta Nova</td><td>08:44</td></tr>
+        <tr><td>Mirante</td><td>08:47</td></tr>
+        <tr><td>Chaos</td><td>08:48</td></tr>
+        <tr><td>Prado</td><td>08:50</td></tr>
+        <tr><td>Cubo</td><td>08:51</td></tr>
+        <tr><td>Maçainhas Baixo</td><td>08:53</td></tr>
+        <tr><td>Guarda</td><td>08:59</td></tr>
+    </table>
+</div>
+
+<!-- Botão voltar -->
+<div class="voltar" onclick="window.location.href='index.html'">
+    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+</div>
+
+<script>
+    // Horários da Lajeosa
+    const horariosLajeosa = [
+        "08:28", // manhã (volta)
+        "17:16"  // tarde (ida)
+    ];
+
+    function toDate(hora) {
+        const [h, m] = hora.split(":");
+        const d = new Date();
+        d.setHours(h);
+        d.setMinutes(m);
+        d.setSeconds(0);
+        return d;
+    }
+
+    function calcularProxima() {
+        const agora = new Date();
+        const futuras = horariosLajeosa
+            .map(h => ({ hora: h, date: toDate(h) }))
+            .filter(h => h.date > agora);
+
+        const texto = document.getElementById("proximaTexto");
+
+        if (futuras.length === 0) {
+            texto.innerHTML = "Não há mais camionetas a passar na Lajeosa hoje.";
+            return;
+        }
+
+        texto.innerHTML = `A próxima camioneta passa às <strong>${futuras[0].hora}</strong>.`;
+    }
+
+    calcularProxima();
+</script>
+
+</body>
+</html>
