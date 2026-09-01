@@ -35,6 +35,37 @@
         font-weight: bold;
     }
 
+    .toggle-btn {
+        background-color: #1F5C45;
+        padding: 14px;
+        border-radius: 18px;
+        cursor: pointer;
+        transition: 0.2s;
+        display: inline-block;
+        margin-top: 10px;
+        font-size: 16px;
+        color: #D4AF37;
+        font-weight: bold;
+    }
+
+    .toggle-btn:hover {
+        background-color: #2a7a5e;
+    }
+
+    .toggle-msg {
+        margin-top: 8px;
+        font-size: 14px;
+        color: #D4AF37;
+        opacity: 0.9;
+    }
+
+    .info {
+        color: #D4AF37;
+        font-size: 13px;
+        margin-top: 10px;
+        opacity: 0.9;
+    }
+
     .card {
         background-color: #1F5C45;
         padding: 18px;
@@ -124,6 +155,10 @@
         font-size: 18px;
         margin-top: 10px;
     }
+
+    .fade {
+        transition: opacity 0.4s ease;
+    }
 </style>
 </head>
 
@@ -132,6 +167,22 @@
 <header>
     <i class="fas fa-bus" style="font-size:48px; color:#D4AF37;"></i>
     <h1>Horários da Camioneta</h1>
+
+    <!-- Botão toggle -->
+    <div class="toggle-btn" onclick="toggleLajeosa()" id="toggleBtn">
+        Mostrar só a Lajeosa
+    </div>
+
+    <!-- Mensagem dinâmica -->
+    <div class="toggle-msg" id="toggleMsg">
+        A mostrar todos os horários completos.
+    </div>
+
+    <p class="info">
+        Horários fornecidos pela empresa Marques Barraqueiro — 
+        <a href="https://marques.pt" style="color:#D4AF37;">marques.pt</a>
+    </p>
+
     <p style="color:#D4AF37; font-size:14px; opacity:0.9;">Guarda ⇄ Seia / São Romão</p>
 </header>
 
@@ -143,7 +194,7 @@
 </div>
 
 <!-- IDA -->
-<div class="card">
+<div class="card fade" id="idaCard">
     <h2>Guarda → São Romão</h2>
     <p class="nota">A - Não se efetua aos sábados, domingos e feriados</p>
 
@@ -187,7 +238,7 @@
 </div>
 
 <!-- VOLTA -->
-<div class="card">
+<div class="card fade" id="voltaCard">
     <h2>São Romão → Guarda</h2>
     <p class="nota">A - Não se efetua aos sábados, domingos e feriados</p>
 
@@ -237,10 +288,7 @@
 
 <script>
     // Horários da Lajeosa
-    const horariosLajeosa = [
-        "08:28", // manhã
-        "17:16"  // tarde
-    ];
+    const horariosLajeosa = ["08:28", "17:16"];
 
     function toDate(hora) {
         const [h, m] = hora.split(":");
@@ -253,13 +301,23 @@
 
     function calcularProxima() {
         const agora = new Date();
-        const futuras = horariosLajeosa
-            .map(h => ({ hora: h, date: toDate(h) }))
-            .filter(h => h.date > agora);
+        const diaSemana = agora.getDay(); // 0 domingo, 6 sábado
 
         const texto = document.getElementById("proximaTexto");
         const faltam = document.getElementById("faltamTexto");
         const box = document.getElementById("proximaBox");
+
+        // Sábados e domingos → não há camionetas
+        if (diaSemana === 0 || diaSemana === 6) {
+            texto.innerHTML = "Não há camionetas a passar na Lajeosa aos sábados e domingos.";
+            faltam.innerHTML = "";
+            box.classList.remove("alerta");
+            return;
+        }
+
+        const futuras = horariosLajeosa
+            .map(h => ({ hora: h, date: toDate(h) }))
+            .filter(h => h.date > agora);
 
         if (futuras.length === 0) {
             texto.innerHTML = "Não há mais camionetas a passar na Lajeosa hoje.";
@@ -271,7 +329,6 @@
         const proxima = futuras[0];
         texto.innerHTML = `A próxima camioneta passa às <strong>${proxima.hora}</strong>.`;
 
-        // Calcular diferença
         const diffMs = proxima.date - agora;
         const diffSec = Math.floor(diffMs / 1000);
         const diffMin = Math.floor(diffSec / 60);
@@ -279,7 +336,6 @@
         const diffMinRestantes = diffMin % 60;
         const diffSecRestantes = diffSec % 60;
 
-        // Mostrar contagem decrescente
         if (diffHoras > 0) {
             faltam.innerHTML = `Faltam ${diffHoras}h ${diffMinRestantes}min ${diffSecRestantes}s.`;
         } else if (diffMin > 0) {
@@ -288,7 +344,6 @@
             faltam.innerHTML = `Faltam ${diffSecRestantes}s.`;
         }
 
-        // Se faltar 10 minutos ou menos → cartão dourado
         if (diffMin <= 10) {
             box.classList.add("alerta");
         } else {
@@ -296,10 +351,43 @@
         }
     }
 
-    // Atualizar segundo a segundo
+    // Toggle Lajeosa
+    let modoLajeosa = false;
+
+    function toggleLajeosa() {
+        modoLajeosa = !modoLajeosa;
+
+        const ida = document.getElementById("idaCard");
+        const volta = document.getElementById("voltaCard");
+        const btn = document.getElementById("toggleBtn");
+        const msg = document.getElementById("toggleMsg");
+
+        if (modoLajeosa) {
+            ida.style.opacity = "0";
+            volta.style.opacity = "0";
+            setTimeout(() => {
+                ida.style.display = "none";
+                volta.style.display = "none";
+            }, 400);
+
+            btn.innerHTML = "Mostrar todos os horários";
+            msg.innerHTML = "A mostrar apenas os horários da Lajeosa do Mondego.";
+        } else {
+            ida.style.display = "block";
+            volta.style.display = "block";
+            setTimeout(() => {
+                ida.style.opacity = "1";
+                volta.style.opacity = "1";
+            }, 10);
+
+            btn.innerHTML = "Mostrar só a Lajeosa";
+            msg.innerHTML = "A mostrar todos os horários completos.";
+        }
+    }
+
     calcularProxima();
     setInterval(calcularProxima, 1000);
 </script>
 
 </body>
-                              </html>
+</html>
