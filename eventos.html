@@ -4,14 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eventos da Lajeosa do Mondego</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FTEGNRDBJW');
-</script>
+
     <style>
         body {
             background-color: #0F3D2E;
@@ -28,30 +21,63 @@
             margin-bottom: 10px;
         }
 
-        p.subtitle {
+        .subtitle {
             text-align: center;
             font-size: 18px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             opacity: 0.9;
         }
 
-        /* Cabeçalho de cada mês */
-        .month-title {
-            font-size: 26px;
-            color: #D4AF37;
-            margin: 30px 0 10px 0;
-            text-align: left;
-            border-left: 6px solid #D4AF37;
-            padding-left: 12px;
+        /* Aviso inicial */
+        .info-card {
+            background-color: #134C3A;
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
         }
 
-        /* Cartão de eventos */
-        .card {
+        .info-card p {
+            color: #D4AF37;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        /* Botão do mês */
+        .month-button {
+            background-color: #1F5C45;
+            padding: 16px;
+            border-radius: 14px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 20px;
+            color: #D4AF37;
+        }
+
+        .month-button:hover {
+            background-color: #2a7a5e;
+        }
+
+        /* Conteúdo dos eventos (accordion) */
+        .events-content {
             background-color: #134C3A;
-            padding: 18px;
+            padding: 16px;
             border-radius: 14px;
             margin-bottom: 20px;
             box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+            display: none; /* começa fechado */
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .event-item {
@@ -59,6 +85,23 @@
             margin: 8px 0;
             padding-left: 10px;
             border-left: 3px solid #D4AF37;
+        }
+
+        /* Botão mostrar todos */
+        .show-all {
+            background-color: #1F5C45;
+            padding: 16px;
+            border-radius: 14px;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #D4AF37;
+            box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+        }
+
+        .show-all:hover {
+            background-color: #2a7a5e;
         }
 
         a {
@@ -69,10 +112,6 @@
             text-align: center;
             margin-top: 30px;
         }
-
-        a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 
@@ -81,60 +120,92 @@
 <h2>Eventos da Lajeosa do Mondego — 2026/2027</h2>
 <p class="subtitle">Algumas datas poderão estar sujeitas a alterações.</p>
 
-<!-- Agosto -->
-<!--<h3 class="month-title">📅 Agosto 2026</h3>
-<div class="card">
-    <p class="event-item">22 — Corrida da Cerveja e Noite Branca</p>
-<a href="https://www.facebook.com/share/p/199oFm8Mas/" target="_blank">
-    Ver no Facebook
-</a><br>
-</div> -->
+<div class="info-card">
+    <p>Carregue num mês para ver os eventos programados</p>
+</div>
 
 <!-- Setembro -->
-<h3 class="month-title">🗓️ Setembro 2026</h3>
-<div class="card">
+<div class="month-button" onclick="toggleEvents('set2026')">
+    🗓️ Setembro 2026 <span>▶</span>
+</div>
+<div id="set2026" class="events-content">
     <p class="event-item">Ida de bicicletas a Fátima — 12 e 13</p>
     <p class="event-item">Feira Celorico da Beira "É Bom, é Nosso" — 12 e 13</p>
 </div>
 
 <!-- Novembro -->
-<h3 class="month-title">🗓️ Novembro 2026</h3>
-<div class="card">
+<div class="month-button" onclick="toggleEvents('nov2026')">
+    🗓️ Novembro 2026 <span>▶</span>
+</div>
+<div id="nov2026" class="events-content">
     <p class="event-item">São Martinho — 13, 14 e 15</p>
 </div>
 
 <!-- Dezembro -->
-<h3 class="month-title">🗓️ Dezembro 2026</h3>
-<div class="card">
+<div class="month-button" onclick="toggleEvents('dez2026')">
+    🗓️ Dezembro 2026 <span>▶</span>
+</div>
+<div id="dez2026" class="events-content">
     <p class="event-item">19 — Jantar de Natal dos Homens</p>
 </div>
 
 <!-- Janeiro -->
-<h3 class="month-title">🗓️ Janeiro 2027</h3>
-<div class="card">
+<div class="month-button" onclick="toggleEvents('jan2027')">
+    🗓️ Janeiro 2027 <span>▶</span>
+</div>
+<div id="jan2027" class="events-content">
     <p class="event-item">9 — Jantar das Rainhas</p>
 </div>
 
 <!-- Abril -->
-<h3 class="month-title">🗓️ Abril 2027</h3>
-<div class="card">
+<div class="month-button" onclick="toggleEvents('abr2027')">
+    🗓️ Abril 2027 <span>▶</span>
+</div>
+<div id="abr2027" class="events-content">
     <p class="event-item">3 e 4 — Festa da Nossa Senhora dos Prazeres</p>
 </div>
 
 <!-- Junho -->
-<h3 class="month-title">🗓️ Junho 2027</h3>
-<div class="card">
+<div class="month-button" onclick="toggleEvents('jun2027')">
+    🗓️ Junho 2027 <span>▶</span>
+</div>
+<div id="jun2027" class="events-content">
     <p class="event-item">10 — Solteiros e Casados (Homens) e Convívio das Mulheres</p>
 </div>
 
 <!-- Julho -->
-<h3 class="month-title">🗓️ Julho 2027</h3>
-<div class="card">
+<div class="month-button" onclick="toggleEvents('jul2027')">
+    🗓️ Julho 2027 <span>▶</span>
+</div>
+<div id="jul2027" class="events-content">
     <p class="event-item">3 — Sardinhada 2027</p>
+</div>
+
+<div class="show-all" onclick="showAllEvents()">
+    Mostrar todos os eventos
 </div>
 
 <a href="index.html">← Voltar</a>
 
+<script>
+function toggleEvents(id) {
+    const content = document.getElementById(id);
+
+    // Fecha todos os outros meses
+    document.querySelectorAll('.events-content').forEach(div => {
+        if (div.id !== id) div.style.display = 'none';
+    });
+
+    // Alterna o mês clicado
+    content.style.display = (content.style.display === 'block') ? 'none' : 'block';
+}
+
+function showAllEvents() {
+    document.querySelectorAll('.events-content').forEach(div => {
+        div.style.display = 'block';
+    });
+}
+</script>
+
 </body>
 </html>
-
