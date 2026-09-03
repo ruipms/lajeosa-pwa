@@ -14,6 +14,84 @@
       gtag('config', 'G-FTEGNRDBJW');
     </script>
 
+    <!-- Métricas avançadas da PWA -->
+    <script>
+    /* 1) Instalação da PWA */
+    window.addEventListener('appinstalled', () => {
+        gtag('event', 'pwa_install', {
+            event_category: 'PWA',
+            event_label: 'Instalação da App'
+        });
+    });
+
+    /* 2) Abertura via ícone do ecrã inicial */
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        gtag('event', 'pwa_launch_icon', {
+            event_category: 'PWA',
+            event_label: 'Abertura via ícone'
+        });
+    }
+
+    /* 3) Primeira visita vs visita recorrente */
+    if (!localStorage.getItem('pwa_first_visit')) {
+        localStorage.setItem('pwa_first_visit', '1');
+        gtag('event', 'pwa_first_open', {
+            event_category: 'PWA',
+            event_label: 'Primeira visita'
+        });
+    } else {
+        gtag('event', 'pwa_return_open', {
+            event_category: 'PWA',
+            event_label: 'Visita recorrente'
+        });
+    }
+
+    /* 4) Uso offline */
+    window.addEventListener('offline', () => {
+        gtag('event', 'pwa_offline_use', {
+            event_category: 'PWA',
+            event_label: 'Uso offline'
+        });
+    });
+
+    /* 5) Erro de rede */
+    window.addEventListener('error', (e) => {
+        if (e.message && e.message.includes('Failed to fetch')) {
+            gtag('event', 'pwa_network_error', {
+                event_category: 'PWA',
+                event_label: 'Erro de rede'
+            });
+        }
+    });
+
+    /* 6) Origem: WhatsApp / Instagram / Facebook */
+    document.addEventListener('DOMContentLoaded', () => {
+        const ref = document.referrer;
+
+        if (ref.includes('whatsapp')) gtag('event', 'pwa_open_whatsapp');
+        if (ref.includes('instagram')) gtag('event', 'pwa_open_instagram');
+        if (ref.includes('facebook')) gtag('event', 'pwa_open_facebook');
+    });
+
+    /* 7) Atualização da PWA */
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            gtag('event', 'pwa_update_trigger', {
+                event_category: 'PWA',
+                event_label: 'Atualização da aplicação'
+            });
+        });
+    }
+
+    /* 8) Tempo real dentro da PWA (ping a cada 15s) */
+    setInterval(() => {
+        gtag('event', 'pwa_active_tick', {
+            event_category: 'PWA',
+            event_label: 'Atividade contínua'
+        });
+    }, 15000);
+    </script>
+
     <!-- Manifest -->
     <link rel="manifest" href="manifest.json">
 
@@ -80,7 +158,6 @@
             margin-top: 8px;
         }
 
-        /* Cartões ao comprido */
         .card-full {
             background-color: #1F5C45;
             padding: 18px;
@@ -108,7 +185,6 @@
     </style>
 
     <!-- Ícones -->
-    <!-- Ícones Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -132,7 +208,6 @@
     </p>
 </header>
 
-<!-- Secção Instituições -->
 <h2 class="sec-title">Instituições</h2>
 <div class="grid">
     <div class="card" onclick="openPage('junta.html')">
@@ -156,7 +231,6 @@
     </div>
 </div>
 
-<!-- Secção Aldeia -->
 <h2 class="sec-title">Aldeia</h2>
 <div class="grid">
     <div class="card" onclick="openPage('pontos.html')">
@@ -180,7 +254,6 @@
     </div>
 </div>
 
-<!-- Secção Clube -->
 <h2 class="sec-title">Clube</h2>
 <div class="grid">
     <div class="card" onclick="openPage('clube.html')">
@@ -189,10 +262,8 @@
     </div>
 </div>
 
-<!-- Secção Utilidade -->
 <h2 class="sec-title">Utilidade</h2>
 <div class="grid">
-
     <div class="card" onclick="openPage('contactos.html')">
         <i class="fas fa-phone"></i>
         <p>Comércio e serviços</p>
@@ -202,11 +273,8 @@
         <i class="fas fa-bus"></i>
         <p>Horários da Camioneta</p>
     </div>
-
 </div>
 
-
-<!-- Cartões ao comprido -->
 <div class="card-full" onclick="openPage('aplicacao.html')">
     <i class="fas fa-mobile-alt"></i>
     <p>Instalar como Aplicação</p>
