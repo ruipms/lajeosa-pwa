@@ -21,16 +21,6 @@
       color: #D4AF37;
     }
 
-    .contact-section {
-      margin-bottom: 32px;
-    }
-
-    .contact-section h3 {
-      color: #D4AF37;
-      margin-bottom: 14px;
-      font-size: 26px;
-    }
-
     .card {
       background-color: #134C3A;
       padding: 18px;
@@ -59,6 +49,37 @@
     a:hover {
       text-decoration: underline;
     }
+
+    /* Accordion */
+    .accordion {
+      background-color: #134C3A;
+      color: #D4AF37;
+      cursor: pointer;
+      padding: 16px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 22px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: 0.2s;
+    }
+
+    .accordion:hover {
+      background-color: #1A5A45;
+    }
+
+    .accordion.active {
+      background-color: #1A5A45;
+    }
+
+    .panel {
+      padding: 0 10px;
+      display: none;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 
@@ -69,14 +90,13 @@
 <!-- Junta de Freguesia -->
 <a href="junta.html" style="text-decoration:none; color:white;">
   <div class="card">
-      <i class="fas fa-landmark"></i>
       <p>Clique aqui para contactar a Junta de Freguesia</p>
   </div>
 </a>
 
-<!-- Comércio Local -->
-<div class="contact-section">
-  <h3>🛒 Comércio Local</h3>
+<!-- 🛒 Comércio Local -->
+<button class="accordion">🛒 Comércio Local</button>
+<div class="panel">
 
   <div class="card">
     <strong>Ana – Mini‑mercado Mondego</strong>
@@ -97,11 +117,12 @@
       </a>
     </p>
   </div>
+
 </div>
 
-<!-- Restauração -->
-<div class="contact-section">
-  <h3>🍽️ Restauração</h3>
+<!-- 🍽️ Restauração -->
+<button class="accordion">🍽️ Restauração</button>
+<div class="panel">
 
   <div class="card">
     <strong>Restaurante “O Menino” – Lídia</strong>
@@ -122,11 +143,12 @@
       </a>
     </p>
   </div>
+
 </div>
 
-<!-- Serviços -->
-<div class="contact-section">
-  <h3>🛠️ Serviços</h3>
+<!-- 🛠️ Serviços -->
+<button class="accordion">🛠️ Serviços</button>
+<div class="panel">
 
   <div class="card">
     <strong>Casa de Alumínios</strong>
@@ -157,21 +179,23 @@
     <strong>Oficinas Saraiva & Saraiva Lda</strong>
     <p>📞 <a href="tel:+351271741325">271 741 325</a></p>
   </div>
+
 </div>
 
-<!-- Transportes -->
-<div class="contact-section">
-  <h3>🚚 Transportes</h3>
+<!-- 🚚 Transportes -->
+<button class="accordion">🚚 Transportes</button>
+<div class="panel">
 
   <div class="card">
     <strong>Transportes Caldeira & Tavares</strong>
     <p>📞 <a href="tel:+351271027485">271 027 485</a></p>
   </div>
+
 </div>
 
-<!-- Correios -->
-<div class="contact-section">
-  <h3>📮 Correios</h3>
+<!-- 📮 Correios -->
+<button class="accordion">📮 Correios</button>
+<div class="panel">
 
   <div class="card">
     <strong>CTT – Lajeosa do Mondego</strong>
@@ -182,11 +206,12 @@
       </a>
     </p>
   </div>
+
 </div>
 
-<!-- Alojamento -->
-<div class="contact-section">
-  <h3>🏡 Alojamento</h3>
+<!-- 🏡 Alojamento -->
+<button class="accordion">🏡 Alojamento</button>
+<div class="panel">
 
   <div class="card">
     <strong>Casa do Brigadeiro</strong>
@@ -198,11 +223,24 @@
       </a>
     </p>
   </div>
+
 </div>
 
 <br>
 <a href="index.html">← Voltar</a>
 
+<script>
+  const acc = document.getElementsByClassName("accordion");
+
+  for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+
+      const panel = this.nextElementSibling;
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    });
+  }
+</script>
+
 </body>
 </html>
-
