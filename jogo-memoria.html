@@ -39,6 +39,21 @@
             color: #D4AF37;
         }
 
+        #voltar {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #1F5C45;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #voltar:hover {
+            background-color: #2a7a5e;
+        }
+
         #info {
             margin-top: 10px;
             font-size: 18px;
@@ -90,6 +105,30 @@
             color: #0F3D2E;
         }
 
+        #leaderboard {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #1F5C45;
+            border-radius: 12px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #leaderboard h2 {
+            color: #D4AF37;
+        }
+
+        #leaderboard ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #leaderboard li {
+            margin: 6px 0;
+            font-size: 18px;
+        }
+
         footer {
             margin-top: 30px;
             padding: 10px;
@@ -101,9 +140,10 @@
 
 <body>
 
-<header onclick="openPage('index.html')" style="cursor:pointer;">
+<header>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
     <h1>Jogo da Memória</h1>
+    <button id="voltar" onclick="openPage('index.html')">← Voltar ao Menu</button>
 </header>
 
 <div id="info">
@@ -113,6 +153,11 @@
 </div>
 
 <div id="tabuleiro" class="grid"></div>
+
+<div id="leaderboard">
+    <h2>🏆 Top Jogadores</h2>
+    <ul id="listaTop"></ul>
+</div>
 
 <footer>
     2026 Lajeosa do Mondego — ©RMS
@@ -139,6 +184,7 @@
     const jogadasEl = document.getElementById("jogadas");
     const tempoEl = document.getElementById("tempo");
     const reiniciarBtn = document.getElementById("reiniciar");
+    const listaTop = document.getElementById("listaTop");
 
     function iniciarJogo() {
 
@@ -221,12 +267,43 @@
                 tempo: tempo
             });
 
-            alert("Parabéns! Completaste o jogo!");
+            const nome = prompt("Parabéns! Escreve o teu nome para entrar no Top Jogadores:");
+
+            if (nome) {
+                guardarPontuacao(nome, tempo, jogadas);
+            }
+
+            mostrarLeaderboard();
         }
+    }
+
+    function guardarPontuacao(nome, tempo, jogadas) {
+        const top = JSON.parse(localStorage.getItem("topJogadores") || "[]");
+
+        top.push({ nome, tempo, jogadas });
+
+        top.sort((a, b) => a.tempo - b.tempo);
+
+        const top10 = top.slice(0, 10);
+
+        localStorage.setItem("topJogadores", JSON.stringify(top10));
+    }
+
+    function mostrarLeaderboard() {
+        const top = JSON.parse(localStorage.getItem("topJogadores") || "[]");
+
+        listaTop.innerHTML = "";
+
+        top.forEach((j, i) => {
+            const li = document.createElement("li");
+            li.textContent = `#${i+1} — ${j.nome} — ${j.tempo}s`;
+            listaTop.appendChild(li);
+        });
     }
 
     reiniciarBtn.addEventListener("click", iniciarJogo);
 
+    mostrarLeaderboard();
     iniciarJogo();
 </script>
 
