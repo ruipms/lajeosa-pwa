@@ -282,7 +282,10 @@
 
         top.push({ nome, tempo, jogadas });
 
-        top.sort((a, b) => a.tempo - b.tempo);
+        top.sort((a, b) => {
+    if (a.tempo !== b.tempo) return a.tempo - b.tempo;   // Tempo mais rápido primeiro
+    return a.jogadas - b.jogadas;                        // Menos jogadas primeiro
+});
 
         const top10 = top.slice(0, 10);
 
