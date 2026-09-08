@@ -54,6 +54,21 @@
             background-color: #2a7a5e;
         }
 
+        #btnStart {
+            padding: 14px 26px;
+            background-color: #1F5C45;
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        #btnStart:hover {
+            background-color: #2a7a5e;
+        }
+
         #info {
             margin-top: 10px;
             font-size: 18px;
@@ -146,14 +161,26 @@
     <button id="voltar" onclick="openPage('index.html')">← Voltar ao Menu</button>
 </header>
 
-<div id="info">
+<!-- INÍCIO DO JOGO -->
+<div id="inicio">
+    <p style="color:#D4AF37; font-size:18px; margin-bottom:14px;">
+        Neste jogo o objetivo é juntar duas cartas iguais.
+    </p>
+
+    <button id="btnStart">🎮 Carregue aqui para começar</button>
+</div>
+
+<!-- INFO DO JOGO -->
+<div id="info" style="display:none;">
     Jogadas: <span id="jogadas">0</span> — Tempo: <span id="tempo">0s</span>
     <br>
     <button id="reiniciar">Reiniciar</button>
 </div>
 
-<div id="tabuleiro" class="grid"></div>
+<!-- TABULEIRO -->
+<div id="tabuleiro" class="grid" style="display:none;"></div>
 
+<!-- LEADERBOARD -->
 <div id="leaderboard">
     <h2>🏆 Top Jogadores</h2>
     <ul id="listaTop"></ul>
@@ -180,6 +207,9 @@
     let tempo = 0;
     let intervaloTempo = null;
 
+    const inicioDiv = document.getElementById("inicio");
+    const btnStart = document.getElementById("btnStart");
+    const info = document.getElementById("info");
     const tabuleiro = document.getElementById("tabuleiro");
     const jogadasEl = document.getElementById("jogadas");
     const tempoEl = document.getElementById("tempo");
@@ -215,6 +245,21 @@
             tabuleiro.appendChild(div);
         });
     }
+
+    btnStart.addEventListener("click", () => {
+        inicioDiv.style.display = "none";
+        info.style.display = "block";
+        tabuleiro.style.display = "grid";
+        iniciarJogo();
+    });
+
+    reiniciarBtn.addEventListener("click", () => {
+        inicioDiv.style.display = "block";
+        info.style.display = "none";
+        tabuleiro.style.display = "none";
+        tabuleiro.innerHTML = "";
+        clearInterval(intervaloTempo);
+    });
 
     function clicarCarta(e) {
         if (bloqueio) return;
@@ -283,9 +328,9 @@
         top.push({ nome, tempo, jogadas });
 
         top.sort((a, b) => {
-    if (a.tempo !== b.tempo) return a.tempo - b.tempo;   // Tempo mais rápido primeiro
-    return a.jogadas - b.jogadas;                        // Menos jogadas primeiro
-});
+            if (a.tempo !== b.tempo) return a.tempo - b.tempo;
+            return a.jogadas - b.jogadas;
+        });
 
         const top10 = top.slice(0, 10);
 
@@ -299,15 +344,12 @@
 
         top.forEach((j, i) => {
             const li = document.createElement("li");
-            li.textContent = `#${i+1} — ${j.nome} — ${j.tempo}s`;
+            li.textContent = `#${i+1} — ${j.nome} — ${j.tempo}s — ${j.jogadas} jogadas`;
             listaTop.appendChild(li);
         });
     }
 
-    reiniciarBtn.addEventListener("click", iniciarJogo);
-
     mostrarLeaderboard();
-    iniciarJogo();
 </script>
 
 </body>
