@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Memória</title>
+
+    <!-- Google tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FTEGNRDBJW');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0F3D2E;
+            color: white;
+            text-align: center;
+            padding-bottom: 40px;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        header img {
+            width: 120px;
+        }
+
+        h1 {
+            margin-top: 10px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #D4AF37;
+        }
+
+        #info {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        #info span {
+            color: #D4AF37;
+            font-weight: bold;
+        }
+
+        #reiniciar {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #1F5C45;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #reiniciar:hover {
+            background-color: #2a7a5e;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 80px);
+            gap: 12px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .card {
+            width: 80px;
+            height: 80px;
+            background-color: #1F5C45;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .card.revelada {
+            background-color: #ffffff;
+            color: #0F3D2E;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 10px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+
+<header onclick="openPage('index.html')" style="cursor:pointer;">
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
+    <h1>Jogo da Memória</h1>
+</header>
+
+<div id="info">
+    Jogadas: <span id="jogadas">0</span> — Tempo: <span id="tempo">0s</span>
+    <br>
+    <button id="reiniciar">Reiniciar</button>
+</div>
+
+<div id="tabuleiro" class="grid"></div>
+
+<footer>
+    2026 Lajeosa do Mondego — ©RMS
+</footer>
+
+<script>
+    function openPage(page) {
+        window.location.href = page;
+    }
+
+    /* --- JOGO DA MEMÓRIA --- */
+
+    const icones = ["🌞","🌙","⭐","🔥","🍀","⚡","🌈","❄️"];
+    let cartas = [...icones, ...icones];
+
+    let primeiraCarta = null;
+    let segundaCarta = null;
+    let bloqueio = false;
+    let jogadas = 0;
+    let tempo = 0;
+    let intervaloTempo = null;
+
+    const tabuleiro = document.getElementById("tabuleiro");
+    const jogadasEl = document.getElementById("jogadas");
+    const tempoEl = document.getElementById("tempo");
+    const reiniciarBtn = document.getElementById("reiniciar");
+
+    function iniciarJogo() {
+
+        gtag('event', 'game_start', {
+            game_name: 'jogo_memoria'
+        });
+
+        jogadas = 0;
+        tempo = 0;
+        jogadasEl.textContent = jogadas;
+        tempoEl.textContent = tempo + "s";
+
+        clearInterval(intervaloTempo);
+        intervaloTempo = setInterval(() => {
+            tempo++;
+            tempoEl.textContent = tempo + "s";
+        }, 1000);
+
+        cartas.sort(() => Math.random() - 0.5);
+        tabuleiro.innerHTML = "";
+
+        cartas.forEach((icone, index) => {
+            const div = document.createElement("div");
+            div.classList.add("card");
+            div.dataset.icone = icone;
+            div.dataset.index = index;
+            div.addEventListener("click", clicarCarta);
+            tabuleiro.appendChild(div);
+        });
+    }
+
+    function clicarCarta(e) {
+        if (bloqueio) return;
+
+        const carta = e.target;
+
+        if (carta.classList.contains("revelada")) return;
+
+        carta.classList.add("revelada");
+        carta.textContent = carta.dataset.icone;
+
+        if (!primeiraCarta) {
+            primeiraCarta = carta;
+            return;
+        }
+
+        segundaCarta = carta;
+        jogadas++;
+        jogadasEl.textContent = jogadas;
+
+        if (primeiraCarta.dataset.icone === segundaCarta.dataset.icone) {
+            primeiraCarta = null;
+            segundaCarta = null;
+
+            verificarVitoria();
+        } else {
+            bloqueio = true;
+            setTimeout(() => {
+                primeiraCarta.classList.remove("revelada");
+                segundaCarta.classList.remove("revelada");
+                primeiraCarta.textContent = "";
+                segundaCarta.textContent = "";
+                primeiraCarta = null;
+                segundaCarta = null;
+                bloqueio = false;
+            }, 800);
+        }
+    }
+
+    function verificarVitoria() {
+        const todas = document.querySelectorAll(".card");
+        const reveladas = [...todas].filter(c => c.classList.contains("revelada"));
+
+        if (reveladas.length === cartas.length) {
+            clearInterval(intervaloTempo);
+
+            gtag('event', 'game_win', {
+                game_name: 'jogo_memoria',
+                jogadas: jogadas,
+                tempo: tempo
+            });
+
+            alert("Parabéns! Completaste o jogo!");
+        }
+    }
+
+    reiniciarBtn.addEventListener("click", iniciarJogo);
+
+    iniciarJogo();
+</script>
+
+</body>
+</html>
