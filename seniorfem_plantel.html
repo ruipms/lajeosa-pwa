@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plantel — Sénior Feminino</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTEGNRDBJW');
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0F3D2E;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    .club-logo {
+      width: 120px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #D4AF37;
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #1F5C45;
+      padding: 18px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      text-align: left;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .card h3 {
+      color: #D4AF37;
+      margin-top: 0;
+    }
+
+    .card ul {
+      padding-left: 20px;
+      font-size: 18px;
+    }
+
+    .pos {
+      color: #D4AF37;
+      font-weight: bold;
+    }
+
+    .player-link {
+      cursor: pointer;
+      padding: 6px 0;
+    }
+
+    .player-link:hover {
+      color: #D4AF37;
+    }
+
+    .player-hint {
+      text-align: left;
+      font-size: 16px;
+      color: #D4AF37;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    /* Modal */
+    #imgModal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #imgModal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="assets/CRC Lajeosa logo.jpg" class="club-logo">
+  <h1>Plantel — Sénior Feminino</h1>
+  <a href="clube_feminino.html" class="back-button">⬅ Voltar</a>
+</header>
+
+<div class="content">
+
+  <div class="card">
+    <h3>👩 Plantel — Sénior Feminino</h3>
+
+    <p class="player-hint">📸 Clique no nome para ver a foto</p>
+
+    <!-- Guarda‑Redes / Universal -->
+    <h4 style="color:#D4AF37;">Guarda‑Redes / Universal</h4>
+    <ul>
+      <li class="player-link" onclick="openModal('assets/jogadoras/Mariana_3.jpg')">
+        Mariana — <span class="pos">#3 • Guarda‑Redes / Universal</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadoras/Elaine_8.jpg')">
+        Elaine — <span class="pos">#8 • Guarda‑Redes / Universal</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadoras/Margarida_12.jpg')">
+        Margarida — <span class="pos">#12 • Universal</span>
+      </li>
+    </ul>
+
+    <!-- Fixa -->
+    <h4 style="color:#D4AF37;">Fixa</h4>
+    <ul>
+      <li class="player-link" onclick="openModal('assets/jogadoras/Joana_Braz_4.jpg')">
+        Joana Brás — <span class="pos">#4 • Fixa</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadoras/Ana_Lucia_15.jpg')">
+        Ana Lúcia — <span class="pos">#15 • Fixo</span>
+      </li>
+    </ul>
+
+    <!-- Ala -->
+    <h4 style="color:#D4AF37;">Ala</h4>
+    <ul>
+      <li class="player-link" onclick="openModal('assets/jogadoras/Catarina_2.jpg')">
+        Catarina — <span class="pos">#2 • Ala</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadoras/Alexandra_9.jpg')">
+        Alexandra — <span class="pos">#9 • Ala</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadoras/Lara_16.jpg')">
+        Lara Sequeira — <span class="pos">#16 • Ala</span>
+      </li>
+    </ul>
+
+    <!-- Ala / Pivot -->
+    <h4 style="color:#D4AF37;">Ala / Pivot</h4>
+    <ul>
+      <li class="player-link" onclick="openModal('assets/jogadoras/Pisca_6.jpg')">
+        Pisca — <span class="pos">#6 • Ala / Pivot</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadoras/Mafalda_14.jpg')">
+        Mafalda — <span class="pos">#14 • Ala / Pivot</span>
+      </li>
+
+      <li class="player-link" onclick="openModal('assets/jogadoras/andreiasantos17.jpg')">
+        Andreia Santos — <span class="pos">#17 • Pivot</span>
+      </li>
+    </ul>
+
+    <!-- Pivot -->
+    <h4 style="color:#D4AF37;">Pivot</h4>
+    <ul>
+      <li class="player-link" onclick="openModal('assets/jogadoras/Beatriz_Caldeira_10.jpg')">
+        Beatriz Caldeira — <span class="pos">#10 • Pivot</span>
+      </li>
+    </ul>
+
+    <!-- Ala / Fixo -->
+    <h4 style="color:#D4AF37;">Ala / Fixo</h4>
+    <ul>
+      <li class="player-link" onclick="openModal('assets/jogadoras/Susana_11.jpg')">
+        Susana Tomaz — <span class="pos">#11 • Ala / Fixo</span>
+      </li>
+    </ul>
+
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div id="imgModal" onclick="closeModal()">
+  <span class="close-btn" onclick="closeModal()">✖</span>
+  <img id="modalImg" src="">
+</div>
+
+<script>
+function openModal(src) {
+  document.getElementById("modalImg").src = src;
+  document.getElementById("imgModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("imgModal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
