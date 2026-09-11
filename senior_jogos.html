@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogos da Pré‑Época — Sénior Masculino</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTEGNRDBJW');
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0F3D2E;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    .club-logo {
+      width: 120px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #D4AF37;
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #1F5C45;
+      padding: 18px;
+      border-radius: 18px;
+      margin-bottom: 20px;
+      text-align: left;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .card h3 {
+      color: #D4AF37;
+      margin-top: 0;
+    }
+
+    .aviso-img {
+      width: 90%;
+      max-width: 600px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .aviso-img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Modal */
+    #imgModal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #imgModal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    #imgModal p {
+      color: white;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="assets/CRC Lajeosa logo.jpg" class="club-logo">
+  <h1>Jogos da Pré‑Época — Sénior Masculino</h1>
+  <a href="senior_masculino.html" class="back-button">⬅ Voltar</a>
+</header>
+
+<div class="content">
+
+  <div class="card">
+    <h3>⚽ Jogos da Pré‑Época 2026/2027</h3>
+
+    <!-- Cartaz / Resultado -->
+    <div style="text-align:center; margin-top:20px;">
+      <img src="assets/resultado.jpg"
+           alt="Resultado do jogo de pré-época — CRC Lajeosa"
+           class="aviso-img"
+           onclick="openModal('assets/resultado.jpg')">
+    </div>
+
+    <h4 style="color:#D4AF37; margin-top:15px;">📌 Resultado</h4>
+    <p style="font-size:16px;">
+      <strong>S. Martinho da Cortiça</strong> 1 — <strong>4 CRC Lajeosa do Mondego</strong>
+    </p>
+
+    <h4 style="color:#D4AF37; margin-top:15px;">🎯 Marcadores</h4>
+    <ul style="padding-left:20px; font-size:16px;">
+      <li>Amorim ×2</li>
+      <li>Serafim</li>
+      <li>Alexandre</li>
+    </ul>
+
+    <p style="opacity:0.8; font-size:14px; margin-top:10px;">
+      📅 Jogo de pré‑época — Data a confirmar
+    </p>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div id="imgModal" onclick="closeModal()">
+  <span class="close-btn" onclick="closeModal()">✖</span>
+  <img id="modalImg" src="">
+  <p id="modalMsg"></p>
+</div>
+
+<script>
+function openModal(src) {
+  const modal = document.getElementById("imgModal");
+  const img = document.getElementById("modalImg");
+  const msg = document.getElementById("modalMsg");
+
+  img.style.display = "block";
+  img.src = src;
+  msg.textContent = "";
+
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("imgModal").style.display = "none";
+}
+</script>
+
+</body>
+</html>
