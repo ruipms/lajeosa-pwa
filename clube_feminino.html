@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sénior Feminino — CRC Lajeosa</title>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FTEGNRDBJW');
-</script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTEGNRDBJW');
+  </script>
 
-<style>
+  <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -39,84 +39,37 @@
       font-weight: bold;
     }
 
-    .content {
-      padding: 20px;
-    }
-
-    .card {
-      background-color: #1F5C45;
-      padding: 14px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .card h3 {
+    .section-title {
       color: #D4AF37;
-      margin-top: 0;
-    }
-
-    .card ul {
-      padding-left: 20px;
-    }
-
-    .pos {
-      color: #D4AF37;
-      font-weight: bold;
-    }
-
-    /* Nome clicável */
-    .player-link {
-      cursor: pointer;
-      padding: 6px 0;
-    }
-
-    .player-link:hover {
-      color: #D4AF37;
-    }
-
-    /* Frase de instrução */
-    .player-hint {
-      text-align: left;
-      font-size: 16px;
-      color: #D4AF37;
+      font-size: 22px;
+      margin-top: 20px;
       margin-bottom: 10px;
       font-weight: bold;
     }
 
-    /* Modal */
-    #imgModal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.85);
-      justify-content: center;
-      align-items: center;
-    }
-
-    #imgModal img {
-      max-width: 90%;
-      max-height: 90%;
-      border-radius: 10px;
-      pointer-events: none;
-    }
-
-    .close-btn {
-      position: fixed;
-      top: 20px;
-      right: 25px;
-      font-size: 32px;
-      font-weight: bold;
-      color: white;
+    .card-full {
+      background-color: #1F5C45;
+      padding: 18px;
+      border-radius: 18px;
+      margin: 16px 20px;
       cursor: pointer;
-      z-index: 10000;
+      transition: 0.2s;
+      text-align: left;
+      font-size: 20px;
+      color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-</style>
+
+    .card-full:hover {
+      transform: scale(1.02);
+    }
+
+    .card-full i {
+      margin-right: 10px;
+      font-size: 22px;
+      color: #D4AF37;
+    }
+  </style>
 </head>
 
 <body>
@@ -127,125 +80,25 @@
   <a href="clube.html" class="back-button">⬅ Voltar ao Clube</a>
 </header>
 
-<div class="content">
+<h2 class="section-title">Secções</h2>
 
-  <!-- Equipa Técnica -->
-  <div class="card">
-    <h3>📋 Equipa Técnica</h3>
-    <ul>
-      <li><strong>Treinador:</strong> Joel Martins</li>
-      <li><strong>Treinador Adjunto:</strong> Nuno Azevedo</li>
-      <li><strong>Diretora Desportiva:</strong> Dulce Afonso</li>
-      <li><strong>Técnica SBV/DAE:</strong> Fátima Nunes</li>
-    </ul>
-  </div>
-
-  <!-- Plantel -->
-  <div class="card">
-    <h3>👩 Plantel — Sénior Feminino</h3>
-
-    <p class="player-hint">📸 Clique no nome para ver a foto</p>
-
-    <h4 style="color:#D4AF37;">Guarda‑Redes / Universal</h4>
-    <ul>
-      <li class="player-link" onclick="openModal('assets/jogadoras/Mariana_3.jpg')">
-        Mariana — <span class="pos">#3 • Guarda‑Redes / Universal</span>
-      </li>
-
-      <li class="player-link" onclick="openModal('assets/jogadoras/Elaine_8.jpg')">
-        Elaine — <span class="pos">#8 • Guarda‑Redes / Universal</span>
-      </li>
-
-      <li class="player-link" onclick="openModal('assets/jogadoras/Margarida_12.jpg')">
-        Margarida — <span class="pos">#12 • Universal</span>
-      </li>
-    </ul>
-
-    <h4 style="color:#D4AF37;">Fixa</h4>
-    <ul>
-      <li class="player-link" onclick="openModal('assets/jogadoras/Joana_Braz_4.jpg')">
-        Joana Brás — <span class="pos">#4 • Fixa</span>
-      </li>
-
-      <li class="player-link" onclick="openModal('assets/jogadoras/Ana_Lucia_15.jpg')">
-        Ana Lúcia — <span class="pos">#15 • Fixo</span>
-      </li>
-    </ul>
-
-    <h4 style="color:#D4AF37;">Ala</h4>
-    <ul>
-      <li class="player-link" onclick="openModal('assets/jogadoras/Catarina_2.jpg')">
-        Catarina — <span class="pos">#2 • Ala</span>
-      </li>
-
-      <li class="player-link" onclick="openModal('assets/jogadoras/Alexandra_9.jpg')">
-        Alexandra — <span class="pos">#9 • Ala</span>
-      </li>
-
-      <li class="player-link" onclick="openModal('assets/jogadoras/Lara_16.jpg')">
-        Lara Sequeira — <span class="pos">#16 • Ala</span>
-      </li>
-    </ul>
-
-    <h4 style="color:#D4AF37;">Ala / Pivot</h4>
-    <ul>
-      <li class="player-link" onclick="openModal('assets/jogadoras/Pisca_6.jpg')">
-        Pisca — <span class="pos">#6 • Ala / Pivot</span>
-      </li>
-
-      <li class="player-link" onclick="openModal('assets/jogadoras/Mafalda_14.jpg')">
-        Mafalda — <span class="pos">#14 • Ala / Pivot</span>
-      </li>
-      <li class="player-link" onclick="openModal('assets/jogadoras/andreiasantos17.jpg')">
-        Andreia Santos — <span class="pos">#17 • Pivot</span>
-      </li>
-    </ul>
-
-    <h4 style="color:#D4AF37;">Pivot</h4>
-    <ul>
-      <li class="player-link" onclick="openModal('assets/jogadoras/Beatriz_Caldeira_10.jpg')">
-        Beatriz Caldeira — <span class="pos">#10 • Pivot</span>
-      </li>
-    </ul>
-
-    <h4 style="color:#D4AF37;">Ala / Fixo</h4>
-    <ul>
-      <li class="player-link" onclick="openModal('assets/jogadoras/Susana_11.jpg')">
-        Susana Tomaz — <span class="pos">#11 • Ala / Fixo</span>
-      </li>
-    </ul>
-
-  </div>
-
-  <!-- Calendário da Pré‑Época -->
-  <div class="card">
-    <h3>📅 Calendário — Pré‑Época</h3>
-    <ul>
-      <li><strong>12/9 (sábado) — 20h — Viseu</strong><br>Lusitano × CRCLM</li>
-      <li><strong>19/9 (sábado) — 20h — Sernancelhe</strong><br>Sernancelhe × CRCLM</li>
-      <li><strong>26/9 (sábado) — 20h — Celorico</strong><br>CRCLM × Lusitano</li>
-    </ul>
-  </div>
-
+<div class="card-full" onclick="openPage('seniorfem_tecnica.html')">
+  <i>📋</i> Equipa Técnica
 </div>
 
-<!-- Modal -->
-<div id="imgModal" onclick="closeModal()">
-  <span class="close-btn" onclick="closeModal()">✖</span>
-  <img id="modalImg" src="">
+<div class="card-full" onclick="openPage('seniorfem_plantel.html')">
+  <i>👩</i> Plantel
+</div>
+
+<div class="card-full" onclick="openPage('seniorfem_calendario.html')">
+  <i>📅</i> Calendário da Pré‑Época
 </div>
 
 <script>
-function openModal(src) {
-  document.getElementById("modalImg").src = src;
-  document.getElementById("imgModal").style.display = "flex";
-}
-
-function closeModal() {
-  document.getElementById("imgModal").style.display = "none";
+function openPage(page) {
+  window.location.href = page;
 }
 </script>
 
 </body>
 </html>
-
