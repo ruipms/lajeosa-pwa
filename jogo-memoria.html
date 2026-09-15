@@ -14,6 +14,24 @@
       gtag('config', 'G-FTEGNRDBJW');
     </script>
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCTnteZsANQ6wH0O96Jn_7H0esaqkiMT4w",
+        authDomain: "lajeosaapp.firebaseapp.com",
+        projectId: "lajeosaapp",
+        storageBucket: "lajeosaapp.firebasestorage.app",
+        messagingSenderId: "646170764557",
+        appId: "1:646170764557:web:202ceb63c421979cc27c44"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database();
+    </script>
+
     <style>
         body {
             margin: 0;
@@ -322,30 +340,35 @@
         }
     }
 
+    /* --- LEADERBOARD GLOBAL (FIREBASE) --- */
+
     function guardarPontuacao(nome, tempo, jogadas) {
-        const top = JSON.parse(localStorage.getItem("topJogadores") || "[]");
+        db.ref("topJogadores").once("value", snapshot => {
+            const top = snapshot.val() || [];
 
-        top.push({ nome, tempo, jogadas });
+            top.push({ nome, tempo, jogadas });
 
-        top.sort((a, b) => {
-            if (a.tempo !== b.tempo) return a.tempo - b.tempo;
-            return a.jogadas - b.jogadas;
+            top.sort((a, b) => {
+                if (a.tempo !== b.tempo) return a.tempo - b.tempo;
+                return a.jogadas - b.jogadas;
+            });
+
+            const top10 = top.slice(0, 10);
+
+            db.ref("topJogadores").set(top10);
         });
-
-        const top10 = top.slice(0, 10);
-
-        localStorage.setItem("topJogadores", JSON.stringify(top10));
     }
 
     function mostrarLeaderboard() {
-        const top = JSON.parse(localStorage.getItem("topJogadores") || "[]");
+        db.ref("topJogadores").once("value", snapshot => {
+            const top = snapshot.val() || [];
+            listaTop.innerHTML = "";
 
-        listaTop.innerHTML = "";
-
-        top.forEach((j, i) => {
-            const li = document.createElement("li");
-            li.textContent = `#${i+1} — ${j.nome} — ${j.tempo}s — ${j.jogadas} jogadas`;
-            listaTop.appendChild(li);
+            top.forEach((j, i) => {
+                const li = document.createElement("li");
+                li.textContent = `#${i+1} — ${j.nome} — ${j.tempo}s — ${j.jogadas} jogadas`;
+                listaTop.appendChild(li);
+            });
         });
     }
 
