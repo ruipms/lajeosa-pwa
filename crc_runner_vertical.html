@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRC Runner Vertical — Lajeosa do Mondego</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FTEGNRDBJW');
+    </script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyCTnteZsANQ6wH0O96Jn_7H0esaqkiMT4w",
+        authDomain: "lajeosaapp.firebaseapp.com",
+        databaseURL: "https://lajeosaapp-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "lajeosaapp",
+        storageBucket: "lajeosaapp.firebasestorage.app",
+        messagingSenderId: "646170764557",
+        appId: "1:646170764557:web:202ceb63c421979cc27c44"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.database();
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0F3D2E;
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        header img {
+            width: 120px;
+        }
+
+        h1 {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #D4AF37;
+        }
+
+        #voltar {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #1F5C45;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #explicacao {
+            margin: 20px auto;
+            width: 85%;
+            background-color: #1F5C45;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+
+        #jogoArea {
+            margin: 20px auto;
+            width: 90%;
+            max-width: 420px;
+            height: 360px;
+            background-color: #144d3a;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #D4AF37;
+        }
+
+        /* Personagem CRC ao fundo, centrado */
+        #personagem {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 28px;
+            height: 56px;
+        }
+
+        #personagem .cabeca {
+            width: 22px;
+            height: 22px;
+            background-color: #c89f72;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+
+        #personagem .corpo {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(
+                to bottom,
+                #0f3d2e 0%,
+                #0f3d2e 33%,
+                white 33%,
+                white 66%,
+                black 66%
+            );
+            margin: 0 auto;
+            border-radius: 4px;
+        }
+
+        #personagem .braco {
+            width: 8px;
+            height: 20px;
+            background-color: #0f3d2e;
+            position: absolute;
+            top: 26px;
+        }
+
+        #personagem .braco.esq { left: -8px; }
+        #personagem .braco.dir { right: -8px; }
+
+        #personagem .perna {
+            width: 10px;
+            height: 20px;
+            background-color: black;
+            position: absolute;
+            top: 46px;
+        }
+
+        #personagem .perna.esq { left: 3px; }
+        #personagem .perna.dir { right: 3px; }
+
+        .impacto {
+            animation: impactoAnim 0.3s;
+        }
+
+        @keyframes impactoAnim {
+            0% { transform: translateX(-50%) translateY(0); }
+            25% { transform: translateX(-52%) translateY(-2px); }
+            50% { transform: translateX(-48%) translateY(2px); }
+            75% { transform: translateX(-52%) translateY(-2px); }
+            100% { transform: translateX(-50%) translateY(0); }
+        }
+
+        #obstaculos {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #hud {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        #leaderboard {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #1F5C45;
+            border-radius: 12px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #leaderboard h2 {
+            color: #D4AF37;
+        }
+
+        #leaderboard ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #leaderboard li {
+            margin: 6px 0;
+            font-size: 16px;
+        }
+
+        #fimJogo button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
+    <h1>CRC Runner Vertical</h1>
+    <button id="voltar" onclick="openPage('jogos.html')">← Voltar aos Jogos</button>
+</header>
+
+<div id="explicacao">
+    <b>História:</b><br><br>
+    Podes vir a ser a nova contratação do CRC Lajeosa do Mondego…<br>
+    mas primeiro tens de provar que tens reflexos dignos de um craque.<br>
+    Este é o teste oficial do treinador.<br><br>
+
+    <b>Como jogar:</b><br><br>
+    O cenário desloca-se de cima para baixo.<br>
+    Move o jogador para a esquerda ou direita:<br>
+    • Teclas ← e → no teclado<br>
+    • Ou desliza / toca no ecrã para mudar de posição<br><br>
+
+    Evita bolas, galinhas e buracos o máximo de tempo possível.<br>
+    No fim, o teu tempo entra no Top 10 dos mais rápidos.
+</div>
+
+<div id="jogoArea">
+    <div id="personagem">
+        <div class="cabeca"></div>
+        <div class="corpo"></div>
+        <div class="braco esq braco"></div>
+        <div class="braco dir braco"></div>
+        <div class="perna esq perna"></div>
+        <div class="perna dir perna"></div>
+    </div>
+
+    <div id="obstaculos"></div>
+</div>
+
+<div id="hud">
+    Tempo: <span id="tempo">0s</span><br><br>
+    <button id="btnIniciar" onclick="iniciarJogo()" style="padding:10px 20px; background:#D4AF37; color:#0F3D2E; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">
+        ▶ Começar jogo
+    </button>
+</div>
+
+<div id="leaderboard">
+    <h2>🏆 Top Jogadores — Runner Vertical</h2>
+    <ul id="listaTop"></ul>
+</div>
+
+<div id="fimJogo" style="display:none;">
+    <button onclick="reiniciarJogo()" style="background:#D4AF37; color:#0F3D2E;">🔄 Novo jogo</button>
+    <button onclick="openPage('jogos.html')" style="background:#1F5C45; color:white;">← Voltar aos Jogos</button>
+</div>
+
+<script>
+    function openPage(page) {
+        window.location.href = page;
+    }
+
+    let tempo = 0;
+    let intervaloTempo = null;
+    let intervaloObstaculos = null;
+
+    let jogoAtivo = false;
+
+    const personagem = document.getElementById("personagem");
+    const obstaculosDiv = document.getElementById("obstaculos");
+    const jogoArea = document.getElementById("jogoArea");
+
+    let posXPersonagem = 0;
+
+    /* --- MOVIMENTO DO PERSONAGEM --- */
+
+    function atualizarPosicaoPersonagem() {
+        const largura = jogoArea.offsetWidth;
+        const centro = largura / 2;
+        const novaPos = centro + posXPersonagem;
+
+        const margem = 20;
+        const limiteEsq = margem;
+        const limiteDir = largura - margem;
+
+        const clamp = Math.max(limiteEsq, Math.min(limiteDir, novaPos));
+
+        personagem.style.left = clamp + "px";
+        personagem.style.transform = "translateX(-50%)";
+    }
+
+    document.addEventListener("keydown", (e) => {
+        if (!jogoAtivo) return;
+
+        const passo = 20;
+
+        if (e.code === "ArrowLeft") {
+            posXPersonagem -= passo;
+            atualizarPosicaoPersonagem();
+        }
+
+        if (e.code === "ArrowRight") {
+            posXPersonagem += passo;
+            atualizarPosicaoPersonagem();
+        }
+    });
+
+    jogoArea.addEventListener("touchmove", (e) => {
+        if (!jogoAtivo) return;
+
+        const toque = e.touches[0];
+        const rect = jogoArea.getBoundingClientRect();
+        const x = toque.clientX - rect.left;
+
+        personagem.style.left = x + "px";
+        personagem.style.transform = "translateX(-50%)";
+    });
+
+    /* --- OBSTÁCULOS --- */
+
+    function tipoObstaculo() {
+        const tipos = ["bola", "galinha", "buraco"];
+        return tipos[Math.floor(Math.random() * tipos.length)];
+    }
+
+    function criarObstaculo() {
+        if (!jogoAtivo) return;
+
+        const obst = document.createElement("div");
+        obst.classList.add("obstaculo");
+
+        const tipo = tipoObstaculo();
+        obst.dataset.tipo = tipo;
+
+        obst.style.position = "absolute";
+        obst.style.top = "-60px";
+
+        const larguraArea = jogoArea.offsetWidth;
+        const posX = Math.random() * (larguraArea - 40) + 20;
+        obst.style.left = posX + "px";
+
+        if (tipo === "bola") {
+            obst.textContent = "⚽";
+            obst.style.fontSize = "28px";
+        }
+
+        if (tipo === "galinha") {
+            obst.textContent = "🐔";
+            obst.style.fontSize = "28px";
+        }
+
+        if (tipo === "buraco") {
+            obst.style.width = "40px";
+            obst.style.height = "18px";
+            obst.style.backgroundColor = "#000";
+            obst.style.borderRadius = "4px";
+        }
+
+        obstaculosDiv.appendChild(obst);
+        moverObstaculo(obst);
+    }
+
+    function verificarColisao(obst) {
+        const rectPersonagem = personagem.getBoundingClientRect();
+        const rectObst = obst.getBoundingClientRect();
+
+        const margem = 6;
+
+        return (
+            rectPersonagem.left + margem < rectObst.right &&
+            rectPersonagem.right - margem > rectObst.left &&
+            rectPersonagem.top + margem < rectObst.bottom &&
+            rectPersonagem.bottom - margem > rectObst.top
+        );
+    }
+
+    function aplicarPenalizacao(tipo) {
+        let penalizacao = 3;
+
+        if (tipo === "bola") penalizacao = 2;
+        if (tipo === "galinha") penalizacao = 3;
+        if (tipo === "buraco") penalizacao = 4;
+
+        tempo += penalizacao;
+        document.getElementById("tempo").textContent = tempo + "s";
+
+        personagem.classList.add("impacto");
+
+        setTimeout(() => {
+            personagem.classList.remove("impacto");
+        }, 300);
+    }
+
+    function moverObstaculo(obst) {
+        let pos = -60;
+
+        const velocidade = 4;
+
+        const intervalo = setInterval(() => {
+            if (!jogoAtivo) {
+                clearInterval(intervalo);
+                obst.remove();
+                return;
+            }
+
+            pos += velocidade;
+            obst.style.top = pos + "px";
+
+            if (pos > jogoArea.offsetHeight + 40) {
+                obst.remove();
+                clearInterval(intervalo);
+                return;
+            }
+
+            if (verificarColisao(obst)) {
+                aplicarPenalizacao(obst.dataset.tipo);
+                obst.remove();
+                clearInterval(intervalo);
+            }
+
+        }, 30);
+    }
+
+    /* --- FIM DE JOGO --- */
+
+    function terminarJogo() {
+        jogoAtivo = false;
+
+        clearInterval(intervaloTempo);
+        clearInterval(intervaloObstaculos);
+
+        alert("Fim de jogo! Tempo final: " + tempo + "s");
+
+        const nome = prompt("Escreve o teu nome para entrar no Top Jogadores:");
+
+        if (nome) {
+            guardarPontuacao(nome, tempo);
+            mostrarLeaderboard();
+        }
+
+        document.getElementById("fimJogo").style.display = "block";
+    }
+
+    /* --- INICIAR / REINICIAR --- */
+
+    function iniciarJogo() {
+        jogoAtivo = true;
+
+        tempo = 0;
+        document.getElementById("tempo").textContent = tempo + "s";
+        document.getElementById("fimJogo").style.display = "none";
+
+        posXPersonagem = 0;
+        atualizarPosicaoPersonagem();
+
+        obstaculosDiv.innerHTML = "";
+
+        clearInterval(intervaloTempo);
+        clearInterval(intervaloObstaculos);
+
+        intervaloTempo = setInterval(() => {
+            tempo++;
+            document.getElementById("tempo").textContent = tempo + "s";
+        }, 1000);
+
+        intervaloObstaculos = setInterval(criarObstaculo, 1200);
+    }
+
+    function reiniciarJogo() {
+        iniciarJogo();
+    }
+
+    /* --- LEADERBOARD --- */
+
+    function guardarPontuacao(nome, tempoFinal) {
+        db.ref("topCRCVertical").once("value", snapshot => {
+            let top = snapshot.val() || [];
+
+            top.push({ nome, tempo: tempoFinal });
+
+            top.sort((a, b) => b.tempo - a.tempo);
+
+            const top10 = top.slice(0, 10);
+
+            db.ref("topCRCVertical").set(top10);
+        });
+    }
+
+    function mostrarLeaderboard() {
+        db.ref("topCRCVertical").once("value", snapshot => {
+            const top = snapshot.val() || [];
+            const lista = document.getElementById("listaTop");
+            lista.innerHTML = "";
+
+            top.forEach((j, i) => {
+                const li = document.createElement("li");
+                li.textContent = `#${i+1} — ${j.nome} — ${j.tempo}s`;
+                lista.appendChild(li);
+            });
+        });
+    }
+
+    mostrarLeaderboard();
+</script>
+
+</body>
+</html>
