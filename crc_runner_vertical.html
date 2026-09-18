@@ -98,6 +98,7 @@
             transform: translateX(-50%);
             width: 28px;
             height: 56px;
+            transition: left 0.15s ease-out;
         }
 
         #personagem .cabeca {
@@ -220,9 +221,9 @@
 
     <b>Como jogar:</b><br><br>
     O cenário desloca-se de cima para baixo.<br>
-    Desliza o jogador para a esquerda ou direita:<br>
-    • <br>
-    • Desliza o jogador para mudar de faixa<br><br>
+    Move o jogador para a esquerda ou direita:<br>
+    • Teclas ← e → no teclado<br>
+    • Ou desliza / toca no ecrã para mudar de faixa<br><br>
 
     Evita bolas, cones e buracos o máximo de tempo possível.<br>
     <b>Se bateres num obstáculo, o jogo termina imediatamente.</b><br><br>
@@ -299,53 +300,49 @@
         }
     });
 
-    
-/* --- MOVIMENTO POR DESLIZE CONTÍNUO --- */
+    /* --- MOVIMENTO POR DESLIZE CONTÍNUO E SUAVE --- */
+    let deslizarAtivo = false;
+    let toqueInicialX = 0;
 
-let deslizarAtivo = false;
-let toqueInicialX = 0;
+    jogoArea.addEventListener("touchstart", (e) => {
+        if (!jogoAtivo) return;
 
-jogoArea.addEventListener("touchstart", (e) => {
-    if (!jogoAtivo) return;
+        const toque = e.touches[0];
+        const rect = jogoArea.getBoundingClientRect();
+        const x = toque.clientX - rect.left;
 
-    const toque = e.touches[0];
-    const rect = jogoArea.getBoundingClientRect();
-    const x = toque.clientX - rect.left;
-
-    // ativa deslize sempre que o toque começa dentro da área do jogo
-    deslizarAtivo = true;
-    toqueInicialX = x;
-});
-
-jogoArea.addEventListener("touchmove", (e) => {
-    if (!jogoAtivo || !deslizarAtivo) return;
-
-    const toque = e.touches[0];
-    const rect = jogoArea.getBoundingClientRect();
-    const x = toque.clientX - rect.left;
-
-    const deslocamento = x - toqueInicialX;
-
-    // mudar de faixa quando o deslize é significativo
-    if (deslocamento > 40 && faixaAtual < faixas.length - 1) {
-        faixaAtual++;
-        atualizarPosicaoPersonagem();
-        toqueInicialX = x; // reinicia referência para permitir deslize contínuo
-    }
-
-    if (deslocamento < -40 && faixaAtual > 0) {
-        faixaAtual--;
-        atualizarPosicaoPersonagem();
+        deslizarAtivo = true;
         toqueInicialX = x;
-    }
-});
+    });
 
-jogoArea.addEventListener("touchend", () => {
-    deslizarAtivo = false;
-});
+    jogoArea.addEventListener("touchmove", (e) => {
+        if (!jogoAtivo || !deslizarAtivo) return;
+
+        const toque = e.touches[0];
+        const rect = jogoArea.getBoundingClientRect();
+        const x = toque.clientX - rect.left;
+
+        const deslocamento = x - toqueInicialX;
+
+        if (deslocamento > 40 && faixaAtual < faixas.length - 1) {
+            faixaAtual++;
+            atualizarPosicaoPersonagem();
+            toqueInicialX = x;
+        }
+
+        if (deslocamento < -40 && faixaAtual > 0) {
+            faixaAtual--;
+            atualizarPosicaoPersonagem();
+            toqueInicialX = x;
+        }
+    });
+
     jogoArea.addEventListener("touchend", () => {
         deslizarAtivo = false;
     });
+
+    /* --- DIFICULDADE PROGRESSIVA --- */
+    let velocidadeGlobal = 7;
 
     /* --- OBSTÁCULOS --- */
 
@@ -409,7 +406,7 @@ jogoArea.addEventListener("touchend", () => {
 
     function moverObstaculo(obst) {
         let pos = -60;
-        let velocidade = 7;
+        let velocidade = velocidadeGlobal;
 
         const intervalo = setInterval(() => {
             if (!jogoAtivo) {
@@ -473,9 +470,21 @@ jogoArea.addEventListener("touchend", () => {
         clearInterval(intervaloTempo);
         clearInterval(intervaloObstaculos);
 
+        velocidadeGlobal = 7;
+
         intervaloTempo = setInterval(() => {
             tempo++;
             document.getElementById("tempo").textContent = tempo + "s";
+
+            if (tempo % 10 === 0) {
+                velocidadeGlobal += 1;
+            }
+
+            if (tempo % 15 === 0) {
+                clearInterval(intervaloObstaculos);
+                const novoIntervalo = Math.max(350, 700 - tempo * 4);
+                intervaloObstaculos = setInterval(criarObstaculo, novoIntervalo);
+            }
         }, 1000);
 
         intervaloObstaculos = setInterval(criarObstaculo, 700);
