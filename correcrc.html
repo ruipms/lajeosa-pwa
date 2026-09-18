@@ -93,7 +93,7 @@
         #personagem {
             position: absolute;
             bottom: 20px;
-            left: 40px;
+            left: 40px; /* fixo à esquerda */
             width: 28px;
             height: 56px;
         }
@@ -184,13 +184,14 @@
             height: 100%;
         }
 
+        /* linha de chegada vem da direita para a esquerda */
         #chegada {
             position: absolute;
-            right: 0;
             bottom: 0;
             width: 20px;
             height: 100%;
-            background-color: rgba(255,255,255,0.15);
+            background-color: rgba(255,255,255,0.3);
+            left: 100%; /* começa fora do ecrã à direita */
         }
 
         #hud {
@@ -257,7 +258,7 @@
 </div>
 
 <div id="jogoArea">
-    <div id="personagem">
+    <div id="personagem" class="correr">
         <div class="cabeca"></div>
         <div class="corpo"></div>
         <div class="braco esq braco"></div>
@@ -294,18 +295,18 @@
 
     let tempo = 0;
     let intervaloTempo = null;
-    let intervaloMovimento = null;
     let intervaloObstaculos = null;
     let intervaloChegada = null;
 
     let jogoAtivo = false;
+    let posChegada = 0;
 
     const personagem = document.getElementById("personagem");
     const obstaculosDiv = document.getElementById("obstaculos");
     const jogoArea = document.getElementById("jogoArea");
+    const chegada = document.getElementById("chegada");
 
     let saltando = false;
-    let posPersonagem = 40;
 
     /* --- SALTO --- */
     function saltar() {
@@ -325,12 +326,6 @@
     document.addEventListener("keydown", (e) => {
         if (e.code === "Space") saltar();
     });
-
-    /* --- MOVIMENTO --- */
-    function moverPersonagem() {
-        posPersonagem += 3;
-        personagem.style.left = posPersonagem + "px";
-    }
 
     /* --- OBSTÁCULOS --- */
     function tipoObstaculo() {
@@ -434,18 +429,10 @@
     }
 
     /* --- CHEGADA --- */
-    function verificarChegada() {
-        const rectPersonagem = personagem.getBoundingClientRect();
-        const rectChegada = document.getElementById("chegada").getBoundingClientRect();
-
-        return rectPersonagem.right >= rectChegada.left;
-    }
-
     function terminarJogo() {
         jogoAtivo = false;
 
         clearInterval(intervaloTempo);
-        clearInterval(intervaloMovimento);
         clearInterval(intervaloObstaculos);
         clearInterval(intervaloChegada);
 
@@ -467,14 +454,14 @@
 
         tempo = 0;
         document.getElementById("tempo").textContent = tempo + "s";
-
-        posPersonagem = 40;
-        personagem.style.left = "40px";
-
         document.getElementById("fimJogo").style.display = "none";
 
+        // linha de chegada começa fora do ecrã à direita
+        const larguraArea = jogoArea.offsetWidth;
+        posChegada = larguraArea + 20;
+        chegada.style.left = posChegada + "px";
+
         clearInterval(intervaloTempo);
-        clearInterval(intervaloMovimento);
         clearInterval(intervaloObstaculos);
         clearInterval(intervaloChegada);
 
@@ -483,13 +470,21 @@
             document.getElementById("tempo").textContent = tempo + "s";
         }, 1000);
 
-        intervaloMovimento = setInterval(moverPersonagem, 30);
-
         intervaloObstaculos = setInterval(criarObstaculo, 1500);
 
         intervaloChegada = setInterval(() => {
-            if (verificarChegada()) terminarJogo();
-        }, 50);
+            if (!jogoAtivo) return;
+
+            posChegada -= 2; // velocidade da meta
+            chegada.style.left = posChegada + "px";
+
+            const rectPersonagem = personagem.getBoundingClientRect();
+            const rectChegada = chegada.getBoundingClientRect();
+
+            if (rectChegada.left <= rectPersonagem.right) {
+                terminarJogo();
+            }
+        }, 30);
     }
 
     function reiniciarJogo() {
@@ -530,5 +525,6 @@
 
 </body>
 </html>
+
 
 
