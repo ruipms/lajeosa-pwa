@@ -299,46 +299,50 @@
         }
     });
 
-    /* --- MOVIMENTO POR DESLIZE --- */
-    let deslizarAtivo = false;
-    let toqueInicialX = 0;
+    
+/* --- MOVIMENTO POR DESLIZE CONTÍNUO --- */
 
-    jogoArea.addEventListener("touchstart", (e) => {
-        if (!jogoAtivo) return;
+let deslizarAtivo = false;
+let toqueInicialX = 0;
 
-        const toque = e.touches[0];
-        const rect = jogoArea.getBoundingClientRect();
-        const x = toque.clientX - rect.left;
+jogoArea.addEventListener("touchstart", (e) => {
+    if (!jogoAtivo) return;
 
-        const bonecoX = faixas[faixaAtual];
-        if (Math.abs(x - bonecoX) < 60) {
-            deslizarAtivo = true;
-            toqueInicialX = x;
-        }
-    });
+    const toque = e.touches[0];
+    const rect = jogoArea.getBoundingClientRect();
+    const x = toque.clientX - rect.left;
 
-    jogoArea.addEventListener("touchmove", (e) => {
-        if (!jogoAtivo || !deslizarAtivo) return;
+    // ativa deslize sempre que o toque começa dentro da área do jogo
+    deslizarAtivo = true;
+    toqueInicialX = x;
+});
 
-        const toque = e.touches[0];
-        const rect = jogoArea.getBoundingClientRect();
-        const x = toque.clientX - rect.left;
+jogoArea.addEventListener("touchmove", (e) => {
+    if (!jogoAtivo || !deslizarAtivo) return;
 
-        const deslocamento = x - toqueInicialX;
+    const toque = e.touches[0];
+    const rect = jogoArea.getBoundingClientRect();
+    const x = toque.clientX - rect.left;
 
-        if (deslocamento > 40 && faixaAtual < faixas.length - 1) {
-            faixaAtual++;
-            atualizarPosicaoPersonagem();
-            deslizarAtivo = false;
-        }
+    const deslocamento = x - toqueInicialX;
 
-        if (deslocamento < -40 && faixaAtual > 0) {
-            faixaAtual--;
-            atualizarPosicaoPersonagem();
-            deslizarAtivo = false;
-        }
-    });
+    // mudar de faixa quando o deslize é significativo
+    if (deslocamento > 40 && faixaAtual < faixas.length - 1) {
+        faixaAtual++;
+        atualizarPosicaoPersonagem();
+        toqueInicialX = x; // reinicia referência para permitir deslize contínuo
+    }
 
+    if (deslocamento < -40 && faixaAtual > 0) {
+        faixaAtual--;
+        atualizarPosicaoPersonagem();
+        toqueInicialX = x;
+    }
+});
+
+jogoArea.addEventListener("touchend", () => {
+    deslizarAtivo = false;
+});
     jogoArea.addEventListener("touchend", () => {
         deslizarAtivo = false;
     });
