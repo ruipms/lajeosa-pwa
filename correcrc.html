@@ -88,36 +88,36 @@
             overflow: hidden;
         }
 
-        /* --- PERSONAGEM SIMPLES EM CSS --- */
+        /* --- PERSONAGEM PEQUENO EM CSS --- */
 
         #personagem {
             position: absolute;
             bottom: 20px;
             left: 40px;
-            width: 40px;
-            height: 80px;
+            width: 28px;
+            height: 56px;
         }
 
         /* Cabeça */
         #personagem .cabeca {
-            width: 32px;
-            height: 32px;
-            background-color: #c89f72; /* pele média */
+            width: 22px;
+            height: 22px;
+            background-color: #c89f72;
             border-radius: 50%;
             margin: 0 auto;
         }
 
-        /* Corpo com faixas CRC */
+        /* Corpo CRC */
         #personagem .corpo {
-            width: 34px;
-            height: 34px;
+            width: 24px;
+            height: 24px;
             background: linear-gradient(
                 to bottom,
-                #0f3d2e 0%,      /* verde CRC */
+                #0f3d2e 0%,
                 #0f3d2e 33%,
-                white 33%,       /* faixa branca */
+                white 33%,
                 white 66%,
-                black 66%        /* faixa preta */
+                black 66%
             );
             margin: 0 auto;
             border-radius: 4px;
@@ -125,31 +125,30 @@
 
         /* Braços */
         #personagem .braco {
-            width: 10px;
-            height: 28px;
+            width: 8px;
+            height: 20px;
             background-color: #0f3d2e;
             position: absolute;
-            top: 36px;
+            top: 26px;
         }
 
-        #personagem .braco.esq { left: -10px; }
-        #personagem .braco.dir { right: -10px; }
+        #personagem .braco.esq { left: -8px; }
+        #personagem .braco.dir { right: -8px; }
 
         /* Pernas */
         #personagem .perna {
-            width: 12px;
-            height: 28px;
+            width: 10px;
+            height: 20px;
             background-color: black;
             position: absolute;
-            top: 68px;
+            top: 46px;
         }
 
-        #personagem .perna.esq { left: 4px; }
-        #personagem .perna.dir { right: 4px; }
+        #personagem .perna.esq { left: 3px; }
+        #personagem .perna.dir { right: 3px; }
 
         /* --- ANIMAÇÕES --- */
 
-        /* Corrida: balança o corpo */
         .correr {
             animation: correrAnim 0.25s infinite alternate;
         }
@@ -159,18 +158,17 @@
             to   { transform: translateY(-4px); }
         }
 
-        /* Salto */
         .saltar {
             animation: saltoAnim 0.5s ease-out;
         }
 
         @keyframes saltoAnim {
             0%   { transform: translateY(0); }
-            50%  { transform: translateY(-60px); }
+            30%  { transform: translateY(-120px); }
+            70%  { transform: translateY(-120px); }
             100% { transform: translateY(0); }
         }
 
-        /* Impacto */
         .impacto {
             animation: impactoAnim 0.3s;
         }
@@ -227,6 +225,15 @@
             margin: 6px 0;
             font-size: 18px;
         }
+
+        /* Botões de fim de jogo */
+        #fimJogo button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 5px;
+        }
     </style>
 </head>
 
@@ -254,7 +261,6 @@
     Será que consegues entrar para a elite do CRC?
 </div>
 
-
 <div id="jogoArea">
     <div id="personagem" class="correr">
         <div class="cabeca"></div>
@@ -271,13 +277,17 @@
 
 <div id="hud">
     Tempo: <span id="tempo">0s</span>
-    <br>
-    <button id="reiniciar" onclick="reiniciarJogo()">Novo jogo</button>
 </div>
 
 <div id="leaderboard">
     <h2>🏆 Top Jogadores</h2>
     <ul id="listaTop"></ul>
+</div>
+
+<!-- Botões de fim de jogo -->
+<div id="fimJogo" style="display:none;">
+    <button onclick="reiniciarJogo()" style="background:#D4AF37; color:#0F3D2E;">🔄 Novo jogo</button>
+    <button onclick="openPage('jogos.html')" style="background:#1F5C45; color:white;">← Voltar aos Jogos</button>
 </div>
 
 <script>
@@ -368,22 +378,13 @@
         const rectPersonagem = personagem.getBoundingClientRect();
         const rectObst = obst.getBoundingClientRect();
 
-        if (obst.dataset.tipo !== "buraco") {
-            return (
-                rectPersonagem.left < rectObst.right &&
-                rectPersonagem.right > rectObst.left &&
-                rectPersonagem.top < rectObst.bottom &&
-                rectPersonagem.bottom > rectObst.top
-            );
-        }
-
-        const personagemNoChao =
-            rectPersonagem.bottom >= (jogoArea.getBoundingClientRect().bottom - 5);
+        const margem = 10;
 
         return (
-            personagemNoChao &&
-            rectPersonagem.left < rectObst.right &&
-            rectPersonagem.right > rectObst.left
+            rectPersonagem.left + margem < rectObst.right &&
+            rectPersonagem.right - margem > rectObst.left &&
+            rectPersonagem.top + margem < rectObst.bottom &&
+            rectPersonagem.bottom - margem > rectObst.top
         );
     }
 
@@ -448,14 +449,15 @@
             mostrarLeaderboard();
         }
 
-        posPersonagem = 40;
-        personagem.style.left = "40px";
+        document.getElementById("fimJogo").style.display = "block";
     }
 
     /* --- INICIAR JOGO --- */
     function iniciarJogo() {
         tempo = 0;
         document.getElementById("tempo").textContent = tempo + "s";
+
+        document.getElementById("fimJogo").style.display = "none";
 
         clearInterval(intervaloTempo);
         intervaloTempo = setInterval(() => {
@@ -513,3 +515,4 @@
 
 </body>
 </html>
+
