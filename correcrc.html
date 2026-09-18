@@ -98,7 +98,6 @@
             height: 56px;
         }
 
-        /* Cabeça */
         #personagem .cabeca {
             width: 22px;
             height: 22px;
@@ -107,7 +106,6 @@
             margin: 0 auto;
         }
 
-        /* Corpo CRC */
         #personagem .corpo {
             width: 24px;
             height: 24px;
@@ -123,7 +121,6 @@
             border-radius: 4px;
         }
 
-        /* Braços */
         #personagem .braco {
             width: 8px;
             height: 20px;
@@ -135,7 +132,6 @@
         #personagem .braco.esq { left: -8px; }
         #personagem .braco.dir { right: -8px; }
 
-        /* Pernas */
         #personagem .perna {
             width: 10px;
             height: 20px;
@@ -226,7 +222,6 @@
             font-size: 18px;
         }
 
-        /* Botões de fim de jogo */
         #fimJogo button {
             padding: 10px 20px;
             border-radius: 10px;
@@ -262,7 +257,7 @@
 </div>
 
 <div id="jogoArea">
-    <div id="personagem" class="correr">
+    <div id="personagem">
         <div class="cabeca"></div>
         <div class="corpo"></div>
         <div class="braco esq braco"></div>
@@ -276,7 +271,10 @@
 </div>
 
 <div id="hud">
-    Tempo: <span id="tempo">0s</span>
+    Tempo: <span id="tempo">0s</span><br><br>
+    <button id="btnIniciar" onclick="iniciarJogo()" style="padding:10px 20px; background:#D4AF37; color:#0F3D2E; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">
+        ▶ Começar jogo
+    </button>
 </div>
 
 <div id="leaderboard">
@@ -284,7 +282,6 @@
     <ul id="listaTop"></ul>
 </div>
 
-<!-- Botões de fim de jogo -->
 <div id="fimJogo" style="display:none;">
     <button onclick="reiniciarJogo()" style="background:#D4AF37; color:#0F3D2E;">🔄 Novo jogo</button>
     <button onclick="openPage('jogos.html')" style="background:#1F5C45; color:white;">← Voltar aos Jogos</button>
@@ -297,6 +294,11 @@
 
     let tempo = 0;
     let intervaloTempo = null;
+    let intervaloMovimento = null;
+    let intervaloObstaculos = null;
+    let intervaloChegada = null;
+
+    let jogoAtivo = false;
 
     const personagem = document.getElementById("personagem");
     const obstaculosDiv = document.getElementById("obstaculos");
@@ -307,15 +309,14 @@
 
     /* --- SALTO --- */
     function saltar() {
+        if (!jogoAtivo) return;
         if (saltando) return;
 
         saltando = true;
-        personagem.classList.remove("correr");
         personagem.classList.add("saltar");
 
         setTimeout(() => {
             personagem.classList.remove("saltar");
-            personagem.classList.add("correr");
             saltando = false;
         }, 500);
     }
@@ -325,21 +326,21 @@
         if (e.code === "Space") saltar();
     });
 
-    /* --- MOVIMENTO AUTOMÁTICO --- */
+    /* --- MOVIMENTO --- */
     function moverPersonagem() {
         posPersonagem += 3;
         personagem.style.left = posPersonagem + "px";
     }
-    setInterval(moverPersonagem, 30);
 
-    /* --- TIPOS DE OBSTÁCULOS --- */
+    /* --- OBSTÁCULOS --- */
     function tipoObstaculo() {
         const tipos = ["bola", "galinha", "buraco"];
         return tipos[Math.floor(Math.random() * tipos.length)];
     }
 
-    /* --- CRIAR OBSTÁCULO --- */
     function criarObstaculo() {
+        if (!jogoAtivo) return;
+
         const obst = document.createElement("div");
         obst.classList.add("obstaculo");
 
@@ -373,7 +374,6 @@
         moverObstaculo(obst);
     }
 
-    /* --- COLISÕES --- */
     function verificarColisao(obst) {
         const rectPersonagem = personagem.getBoundingClientRect();
         const rectObst = obst.getBoundingClientRect();
@@ -388,7 +388,6 @@
         );
     }
 
-    /* --- PENALIZAÇÃO --- */
     function aplicarPenalizacao(tipo) {
         let penalizacao = 3;
 
@@ -406,11 +405,16 @@
         }, 300);
     }
 
-    /* --- MOVER OBSTÁCULO --- */
     function moverObstaculo(obst) {
         let pos = -50;
 
         const intervalo = setInterval(() => {
+            if (!jogoAtivo) {
+                clearInterval(intervalo);
+                obst.remove();
+                return;
+            }
+
             pos += 5;
             obst.style.right = pos + "px";
 
@@ -438,7 +442,12 @@
     }
 
     function terminarJogo() {
+        jogoAtivo = false;
+
         clearInterval(intervaloTempo);
+        clearInterval(intervaloMovimento);
+        clearInterval(intervaloObstaculos);
+        clearInterval(intervaloChegada);
 
         alert("Chegaste ao campo do CRC! Tempo final: " + tempo + "s");
 
@@ -454,29 +463,36 @@
 
     /* --- INICIAR JOGO --- */
     function iniciarJogo() {
+        jogoAtivo = true;
+
         tempo = 0;
         document.getElementById("tempo").textContent = tempo + "s";
+
+        posPersonagem = 40;
+        personagem.style.left = "40px";
 
         document.getElementById("fimJogo").style.display = "none";
 
         clearInterval(intervaloTempo);
+        clearInterval(intervaloMovimento);
+        clearInterval(intervaloObstaculos);
+        clearInterval(intervaloChegada);
+
         intervaloTempo = setInterval(() => {
             tempo++;
             document.getElementById("tempo").textContent = tempo + "s";
         }, 1000);
 
-        setInterval(() => {
-            criarObstaculo();
-        }, 1500);
+        intervaloMovimento = setInterval(moverPersonagem, 30);
 
-        setInterval(() => {
+        intervaloObstaculos = setInterval(criarObstaculo, 1500);
+
+        intervaloChegada = setInterval(() => {
             if (verificarChegada()) terminarJogo();
         }, 50);
     }
 
     function reiniciarJogo() {
-        posPersonagem = 40;
-        personagem.style.left = "40px";
         iniciarJogo();
     }
 
@@ -509,10 +525,10 @@
         });
     }
 
-    iniciarJogo();
     mostrarLeaderboard();
 </script>
 
 </body>
 </html>
+
 
