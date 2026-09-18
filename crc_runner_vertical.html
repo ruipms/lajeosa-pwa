@@ -447,7 +447,7 @@
 
         if (nome) {
             guardarPontuacao(nome, tempo);
-            mostrarLeaderboard();
+        
         }
 
         document.getElementById("fimJogo").style.display = "block";
@@ -497,17 +497,20 @@
     /* --- LEADERBOARD --- */
 
     function guardarPontuacao(nome, tempoFinal) {
-        db.ref("topCRCVertical").once("value", snapshot => {
-            let top = snapshot.val() || [];
+    db.ref("topCRCVertical").once("value", snapshot => {
+        let top = snapshot.val() || [];
 
-            top.push({ nome, tempo: tempoFinal });
+        top.push({ nome, tempo: tempoFinal });
 
-            top.sort((a, b) => b.tempo - a.tempo);
+        top.sort((a, b) => b.tempo - a.tempo);
 
-            const top10 = top.slice(0, 10);
+        const top10 = top.slice(0, 10);
 
-            db.ref("topCRCVertical").set(top10);
+        db.ref("topCRCVertical").set(top10, () => {
+            // Só atualiza o leaderboard depois de guardar
+            mostrarLeaderboard();
         });
+    });
     }
 
     function mostrarLeaderboard() {
