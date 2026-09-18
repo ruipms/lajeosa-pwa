@@ -449,7 +449,7 @@
     }
 
     /* --- INICIAR JOGO --- */
-   function iniciarJogo() {
+ function iniciarJogo() {
     jogoAtivo = true;
 
     tempo = 0;
@@ -458,8 +458,8 @@
 
     const larguraArea = jogoArea.offsetWidth;
 
-    // META MUITO MAIS LONGE (10 ecrãs à frente)
-    posChegada = larguraArea * 10;
+    // META A 5 ECRÃS DE DISTÂNCIA
+    posChegada = larguraArea * 5;
     chegada.style.left = posChegada + "px";
 
     clearInterval(intervaloTempo);
@@ -476,7 +476,8 @@
     intervaloChegada = setInterval(() => {
         if (!jogoAtivo) return;
 
-        posChegada -= 0.5; // velocidade realista
+        // VELOCIDADE REALISTA DO CENÁRIO
+        posChegada -= 2;
         chegada.style.left = posChegada + "px";
 
         const rectPersonagem = personagem.getBoundingClientRect();
@@ -487,6 +488,7 @@
         }
     }, 30);
 }
+
 
 
     function reiniciarJogo() {
