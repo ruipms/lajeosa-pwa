@@ -222,9 +222,11 @@
     O cenário desloca-se de cima para baixo.<br>
     Move o jogador para a esquerda ou direita:<br>
     • Teclas ← e → no teclado<br>
-    • Ou desliza / toca no ecrã para mudar de posição<br><br>
+    • Ou desliza / toca no ecrã para mudar de faixa<br><br>
 
     Evita bolas, galinhas e buracos o máximo de tempo possível.<br>
+    <b>Se bateres num obstáculo, o jogo termina imediatamente.</b><br><br>
+
     No fim, o teu tempo entra no Top 10 dos mais rápidos.
 </div>
 
@@ -273,50 +275,52 @@
     const obstaculosDiv = document.getElementById("obstaculos");
     const jogoArea = document.getElementById("jogoArea");
 
-    let posXPersonagem = 0;
-
-    /* --- MOVIMENTO DO PERSONAGEM --- */
+    /* --- FAIXAS --- */
+    const faixas = [80, 160, 240]; // ajusta conforme o tamanho do jogoArea
+    let faixaAtual = 1; // começa no centro
 
     function atualizarPosicaoPersonagem() {
-        const largura = jogoArea.offsetWidth;
-        const centro = largura / 2;
-        const novaPos = centro + posXPersonagem;
-
-        const margem = 20;
-        const limiteEsq = margem;
-        const limiteDir = largura - margem;
-
-        const clamp = Math.max(limiteEsq, Math.min(limiteDir, novaPos));
-
-        personagem.style.left = clamp + "px";
+        personagem.style.left = faixas[faixaAtual] + "px";
         personagem.style.transform = "translateX(-50%)";
     }
 
+    /* --- MOVIMENTO POR TECLADO --- */
     document.addEventListener("keydown", (e) => {
         if (!jogoAtivo) return;
 
-        const passo = 20;
-
-        if (e.code === "ArrowLeft") {
-            posXPersonagem -= passo;
+        if (e.code === "ArrowLeft" && faixaAtual > 0) {
+            faixaAtual--;
             atualizarPosicaoPersonagem();
         }
 
-        if (e.code === "ArrowRight") {
-            posXPersonagem += passo;
+        if (e.code === "ArrowRight" && faixaAtual < faixas.length - 1) {
+            faixaAtual++;
             atualizarPosicaoPersonagem();
         }
     });
 
-    jogoArea.addEventListener("touchmove", (e) => {
+    /* --- MOVIMENTO POR TOQUE --- */
+    jogoArea.addEventListener("touchstart", (e) => {
         if (!jogoAtivo) return;
 
-        const toque = e.touches[0];
+        const toque = e.touches[0].clientX;
         const rect = jogoArea.getBoundingClientRect();
-        const x = toque.clientX - rect.left;
+        const x = toque - rect.left;
 
-        personagem.style.left = x + "px";
-        personagem.style.transform = "translateX(-50%)";
+        // escolher faixa mais próxima
+        let melhorFaixa = 0;
+        let melhorDist = Infinity;
+
+        faixas.forEach((f, i) => {
+            const dist = Math.abs(f - x);
+            if (dist < melhorDist) {
+                melhorDist = dist;
+                melhorFaixa = i;
+            }
+        });
+
+        faixaAtual = melhorFaixa;
+        atualizarPosicaoPersonagem();
     });
 
     /* --- OBSTÁCULOS --- */
@@ -338,9 +342,9 @@
         obst.style.position = "absolute";
         obst.style.top = "-60px";
 
-        const larguraArea = jogoArea.offsetWidth;
-        const posX = Math.random() * (larguraArea - 40) + 20;
-        obst.style.left = posX + "px";
+        // escolher faixa aleatória
+        const faixa = faixas[Math.floor(Math.random() * faixas.length)];
+        obst.style.left = faixa + "px";
 
         if (tipo === "bola") {
             obst.textContent = "⚽";
@@ -378,13 +382,7 @@
     }
 
     function aplicarPenalizacao(tipo) {
-        let penalizacao = 3;
-
-        if (tipo === "bola") penalizacao = 2;
-        if (tipo === "galinha") penalizacao = 3;
-        if (tipo === "buraco") penalizacao = 4;
-
-        tempo += penalizacao;
+        tempo += 3;
         document.getElementById("tempo").textContent = tempo + "s";
 
         personagem.classList.add("impacto");
@@ -396,8 +394,7 @@
 
     function moverObstaculo(obst) {
         let pos = -60;
-
-        const velocidade = 4;
+        let velocidade = 7;
 
         const intervalo = setInterval(() => {
             if (!jogoAtivo) {
@@ -416,7 +413,7 @@
             }
 
             if (verificarColisao(obst)) {
-                aplicarPenalizacao(obst.dataset.tipo);
+                terminarJogo();
                 obst.remove();
                 clearInterval(intervalo);
             }
@@ -453,7 +450,7 @@
         document.getElementById("tempo").textContent = tempo + "s";
         document.getElementById("fimJogo").style.display = "none";
 
-        posXPersonagem = 0;
+        faixaAtual = 1;
         atualizarPosicaoPersonagem();
 
         obstaculosDiv.innerHTML = "";
@@ -466,7 +463,7 @@
             document.getElementById("tempo").textContent = tempo + "s";
         }, 1000);
 
-        intervaloObstaculos = setInterval(criarObstaculo, 1200);
+        intervaloObstaculos = setInterval(criarObstaculo, 700);
     }
 
     function reiniciarJogo() {
