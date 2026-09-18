@@ -449,43 +449,45 @@
     }
 
     /* --- INICIAR JOGO --- */
-    function iniciarJogo() {
-        jogoAtivo = true;
+   function iniciarJogo() {
+    jogoAtivo = true;
 
-        tempo = 0;
+    tempo = 0;
+    document.getElementById("tempo").textContent = tempo + "s";
+    document.getElementById("fimJogo").style.display = "none";
+
+    const larguraArea = jogoArea.offsetWidth;
+
+    // META MUITO MAIS LONGE (10 ecrãs à frente)
+    posChegada = larguraArea * 10;
+    chegada.style.left = posChegada + "px";
+
+    clearInterval(intervaloTempo);
+    clearInterval(intervaloObstaculos);
+    clearInterval(intervaloChegada);
+
+    intervaloTempo = setInterval(() => {
+        tempo++;
         document.getElementById("tempo").textContent = tempo + "s";
-        document.getElementById("fimJogo").style.display = "none";
+    }, 1000);
 
-        // linha de chegada começa fora do ecrã à direita
-        const larguraArea = jogoArea.offsetWidth;
-        posChegada = larguraArea + 20;
+    intervaloObstaculos = setInterval(criarObstaculo, 1500);
+
+    intervaloChegada = setInterval(() => {
+        if (!jogoAtivo) return;
+
+        posChegada -= 0.5; // velocidade realista
         chegada.style.left = posChegada + "px";
 
-        clearInterval(intervaloTempo);
-        clearInterval(intervaloObstaculos);
-        clearInterval(intervaloChegada);
+        const rectPersonagem = personagem.getBoundingClientRect();
+        const rectChegada = chegada.getBoundingClientRect();
 
-        intervaloTempo = setInterval(() => {
-            tempo++;
-            document.getElementById("tempo").textContent = tempo + "s";
-        }, 1000);
+        if (rectChegada.left <= rectPersonagem.right) {
+            terminarJogo();
+        }
+    }, 30);
+}
 
-        intervaloObstaculos = setInterval(criarObstaculo, 1500);
-
-        intervaloChegada = setInterval(() => {
-            if (!jogoAtivo) return;
-
-            posChegada -= 2; // velocidade da meta
-            chegada.style.left = posChegada + "px";
-
-            const rectPersonagem = personagem.getBoundingClientRect();
-            const rectChegada = chegada.getBoundingClientRect();
-
-            if (rectChegada.left <= rectPersonagem.right) {
-                terminarJogo();
-            }
-        }, 30);
-    }
 
     function reiniciarJogo() {
         iniciarJogo();
