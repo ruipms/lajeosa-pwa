@@ -220,11 +220,11 @@
 
     <b>Como jogar:</b><br><br>
     O cenário desloca-se de cima para baixo.<br>
-    Move o jogador para a esquerda ou direita:<br>
-    • Teclas ← e → no teclado<br>
-    • Ou desliza / toca no ecrã para mudar de faixa<br><br>
+    Desliza o jogador para a esquerda ou direita:<br>
+    • <br>
+    • Desliza o jogador para mudar de faixa<br><br>
 
-    Evita bolas, galinhas e buracos o máximo de tempo possível.<br>
+    Evita bolas, cones e buracos o máximo de tempo possível.<br>
     <b>Se bateres num obstáculo, o jogo termina imediatamente.</b><br><br>
 
     No fim, o teu tempo entra no Top 10 dos mais rápidos.
@@ -276,8 +276,8 @@
     const jogoArea = document.getElementById("jogoArea");
 
     /* --- FAIXAS --- */
-    const faixas = [80, 160, 240]; // ajusta conforme o tamanho do jogoArea
-    let faixaAtual = 1; // começa no centro
+    const faixas = [80, 160, 240];
+    let faixaAtual = 1;
 
     function atualizarPosicaoPersonagem() {
         personagem.style.left = faixas[faixaAtual] + "px";
@@ -299,34 +299,54 @@
         }
     });
 
-    /* --- MOVIMENTO POR TOQUE --- */
+    /* --- MOVIMENTO POR DESLIZE --- */
+    let deslizarAtivo = false;
+    let toqueInicialX = 0;
+
     jogoArea.addEventListener("touchstart", (e) => {
         if (!jogoAtivo) return;
 
-        const toque = e.touches[0].clientX;
+        const toque = e.touches[0];
         const rect = jogoArea.getBoundingClientRect();
-        const x = toque - rect.left;
+        const x = toque.clientX - rect.left;
 
-        // escolher faixa mais próxima
-        let melhorFaixa = 0;
-        let melhorDist = Infinity;
+        const bonecoX = faixas[faixaAtual];
+        if (Math.abs(x - bonecoX) < 60) {
+            deslizarAtivo = true;
+            toqueInicialX = x;
+        }
+    });
 
-        faixas.forEach((f, i) => {
-            const dist = Math.abs(f - x);
-            if (dist < melhorDist) {
-                melhorDist = dist;
-                melhorFaixa = i;
-            }
-        });
+    jogoArea.addEventListener("touchmove", (e) => {
+        if (!jogoAtivo || !deslizarAtivo) return;
 
-        faixaAtual = melhorFaixa;
-        atualizarPosicaoPersonagem();
+        const toque = e.touches[0];
+        const rect = jogoArea.getBoundingClientRect();
+        const x = toque.clientX - rect.left;
+
+        const deslocamento = x - toqueInicialX;
+
+        if (deslocamento > 40 && faixaAtual < faixas.length - 1) {
+            faixaAtual++;
+            atualizarPosicaoPersonagem();
+            deslizarAtivo = false;
+        }
+
+        if (deslocamento < -40 && faixaAtual > 0) {
+            faixaAtual--;
+            atualizarPosicaoPersonagem();
+            deslizarAtivo = false;
+        }
+    });
+
+    jogoArea.addEventListener("touchend", () => {
+        deslizarAtivo = false;
     });
 
     /* --- OBSTÁCULOS --- */
 
     function tipoObstaculo() {
-        const tipos = ["bola", "galinha", "buraco"];
+        const tipos = ["bola", "cone", "buraco"];
         return tipos[Math.floor(Math.random() * tipos.length)];
     }
 
@@ -342,7 +362,6 @@
         obst.style.position = "absolute";
         obst.style.top = "-60px";
 
-        // escolher faixa aleatória
         const faixa = faixas[Math.floor(Math.random() * faixas.length)];
         obst.style.left = faixa + "px";
 
@@ -351,9 +370,12 @@
             obst.style.fontSize = "28px";
         }
 
-        if (tipo === "galinha") {
-            obst.textContent = "🐔";
-            obst.style.fontSize = "28px";
+        if (tipo === "cone") {
+            obst.style.width = "0";
+            obst.style.height = "0";
+            obst.style.borderLeft = "20px solid transparent";
+            obst.style.borderRight = "20px solid transparent";
+            obst.style.borderBottom = "40px solid orange";
         }
 
         if (tipo === "buraco") {
@@ -379,17 +401,6 @@
             rectPersonagem.top + margem < rectObst.bottom &&
             rectPersonagem.bottom - margem > rectObst.top
         );
-    }
-
-    function aplicarPenalizacao(tipo) {
-        tempo += 3;
-        document.getElementById("tempo").textContent = tempo + "s";
-
-        personagem.classList.add("impacto");
-
-        setTimeout(() => {
-            personagem.classList.remove("impacto");
-        }, 300);
     }
 
     function moverObstaculo(obst) {
