@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avisos — Sénior Feminino</title>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTEGNRDBJW');
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0F3D2E;
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    .club-logo {
+      width: 120px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: #D4AF37;
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .aviso-img {
+      width: 90%;
+      max-width: 600px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .aviso-img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Modal */
+    #imgModal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    #imgModal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 25px;
+      font-size: 32px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      z-index: 10000;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="assets/CRC Lajeosa logo.jpg" class="club-logo">
+  <h1>Avisos — Sénior Feminino</h1>
+  <a href="clube_feminino.html" class="back-button">⬅ Voltar</a>
+</header>
+
+<div class="content">
+
+  <h3 style="color:#D4AF37; margin-bottom:20px;">📢 Avisos</h3>
+
+  <!-- Mensagem dinâmica -->
+  <p id="noAvisosMsg" style="color:#D4AF37; font-size:20px; font-weight:bold; margin-top:20px;">
+    Não há avisos
+  </p>
+
+  <!-- Quando houver avisos, colocas aqui imagens como esta:
+  <img src="assets/avisos/algum_aviso.jpg"
+       alt="Aviso"
+       class="aviso-img"
+       onclick="openModal('assets/avisos/algum_aviso.jpg')">
+  -->
+
+</div>
+
+<!-- Modal -->
+<div id="imgModal" onclick="closeModal()">
+  <span class="close-btn" onclick="closeModal()">✖</span>
+  <img id="modalImg" src="">
+</div>
+
+<script>
+function openModal(src) {
+  const modal = document.getElementById("imgModal");
+  const img = document.getElementById("modalImg");
+
+  img.src = src;
+  modal.style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("imgModal").style.display = "none";
+}
+
+window.onload = function() {
+  const avisos = document.querySelectorAll('.aviso-img');
+  const msg = document.getElementById('noAvisosMsg');
+
+  msg.style.display = avisos.length > 0 ? 'none' : 'block';
+};
+</script>
+
+</body>
+</html>
