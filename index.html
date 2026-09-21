@@ -194,13 +194,14 @@
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
     <h1>Lajeosa do Mondego</h1>
 
-    <p style="color:#D4AF37; font-size:14px; font-weight:bold; margin-top:4px;">
-        18/09/2026
-    </p>
+   <p id="dataAtual" style="color:#D4AF37; font-size:14px; font-weight:bold; margin-top:4px;">
+    <!-- A data aparece aqui automaticamente -->
+   </p>
+
 
     <p style="color:#D4AF37; font-size:13px; margin-top:2px; cursor:pointer;"
        onclick="openPage('changelog.html')">
-        📜 Clique para ver histórico de versões
+        📜 Clique para ver histórico de alterações na app
     </p>
 
     <p style="color:#D4AF37; font-size:13px; margin-top:6px; opacity:0.9;">
@@ -311,6 +312,24 @@
         navigator.serviceWorker.register('service-worker.js');
     }
 </script>
+    <script>
+    function openPage(page) {
+        window.location.href = page;
+    }
+
+    // Mostrar data atual automaticamente
+    const hoje = new Date();
+    const dia = String(hoje.getDate()).padStart(2, '0');
+    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
+    const ano = hoje.getFullYear();
+
+    document.getElementById('dataAtual').textContent = `${dia}/${mes}/${ano}`;
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js');
+    }
+</script>
+
 
 </body>
 </html>
