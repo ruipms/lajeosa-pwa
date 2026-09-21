@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notícias</title>
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
@@ -12,6 +13,7 @@
   gtag('js', new Date());
   gtag('config', 'G-FTEGNRDBJW');
 </script>
+
 <style>
     body {
         background-color: #0F3D2E;
@@ -69,39 +71,20 @@
 
 <h2>Notícias da Região</h2>
 
-<!-- ========================= -->
-<!-- 1) BEIRA.PT -->
-<!-- ========================= -->
-
 <h3>Beira.pt</h3>
 <ul id="noticias-beira">
     <li>A carregar notícias...</li>
 </ul>
-
-<!-- ========================= -->
-<!-- 2) RÁDIO ALTITUDE -->
-<!-- ========================= -->
 
 <h3>Rádio Altitude</h3>
 <ul id="noticias-altitude">
     <li>A carregar notícias...</li>
 </ul>
 
-<!-- ========================= -->
-<!-- 3) O INTERIOR -->
-<!-- ========================= -->
-
 <h3>O Interior</h3>
 <ul id="noticias-ointerior">
     <li>A carregar notícias...</li>
 </ul>
-
-<!-- ========================= -->
-<!-- 4) RÁDIO F -->
-<!-- ========================= -->
-<!-- ========================= -->
-<!-- 4) RÁDIO F -->
-<!-- ========================= -->
 
 <h3>Rádio F</h3>
 <ul>
@@ -112,31 +95,15 @@
     </li>
 </ul>
 
-<!--<h3>Rádio F</h3>
-<ul id="noticias-radiof">
-    <li>A carregar notícias...</li>
-</ul> -->
-
-<!-- ========================= -->
-<!-- 5) CÂMARA MUNICIPAL DA GUARDA -->
-<!-- ========================= -->
-
 <h3>Câmara Municipal da Guarda</h3>
 <ul id="noticias-guarda">
     <li>A carregar notícias...</li>
 </ul>
-<!-- ========================= -->
-<!-- 6) TERRAS DA GUARDA -->
-<!-- ========================= -->
+
 <h3>Terras da Guarda</h3>
 <ul id="noticias-terrasdaguarda">
     <li>A carregar notícias...</li>
 </ul>
-
-
-<!-- ========================= -->
-<!-- LINKS DIRETOS -->
-<!-- ========================= -->
 
 <h3>Mais Beiras – Celorico da Beira</h3>
 <ul>
@@ -188,9 +155,25 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
         items.slice(0, maxItems).forEach(match => {
             const bloco = match[1];
 
-            // Extrair título
-            const tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
-            const titulo = tituloMatch ? tituloMatch[1] : "Sem título";
+            // Extrair título (suporta CDATA e texto normal)
+            let tituloMatch = bloco.match(/<title><!
+
+\[CDATA
+
+\[([\s\S]*?)\]
+
+\]
+
+><\/title>/);
+
+            if (!tituloMatch) {
+                tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
+            }
+
+            let titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
+
+            // Remover HTML dentro do título (caso exista)
+            titulo = titulo.replace(/<[^>]+>/g, "").trim();
 
             // Extrair link (RSS)
             let linkMatch = bloco.match(/<link>([\s\S]*?)<\/link>/);
@@ -226,7 +209,7 @@ carregarFeed(worker + "terrasdaguarda", "noticias-terrasdaguarda", 3);
 
 </script>
 
-
 </body>
 </html>
+
 
