@@ -155,7 +155,7 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
         items.slice(0, maxItems).forEach(match => {
             const bloco = match[1];
 
-            // Extrair título (suporta CDATA e texto normal)
+            // Extrair título (CDATA ou normal)
             let tituloMatch = bloco.match(/<title>\s*<!
 
 \[CDATA
@@ -165,14 +165,13 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
 \]
 
 >\s*<\/title>/);
-
             if (!tituloMatch) {
                 tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
             }
 
             let titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
 
-            // Remover HTML dentro do título (caso exista)
+            // Remover HTML dentro do título
             titulo = titulo.replace(/<[^>]+>/g, "").trim();
 
             // Extrair link (RSS)
@@ -199,7 +198,7 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
     }
 }
 
-const worker = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=";
+const worker = "https://small-glade-3bb9.ruipms.workers.dev/?feed=";
 
 carregarFeed(worker + "beira", "noticias-beira", 3);
 carregarFeed(worker + "altitude", "noticias-altitude", 3);
