@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notícias</title>
-
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
@@ -13,7 +12,6 @@
   gtag('js', new Date());
   gtag('config', 'G-FTEGNRDBJW');
 </script>
-
 <style>
     body {
         background-color: #0F3D2E;
@@ -155,24 +153,9 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
         items.slice(0, maxItems).forEach(match => {
             const bloco = match[1];
 
-            // Extrair título (CDATA ou normal)
-            let tituloMatch = bloco.match(/<title>\s*<!
-
-\[CDATA
-
-\[([\s\S]*?)\]
-
-\]
-
->\s*<\/title>/);
-            if (!tituloMatch) {
-                tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
-            }
-
-            let titulo = tituloMatch ? tituloMatch[1].trim() : "Sem título";
-
-            // Remover HTML dentro do título
-            titulo = titulo.replace(/<[^>]+>/g, "").trim();
+            // Extrair título (igual ao código antigo)
+            const tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
+            const titulo = tituloMatch ? tituloMatch[1] : "Sem título";
 
             // Extrair link (RSS)
             let linkMatch = bloco.match(/<link>([\s\S]*?)<\/link>/);
@@ -198,15 +181,15 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
     }
 }
 
-const worker = "https://small-glade-3bb9.ruipms.workers.dev/?feed=";
+const worker = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=";
 
 carregarFeed(worker + "beira", "noticias-beira", 3);
 carregarFeed(worker + "altitude", "noticias-altitude", 3);
 carregarFeed(worker + "ointerior", "noticias-ointerior", 3);
 carregarFeed(worker + "guarda", "noticias-guarda", 3);
 carregarFeed(worker + "terrasdaguarda", "noticias-terrasdaguarda", 3);
-
 </script>
 
 </body>
 </html>
+
