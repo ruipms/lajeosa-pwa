@@ -156,7 +156,7 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
             const bloco = match[1];
 
             // Extrair título (suporta CDATA e texto normal)
-            let tituloMatch = bloco.match(/<title><!
+            let tituloMatch = bloco.match(/<title>\s*<!
 
 \[CDATA
 
@@ -164,7 +164,7 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
 
 \]
 
-><\/title>/);
+>\s*<\/title>/);
 
             if (!tituloMatch) {
                 tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
@@ -211,5 +211,6 @@ carregarFeed(worker + "terrasdaguarda", "noticias-terrasdaguarda", 3);
 
 </body>
 </html>
+
 
 
