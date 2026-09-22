@@ -155,9 +155,11 @@
         lista.forEach(inc => {
             const icone = tipoIcone(inc.status);
 
-            const dataFormatada = inc.date
-                ? new Date(inc.date).toLocaleString("pt-PT")
-                : "Data não disponível";
+            let dataFormatada = "Data não disponível";
+if (inc.date && !isNaN(Date.parse(inc.date))) {
+    dataFormatada = new Date(inc.date).toLocaleString("pt-PT");
+}
+
 
             html += `
                 <div class="card-inc">
