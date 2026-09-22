@@ -20,29 +20,19 @@
             color: #2f4f2f;
         }
 
-        .item {
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .item:last-child {
-            border-bottom: none;
-        }
-
-        .estado {
-            font-weight: bold;
-        }
-
-        .verde { color: #2e8b57; }
-        .amarelo { color: #d4a017; }
-        .laranja { color: #e67e22; }
-        .vermelho { color: #c0392b; }
-
-        .link-mapa {
+        .botao-link {
             display: inline-block;
-            margin-top: 5px;
-            color: #2e8b57;
+            background: #2f4f2f;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
             font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .botao-link:hover {
+            background: #3b5f3b;
         }
     </style>
 </head>
@@ -55,106 +45,42 @@
 
 <main>
 
-    <!-- 🔥 INCÊNDIOS PERTO DA LAJEOSA -->
+    <!-- 🔥 INCÊNDIOS -->
     <section class="secao">
-        <h2>🔥 Incêndios perto da Lajeosa</h2>
-        <div id="incendios">
-            <div class="item">
-                <p>A carregar dados de incêndios...</p>
-            </div>
-        </div>
+        <h2>🔥 Incêndios Ativos</h2>
+        <p>Consultar incêndios ativos em Portugal, com mapa ao vivo e meios no terreno.</p>
+        <a href="https://www.fogos.pt/pt" target="_blank" class="botao-link">Abrir Fogos.pt</a>
     </section>
 
-    <!-- 🚨 AVISOS DA PROTEÇÃO CIVIL -->
+    <!-- 🚨 OCORRÊNCIAS -->
     <section class="secao">
-        <h2>🚨 Avisos da Proteção Civil</h2>
-        <div id="protecao-civil">
-            <div class="item">
-                <p>A carregar avisos...</p>
-            </div>
-        </div>
+        <h2>🚨 Ocorrências Ativas</h2>
+        <p>Ocorrências oficiais da Proteção Civil: incêndios, acidentes, inundações e mais.</p>
+        <a href="https://ocorrenciasativas.pt/" target="_blank" class="botao-link">Abrir Ocorrências Ativas</a>
     </section>
 
-    <!-- 👮 AVISOS DA GNR -->
-    <section class="secao">
-        <h2>👮 Avisos da GNR</h2>
-        <div id="gnr">
-            <div class="item">
-                <p>A carregar avisos...</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 🛣️ CORTES DE ESTRADAS -->
-    <section class="secao">
-        <h2>🛣️ Cortes de Estradas</h2>
-        <div id="estradas">
-            <div class="item">
-                <p>A carregar informação...</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 🌡️ METEOROLOGIA CRÍTICA -->
+    <!-- 🌡️ METEOROLOGIA -->
     <section class="secao">
         <h2>🌡️ Meteorologia Crítica</h2>
-        <div id="meteorologia">
-            <div class="item">
-                <p>A carregar dados meteorológicos...</p>
-            </div>
-        </div>
+        <p>Previsão horária, avisos meteorológicos e risco crítico para a região da Guarda.</p>
+        <a href="https://www.ipma.pt/pt/otempo/prev.localidade.hora/index.jsp#Guarda&Guarda" target="_blank" class="botao-link">Abrir IPMA</a>
     </section>
 
-    <!-- 📡 ALERTAS LOCAIS -->
+    <!-- 👮 GNR -->
     <section class="secao">
-        <h2>📡 Alertas Locais</h2>
-        <div id="alertas-locais">
-            <div class="item">
-                <p>A carregar alertas...</p>
-            </div>
-        </div>
+        <h2>👮 Comunicados da GNR</h2>
+        <p>Avisos, operações e comunicados oficiais da Guarda Nacional Republicana.</p>
+        <a href="https://www.gnr.pt/Comunicados.aspx" target="_blank" class="botao-link">Abrir GNR</a>
+    </section>
+
+    <!-- 🛣️ ESTRADAS -->
+    <section class="secao">
+        <h2>🛣️ Trânsito e Cortes de Estrada</h2>
+        <p>Informação oficial sobre condicionamentos, obras e trânsito em tempo real.</p>
+        <a href="https://servicos.infraestruturasdeportugal.pt/viajar-na-estrada/transito-em-tempo-real" target="_blank" class="botao-link">Abrir Infraestruturas de Portugal</a>
     </section>
 
 </main>
-
-<script>
-    const worker = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=";
-
-    async function carregarIncendios() {
-        const alvo = document.getElementById("incendios");
-
-        try {
-            const resposta = await fetch(worker + "incendios");
-            const dados = await resposta.json();
-
-            if (!dados || dados.length === 0) {
-                alvo.innerHTML = `
-                    <div class="item">
-                        <p class="verde">🟢 Sem incêndios ativos num raio de 15 km.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            alvo.innerHTML = dados.map(inc => `
-                <div class="item">
-                    <p><span class="estado">${inc.estado}</span> a ${inc.distancia.toFixed(1)} km da Lajeosa</p>
-                    <p>Meios: ${inc.meios}</p>
-                    <a href="${inc.link}" target="_blank" class="link-mapa">Ver no mapa ao vivo</a>
-                </div>
-            `).join("");
-
-        } catch (e) {
-            alvo.innerHTML = `
-                <div class="item">
-                    <p class="vermelho">Erro ao carregar dados de incêndios.</p>
-                </div>
-            `;
-        }
-    }
-
-    carregarIncendios();
-</script>
 
 </body>
 </html>
