@@ -23,6 +23,12 @@
             background-color: #0F3D2E;
             color: white;
             text-align: center;
+            font-size: 18px; /* texto maior */
+        }
+
+        main {
+            max-width: 420px; /* impede o telemóvel de encolher tudo */
+            margin: 0 auto;
         }
 
         header {
@@ -37,6 +43,11 @@
             margin-top: 10px;
             font-size: 26px;
             font-weight: bold;
+            color: #D4AF37;
+        }
+
+        h2 {
+            font-size: 22px;
             color: #D4AF37;
         }
 
@@ -68,32 +79,36 @@
             opacity: 0.8;
         }
 
-        /* Tabela */
-        .tabela-incendios {
-            width: 90%;
-            margin: 20px auto;
-            border-collapse: collapse;
+        /* Cartões dos incêndios */
+        .card-incendio {
             background-color: #1F5C45;
             border-radius: 12px;
-            overflow: hidden;
+            padding: 12px;
+            margin: 15px auto;
+            width: 90%;
+            color: white;
+            text-align: left;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        .tabela-incendios th {
-            background-color: #0F3D2E;
-            color: #D4AF37;
-            padding: 10px;
+        .linha1, .linha2 {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 6px;
         }
 
-        .tabela-incendios td {
-            padding: 8px;
-            border-bottom: 1px solid #2a7a5e;
+        .linha1 span, .linha2 span {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 15px;
         }
 
         .estado {
-            padding: 5px 10px;
-            border-radius: 6px;
             font-weight: bold;
-            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 6px;
         }
 
         .estado-curso { background: #ff4d4f; }
@@ -101,16 +116,15 @@
         .estado-despacho { background: #fadb14; color: black; }
         .estado-vigilancia { background: #52c41a; }
 
-        /* Mapa */
-       #mapa {
-        width: 100%;
-        max-width: 380px;   /* mapa mais estreito */
-        height: 420px;      /* mapa mais alto */
-        margin: 20px auto;
-        border-radius: 12px;
-        overflow: hidden;
-    }
-
+        /* Mapa vertical */
+        #mapa {
+            width: 100%;
+            max-width: 380px;
+            height: 420px;
+            margin: 20px auto;
+            border-radius: 12px;
+            overflow: hidden;
+        }
 
         footer {
             margin-top: 30px;
@@ -122,6 +136,7 @@
 </head>
 
 <body>
+<main>
 
 <header>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
@@ -134,12 +149,14 @@
 
 <div id="incendios"></div>
 
-<h2 style="color:#D4AF37; margin-top:30px;">Mapa da Região</h2>
+<h2>Mapa da Região</h2>
 <div id="mapa"></div>
 
 <footer>
     2026 Lajeosa do Mondego — ©RMS
 </footer>
+
+</main>
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -169,37 +186,30 @@
                 ? "Não há incêndios ativos no distrito da Guarda."
                 : `${lista.length} incêndio(s) ativo(s) no distrito da Guarda.`;
 
-        let html = `
-            <table class="tabela-incendios">
-                <tr>
-                    <th>Local</th>
-                    <th>Concelho</th>
-                    <th>Freguesia</th>
-                    <th>Estado</th>
-                    <th>Humanos</th>
-                    <th>Terrestres</th>
-                    <th>Aéreos</th>
-                    <th>Data/Hora</th>
-                </tr>
-        `;
+        let html = "";
 
         lista.forEach(inc => {
             const cls = classeEstado(inc.status);
+
             html += `
-                <tr>
-                    <td>${inc.location}</td>
-                    <td>${inc.county}</td>
-                    <td>${inc.parish}</td>
-                    <td><span class="estado ${cls}">${inc.status}</span></td>
-                    <td>${inc.resources.human}</td>
-                    <td>${inc.resources.terrestrial}</td>
-                    <td>${inc.resources.aerial}</td>
-                    <td>${inc.timestamp}</td>
-                </tr>
+                <div class="card-incendio">
+                    <div class="linha1">
+                        <span>${inc.location}</span>
+                        <span>${inc.county}</span>
+                        <span>${inc.parish}</span>
+                        <span class="estado ${cls}">${inc.status}</span>
+                    </div>
+
+                    <div class="linha2">
+                        <span>👥 ${inc.resources.human}</span>
+                        <span>🚒 ${inc.resources.terrestrial}</span>
+                        <span>✈️ ${inc.resources.aerial}</span>
+                        <span>🕒 ${inc.timestamp}</span>
+                    </div>
+                </div>
             `;
         });
 
-        html += `</table>`;
         document.getElementById("incendios").innerHTML = html;
     }
 
@@ -221,3 +231,4 @@
 
 </body>
 </html>
+
