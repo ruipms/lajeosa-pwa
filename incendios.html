@@ -2,9 +2,10 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incêndios — Lajeosa do Mondego</title>
 
-    <!-- Google Analytics (GA4) -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -23,12 +24,6 @@
             background-color: #0F3D2E;
             color: white;
             text-align: center;
-            font-size: 18px; /* texto maior */
-        }
-
-        main {
-            max-width: 420px; /* impede o telemóvel de encolher tudo */
-            margin: 0 auto;
         }
 
         header {
@@ -47,17 +42,20 @@
         }
 
         h2 {
-            font-size: 22px;
             color: #D4AF37;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 10px;
         }
 
         .btn-voltar {
             background-color: #1F5C45;
             color: #D4AF37;
             padding: 10px 18px;
-            border-radius: 10px;
+            border-radius: 18px;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 17px;
             display: inline-block;
             margin-top: 10px;
             transition: 0.2s;
@@ -69,7 +67,7 @@
 
         .contador {
             margin-top: 15px;
-            font-size: 18px;
+            font-size: 17px;
             color: #D4AF37;
             font-weight: bold;
         }
@@ -82,33 +80,37 @@
         /* Cartões dos incêndios */
         .card-incendio {
             background-color: #1F5C45;
-            border-radius: 12px;
-            padding: 12px;
-            margin: 15px auto;
-            width: 90%;
-            color: white;
+            padding: 18px;
+            border-radius: 18px;
+            margin: 16px 20px;
             text-align: left;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .linha-titulo {
+            color: #D4AF37;
+            font-size: 15px;
+            font-weight: bold;
+            margin-bottom: 6px;
         }
 
         .linha1, .linha2 {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 6px;
+            margin-bottom: 10px;
         }
 
         .linha1 span, .linha2 span {
             background: rgba(255,255,255,0.1);
-            padding: 4px 8px;
-            border-radius: 6px;
+            padding: 6px 10px;
+            border-radius: 10px;
             font-size: 15px;
         }
 
         .estado {
             font-weight: bold;
-            padding: 4px 8px;
-            border-radius: 6px;
+            padding: 6px 10px;
+            border-radius: 10px;
         }
 
         .estado-curso { background: #ff4d4f; }
@@ -118,11 +120,10 @@
 
         /* Mapa vertical */
         #mapa {
-            width: 100%;
-            max-width: 380px;
+            width: 90%;
             height: 420px;
             margin: 20px auto;
-            border-radius: 12px;
+            border-radius: 18px;
             overflow: hidden;
         }
 
@@ -136,7 +137,6 @@
 </head>
 
 <body>
-<main>
 
 <header>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
@@ -155,8 +155,6 @@
 <footer>
     2026 Lajeosa do Mondego — ©RMS
 </footer>
-
-</main>
 
 <!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -193,6 +191,8 @@
 
             html += `
                 <div class="card-incendio">
+
+                    <div class="linha-titulo">Localização e Estado</div>
                     <div class="linha1">
                         <span>${inc.location}</span>
                         <span>${inc.county}</span>
@@ -200,12 +200,14 @@
                         <span class="estado ${cls}">${inc.status}</span>
                     </div>
 
+                    <div class="linha-titulo">Meios e Data</div>
                     <div class="linha2">
                         <span>👥 ${inc.resources.human}</span>
                         <span>🚒 ${inc.resources.terrestrial}</span>
                         <span>✈️ ${inc.resources.aerial}</span>
                         <span>🕒 ${inc.timestamp}</span>
                     </div>
+
                 </div>
             `;
         });
@@ -227,8 +229,11 @@
 
     carregarIncendios();
     inicializarMapa();
+
+    function openPage(page) {
+        window.location.href = page;
+    }
 </script>
 
 </body>
 </html>
-
