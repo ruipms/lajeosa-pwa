@@ -3,36 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Segurança e Avisos</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Segurança</title>
+
+    <link rel="icon" href="assets/brasao.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <style>
-        .secao {
-            background: #ffffff;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0F3D2E;
+            color: white;
+            text-align: center;
         }
 
-        .secao h2 {
-            margin-top: 0;
-            color: #2f4f2f;
+        header {
+            padding: 20px;
         }
 
-        .botao-link {
-            display: inline-block;
-            background: #2f4f2f;
-            color: #fff;
-            padding: 10px 15px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
+        header img {
+            width: 140px;
+        }
+
+        h1 {
             margin-top: 10px;
+            font-size: 26px;
+            font-weight: bold;
         }
 
-        .botao-link:hover {
-            background: #3b5f3b;
+        .sec-title {
+            color: #D4AF37;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            padding: 10px 20px;
+        }
+
+        .card {
+            background-color: #1F5C45;
+            padding: 18px;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            background-color: #2a7a5e;
+        }
+
+        .card i {
+            font-size: 36px;
+            color: #D4AF37;
+        }
+
+        .card p {
+            font-size: 17px;
+            margin-top: 8px;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 10px;
+            font-size: 14px;
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -40,47 +80,57 @@
 <body>
 
 <header>
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
     <h1>Segurança e Avisos</h1>
 </header>
 
-<main>
+<!-- SECÇÃO SEGURANÇA -->
+<h2 class="sec-title">Informação em Tempo Real</h2>
 
-    <!-- 🔥 INCÊNDIOS -->
-    <section class="secao">
-        <h2>🔥 Incêndios Ativos</h2>
-        <p>Consultar incêndios ativos em Portugal, com mapa ao vivo e meios no terreno.</p>
-        <a href="https://www.fogos.pt/pt" target="_blank" class="botao-link">Abrir Fogos.pt</a>
-    </section>
+<div class="grid">
 
-    <!-- 🚨 OCORRÊNCIAS -->
-    <section class="secao">
-        <h2>🚨 Ocorrências Ativas</h2>
-        <p>Ocorrências oficiais da Proteção Civil: incêndios, acidentes, inundações e mais.</p>
-        <a href="https://ocorrenciasativas.pt/" target="_blank" class="botao-link">Abrir Ocorrências Ativas</a>
-    </section>
+    <!-- INCÊNDIOS -->
+    <div class="card" onclick="openLink('https://www.fogos.pt/pt')">
+        <i class="fas fa-fire"></i>
+        <p>Incêndios Ativos</p>
+    </div>
 
-    <!-- 🌡️ METEOROLOGIA -->
-    <section class="secao">
-        <h2>🌡️ Meteorologia Crítica</h2>
-        <p>Previsão horária, avisos meteorológicos e risco crítico para a região da Guarda.</p>
-        <a href="https://www.ipma.pt/pt/otempo/prev.localidade.hora/index.jsp#Guarda&Guarda" target="_blank" class="botao-link">Abrir IPMA</a>
-    </section>
+    <!-- OCORRÊNCIAS -->
+    <div class="card" onclick="openLink('https://ocorrenciasativas.pt/')">
+        <i class="fas fa-triangle-exclamation"></i>
+        <p>Ocorrências Ativas</p>
+    </div>
 
-    <!-- 👮 GNR -->
-    <section class="secao">
-        <h2>👮 Comunicados da GNR</h2>
-        <p>Avisos, operações e comunicados oficiais da Guarda Nacional Republicana.</p>
-        <a href="https://www.gnr.pt/Comunicados.aspx" target="_blank" class="botao-link">Abrir GNR</a>
-    </section>
+    <!-- METEOROLOGIA -->
+    <div class="card" onclick="openLink('https://www.ipma.pt/pt/otempo/prev.localidade.hora/index.jsp#Guarda&Guarda')">
+        <i class="fas fa-cloud-sun"></i>
+        <p>Meteorologia Crítica</p>
+    </div>
 
-    <!-- 🛣️ ESTRADAS -->
-    <section class="secao">
-        <h2>🛣️ Trânsito e Cortes de Estrada</h2>
-        <p>Informação oficial sobre condicionamentos, obras e trânsito em tempo real.</p>
-        <a href="https://servicos.infraestruturasdeportugal.pt/viajar-na-estrada/transito-em-tempo-real" target="_blank" class="botao-link">Abrir Infraestruturas de Portugal</a>
-    </section>
+    <!-- GNR -->
+    <div class="card" onclick="openLink('https://www.gnr.pt/Comunicados.aspx')">
+        <i class="fas fa-shield-halved"></i>
+        <p>Comunicados da GNR</p>
+    </div>
 
-</main>
+    <!-- ESTRADAS -->
+    <div class="card" onclick="openLink('https://servicos.infraestruturasdeportugal.pt/viajar-na-estrada/transito-em-tempo-real')">
+        <i class="fas fa-road"></i>
+        <p>Trânsito e Estradas</p>
+    </div>
+
+</div>
+
+<footer>
+    2026 Lajeosa do Mondego — ©RMS
+</footer>
+
+<script>
+    function openLink(url) {
+        window.open(url, '_blank');
+    }
+</script>
 
 </body>
 </html>
+
