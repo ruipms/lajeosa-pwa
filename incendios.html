@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incêndios — Lajeosa do Mondego</title>
+    <title>Incêndios — Distrito da Guarda</title>
 
-    <!-- Google Analytics -->
+    <!-- Google Analytics (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -13,9 +13,6 @@
       gtag('js', new Date());
       gtag('config', 'G-FTEGNRDBJW');
     </script>
-
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
     <style>
         body {
@@ -41,14 +38,6 @@
             color: #D4AF37;
         }
 
-        h2 {
-            color: #D4AF37;
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
-
         .btn-voltar {
             background-color: #1F5C45;
             color: #D4AF37;
@@ -65,6 +54,11 @@
             background-color: #2a7a5e;
         }
 
+        .atualizado {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
         .contador {
             margin-top: 15px;
             font-size: 17px;
@@ -72,13 +66,7 @@
             font-weight: bold;
         }
 
-        .atualizado {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        /* Cartões dos incêndios */
-        .card-incendio {
+        .card-inc {
             background-color: #1F5C45;
             padding: 18px;
             border-radius: 18px;
@@ -88,9 +76,11 @@
 
         .linha-titulo {
             color: #D4AF37;
-            font-size: 15px;
+            font-size: 17px;
             font-weight: bold;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            margin-top: 10px;
+            text-align: left;
         }
 
         .linha1, .linha2 {
@@ -107,26 +97,6 @@
             font-size: 15px;
         }
 
-        .estado {
-            font-weight: bold;
-            padding: 6px 10px;
-            border-radius: 10px;
-        }
-
-        .estado-curso { background: #ff4d4f; }
-        .estado-resolucao { background: #fa8c16; }
-        .estado-despacho { background: #fadb14; color: black; }
-        .estado-vigilancia { background: #52c41a; }
-
-        /* Mapa vertical */
-        #mapa {
-            width: 90%;
-            height: 420px;
-            margin: 20px auto;
-            border-radius: 18px;
-            overflow: hidden;
-        }
-
         footer {
             margin-top: 30px;
             padding: 10px;
@@ -140,7 +110,7 @@
 
 <header>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
-    <h1>Incêndios Ativos — Distrito da Guarda</h1>
+    <h1>Incêndios — Distrito da Guarda</h1>
     <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
 </header>
 
@@ -149,25 +119,21 @@
 
 <div id="incendios"></div>
 
-<h2>Mapa da Região</h2>
-<div id="mapa"></div>
-
 <footer>
     2026 Lajeosa do Mondego — ©RMS
 </footer>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
-    const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=incidents";
+    const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=fogos";
 
-    function classeEstado(status) {
-        if (status.includes("Curso")) return "estado-curso";
-        if (status.includes("Resolução")) return "estado-resolucao";
-        if (status.includes("Despacho")) return "estado-despacho";
-        if (status.includes("Vigilância")) return "estado-vigilancia";
-        return "";
+    function tipoIcone(status) {
+        status = status.toLowerCase();
+
+        if (status.includes("em curso")) return "🔥";
+        if (status.includes("em resolução")) return "🟠";
+        if (status.includes("vigilância")) return "🟡";
+        if (status.includes("despacho")) return "⚠️";
+        return "🔥";
     }
 
     async function carregarIncendios() {
@@ -187,25 +153,24 @@
         let html = "";
 
         lista.forEach(inc => {
-            const cls = classeEstado(inc.status);
+            const icone = tipoIcone(inc.status);
 
             html += `
-                <div class="card-incendio">
+                <div class="card-inc">
 
-                    <div class="linha-titulo">Localização e Estado</div>
+                    <div class="linha-titulo">${icone} ${inc.status}</div>
+
                     <div class="linha1">
-                        <span>${inc.location}</span>
                         <span>${inc.county}</span>
                         <span>${inc.parish}</span>
-                        <span class="estado ${cls}">${inc.status}</span>
+                        <span>${inc.location}</span>
                     </div>
 
-                    <div class="linha-titulo">Meios e Data</div>
                     <div class="linha2">
-                        <span>👥 ${inc.resources.human}</span>
-                        <span>🚒 ${inc.resources.terrestrial}</span>
-                        <span>✈️ ${inc.resources.aerial}</span>
-                        <span>🕒 ${inc.timestamp}</span>
+                        <span>🕒 ${new Date(inc.date).toLocaleString("pt-PT")}</span>
+                        <span>👥 ${inc.human}</span>
+                        <span>🚒 ${inc.terrestrial}</span>
+                        <span>✈️ ${inc.aerial}</span>
                     </div>
 
                 </div>
@@ -215,20 +180,7 @@
         document.getElementById("incendios").innerHTML = html;
     }
 
-    function inicializarMapa() {
-        const mapa = L.map("mapa").setView([40.537, -7.267], 9);
-
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 18,
-            attribution: "© OpenStreetMap"
-        }).addTo(mapa);
-
-        L.marker([40.537, -7.267]).addTo(mapa)
-            .bindPopup("Região da Guarda");
-    }
-
     carregarIncendios();
-    inicializarMapa();
 
     function openPage(page) {
         window.location.href = page;
@@ -237,3 +189,4 @@
 
 </body>
 </html>
+
