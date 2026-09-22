@@ -5,6 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Segurança</title>
 
+    <!-- Google tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FTEGNRDBJW');
+    </script>
+
+    <!-- Métricas avançadas da PWA -->
+    <script>
+    window.addEventListener('appinstalled', () => {
+        gtag('event', 'pwa_install', { event_category: 'PWA', event_label: 'Instalação da App' });
+    });
+
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        gtag('event', 'pwa_launch_icon', { event_category: 'PWA', event_label: 'Abertura via ícone' });
+    }
+
+    if (!localStorage.getItem('pwa_first_visit')) {
+        localStorage.setItem('pwa_first_visit', '1');
+        gtag('event', 'pwa_first_open', { event_category: 'PWA', event_label: 'Primeira visita' });
+    } else {
+        gtag('event', 'pwa_return_open', { event_category: 'PWA', event_label: 'Visita recorrente' });
+    }
+
+    window.addEventListener('offline', () => {
+        gtag('event', 'pwa_offline_use', { event_category: 'PWA', event_label: 'Uso offline' });
+    });
+
+    window.addEventListener('error', (e) => {
+        if (e.message && e.message.includes('Failed to fetch')) {
+            gtag('event', 'pwa_network_error', { event_category: 'PWA', event_label: 'Erro de rede' });
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const ref = document.referrer;
+        if (ref.includes('whatsapp')) gtag('event', 'pwa_open_whatsapp');
+        if (ref.includes('instagram')) gtag('event', 'pwa_open_instagram');
+        if (ref.includes('facebook')) gtag('event', 'pwa_open_facebook');
+    });
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            gtag('event', 'pwa_update_trigger', { event_category: 'PWA', event_label: 'Atualização da aplicação' });
+        });
+    }
+
+    setInterval(() => {
+        gtag('event', 'pwa_active_tick', { event_category: 'PWA', event_label: 'Atividade contínua' });
+    }, 15000);
+    </script>
+
+    <link rel="manifest" href="manifest.json">
     <link rel="icon" href="assets/brasao.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -68,6 +123,25 @@
             margin-top: 8px;
         }
 
+        .back-btn {
+            background-color: #1F5C45;
+            padding: 15px;
+            border-radius: 18px;
+            margin: 20px auto;
+            width: 200px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: #2a7a5e;
+        }
+
+        .back-btn i {
+            font-size: 24px;
+            color: #D4AF37;
+        }
+
         footer {
             margin-top: 30px;
             padding: 10px;
@@ -84,41 +158,41 @@
     <h1>Segurança e Avisos</h1>
 </header>
 
-<!-- SECÇÃO SEGURANÇA -->
 <h2 class="sec-title">Informação em Tempo Real</h2>
 
 <div class="grid">
 
-    <!-- INCÊNDIOS -->
     <div class="card" onclick="openLink('https://www.fogos.pt/pt')">
         <i class="fas fa-fire"></i>
         <p>Incêndios Ativos</p>
     </div>
 
-    <!-- OCORRÊNCIAS -->
     <div class="card" onclick="openLink('https://ocorrenciasativas.pt/')">
         <i class="fas fa-triangle-exclamation"></i>
         <p>Ocorrências Ativas</p>
     </div>
 
-    <!-- METEOROLOGIA -->
     <div class="card" onclick="openLink('https://www.ipma.pt/pt/otempo/prev.localidade.hora/index.jsp#Guarda&Guarda')">
         <i class="fas fa-cloud-sun"></i>
         <p>Meteorologia Crítica</p>
     </div>
 
-    <!-- GNR -->
     <div class="card" onclick="openLink('https://www.gnr.pt/Comunicados.aspx')">
         <i class="fas fa-shield-halved"></i>
         <p>Comunicados da GNR</p>
     </div>
 
-    <!-- ESTRADAS -->
     <div class="card" onclick="openLink('https://servicos.infraestruturasdeportugal.pt/viajar-na-estrada/transito-em-tempo-real')">
         <i class="fas fa-road"></i>
         <p>Trânsito e Estradas</p>
     </div>
 
+</div>
+
+<!-- BOTÃO VOLTAR -->
+<div class="back-btn" onclick="openPage('index.html')">
+    <i class="fas fa-arrow-left"></i>
+    <p>Voltar à Página Inicial</p>
 </div>
 
 <footer>
@@ -129,8 +203,15 @@
     function openLink(url) {
         window.open(url, '_blank');
     }
+
+    function openPage(page) {
+        window.location.href = page;
+    }
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js');
+    }
 </script>
 
 </body>
 </html>
-
