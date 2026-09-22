@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segurança e Avisos</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .secao {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .secao h2 {
+            margin-top: 0;
+            color: #2f4f2f;
+        }
+
+        .item {
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .item:last-child {
+            border-bottom: none;
+        }
+
+        .estado {
+            font-weight: bold;
+        }
+
+        .verde { color: #2e8b57; }
+        .amarelo { color: #d4a017; }
+        .laranja { color: #e67e22; }
+        .vermelho { color: #c0392b; }
+
+        .link-mapa {
+            display: inline-block;
+            margin-top: 5px;
+            color: #2e8b57;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Segurança e Avisos</h1>
+</header>
+
+<main>
+
+    <!-- 🔥 INCÊNDIOS PERTO DA LAJEOSA -->
+    <section class="secao">
+        <h2>🔥 Incêndios perto da Lajeosa</h2>
+        <div id="incendios">
+            <div class="item">
+                <p>A carregar dados de incêndios...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🚨 AVISOS DA PROTEÇÃO CIVIL -->
+    <section class="secao">
+        <h2>🚨 Avisos da Proteção Civil</h2>
+        <div id="protecao-civil">
+            <div class="item">
+                <p>A carregar avisos...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 👮 AVISOS DA GNR -->
+    <section class="secao">
+        <h2>👮 Avisos da GNR</h2>
+        <div id="gnr">
+            <div class="item">
+                <p>A carregar avisos...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🛣️ CORTES DE ESTRADAS -->
+    <section class="secao">
+        <h2>🛣️ Cortes de Estradas</h2>
+        <div id="estradas">
+            <div class="item">
+                <p>A carregar informação...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🌡️ METEOROLOGIA CRÍTICA -->
+    <section class="secao">
+        <h2>🌡️ Meteorologia Crítica</h2>
+        <div id="meteorologia">
+            <div class="item">
+                <p>A carregar dados meteorológicos...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 📡 ALERTAS LOCAIS -->
+    <section class="secao">
+        <h2>📡 Alertas Locais</h2>
+        <div id="alertas-locais">
+            <div class="item">
+                <p>A carregar alertas...</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<script>
+    const worker = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=";
+
+    async function carregarIncendios() {
+        const alvo = document.getElementById("incendios");
+
+        try {
+            const resposta = await fetch(worker + "incendios");
+            const dados = await resposta.json();
+
+            if (!dados || dados.length === 0) {
+                alvo.innerHTML = `
+                    <div class="item">
+                        <p class="verde">🟢 Sem incêndios ativos num raio de 15 km.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            alvo.innerHTML = dados.map(inc => `
+                <div class="item">
+                    <p><span class="estado">${inc.estado}</span> a ${inc.distancia.toFixed(1)} km da Lajeosa</p>
+                    <p>Meios: ${inc.meios}</p>
+                    <a href="${inc.link}" target="_blank" class="link-mapa">Ver no mapa ao vivo</a>
+                </div>
+            `).join("");
+
+        } catch (e) {
+            alvo.innerHTML = `
+                <div class="item">
+                    <p class="vermelho">Erro ao carregar dados de incêndios.</p>
+                </div>
+            `;
+        }
+    }
+
+    carregarIncendios();
+</script>
+
+</body>
+</html>
