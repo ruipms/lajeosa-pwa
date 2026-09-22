@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ocorrências — Lajeosa do Mondego</title>
+    <title>Ocorrências — Beiras e Serra da Estrela</title>
 
     <!-- Google Analytics (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
@@ -13,9 +13,6 @@
       gtag('js', new Date());
       gtag('config', 'G-FTEGNRDBJW');
     </script>
-
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 
     <style>
         body {
@@ -41,14 +38,6 @@
             color: #D4AF37;
         }
 
-        h2 {
-            color: #D4AF37;
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
-
         .btn-voltar {
             background-color: #1F5C45;
             color: #D4AF37;
@@ -65,6 +54,11 @@
             background-color: #2a7a5e;
         }
 
+        .atualizado {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
         .contador {
             margin-top: 15px;
             font-size: 17px;
@@ -72,12 +66,6 @@
             font-weight: bold;
         }
 
-        .atualizado {
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        /* Cartões das ocorrências */
         .card-ocor {
             background-color: #1F5C45;
             padding: 18px;
@@ -109,15 +97,6 @@
             font-size: 15px;
         }
 
-        /* Mapa vertical */
-        #mapa {
-            width: 90%;
-            height: 420px;
-            margin: 20px auto;
-            border-radius: 18px;
-            overflow: hidden;
-        }
-
         footer {
             margin-top: 30px;
             padding: 10px;
@@ -131,7 +110,7 @@
 
 <header>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
-    <h1>Ocorrências — Distrito da Guarda</h1>
+    <h1>Ocorrências — Beiras e Serra da Estrela</h1>
     <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
 </header>
 
@@ -140,18 +119,12 @@
 
 <div id="ocorrencias"></div>
 
-<h2>Mapa da Região</h2>
-<div id="mapa"></div>
-
 <footer>
     2026 Lajeosa do Mondego — ©RMS
 </footer>
 
-<!-- Leaflet JS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
-    const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=occurrences";
+    const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=occbeiras";
 
     function tipoIcone(tipo) {
         tipo = tipo.toLowerCase();
@@ -160,6 +133,8 @@
         if (tipo.includes("acidente")) return "🚗";
         if (tipo.includes("inundação")) return "🌧️";
         if (tipo.includes("assistência") || tipo.includes("socorro")) return "🛟";
+        if (tipo.includes("mato")) return "🌿";
+        if (tipo.includes("povoamento")) return "🌲";
         return "⚠️";
     }
 
@@ -174,8 +149,8 @@
 
         document.getElementById("contador").textContent =
             lista.length === 0
-                ? "Não há ocorrências no distrito da Guarda."
-                : `${lista.length} ocorrência(s) no distrito da Guarda.`;
+                ? "Não há ocorrências ativas hoje."
+                : `${lista.length} ocorrência(s) ativa(s) hoje.`;
 
         let html = "";
 
@@ -188,13 +163,12 @@
                     <div class="linha-titulo">${icone} ${oc.type}</div>
 
                     <div class="linha1">
-                        <span>${oc.location}</span>
                         <span>${oc.county}</span>
                         <span>${oc.parish}</span>
                     </div>
 
                     <div class="linha2">
-                        <span>🕒 ${oc.timestamp}</span>
+                        <span>🕒 ${new Date(oc.timestamp).toLocaleString("pt-PT")}</span>
                         <span>👥 ${oc.resources.human}</span>
                         <span>🚒 ${oc.resources.terrestrial}</span>
                         <span>✈️ ${oc.resources.aerial}</span>
@@ -207,20 +181,7 @@
         document.getElementById("ocorrencias").innerHTML = html;
     }
 
-    function inicializarMapa() {
-        const mapa = L.map("mapa").setView([40.537, -7.267], 9);
-
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            maxZoom: 18,
-            attribution: "© OpenStreetMap"
-        }).addTo(mapa);
-
-        L.marker([40.537, -7.267]).addTo(mapa)
-            .bindPopup("Região da Guarda");
-    }
-
     carregarOcorrencias();
-    inicializarMapa();
 
     function openPage(page) {
         window.location.href = page;
