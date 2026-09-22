@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Incêndios — Lajeosa do Mondego</title>
+
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FTEGNRDBJW');
+    </script>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0F3D2E;
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        header img {
+            width: 140px;
+        }
+
+        h1 {
+            margin-top: 10px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #D4AF37;
+        }
+
+        .btn-voltar {
+            background-color: #1F5C45;
+            color: #D4AF37;
+            padding: 10px 18px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            display: inline-block;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+
+        .btn-voltar:hover {
+            background-color: #2a7a5e;
+        }
+
+        .contador {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #D4AF37;
+            font-weight: bold;
+        }
+
+        .atualizado {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        /* Tabela */
+        .tabela-incendios {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #1F5C45;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .tabela-incendios th {
+            background-color: #0F3D2E;
+            color: #D4AF37;
+            padding: 10px;
+        }
+
+        .tabela-incendios td {
+            padding: 8px;
+            border-bottom: 1px solid #2a7a5e;
+        }
+
+        .estado {
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .estado-curso { background: #ff4d4f; }
+        .estado-resolucao { background: #fa8c16; }
+        .estado-despacho { background: #fadb14; color: black; }
+        .estado-vigilancia { background: #52c41a; }
+
+        /* Mapa */
+        #mapa {
+            width: 90%;
+            height: 300px;
+            margin: 20px auto;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 10px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
+    <h1>Incêndios Ativos — Distrito da Guarda</h1>
+    <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
+</header>
+
+<p class="atualizado" id="atualizado"></p>
+<p class="contador" id="contador"></p>
+
+<div id="incendios"></div>
+
+<h2 style="color:#D4AF37; margin-top:30px;">Mapa da Região</h2>
+<div id="mapa"></div>
+
+<footer>
+    2026 Lajeosa do Mondego — ©RMS
+</footer>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=incidents";
+
+    function classeEstado(status) {
+        if (status.includes("Curso")) return "estado-curso";
+        if (status.includes("Resolução")) return "estado-resolucao";
+        if (status.includes("Despacho")) return "estado-despacho";
+        if (status.includes("Vigilância")) return "estado-vigilancia";
+        return "";
+    }
+
+    async function carregarIncendios() {
+        const resposta = await fetch(WORKER_URL);
+        const dados = await resposta.json();
+
+        document.getElementById("atualizado").textContent =
+            "Atualizado: " + new Date(dados.updated).toLocaleString("pt-PT");
+
+        const lista = dados.incidents || [];
+
+        document.getElementById("contador").textContent =
+            lista.length === 0
+                ? "Não há incêndios ativos no distrito da Guarda."
+                : `${lista.length} incêndio(s) ativo(s) no distrito da Guarda.`;
+
+        let html = `
+            <table class="tabela-incendios">
+                <tr>
+                    <th>Local</th>
+                    <th>Concelho</th>
+                    <th>Freguesia</th>
+                    <th>Estado</th>
+                    <th>Humanos</th>
+                    <th>Terrestres</th>
+                    <th>Aéreos</th>
+                    <th>Data/Hora</th>
+                </tr>
+        `;
+
+        lista.forEach(inc => {
+            const cls = classeEstado(inc.status);
+            html += `
+                <tr>
+                    <td>${inc.location}</td>
+                    <td>${inc.county}</td>
+                    <td>${inc.parish}</td>
+                    <td><span class="estado ${cls}">${inc.status}</span></td>
+                    <td>${inc.resources.human}</td>
+                    <td>${inc.resources.terrestrial}</td>
+                    <td>${inc.resources.aerial}</td>
+                    <td>${inc.timestamp}</td>
+                </tr>
+            `;
+        });
+
+        html += `</table>`;
+        document.getElementById("incendios").innerHTML = html;
+    }
+
+    function inicializarMapa() {
+        const mapa = L.map("mapa").setView([40.537, -7.267], 9);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            maxZoom: 18,
+            attribution: "© OpenStreetMap"
+        }).addTo(mapa);
+
+        L.marker([40.537, -7.267]).addTo(mapa)
+            .bindPopup("Região da Guarda");
+    }
+
+    carregarIncendios();
+    inicializarMapa();
+</script>
+
+</body>
+</html>
