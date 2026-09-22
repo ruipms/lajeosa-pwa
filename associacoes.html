@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associações - Lajeosa do Mondego</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FTEGNRDBJW');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0F3D2E;
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        header button {
+            background-color: #1F5C45;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 18px;
+            color: #D4AF37;
+            font-size: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        header button:hover {
+            background-color: #2a7a5e;
+        }
+
+        h1 {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #D4AF37;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            padding: 10px 20px;
+        }
+
+        .card {
+            background-color: #1F5C45;
+            padding: 18px;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            background-color: #2a7a5e;
+        }
+
+        .card i {
+            font-size: 36px;
+            color: #D4AF37;
+        }
+
+        .card p {
+            font-size: 17px;
+            margin-top: 8px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<header>
+    <button onclick="window.location.href='index.html'">← Voltar</button>
+    <h1>Associações</h1>
+</header>
+
+<div class="grid">
+
+    <div class="card" onclick="openPage('alss.html')">
+        <i class="fas fa-hand-holding-heart"></i>
+        <p>Solidariedade Social (ALSS)</p>
+    </div>
+
+   <!-- <div class="card" onclick="openPage('associacao_juvenil.html')">
+        <i class="fas fa-users"></i>
+        <p>Associação Juvenil</p>
+    </div>-->
+
+</div>
+
+<script>
+    function openPage(page) {
+        window.location.href = page;
+    }
+</script>
+
+</body>
+</html>
