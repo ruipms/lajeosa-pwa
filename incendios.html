@@ -129,9 +129,9 @@
     function tipoIcone(status) {
         status = status.toLowerCase();
 
-        if (status.includes("em curso")) return "🔥";
-        if (status.includes("em resolução")) return "🟠";
-        if (status.includes("vigilância")) return "🟡";
+        if (status.includes("curso")) return "🔥";
+        if (status.includes("resolução")) return "🟠";
+        if (status.includes("vigil")) return "🟡";
         if (status.includes("despacho")) return "⚠️";
         return "🔥";
     }
@@ -155,6 +155,10 @@
         lista.forEach(inc => {
             const icone = tipoIcone(inc.status);
 
+            const dataFormatada = inc.date
+                ? new Date(inc.date).toLocaleString("pt-PT")
+                : "Data não disponível";
+
             html += `
                 <div class="card-inc">
 
@@ -167,7 +171,7 @@
                     </div>
 
                     <div class="linha2">
-                        <span>🕒 ${new Date(inc.date).toLocaleString("pt-PT")}</span>
+                        <span>🕒 ${dataFormatada}</span>
                         <span>👥 ${inc.human}</span>
                         <span>🚒 ${inc.terrestrial}</span>
                         <span>✈️ ${inc.aerial}</span>
@@ -186,6 +190,7 @@
         window.location.href = page;
     }
 </script>
+
 
 </body>
 </html>
