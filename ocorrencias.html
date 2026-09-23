@@ -163,8 +163,17 @@
         // Mostrar ativos
         let htmlAtivos = "";
 
-        if (ativos.length === 0) {
-            htmlAtivos = `<p style="opacity:0.8; font-size:16px;">Não há ocorrências ativas no distrito da Guarda.</p>`;
+       if (ativos.length === 0) {
+    htmlAtivos = `
+        <p style="opacity:0.8; font-size:16px; margin:20px;">
+            Todas as ocorrências ativas são incêndios —
+            <a href="incendios.html" style="color:#D4AF37; text-decoration:underline;">
+                consulte a página de incêndios
+            </a>.
+        </p>
+    `;
+}
+
         } else {
             ativos.forEach(inc => {
                 const icone = tipoIcone(inc.type);
