@@ -123,7 +123,7 @@
 </footer>
 
 <script>
-    const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=fogos";
+    const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=arcgis-beiras";
 
     function tipoIcone(status) {
         status = status.toLowerCase();
@@ -143,7 +143,8 @@
 
         const lista = dados.incidents || [];
 
-        const ativos = lista.filter(inc => 
+        // Estados oficiais ArcGIS
+        const ativos = lista.filter(inc =>
             inc.status.toLowerCase().includes("curso") ||
             inc.status.toLowerCase().includes("resolução") ||
             inc.status.toLowerCase().includes("vigil")
@@ -161,7 +162,9 @@
         } else {
             ativos.forEach(inc => {
                 const icone = tipoIcone(inc.status);
-                const data = inc.date ? new Date(inc.date).toLocaleString("pt-PT") : "Data não disponível";
+                const data = inc.alert_time
+                    ? new Date(inc.alert_time).toLocaleString("pt-PT")
+                    : "Data não disponível";
 
                 htmlAtivos += `
                     <div class="card-inc">
@@ -184,16 +187,18 @@
 
         document.getElementById("ativos").innerHTML = htmlAtivos;
 
-        // Mostrar concluídos (apenas se tiverem dados úteis)
+        // Mostrar concluídos
         let htmlConcluidos = "";
 
         concluidos.forEach(inc => {
             const temMeios = inc.human > 0 || inc.terrestrial > 0 || inc.aerial > 0;
-            const temData = inc.date && !isNaN(Date.parse(inc.date));
+            const temData = inc.alert_time && !isNaN(Date.parse(inc.alert_time));
 
-            if (!temMeios && !temData) return; // esconder lixo
+            if (!temMeios && !temData) return;
 
-            const data = temData ? new Date(inc.date).toLocaleString("pt-PT") : "Data não disponível";
+            const data = temData
+                ? new Date(inc.alert_time).toLocaleString("pt-PT")
+                : "Data não disponível";
 
             htmlConcluidos += `
                 <div class="card-inc">
@@ -225,4 +230,5 @@
 
 </body>
 </html>
+
 
