@@ -160,10 +160,10 @@
             inc.status.toLowerCase().includes("conclus")
         );
 
-        // Mostrar ativos
-        let htmlAtivos = "";
+// Mostrar ativos
+let htmlAtivos = "";
 
-       if (ativos.length === 0) {
+if (ativos.length === 0) {
     htmlAtivos = `
         <p style="opacity:0.8; font-size:16px; margin:20px;">
             Todas as ocorrências ativas são incêndios —
@@ -172,31 +172,31 @@
             </a>.
         </p>
     `;
+} else {
+    ativos.forEach(inc => {
+        const icone = tipoIcone(inc.type);
+        const data = inc.date || "Data não disponível";
+
+        htmlAtivos += `
+            <div class="card-inc">
+                <div class="linha-titulo">${icone} ${inc.type} — ${inc.status}</div>
+                <div class="linha1">
+                    <span>${inc.county}</span>
+                    <span>${inc.parish}</span>
+                    <span>${inc.location}</span>
+                </div>
+                <div class="linha2">
+                    <span>🕒 ${data}</span>
+                    <span>👥 ${inc.human}</span>
+                    <span>🚒 ${inc.terrestrial}</span>
+                    <span>✈️ ${inc.aerial}</span>
+                </div>
+            </div>
+        `;
+    });
 }
 
-        } else {
-            ativos.forEach(inc => {
-                const icone = tipoIcone(inc.type);
-                const data = inc.date || "Data não disponível";
-
-                htmlAtivos += `
-                    <div class="card-inc">
-                        <div class="linha-titulo">${icone} ${inc.type} — ${inc.status}</div>
-                        <div class="linha1">
-                            <span>${inc.county}</span>
-                            <span>${inc.parish}</span>
-                            <span>${inc.location}</span>
-                        </div>
-                        <div class="linha2">
-                            <span>🕒 ${data}</span>
-                            <span>👥 ${inc.human}</span>
-                            <span>🚒 ${inc.terrestrial}</span>
-                            <span>✈️ ${inc.aerial}</span>
-                        </div>
-                    </div>
-                `;
-            });
-        }
+document.getElementById("ativos").innerHTML = htmlAtivos;
 
         document.getElementById("ativos").innerHTML = htmlAtivos;
 
