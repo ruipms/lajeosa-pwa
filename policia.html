@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polícia Judiciária – Região da Guarda</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<style>
+    body {
+        background-color: #0F3D2E;
+        color: white;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        margin-top: 30px;
+        margin-bottom: 10px;
+        color: #D4AF37;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+        background-color: #134C3A;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    a {
+        color: #D4AF37;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    .voltar {
+        display: inline-block;
+        margin-top: 30px;
+        color: #D4AF37;
+        font-size: 18px;
+    }
+
+    .mensagem {
+        font-size: 14px;
+        color: #cccccc;
+    }
+</style>
+</head>
+<body>
+
+<h2>Polícia Judiciária – Região da Guarda</h2>
+
+<h3>Comunicados relevantes</h3>
+<ul id="noticias-pj">
+    <li>A carregar comunicados...</li>
+</ul>
+
+<a class="voltar" href="seguranca.html">← Voltar</a>
+
+<script>
+async function carregarPJFiltrado(maxItems = 10) {
+    const lista = document.getElementById("noticias-pj");
+
+    const locaisGuarda = [
+        "Guarda", "Celorico da Beira", "Gouveia", "Seia", "Pinhel",
+        "Trancoso", "Sabugal", "Almeida", "Manteigas",
+        "Fornos de Algodres", "Figueira de Castelo Rodrigo",
+        "Vila Nova de Foz Côa"
+    ];
+
+    try {
+        const resposta = await fetch("https://www.policiajudiciaria.pt/feed/");
+        const texto = await resposta.text();
+
+        // Extrair <item> manualmente
+        let items = [...texto.matchAll(/<item>([\s\S]*?)<\/item>/g)];
+
+        lista.innerHTML = "";
+        let contador = 0;
+
+        for (const match of items) {
+            if (contador >= maxItems) break;
+
+            const bloco = match[1];
+
+            const tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
+            const titulo = tituloMatch ? tituloMatch[1] : "Sem título";
+
+            const descricaoMatch = bloco.match(/<description>([\s\S]*?)<\/description>/);
+            const descricao = descricaoMatch ? descricaoMatch[1] : "";
+
+            const linkMatch = bloco.match(/<link>([\s\S]*?)<\/link>/);
+            const link = linkMatch ? linkMatch[1] : "#";
+
+            // Verificar se contém algum concelho da Guarda
+            const relevante = locaisGuarda.some(local =>
+                titulo.includes(local) || descricao.includes(local)
+            );
+
+            if (relevante) {
+                const li = document.createElement("li");
+                li.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
+                lista.appendChild(li);
+                contador++;
+            }
+        }
+
+        if (contador === 0) {
+            lista.innerHTML = "<li class='mensagem'>Nenhum comunicado relevante encontrado.</li>";
+        }
+
+    } catch (erro) {
+        lista.innerHTML = "<li class='mensagem'>Erro ao carregar comunicados.</li>";
+    }
+}
+
+carregarPJFiltrado();
+</script>
+
+</body>
+</html>
