@@ -125,7 +125,6 @@
 <script>
     const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=arcgis-beiras";
 
-
     function tipoIcone(status) {
         status = status.toLowerCase();
         if (status.includes("curso")) return "🔥";
@@ -163,9 +162,9 @@
         } else {
             ativos.forEach(inc => {
                 const icone = tipoIcone(inc.status);
-                const data = inc.alert_time
-                    ? new Date(inc.alert_time).toLocaleString("pt-PT")
-                    : "Data não disponível";
+
+                // CORREÇÃO: usar inc.date
+                const data = inc.date || "Data não disponível";
 
                 htmlAtivos += `
                     <div class="card-inc">
@@ -192,14 +191,8 @@
         let htmlConcluidos = "";
 
         concluidos.forEach(inc => {
-            const temMeios = inc.human > 0 || inc.terrestrial > 0 || inc.aerial > 0;
-            const temData = inc.alert_time && !isNaN(Date.parse(inc.alert_time));
 
-            if (!temMeios && !temData) return;
-
-            const data = temData
-                ? new Date(inc.alert_time).toLocaleString("pt-PT")
-                : "Data não disponível";
+            const data = inc.date || "Data não disponível";
 
             htmlConcluidos += `
                 <div class="card-inc">
@@ -231,5 +224,3 @@
 
 </body>
 </html>
-
-
