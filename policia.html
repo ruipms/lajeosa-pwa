@@ -49,17 +49,6 @@
         font-size: 18px;
         font-weight: bold;
         color: #D4AF37;
-        margin-bottom: 8px;
-    }
-
-    .data {
-        font-size: 14px;
-        opacity: 0.8;
-        margin-bottom: 10px;
-    }
-
-    .resumo {
-        font-size: 15px;
         margin-bottom: 12px;
     }
 
@@ -111,7 +100,7 @@
         background-size: 200% 100%;
         animation: shimmer 1.5s infinite;
         border-radius: 10px;
-        height: 90px;
+        height: 70px;
         margin-bottom: 18px;
     }
 
@@ -178,8 +167,6 @@ async function carregarNoticiasPJ() {
             html += `
                 <div class="card">
                     <div class="titulo">${n.titulo}</div>
-                    <div class="data">📅 ${n.data}</div>
-                    <div class="resumo">${n.resumo}...</div>
                     <a class="btn-link" href="${n.link}" target="_blank">Ler notícia completa</a>
                 </div>
             `;
