@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ocorrências — Distrito da Guarda</title>
+    <title>Ocorrências — Beiras e Serra da Estrela</title>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
@@ -106,7 +106,7 @@
 
 <header>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
-    <h1>Ocorrências — Distrito da Guarda</h1>
+    <h1>Ocorrências — Beiras e Serra da Estrela</h1>
     <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
 </header>
 
@@ -123,7 +123,8 @@
 </footer>
 
 <script>
-    const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=arcgis-beiras";
+    // NOVO FEED COMPLETO
+    const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=arcgis-full";
 
     function tipoIcone(tipo) {
         tipo = tipo.toLowerCase();
@@ -132,7 +133,9 @@
         if (tipo.includes("inunda")) return "🌧️";
         if (tipo.includes("socorro") || tipo.includes("assist")) return "🚑";
         if (tipo.includes("risco") || tipo.includes("preven")) return "⚠️";
-        if (tipo.includes("operacionais") || tipo.includes("apoio")) return "🛠️";
+        if (tipo.includes("gás") || tipo.includes("gas")) return "🔥";
+        if (tipo.includes("queda")) return "🌲";
+        if (tipo.includes("apoio")) return "🛠️";
 
         return "📍"; // fallback
     }
@@ -146,57 +149,51 @@
 
         const lista = dados.incidents || [];
 
-        // ❗ Excluir incêndios (Natureza 310x)
-        const ocorrencias = lista.filter(inc => !inc.type.startsWith("310"));
-
         // Separar por estado
-        const ativos = ocorrencias.filter(inc =>
+        const ativos = lista.filter(inc =>
             inc.status.toLowerCase().includes("curso") ||
             inc.status.toLowerCase().includes("resolução") ||
-            inc.status.toLowerCase().includes("vigil")
+            inc.status.toLowerCase().includes("vigil") ||
+            inc.status.toLowerCase().includes("alerta") ||
+            inc.status.toLowerCase().includes("despacho")
         );
 
-        const concluidos = ocorrencias.filter(inc =>
+        const concluidos = lista.filter(inc =>
             inc.status.toLowerCase().includes("conclus")
         );
 
-// Mostrar ativos
-let htmlAtivos = "";
+        // Mostrar ativos
+        let htmlAtivos = "";
 
-if (ativos.length === 0) {
-    htmlAtivos = `
-        <p style="opacity:0.8; font-size:16px; margin:20px;">
-            Todas as ocorrências ativas são incêndios —
-            <a href="incendios.html" style="color:#D4AF37; text-decoration:underline;">
-                consulte a página de incêndios
-            </a>.
-        </p>
-    `;
-} else {
-    ativos.forEach(inc => {
-        const icone = tipoIcone(inc.type);
-        const data = inc.date || "Data não disponível";
+        if (ativos.length === 0) {
+            htmlAtivos = `
+                <p style="opacity:0.8; font-size:16px; margin:20px;">
+                    Não existem ocorrências ativas neste momento.
+                </p>
+            `;
+        } else {
+            ativos.forEach(inc => {
+                const icone = tipoIcone(inc.type);
+                const data = inc.date || "Data não disponível";
 
-        htmlAtivos += `
-            <div class="card-inc">
-                <div class="linha-titulo">${icone} ${inc.type} — ${inc.status}</div>
-                <div class="linha1">
-                    <span>${inc.county}</span>
-                    <span>${inc.parish}</span>
-                    <span>${inc.location}</span>
-                </div>
-                <div class="linha2">
-                    <span>🕒 ${data}</span>
-                    <span>👥 ${inc.human}</span>
-                    <span>🚒 ${inc.terrestrial}</span>
-                    <span>✈️ ${inc.aerial}</span>
-                </div>
-            </div>
-        `;
-    });
-}
-
-document.getElementById("ativos").innerHTML = htmlAtivos;
+                htmlAtivos += `
+                    <div class="card-inc">
+                        <div class="linha-titulo">${icone} ${inc.type} — ${inc.status}</div>
+                        <div class="linha1">
+                            <span>${inc.county || "Concelho desconhecido"}</span>
+                            <span>${inc.parish || "Freguesia desconhecida"}</span>
+                            <span>${inc.location || "Local não indicado"}</span>
+                        </div>
+                        <div class="linha2">
+                            <span>🕒 ${new Date(data).toLocaleString("pt-PT")}</span>
+                            <span>👥 ${inc.human}</span>
+                            <span>🚒 ${inc.terrestrial}</span>
+                            <span>✈️ ${inc.aerial}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
 
         document.getElementById("ativos").innerHTML = htmlAtivos;
 
@@ -211,12 +208,12 @@ document.getElementById("ativos").innerHTML = htmlAtivos;
                 <div class="card-inc">
                     <div class="linha-titulo">🟩 ${icone} ${inc.type} — ${inc.status}</div>
                     <div class="linha1">
-                        <span>${inc.county}</span>
-                        <span>${inc.parish}</span>
-                        <span>${inc.location}</span>
+                        <span>${inc.county || "Concelho desconhecido"}</span>
+                        <span>${inc.parish || "Freguesia desconhecida"}</span>
+                        <span>${inc.location || "Local não indicado"}</span>
                     </div>
                     <div class="linha2">
-                        <span>🕒 ${data}</span>
+                        <span>🕒 ${new Date(data).toLocaleString("pt-PT")}</span>
                         <span>👥 ${inc.human}</span>
                         <span>🚒 ${inc.terrestrial}</span>
                         <span>✈️ ${inc.aerial}</span>
