@@ -5,15 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocorrências — Beiras e Serra da Estrela</title>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-FTEGNRDBJW');
-    </script>
-
     <style>
         body {
             margin: 0;
@@ -123,7 +114,6 @@
 </footer>
 
 <script>
-    // NOVO FEED COMPLETO
     const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=arcgis-full";
 
     function tipoIcone(tipo) {
@@ -137,7 +127,7 @@
         if (tipo.includes("queda")) return "🌲";
         if (tipo.includes("apoio")) return "🛠️";
 
-        return "📍"; // fallback
+        return "📍";
     }
 
     async function carregarOcorrencias() {
@@ -149,13 +139,19 @@
 
         const lista = dados.incidents || [];
 
-        // Separar por estado
+        // ESTADOS ATIVOS CORRIGIDOS
+        const estadosAtivos = [
+            "curso",
+            "resolução",
+            "vigil",
+            "alerta",
+            "despacho",
+            "despacho de 1º alerta",
+            "despacho de 2º alerta"
+        ];
+
         const ativos = lista.filter(inc =>
-            inc.status.toLowerCase().includes("curso") ||
-            inc.status.toLowerCase().includes("resolução") ||
-            inc.status.toLowerCase().includes("vigil") ||
-            inc.status.toLowerCase().includes("alerta") ||
-            inc.status.toLowerCase().includes("despacho")
+            estadosAtivos.some(e => inc.status.toLowerCase().includes(e))
         );
 
         const concluidos = lista.filter(inc =>
@@ -234,5 +230,3 @@
 
 </body>
 </html>
-
-
