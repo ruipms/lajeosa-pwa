@@ -2,199 +2,66 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meteorologia Crítica – Distrito da Guarda</title>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FTEGNRDBJW');
-</script>
-
 <style>
-    body {
-        background-color: #0F3D2E;
-        color: white;
-        font-family: Arial, sans-serif;
-        padding: 20px;
-    }
-
-    h1 {
-        color: #D4AF37;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .mensagem {
-        font-size: 16px;
-        opacity: 0.9;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .card {
-        background-color: #134C3A;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 18px;
-        opacity: 0;
-        transform: translateY(10px);
-        animation: fadeIn 0.4s forwards;
-    }
-
-    @keyframes fadeIn {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .titulo {
-        font-size: 18px;
-        font-weight: bold;
-        color: #D4AF37;
-        margin-bottom: 12px;
-    }
-
-    .valor {
-        font-size: 16px;
-        margin-bottom: 6px;
-    }
-
-    .aviso {
-        padding: 10px;
-        border-radius: 8px;
-        margin-top: 10px;
-        font-weight: bold;
-        text-align: center;
-    }
-
-    .aviso-verde { background-color: #1f6f4a; }
-    .aviso-amarelo { background-color: #c9a400; }
-    .aviso-laranja { background-color: #d97900; }
-    .aviso-vermelho { background-color: #b30000; }
-
-    .voltar {
-        display: inline-block;
-        margin-top: 30px;
-        color: #D4AF37;
-        font-size: 18px;
-        text-decoration: none;
-    }
-
-    footer {
-        margin-top: 40px;
-        text-align: center;
-        opacity: 0.7;
-        font-size: 14px;
-    }
-
-    /* ⭐ Skeleton */
-    .skeleton {
-        background: linear-gradient(90deg, #134C3A 25%, #1a5a47 50%, #134C3A 75%);
-        background-size: 200% 100%;
-        animation: shimmer 1.5s infinite;
-        border-radius: 10px;
-        height: 90px;
-        margin-bottom: 18px;
-    }
-
-    @keyframes shimmer {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
-    }
+  body {
+    background: #0b2e1f;
+    color: #f2d96b;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  .card {
+    background: #13452c;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+  }
+  .verde { border-left: 10px solid #4caf50; }
+  .amarelo { border-left: 10px solid #f7e600; }
+  .laranja { border-left: 10px solid #ff9800; }
+  .vermelho { border-left: 10px solid #f44336; }
 </style>
 </head>
 <body>
 
-<h1>Meteorologia Crítica – Distrito da Guarda</h1>
+<h2>Meteorologia Crítica – Distrito da Guarda</h2>
 
-<!-- ⭐ Mensagem de espera -->
-<p id="msg-aguarde" class="mensagem">
-    A carregar meteorologia crítica… aguarde um pouco.
-</p>
-
-<div id="meteo">
-    <!-- Skeletons aparecem aqui -->
+<div id="alerta" class="card verde">
+  <h3 id="tipo">A carregar aviso...</h3>
+  <p id="validade"></p>
 </div>
 
-<a class="voltar" href="seguranca.html">← Voltar</a>
-
-<footer>
-    2026 Lajeosa do Mondego — ©RMS
-</footer>
-
-<!-- ⭐ SCRIPT NO FIM -->
 <script>
 const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=meteo-guarda";
 
-/* ⭐ Mostrar skeletons imediatamente */
-function mostrarSkeletons() {
-    const caixa = document.getElementById("meteo");
-    caixa.innerHTML = "";
-    for (let i = 0; i < 4; i++) {
-        caixa.innerHTML += `<div class="skeleton"></div>`;
+async function carregarAviso() {
+  try {
+    const resp = await fetch(WORKER_URL);
+    const dados = await resp.json();
+
+    const card = document.getElementById("alerta");
+    const tipo = document.getElementById("tipo");
+    const validade = document.getElementById("validade");
+
+    if (!dados.aviso) {
+      tipo.textContent = "Sem avisos meteorológicos para o distrito da Guarda.";
+      validade.textContent = "";
+      card.className = "card verde";
+      return;
     }
+
+    tipo.textContent = dados.aviso;
+    validade.textContent = dados.validade || "";
+    card.className = "card " + dados.avisoCor;
+
+  } catch (e) {
+    document.getElementById("tipo").textContent = "Erro ao carregar meteorologia crítica.";
+  }
 }
 
-async function carregarMeteo() {
-    const caixa = document.getElementById("meteo");
-    const msg = document.getElementById("msg-aguarde");
-
-    msg.style.display = "block";
-    mostrarSkeletons();
-
-    try {
-        const resposta = await fetch(WORKER_URL);
-        const dados = await resposta.json();
-
-        msg.style.display = "none";
-
-        let html = `
-            <div class="card">
-                <div class="titulo">Temperatura</div>
-                <div class="valor">${dados.temp} ºC</div>
-            </div>
-
-            <div class="card">
-                <div class="titulo">Vento</div>
-                <div class="valor">${dados.ventoVel} km/h (${dados.ventoDir})</div>
-            </div>
-
-            <div class="card">
-                <div class="titulo">Humidade</div>
-                <div class="valor">${dados.humidade}%</div>
-            </div>
-
-            <div class="card">
-                <div class="titulo">Precipitação</div>
-                <div class="valor">${dados.precipitacao} mm</div>
-            </div>
-        `;
-
-        if (dados.aviso) {
-            html += `
-                <div class="card aviso aviso-${dados.avisoCor}">
-                    ${dados.aviso}
-                </div>
-            `;
-        }
-
-        caixa.innerHTML = html;
-
-    } catch (e) {
-        msg.style.display = "none";
-        caixa.innerHTML = `
-            <p class="mensagem">Erro ao carregar meteorologia crítica.</p>
-        `;
-    }
-}
-
-carregarMeteo();
+carregarAviso();
 </script>
 
 </body>
 </html>
+
