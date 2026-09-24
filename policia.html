@@ -33,6 +33,16 @@
         padding: 15px;
         border-radius: 10px;
         margin-bottom: 18px;
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeIn 0.4s forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 
     .titulo {
@@ -94,6 +104,21 @@
         font-size: 15px;
         opacity: 0.9;
     }
+
+    /* ⭐ SKELETON SIMPLES */
+    .skeleton {
+        background: linear-gradient(90deg, #134C3A 25%, #1a5a47 50%, #134C3A 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 10px;
+        height: 90px;
+        margin-bottom: 18px;
+    }
+
+    @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
 </style>
 </head>
 <body>
@@ -101,13 +126,13 @@
 <h1>Polícia Judiciária – Região da Guarda</h1>
 
 <div id="lista-pj">
-    <p class="mensagem">A carregar notícias...</p>
+    <!-- Skeletons aparecem aqui -->
 </div>
 
 <div class="pj-final">
     Para informação mais completa, consulte a página da Polícia Judiciária.<br>
     <a href="https://www.policiajudiciaria.pt" target="_blank" style="color:#D4AF37;">
-        www.policiajudiciaria.pt
+        www.policiajudiaria.pt
     </a>
 </div>
 
@@ -120,8 +145,19 @@
 <script>
 const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=pj-guarda";
 
+/* ⭐ Mostrar skeletons imediatamente */
+function mostrarSkeletons() {
+    const caixa = document.getElementById("lista-pj");
+    caixa.innerHTML = "";
+    for (let i = 0; i < 5; i++) {
+        caixa.innerHTML += `<div class="skeleton"></div>`;
+    }
+}
+
 async function carregarNoticiasPJ() {
     const caixa = document.getElementById("lista-pj");
+
+    mostrarSkeletons(); // ⭐ aparece logo
 
     try {
         const resposta = await fetch(WORKER_URL);
@@ -163,3 +199,4 @@ carregarNoticiasPJ();
 
 </body>
 </html>
+
