@@ -65,6 +65,34 @@
         font-size: 14px;
         color: #cccccc;
     }
+
+    /* Cartão extra */
+    .cartao-extra {
+        background-color: #134C3A;
+        padding: 15px;
+        border-radius: 8px;
+        margin-top: 30px;
+    }
+
+    .cartao-extra h3 {
+        margin-top: 0;
+        color: #D4AF37;
+    }
+
+    .botao-pj {
+        display: inline-block;
+        margin-top: 10px;
+        background-color: #D4AF37;
+        color: #0F3D2E;
+        padding: 10px 15px;
+        border-radius: 6px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .botao-pj:hover {
+        background-color: #c09a2f;
+    }
 </style>
 </head>
 <body>
@@ -75,6 +103,15 @@
 <ul id="noticias-pj">
     <li>A carregar comunicados...</li>
 </ul>
+
+<!-- Cartão extra para abrir notícias da Guarda na PJ -->
+<div class="cartao-extra">
+    <h3>Notícias da PJ sobre a Guarda</h3>
+    <p>Estas notícias não aparecem no RSS, mas podem ser consultadas na página oficial da Polícia Judiciária.</p>
+    <a class="botao-pj" href="https://www.policiajudiciaria.pt/?s=guarda" target="_blank">
+        Abrir página da PJ
+    </a>
+</div>
 
 <a class="voltar" href="seguranca.html">← Voltar</a>
 
@@ -87,14 +124,12 @@ async function carregarPJFiltrado(maxItems = 10) {
         "Almeida","Manteigas","Fornos de Algodres","Figueira de Castelo Rodrigo",
         "Vila Nova de Foz Côa",
 
-        // Freguesias e localidades
         "Lajeosa do Mondego","Vale de Estrela","Videmonte","Meios","Ramela",
         "Panoias de Cima","Panoias de Baixo","Aldeia Viçosa","Faia","Fernão Joanes",
         "Jarmelo","Corujeira","Casal de Cinza","Marmeleiro","Arrifana","Benespera",
         "Codesseiro","Galegos","Joanes","Porto da Carne","Rochoso","Santana da Azinha",
         "Sobral da Serra","Vila Garcia",
 
-        // Região
         "Beiras","Serra da Estrela","Interior Norte","Interior Centro",
         "Beiras e Serra da Estrela","Distrito da Guarda"
     ];
@@ -131,7 +166,6 @@ async function carregarPJFiltrado(maxItems = 10) {
             }
         }
 
-        // Mostrar comunicados da Guarda
         if (relevantes.length > 0) {
             relevantes.slice(0, maxItems).forEach(item => {
                 const li = document.createElement("li");
@@ -141,7 +175,6 @@ async function carregarPJFiltrado(maxItems = 10) {
             return;
         }
 
-        // Modo híbrido: mostrar 3 comunicados nacionais
         lista.innerHTML = "<li class='mensagem'>Nenhum comunicado da região encontrado. Aqui ficam os mais recentes:</li>";
 
         items.slice(0, 3).forEach(match => {
@@ -168,4 +201,5 @@ carregarPJFiltrado();
 
 </body>
 </html>
+
 
