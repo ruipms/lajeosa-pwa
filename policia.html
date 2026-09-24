@@ -89,11 +89,12 @@ async function carregarPJFiltrado(maxItems = 10) {
         "Vila Nova de Foz Côa"
     ];
 
+    const worker = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=";
+
     try {
-        const resposta = await fetch("https://www.policiajudiciaria.pt/feed/");
+        const resposta = await fetch(worker + "pj");
         const texto = await resposta.text();
 
-        // Extrair <item> manualmente
         let items = [...texto.matchAll(/<item>([\s\S]*?)<\/item>/g)];
 
         lista.innerHTML = "";
@@ -108,12 +109,11 @@ async function carregarPJFiltrado(maxItems = 10) {
             const titulo = tituloMatch ? tituloMatch[1] : "Sem título";
 
             const descricaoMatch = bloco.match(/<description>([\s\S]*?)<\/description>/);
-            const descricao = descricaoMatch ? descricaoMatch[1] : "";
+            const descricao = descricaoMatch ? descricaoMatch[1].replace(/<[^>]+>/g, "") : "";
 
             const linkMatch = bloco.match(/<link>([\s\S]*?)<\/link>/);
             const link = linkMatch ? linkMatch[1] : "#";
 
-            // Verificar se contém algum concelho da Guarda
             const relevante = locaisGuarda.some(local =>
                 titulo.includes(local) || descricao.includes(local)
             );
