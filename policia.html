@@ -83,10 +83,20 @@ async function carregarPJFiltrado(maxItems = 10) {
     const lista = document.getElementById("noticias-pj");
 
     const locaisGuarda = [
-        "Guarda", "Celorico da Beira", "Gouveia", "Seia", "Pinhel",
-        "Trancoso", "Sabugal", "Almeida", "Manteigas",
-        "Fornos de Algodres", "Figueira de Castelo Rodrigo",
-        "Vila Nova de Foz Côa"
+        "Guarda","Celorico da Beira","Gouveia","Seia","Pinhel","Trancoso","Sabugal",
+        "Almeida","Manteigas","Fornos de Algodres","Figueira de Castelo Rodrigo",
+        "Vila Nova de Foz Côa",
+
+        // Freguesias e localidades
+        "Lajeosa do Mondego","Vale de Estrela","Videmonte","Meios","Ramela",
+        "Panoias de Cima","Panoias de Baixo","Aldeia Viçosa","Faia","Fernão Joanes",
+        "Jarmelo","Corujeira","Casal de Cinza","Marmeleiro","Arrifana","Benespera",
+        "Codesseiro","Galegos","Joanes","Porto da Carne","Rochoso","Santana da Azinha",
+        "Sobral da Serra","Vila Garcia",
+
+        // Região
+        "Beiras","Serra da Estrela","Interior Norte","Interior Centro",
+        "Beiras e Serra da Estrela","Distrito da Guarda"
     ];
 
     const worker = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=";
@@ -98,11 +108,9 @@ async function carregarPJFiltrado(maxItems = 10) {
         let items = [...texto.matchAll(/<item>([\s\S]*?)<\/item>/g)];
 
         lista.innerHTML = "";
-        let contador = 0;
+        let relevantes = [];
 
         for (const match of items) {
-            if (contador >= maxItems) break;
-
             const bloco = match[1];
 
             const tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
@@ -119,16 +127,36 @@ async function carregarPJFiltrado(maxItems = 10) {
             );
 
             if (relevante) {
-                const li = document.createElement("li");
-                li.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
-                lista.appendChild(li);
-                contador++;
+                relevantes.push({ titulo, link });
             }
         }
 
-        if (contador === 0) {
-            lista.innerHTML = "<li class='mensagem'>Nenhum comunicado relevante encontrado.</li>";
+        // Mostrar comunicados da Guarda
+        if (relevantes.length > 0) {
+            relevantes.slice(0, maxItems).forEach(item => {
+                const li = document.createElement("li");
+                li.innerHTML = `<a href="${item.link}" target="_blank">${item.titulo}</a>`;
+                lista.appendChild(li);
+            });
+            return;
         }
+
+        // Modo híbrido: mostrar 3 comunicados nacionais
+        lista.innerHTML = "<li class='mensagem'>Nenhum comunicado da região encontrado. Aqui ficam os mais recentes:</li>";
+
+        items.slice(0, 3).forEach(match => {
+            const bloco = match[1];
+
+            const tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
+            const titulo = tituloMatch ? tituloMatch[1] : "Sem título";
+
+            const linkMatch = bloco.match(/<link>([\s\S]*?)<\/link>/);
+            const link = linkMatch ? linkMatch[1] : "#";
+
+            const li = document.createElement("li");
+            li.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
+            lista.appendChild(li);
+        });
 
     } catch (erro) {
         lista.innerHTML = "<li class='mensagem'>Erro ao carregar comunicados.</li>";
@@ -140,3 +168,4 @@ carregarPJFiltrado();
 
 </body>
 </html>
+
