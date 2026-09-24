@@ -76,8 +76,9 @@
 
     .mensagem {
         font-size: 16px;
-        opacity: 0.8;
+        opacity: 0.9;
         margin-top: 10px;
+        text-align: center;
     }
 
     footer {
@@ -114,6 +115,11 @@
 
 <h1>Polícia Judiciária – Região da Guarda</h1>
 
+<!-- ⭐ Mensagem de espera -->
+<p id="msg-aguarde" class="mensagem">
+    A carregar notícias da Polícia Judiciária… aguarde um pouco.
+</p>
+
 <div id="lista-pj">
     <!-- Skeletons aparecem aqui -->
 </div>
@@ -145,14 +151,20 @@ function mostrarSkeletons() {
 
 async function carregarNoticiasPJ() {
     const caixa = document.getElementById("lista-pj");
+    const msg = document.getElementById("msg-aguarde");
 
-    mostrarSkeletons(); // ⭐ aparece logo
+    // ⭐ Mostrar mensagem + skeletons
+    msg.style.display = "block";
+    mostrarSkeletons();
 
     try {
         const resposta = await fetch(WORKER_URL);
         const dados = await resposta.json();
 
         const lista = dados.items || [];
+
+        // ⭐ Esconder mensagem quando terminar
+        msg.style.display = "none";
 
         if (lista.length === 0) {
             caixa.innerHTML = `
@@ -175,6 +187,7 @@ async function carregarNoticiasPJ() {
         caixa.innerHTML = html;
 
     } catch (e) {
+        msg.style.display = "none";
         caixa.innerHTML = `
             <p class="mensagem">Erro ao carregar notícias da Polícia Judiciária.</p>
         `;
@@ -186,4 +199,3 @@ carregarNoticiasPJ();
 
 </body>
 </html>
-
