@@ -154,16 +154,20 @@
             inc.status.toLowerCase().includes("conclus")
         );
 
-        // Mostrar ativos
+        // ============================
+        // 🔥 INCÊNDIOS ATIVOS
+        // ============================
         let htmlAtivos = "";
 
         if (ativos.length === 0) {
-            htmlAtivos = `<p style="opacity:0.8; font-size:16px;">Não há incêndios ativos no distrito da Guarda.</p>`;
+            htmlAtivos = `
+                <p style="opacity:0.8; font-size:16px; margin-top:10px;">
+                    Não há incêndios ativos no distrito da Guarda neste momento.
+                </p>
+            `;
         } else {
             ativos.forEach(inc => {
                 const icone = tipoIcone(inc.status);
-
-                // CORREÇÃO: usar inc.date
                 const data = inc.date || "Data não disponível";
 
                 htmlAtivos += `
@@ -187,30 +191,39 @@
 
         document.getElementById("ativos").innerHTML = htmlAtivos;
 
-        // Mostrar concluídos
+        // ============================
+        // 🔥 INCÊNDIOS CONCLUÍDOS
+        // ============================
         let htmlConcluidos = "";
 
-        concluidos.forEach(inc => {
-
-            const data = inc.date || "Data não disponível";
-
-            htmlConcluidos += `
-                <div class="card-inc">
-                    <div class="linha-titulo">🟩 ${inc.status}</div>
-                    <div class="linha1">
-                        <span>${inc.county}</span>
-                        <span>${inc.parish}</span>
-                        <span>${inc.location}</span>
-                    </div>
-                    <div class="linha2">
-                        <span>🕒 ${data}</span>
-                        <span>👥 ${inc.human}</span>
-                        <span>🚒 ${inc.terrestrial}</span>
-                        <span>✈️ ${inc.aerial}</span>
-                    </div>
-                </div>
+        if (concluidos.length === 0) {
+            htmlConcluidos = `
+                <p style="opacity:0.8; font-size:16px; margin-top:10px;">
+                    Não há incêndios concluídos recentes no distrito da Guarda.
+                </p>
             `;
-        });
+        } else {
+            concluidos.forEach(inc => {
+                const data = inc.date || "Data não disponível";
+
+                htmlConcluidos += `
+                    <div class="card-inc">
+                        <div class="linha-titulo">🟩 ${inc.status}</div>
+                        <div class="linha1">
+                            <span>${inc.county}</span>
+                            <span>${inc.parish}</span>
+                            <span>${inc.location}</span>
+                        </div>
+                        <div class="linha2">
+                            <span>🕒 ${data}</span>
+                            <span>👥 ${inc.human}</span>
+                            <span>🚒 ${inc.terrestrial}</span>
+                            <span>✈️ ${inc.aerial}</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
 
         document.getElementById("concluidos").innerHTML = htmlConcluidos;
     }
@@ -224,3 +237,4 @@
 
 </body>
 </html>
+
