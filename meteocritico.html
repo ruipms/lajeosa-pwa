@@ -43,12 +43,22 @@ async function carregarAviso() {
     const tipo = document.getElementById("tipo");
     const validade = document.getElementById("validade");
 
-    if (!dados.aviso) {
-      tipo.textContent = "Sem avisos meteorológicos para o distrito da Guarda.";
-      validade.textContent = "";
-      card.className = "card verde";
-      return;
-    }
+   if (!dados.aviso) {
+  card.className = "card verde";
+
+  tipo.innerHTML = `
+    🌤️ Sem avisos meteorológicos para o distrito da Guarda.
+  `;
+
+  validade.innerHTML = `
+    <a href="meteorologia.html" style="color:#D4AF37; text-decoration:none;">
+      Ver previsão normal →
+    </a>
+  `;
+
+  return;
+}
+
 
     tipo.textContent = dados.aviso;
     validade.textContent = dados.validade || "";
