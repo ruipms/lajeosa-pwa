@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Associação Juvenil Lageosense</title>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FTEGNRDBJW');
+    </script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0F3D2E;
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        header button {
+            background-color: #1F5C45;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 18px;
+            color: #D4AF37;
+            font-size: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        header button:hover {
+            background-color: #2a7a5e;
+        }
+
+        h1 {
+            margin-top: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #D4AF37;
+        }
+
+        .accordion {
+            background-color: #1F5C45;
+            margin: 16px 20px;
+            border-radius: 18px;
+            padding: 0;
+            text-align: left;
+        }
+
+        .accordion-header {
+            padding: 18px;
+            font-size: 18px;
+            color: #D4AF37;
+            cursor: pointer;
+        }
+
+        .accordion-header:hover {
+            background-color: #2a7a5e;
+        }
+
+        .accordion-content {
+            padding: 0 18px 18px 18px;
+            display: none;
+            font-size: 15px;
+            line-height: 1.5;
+            color: white;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        .quote {
+            font-style: italic;
+            border-left: 3px solid #D4AF37;
+            padding-left: 10px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        a {
+            color: #D4AF37;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            content.style.display = content.style.display === "block" ? "none" : "block";
+        }
+    </script>
+</head>
+
+<body>
+
+<header>
+    <button onclick="window.location.href='associacoes.html'">← Voltar</button>
+    <h1>Associação Juvenil Lageosense</h1>
+</header>
+
+<!-- Quem Somos -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion('sec1')">
+        Quem Somos
+    </div>
+    <div class="accordion-content" id="sec1">
+        <p>
+            A <strong>Associação Juvenil Lageosense</strong> é uma entidade comunitária dedicada à dinamização
+            de atividades culturais, recreativas e formativas para os jovens da Lajeosa do Mondego.
+        </p>
+        <p>
+            A associação promove iniciativas que fortalecem o espírito de união, participação e desenvolvimento
+            local, incentivando a criatividade, a responsabilidade e o envolvimento dos jovens na comunidade.
+        </p>
+
+        <div class="quote">
+            “A juventude é o motor da comunidade — quando participa, a aldeia cresce.”
+        </div>
+    </div>
+</div>
+
+<!-- História -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion('sec2')">
+        História da Associação
+    </div>
+    <div class="accordion-content" id="sec2">
+        <p>A Associação Juvenil Lageosense foi criada com o objetivo de dar voz e espaço aos jovens da aldeia.</p>
+        <p>Ao longo dos anos, tem dinamizado atividades culturais, desportivas e sociais, reforçando o papel da juventude na vida comunitária.</p>
+        <p>Continua ativa e presente na aldeia, mantendo ligação com outras instituições locais.</p>
+    </div>
+</div>
+
+<!-- Atividades -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion('sec3')">
+        Atividades
+    </div>
+    <div class="accordion-content" id="sec3">
+        <ul>
+            <li>Eventos culturais e recreativos</li>
+            <li>Atividades para jovens e adolescentes</li>
+            <li>Colaboração com instituições locais</li>
+            <li>Promoção de iniciativas comunitárias</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Facebook -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion('secFB')">
+        Página no Facebook
+    </div>
+    <div class="accordion-content" id="secFB">
+        <p>Segue a associação nas redes sociais:</p>
+        <p>
+            👉 <a href="https://www.facebook.com/share/18mqeSFVEs/" target="_blank">
+                Página Oficial no Facebook
+            </a>
+        </p>
+    </div>
+</div>
+
+<!-- Contactos -->
+<div class="accordion">
+    <div class="accordion-header" onclick="toggleAccordion('sec5')">
+        Contactos
+    </div>
+    <div class="accordion-content" id="sec5">
+        <p><strong>Associação Juvenil Lageosense</strong></p>
+        <p>Rua do Freixo nº 1</p>
+        <p>6360-508 Lageosa do Mondego</p>
+        <p>📞 (contacto não disponível publicamente)</p>
+        <p>📧 (email não disponível publicamente)</p>
+    </div>
+</div>
+
+</body>
+</html>
