@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trânsito A25 – Lajeosa</title>
+
+<!-- Google tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #0F3D2E;
+        color: white;
+        text-align: center;
+        padding-bottom: 40px;
+    }
+
+    header {
+        padding: 20px;
+    }
+
+    header img {
+        width: 120px;
+    }
+
+    h1 {
+        margin-top: 10px;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .sec-title {
+        color: #D4AF37;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .card {
+        background-color: #1F5C45;
+        padding: 18px;
+        border-radius: 18px;
+        margin: 16px 20px;
+        text-align: left;
+        border: 1px solid rgba(212,175,55,0.4);
+    }
+
+    .card i {
+        font-size: 32px;
+        color: #D4AF37;
+        margin-right: 10px;
+    }
+
+    .status-title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 6px;
+    }
+
+    .status-desc {
+        font-size: 15px;
+        margin-top: 10px;
+        line-height: 1.4;
+    }
+
+    .incident {
+        background-color: #144d3a;
+        padding: 12px;
+        border-radius: 14px;
+        margin-top: 12px;
+        border: 1px solid rgba(212,175,55,0.3);
+    }
+
+    .incident strong {
+        color: #D4AF37;
+    }
+
+    .btn {
+        display: block;
+        margin: 14px auto;
+        width: 80%;
+        padding: 12px;
+        border-radius: 18px;
+        background-color: #1F5C45;
+        border: 1px solid #D4AF37;
+        color: #D4AF37;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        background-color: #2a7a5e;
+    }
+
+    .error-box {
+        background-color: #8B0000;
+        padding: 16px;
+        border-radius: 18px;
+        margin: 20px;
+        border: 1px solid #D4AF37;
+        font-size: 15px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa">
+    <h1>Trânsito na A25</h1>
+    <p style="color:#D4AF37; font-size:14px;">Fonte: transitoagora.pt</p>
+</header>
+
+<h2 class="sec-title">Estado Atual</h2>
+
+<div id="conteudo"></div>
+
+<a class="btn" href="seguranca.html">⬅ Voltar à página Segurança</a>
+
+<script>
+const WORKER_URL = "https://SEU-WORKER.workers.dev/?feed=transito-a25";
+
+async function carregarTransito() {
+    const div = document.getElementById("conteudo");
+
+    try {
+        const resp = await fetch(WORKER_URL, { cache: "no-store" });
+        const data = await resp.json();
+
+        if (data.erro || !resp.ok) {
+            div.innerHTML = `
+                <div class="error-box">
+                    Não foi possível carregar o estado do trânsito.<br>
+                    Tente novamente dentro de alguns minutos.
+                </div>`;
+            return;
+        }
+
+        let html = `
+            <div class="card">
+                <div class="status-title">
+                    <i class="fa-solid fa-road"></i>
+                    ${data.estado}
+                </div>
+
+                <div class="status-desc">
+                    ${data.resumo || "Sem informação adicional disponível."}
+                </div>
+        `;
+
+        if (data.incidentes.length > 0) {
+            html += `<h3 style="color:#D4AF37; margin-top:18px;">Ocorrências na A25</h3>`;
+
+            data.incidentes.forEach(inc => {
+                html += `
+                    <div class="incident">
+                        <strong>${inc.tipo}</strong><br>
+                        ${inc.local ? "Local: " + inc.local + "<br>" : ""}
+                        ${inc.hora ? "Atualizado: " + inc.hora : ""}
+                    </div>
+                `;
+            });
+        } else {
+            html += `
+                <div class="incident">
+                    Sem ocorrências registadas neste momento.
+                </div>
+            `;
+        }
+
+        html += `</div>`;
+        div.innerHTML = html;
+
+    } catch (e) {
+        div.innerHTML = `
+            <div class="error-box">
+                Erro ao contactar o serviço de trânsito.<br>
+                Verifique a ligação à internet.
+            </div>`;
+    }
+}
+
+carregarTransito();
+</script>
+
+</body>
+</html>
