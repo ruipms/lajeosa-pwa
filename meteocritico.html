@@ -106,15 +106,15 @@
 <header>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa">
     <h1>Meteorologia Crítica</h1>
-    <p style="color:#D4AF37; font-size:14px;">Fonte: avisos.pt – Distrito da Guarda</p>
+    <p style="color:#D4AF37; font-size:14px;">Fonte: IPMA – Avisos Oficiais</p>
 </header>
 
 <h2 class="sec-title">Estado Atual</h2>
 
 <div id="conteudo"></div>
 
-<a class="btn" href="https://avisos.pt/distrito/guarda" target="_blank">
-    Ver detalhes em avisos.pt
+<a class="btn" href="https://www.ipma.pt/pt/otempo/prev-simples/" target="_blank">
+    Ver detalhes no IPMA
 </a>
 
 <a class="btn" href="meteorologia.html">
@@ -122,7 +122,7 @@
 </a>
 
 <script>
-const WORKER_URL = "https://SEU-WORKER.workers.dev/?feed=meteo-guarda";
+const WORKER_URL = "https://SEU-WORKER.workers.dev/?feed=meteo-ipma";
 
 async function carregarAvisos() {
     const div = document.getElementById("conteudo");
@@ -131,7 +131,7 @@ async function carregarAvisos() {
         const resp = await fetch(WORKER_URL, { cache: "no-store" });
         const data = await resp.json();
 
-        if (data.erro || !resp.ok) {
+        if (data.error || !resp.ok) {
             div.innerHTML = `
                 <div class="error-box">
                     Não foi possível carregar os avisos meteorológicos.<br>
@@ -141,29 +141,40 @@ async function carregarAvisos() {
         }
 
         const aviso = data.aviso;
-        const cor = data.avisoCor || "verde";
+        const cor = data.cor || "verde";
         const desc = data.descricao || "Sem descrição disponível.";
-        const validade = data.validade || "Sem validade indicada.";
+        const inicio = data.inicio || "Sem início indicado.";
+        const fim = data.fim || "Sem fim indicado.";
 
+        // Ícones por nível IPMA
         let icone = "fa-check-circle";
-        if (cor === "amarelo") icone = "fa-triangle-exclamation";
-        if (cor === "laranja") icone = "fa-exclamation-circle";
-        if (cor === "vermelho") icone = "fa-skull-crossbones";
+        if (cor === "yellow") icone = "fa-triangle-exclamation";
+        if (cor === "orange") icone = "fa-exclamation-circle";
+        if (cor === "red") icone = "fa-skull-crossbones";
+
+        // Converter nomes IPMA para PT
+        const corPT =
+            cor === "yellow" ? "Amarelo" :
+            cor === "orange" ? "Laranja" :
+            cor === "red" ? "Vermelho" : "Verde";
 
         div.innerHTML = `
             <div class="card">
                 <div class="status-title">
                     <i class="fa-solid ${icone}"></i>
-                    ${aviso ? aviso : "Sem avisos ativos"}
+                    ${aviso !== "Nenhum" ? `${aviso} – ${corPT}` : "Sem avisos ativos"}
                 </div>
 
                 <div class="status-desc">
-                    ${aviso ? desc : "Neste momento não existem avisos meteorológicos ativos para o distrito da Guarda."}
+                    ${aviso !== "Nenhum" ? desc : "Neste momento não existem avisos meteorológicos ativos para o distrito da Guarda."}
                 </div>
 
                 <div class="status-meta">
-                    <strong>Validade:</strong> ${validade}<br>
-                    <strong>Atualizado:</strong> ${new Date(data.updated).toLocaleString("pt-PT")}
+                    ${aviso !== "Nenhum" ? `
+                        <strong>Início:</strong> ${inicio}<br>
+                        <strong>Fim:</strong> ${fim}<br>
+                    ` : ""}
+                    <strong>Atualizado:</strong> ${new Date().toLocaleString("pt-PT")}
                 </div>
             </div>
         `;
@@ -181,5 +192,3 @@ carregarAvisos();
 
 </body>
 </html>
-
-
