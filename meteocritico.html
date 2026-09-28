@@ -1,417 +1,185 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <title>Meteorologia Crítica – Lajeosa</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    :root {
-      --verde: #1b5e20;
-      --verde-claro: #2e7d32;
-      --dourado: #c9a23f;
-      --cinza-fundo: #121212;
-      --cinza-card: #1e1e1e;
-      --texto: #f5f5f5;
-      --perigo-amarelo: #fbc02d;
-      --perigo-laranja: #fb8c00;
-      --perigo-vermelho: #e53935;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meteorologia Crítica – Lajeosa</title>
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+<style>
     body {
-      background: radial-gradient(circle at top, #263238 0, #0b0b0b 55%);
-      color: var(--texto);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #0F3D2E;
+        color: white;
+        text-align: center;
+        padding-bottom: 40px;
     }
 
-    .page {
-      max-width: 480px;
-      width: 100%;
-      background: linear-gradient(145deg, #101010, #181818);
-      border-radius: 18px;
-      border: 1px solid rgba(201, 162, 63, 0.35);
-      box-shadow:
-        0 18px 40px rgba(0, 0, 0, 0.75),
-        0 0 0 1px rgba(255, 255, 255, 0.02);
-      padding: 18px 18px 20px;
+    header {
+        padding: 20px;
     }
 
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
+    header img {
+        width: 120px;
     }
 
-    .title-block {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    h1 {
+        margin-top: 10px;
+        font-size: 24px;
+        font-weight: bold;
     }
 
-    .app-name {
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(201, 162, 63, 0.9);
+    .sec-title {
+        color: #D4AF37;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+        margin-bottom: 10px;
     }
 
-    .page-title {
-      font-size: 20px;
-      font-weight: 600;
-      color: #ffffff;
+    .card {
+        background-color: #1F5C45;
+        padding: 18px;
+        border-radius: 18px;
+        margin: 16px 20px;
+        text-align: left;
+        border: 1px solid rgba(212,175,55,0.4);
     }
 
-    .badge {
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(201, 162, 63, 0.5);
-      font-size: 11px;
-      color: rgba(245, 245, 245, 0.85);
-      background: radial-gradient(circle at top, rgba(201, 162, 63, 0.25), rgba(0, 0, 0, 0.8));
-    }
-
-    .status-card {
-      border-radius: 14px;
-      padding: 14px 14px 12px;
-      margin-bottom: 12px;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.04);
-    }
-
-    .status-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      opacity: 0.18;
-      pointer-events: none;
-    }
-
-    .status-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-bottom: 6px;
+    .card i {
+        font-size: 32px;
+        color: #D4AF37;
+        margin-right: 10px;
     }
 
     .status-title {
-      font-size: 15px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 6px;
     }
 
-    .status-pill {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      background: rgba(0, 0, 0, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+    .status-desc {
+        font-size: 15px;
+        margin-top: 10px;
+        line-height: 1.4;
     }
 
-    .status-icon {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      background: rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+    .status-meta {
+        margin-top: 12px;
+        font-size: 13px;
+        opacity: 0.9;
     }
 
-    .status-text {
-      font-size: 13px;
-      line-height: 1.4;
-      color: rgba(245, 245, 245, 0.9);
+    .btn {
+        display: block;
+        margin: 14px auto;
+        width: 80%;
+        padding: 12px;
+        border-radius: 18px;
+        background-color: #1F5C45;
+        border: 1px solid #D4AF37;
+        color: #D4AF37;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
     }
 
-    .meta-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 8px;
-      font-size: 11px;
-      color: rgba(220, 220, 220, 0.8);
+    .btn:hover {
+        background-color: #2a7a5e;
     }
 
-    .meta-row span {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+    .error-box {
+        background-color: #8B0000;
+        padding: 16px;
+        border-radius: 18px;
+        margin: 20px;
+        border: 1px solid #D4AF37;
+        font-size: 15px;
     }
-
-    .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(245, 245, 245, 0.7);
-    }
-
-    .link-block {
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      font-size: 12px;
-    }
-
-    .link-btn {
-      flex: 1;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(201, 162, 63, 0.5);
-      background: radial-gradient(circle at top, rgba(201, 162, 63, 0.25), rgba(0, 0, 0, 0.9));
-      color: rgba(245, 245, 245, 0.95);
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .link-btn.secondary {
-      border-color: rgba(255, 255, 255, 0.12);
-      background: rgba(0, 0, 0, 0.4);
-      color: rgba(230, 230, 230, 0.9);
-    }
-
-    .footer-note {
-      margin-top: 12px;
-      font-size: 10px;
-      color: rgba(200, 200, 200, 0.7);
-      display: flex;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .footer-note span {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .severity-verde {
-      background: linear-gradient(135deg, #1b5e20, #2e7d32);
-    }
-    .severity-verde::before {
-      background: radial-gradient(circle at top left, rgba(201, 162, 63, 0.25), transparent 55%);
-    }
-
-    .severity-amarelo {
-      background: linear-gradient(135deg, #fbc02d, #f57f17);
-    }
-    .severity-amarelo::before {
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.25), transparent 55%);
-    }
-
-    .severity-laranja {
-      background: linear-gradient(135deg, #fb8c00, #ef6c00);
-    }
-    .severity-laranja::before {
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.25), transparent 55%);
-    }
-
-    .severity-vermelho {
-      background: linear-gradient(135deg, #e53935, #b71c1c);
-    }
-    .severity-vermelho::before {
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.25), transparent 55%);
-    }
-
-    .loading,
-    .error {
-      font-size: 13px;
-      color: rgba(230, 230, 230, 0.9);
-      padding: 10px 12px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      margin-bottom: 10px;
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <div class="page">
-    <header class="header">
-      <div class="title-block">
-        <div class="app-name">Lajeosa · Meteo</div>
-        <div class="page-title">Meteorologia crítica</div>
-      </div>
-      <div class="badge">Fonte: avisos.pt · distrito Guarda</div>
-    </header>
 
-    <div id="state" class="loading">A carregar avisos meteorológicos…</div>
+<header>
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa">
+    <h1>Meteorologia Crítica</h1>
+    <p style="color:#D4AF37; font-size:14px;">Fonte: avisos.pt – Distrito da Guarda</p>
+</header>
 
-    <section id="card-container"></section>
+<h2 class="sec-title">Estado Atual</h2>
 
-    <div class="link-block">
-      <a class="link-btn" href="https://avisos.pt/distrito/guarda" target="_blank" rel="noopener">
-        <span>Ver detalhes em avisos.pt</span>
-      </a>
-      <a class="link-btn secondary" href="https://www.ipma.pt/pt/otempo/prev-sam/?p=GDA" target="_blank" rel="noopener">
-        <span>Meteorologia completa (IPMA)</span>
-      </a>
-    </div>
+<div id="conteudo"></div>
 
-    <div class="footer-note">
-      <span>⚠️ Avisos sujeitos a atualização frequente.</span>
-      <span id="updated-label">Última atualização: —</span>
-    </div>
-  </div>
+<a class="btn" href="https://avisos.pt/distrito/guarda" target="_blank">
+    Ver detalhes em avisos.pt
+</a>
 
-  <script>
-    const WORKER_URL = "https://SEU-WORKER.workers.dev/?feed=meteo-guarda";
+<a class="btn" href="meteorologia.html">
+    Voltar à Meteorologia Normal
+</a>
 
-    function mapCorToClass(cor) {
-      switch ((cor || "").toLowerCase()) {
-        case "amarelo": return "severity-amarelo";
-        case "laranja": return "severity-laranja";
-        case "vermelho": return "severity-vermelho";
-        default: return "severity-verde";
-      }
-    }
+<script>
+const WORKER_URL = "https://SEU-WORKER.workers.dev/?feed=meteo-guarda";
 
-    function mapCorToLabel(cor) {
-      switch ((cor || "").toLowerCase()) {
-        case "amarelo": return "Aviso amarelo · atenção moderada";
-        case "laranja": return "Aviso laranja · situação potencialmente perigosa";
-        case "vermelho": return "Aviso vermelho · situação perigosa";
-        default: return "Sem avisos meteorológicos ativos";
-      }
-    }
+async function carregarAvisos() {
+    const div = document.getElementById("conteudo");
 
-    function iconForCor(cor) {
-      switch ((cor || "").toLowerCase()) {
-        case "amarelo": return "⚠️";
-        case "laranja": return "⚠️";
-        case "vermelho": return "⛔";
-        default: return "✅";
-      }
-    }
-
-    async function loadMeteoCritico() {
-      const stateEl = document.getElementById("state");
-      const cardContainer = document.getElementById("card-container");
-      const updatedLabel = document.getElementById("updated-label");
-
-      stateEl.textContent = "A carregar avisos meteorológicos…";
-
-      try {
+    try {
         const resp = await fetch(WORKER_URL, { cache: "no-store" });
-        if (!resp.ok) {
-          throw new Error("Resposta inválida do serviço de avisos");
-        }
-
         const data = await resp.json();
 
-        const updated = data.updated || new Date().toISOString();
-        const aviso = data.aviso || null;
-        const avisoCor = data.avisoCor || "verde";
-        const validade = data.validade || null;
-        const descricao = data.descricao || null;
-
-        updatedLabel.textContent = "Última atualização: " +
-          new Date(updated).toLocaleString("pt-PT", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit"
-          });
-
-        stateEl.remove();
-
-        const card = document.createElement("article");
-        card.className = "status-card " + mapCorToClass(avisoCor);
-
-        const header = document.createElement("div");
-        header.className = "status-header";
-
-        const title = document.createElement("div");
-        title.className = "status-title";
-        const icon = document.createElement("div");
-        icon.className = "status-icon";
-        icon.textContent = iconForCor(avisoCor);
-
-        const titleText = document.createElement("span");
-        titleText.textContent = aviso ? aviso : "Sem avisos meteorológicos";
-
-        title.appendChild(icon);
-        title.appendChild(titleText);
-
-        const pill = document.createElement("div");
-        pill.className = "status-pill";
-        pill.textContent = mapCorToLabel(avisoCor);
-
-        header.appendChild(title);
-        header.appendChild(pill);
-
-        const text = document.createElement("p");
-        text.className = "status-text";
-
-        if (!aviso) {
-          text.textContent =
-            "Neste momento não existem avisos meteorológicos ativos para o distrito da Guarda. " +
-            "A circulação e atividades decorrem em condições normais, mantendo sempre a vigilância habitual.";
-        } else {
-          const desc = descricao
-            ? descricao
-            : "Aviso emitido para o distrito da Guarda. Recomenda-se atenção às condições meteorológicas.";
-          text.textContent = desc;
+        if (data.erro || !resp.ok) {
+            div.innerHTML = `
+                <div class="error-box">
+                    Não foi possível carregar os avisos meteorológicos.<br>
+                    Tente novamente dentro de alguns minutos.
+                </div>`;
+            return;
         }
 
-        const meta = document.createElement("div");
-        meta.className = "meta-row";
+        const aviso = data.aviso;
+        const cor = data.avisoCor || "verde";
+        const desc = data.descricao || "Sem descrição disponível.";
+        const validade = data.validade || "Sem validade indicada.";
 
-        const left = document.createElement("span");
-        const dot = document.createElement("span");
-        dot.className = "dot";
-        left.appendChild(dot);
-        const leftText = document.createElement("span");
-        leftText.textContent = aviso ? "Aviso ativo para o distrito da Guarda" : "Sem avisos ativos para o distrito da Guarda";
-        left.appendChild(leftText);
+        let icone = "fa-check-circle";
+        if (cor === "amarelo") icone = "fa-triangle-exclamation";
+        if (cor === "laranja") icone = "fa-exclamation-circle";
+        if (cor === "vermelho") icone = "fa-skull-crossbones";
 
-        const right = document.createElement("span");
-        right.textContent = validade
-          ? "Válido: " + validade
-          : "Validade: não especificada";
+        div.innerHTML = `
+            <div class="card">
+                <div class="status-title">
+                    <i class="fa-solid ${icone}"></i>
+                    ${aviso ? aviso : "Sem avisos ativos"}
+                </div>
 
-        meta.appendChild(left);
-        meta.appendChild(right);
+                <div class="status-desc">
+                    ${aviso ? desc : "Neste momento não existem avisos meteorológicos ativos para o distrito da Guarda."}
+                </div>
 
-        card.appendChild(header);
-        card.appendChild(text);
-        card.appendChild(meta);
-
-        cardContainer.innerHTML = "";
-        cardContainer.appendChild(card);
-      } catch (err) {
-        console.error(err);
-        stateEl.className = "error";
-        stateEl.textContent =
-          "Não foi possível carregar os avisos meteorológicos neste momento. " +
-          "Tente novamente dentro de alguns minutos.";
-      }
+                <div class="status-meta">
+                    <strong>Validade:</strong> ${validade}<br>
+                    <strong>Atualizado:</strong> ${new Date(data.updated).toLocaleString("pt-PT")}
+                </div>
+            </div>
+        `;
+    } catch (e) {
+        div.innerHTML = `
+            <div class="error-box">
+                Erro ao contactar o serviço de avisos.<br>
+                Verifique a ligação à internet.
+            </div>`;
     }
+}
 
-    loadMeteoCritico();
-  </script>
+carregarAvisos();
+</script>
+
 </body>
 </html>
+
 
