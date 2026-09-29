@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Histórico da Competição — CRC Lajeosa</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FTEGNRDBJW');
-</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTEGNRDBJW');
+  </script>
+
   <style>
     body {
       margin: 0;
@@ -55,6 +57,12 @@
       margin-top: 0;
     }
 
+    .card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 10px;
+    }
+
     .card ul {
       padding-left: 20px;
     }
@@ -64,7 +72,7 @@
 <body>
 
 <header>
-  <img src="assets/CRC Lajeosa logo.jpg" class="club-logo">
+  <img src="assets/CRC Lajeosa logo.jpg" class="club-logo" alt="Logótipo CRC Lajeosa">
   <h1>Histórico da Competição</h1>
   <a href="clube_masculino.html" class="back-button">⬅ Voltar ao Clube</a>
 </header>
@@ -72,13 +80,32 @@
 <div class="content">
 
   <!-- ========================= -->
-  <!--       MASCULINOS          -->
+  <!--       ÉPOCA ATUAL         -->
   <!-- ========================= -->
 
   <div class="card">
     <h3>👨‍🦱 Sénior Masculino — Época 2026/2027</h3>
-    <p>Aguarda início da nova época.</p>
+
+    <p><strong>Jornada Atual</strong></p>
+    <img src="assets/jogadores/jornadas.jpg"
+         alt="Jornada atual da competição">
+
+    <p style="margin-top:15px;"><strong>Classificação Atual</strong></p>
+    <img src="assets/jogadores/classificacao.jpg"
+         alt="Classificação atual da competição">
+
+    <p style="margin-top:10px;">
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=28453&seasonId=105"
+         target="_blank"
+         style="color:#D4AF37; font-weight:bold;">
+         Ver detalhes completos na FPF
+      </a>
+    </p>
   </div>
+
+  <!-- ========================= -->
+  <!--       ÉPOCA ANTERIOR      -->
+  <!-- ========================= -->
 
   <div class="card">
     <h3>👨‍🦱 Sénior Masculino — Época 2025/2026</h3>
@@ -95,23 +122,17 @@
       <li><strong>Golos Sofridos:</strong> 61</li>
     </ul>
 
-    <a href="https://resultados.fpf.pt/Competition/Details?competitionId=28453&seasonId=105"
-       target="_blank"
-       style="color:#D4AF37; font-weight:bold;">
-       Ver percurso completo na FPF
-    </a>
-  </div>
-
- 
-
-    <a href="https://resultados.fpf.pt/Competition/Details?competitionId=28442&seasonId=105"
-       target="_blank"
-       style="color:#D4AF37; font-weight:bold;">
-       Ver percurso completo na FPF
-    </a>
+    <p>
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=28442&seasonId=105"
+         target="_blank"
+         style="color:#D4AF37; font-weight:bold;">
+         Ver percurso completo na FPF
+      </a>
+    </p>
   </div>
 
 </div>
 
 </body>
 </html>
+
