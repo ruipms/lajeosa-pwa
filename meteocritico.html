@@ -13,43 +13,20 @@
   gtag('js', new Date());
   gtag('config', 'G-FTEGNRDBJW');
 
-  /* 1) Instalação da PWA */
-  window.addEventListener('appinstalled', () => {
-      gtag('event', 'pwa_install', {
-          event_category: 'PWA',
-          event_label: 'Instalação da App'
-      });
-  });
+  window.addEventListener('appinstalled', () => gtag('event', 'pwa_install'));
+  if (window.matchMedia('(display-mode: standalone)').matches) gtag('event', 'pwa_launch_icon');
 
-  /* 2) Abertura via ícone */
-  if (window.matchMedia('(display-mode: standalone)').matches) {
-      gtag('event', 'pwa_launch_icon', {
-          event_category: 'PWA',
-          event_label: 'Abertura via ícone'
-      });
-  }
-
-  /* 3) Primeira visita vs recorrente */
   if (!localStorage.getItem('pwa_first_visit')) {
       localStorage.setItem('pwa_first_visit', '1');
       gtag('event', 'pwa_first_open');
-  } else {
-      gtag('event', 'pwa_return_open');
-  }
+  } else gtag('event', 'pwa_return_open');
 
-  /* 4) Uso offline */
-  window.addEventListener('offline', () => {
-      gtag('event', 'pwa_offline_use');
-  });
+  window.addEventListener('offline', () => gtag('event', 'pwa_offline_use'));
 
-  /* 5) Erro de rede */
   window.addEventListener('error', (e) => {
-      if (e.message && e.message.includes('Failed to fetch')) {
-          gtag('event', 'pwa_network_error');
-      }
+      if (e.message && e.message.includes('Failed to fetch')) gtag('event', 'pwa_network_error');
   });
 
-  /* 6) Origem social */
   document.addEventListener('DOMContentLoaded', () => {
       const ref = document.referrer;
       if (ref.includes('whatsapp')) gtag('event', 'pwa_open_whatsapp');
@@ -57,17 +34,13 @@
       if (ref.includes('facebook')) gtag('event', 'pwa_open_facebook');
   });
 
-  /* 7) Atualização da PWA */
   if ('serviceWorker' in navigator) {
       navigator.serviceWorker.addEventListener('controllerchange', () => {
           gtag('event', 'pwa_update_trigger');
       });
   }
 
-  /* 8) Atividade contínua */
-  setInterval(() => {
-      gtag('event', 'pwa_active_tick');
-  }, 15000);
+  setInterval(() => gtag('event', 'pwa_active_tick'), 15000);
 </script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -98,7 +71,7 @@
 
     .top-btn {
         display: inline-block;
-        margin-bottom: 10px;
+        margin-top: 10px;
         padding: 10px 18px;
         border-radius: 18px;
         background-color: #1F5C45;
@@ -135,6 +108,27 @@
         margin-right: 10px;
     }
 
+    /* Destaque para avisos amarelos */
+    .card.yellow {
+        background-color: #8a6f00;
+        border: 2px solid #D4AF37;
+        color: #fff;
+    }
+
+    /* Destaque para avisos laranja */
+    .card.orange {
+        background-color: #b85c00;
+        border: 2px solid #ffb347;
+        color: #fff;
+    }
+
+    /* Destaque para avisos vermelhos */
+    .card.red {
+        background-color: #8b0000;
+        border: 2px solid #ff4d4d;
+        color: #fff;
+    }
+
     .status-title {
         font-size: 20px;
         font-weight: bold;
@@ -167,8 +161,11 @@
 <body>
 
 <header>
-    <a class="top-btn" href="seguranca.html">← Voltar à Segurança</a>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa">
+
+    <!-- Botão agora abaixo do brasão -->
+    <a class="top-btn" href="seguranca.html">← Voltar</a>
+
     <h1>Meteorologia Crítica</h1>
     <p style="color:#D4AF37; font-size:14px;">Fonte: IPMA – Avisos Oficiais</p>
 </header>
@@ -243,8 +240,13 @@ async function carregarAvisos() {
                 nivel === "orange" ? "Laranja" :
                 nivel === "red" ? "Vermelho" : "Verde";
 
+            const classeNivel =
+                nivel === "yellow" ? "yellow" :
+                nivel === "orange" ? "orange" :
+                nivel === "red" ? "red" : "";
+
             html += `
-                <div class="card">
+                <div class="card ${classeNivel}">
                     <div class="status-title">
                         <i class="fa-solid ${iconeNivel}"></i>
                         ${tipo} – ${nivelPT}
@@ -280,4 +282,3 @@ carregarAvisos();
 
 </body>
 </html>
-
