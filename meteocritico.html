@@ -131,7 +131,7 @@ async function carregarAvisos() {
         const resp = await fetch(WORKER_URL, { cache: "no-store" });
         const data = await resp.json();
 
-        if (data.error || !resp.ok) {
+        if (!resp.ok || !data.avisos) {
             div.innerHTML = `
                 <div class="error-box">
                     Não foi possível carregar os avisos meteorológicos.<br>
@@ -140,44 +140,78 @@ async function carregarAvisos() {
             return;
         }
 
-        const aviso = data.aviso;
-        const cor = data.cor || "verde";
-        const desc = data.descricao || "Sem descrição disponível.";
-        const inicio = data.inicio || "Sem início indicado.";
-        const fim = data.fim || "Sem fim indicado.";
+        const avisos = data.avisos;
 
-        // Ícones por nível IPMA
-        let icone = "fa-check-circle";
-        if (cor === "yellow") icone = "fa-triangle-exclamation";
-        if (cor === "orange") icone = "fa-exclamation-circle";
-        if (cor === "red") icone = "fa-skull-crossbones";
-
-        // Converter nomes IPMA para PT
-        const corPT =
-            cor === "yellow" ? "Amarelo" :
-            cor === "orange" ? "Laranja" :
-            cor === "red" ? "Vermelho" : "Verde";
-
-        div.innerHTML = `
-            <div class="card">
-                <div class="status-title">
-                    <i class="fa-solid ${icone}"></i>
-                    ${aviso !== "Nenhum" ? `${aviso} – ${corPT}` : "Sem avisos ativos"}
+        if (avisos.length === 0) {
+            div.innerHTML = `
+                <div class="card">
+                    <div class="status-title">
+                        <i class="fa-solid fa-check-circle"></i>
+                        Sem avisos ativos
+                    </div>
+                    <div class="status-desc">
+                        Neste momento não existem avisos meteorológicos ativos para o distrito da Guarda.
+                    </div>
+                    <div class="status-meta">
+                        <strong>Atualizado:</strong> ${new Date().toLocaleString("pt-PT")}
+                    </div>
                 </div>
+            `;
+            return;
+        }
 
-                <div class="status-desc">
-                    ${aviso !== "Nenhum" ? desc : "Neste momento não existem avisos meteorológicos ativos para o distrito da Guarda."}
-                </div>
+        let html = "";
 
-                <div class="status-meta">
-                    ${aviso !== "Nenhum" ? `
+        avisos.forEach(av => {
+            const tipo = av.awarenessTypeName || "Aviso";
+            const nivel = av.awarenessLevelID || "green";
+            const texto = av.text || "Sem descrição disponível.";
+            const inicio = av.startTime || "Sem início indicado.";
+            const fim = av.endTime || "Sem fim indicado.";
+
+            // Ícones por tipo
+            let icone = "fa-circle-info";
+            if (tipo.includes("Precip")) icone = "fa-cloud-rain";
+            if (tipo.includes("Vento")) icone = "fa-wind";
+            if (tipo.includes("Trovoada")) icone = "fa-bolt";
+            if (tipo.includes("Neve")) icone = "fa-snowflake";
+            if (tipo.includes("Agitação")) icone = "fa-water";
+            if (tipo.includes("Nevoeiro")) icone = "fa-smog";
+
+            // Ícones por nível
+            let iconeNivel = "fa-check-circle";
+            if (nivel === "yellow") iconeNivel = "fa-triangle-exclamation";
+            if (nivel === "orange") iconeNivel = "fa-exclamation-circle";
+            if (nivel === "red") iconeNivel = "fa-skull-crossbones";
+
+            const nivelPT =
+                nivel === "yellow" ? "Amarelo" :
+                nivel === "orange" ? "Laranja" :
+                nivel === "red" ? "Vermelho" : "Verde";
+
+            html += `
+                <div class="card">
+                    <div class="status-title">
+                        <i class="fa-solid ${iconeNivel}"></i>
+                        ${tipo} – ${nivelPT}
+                    </div>
+
+                    <div class="status-desc">
+                        <i class="fa-solid ${icone}"></i>
+                        ${texto}
+                    </div>
+
+                    <div class="status-meta">
                         <strong>Início:</strong> ${inicio}<br>
                         <strong>Fim:</strong> ${fim}<br>
-                    ` : ""}
-                    <strong>Atualizado:</strong> ${new Date().toLocaleString("pt-PT")}
+                        <strong>Atualizado:</strong> ${new Date().toLocaleString("pt-PT")}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        });
+
+        div.innerHTML = html;
+
     } catch (e) {
         div.innerHTML = `
             <div class="error-box">
@@ -189,6 +223,7 @@ async function carregarAvisos() {
 
 carregarAvisos();
 </script>
+
 
 </body>
 </html>
