@@ -5,6 +5,71 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meteorologia Crítica – Lajeosa</title>
 
+<!-- Google Analytics (mesmo da index) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FTEGNRDBJW');
+
+  /* 1) Instalação da PWA */
+  window.addEventListener('appinstalled', () => {
+      gtag('event', 'pwa_install', {
+          event_category: 'PWA',
+          event_label: 'Instalação da App'
+      });
+  });
+
+  /* 2) Abertura via ícone */
+  if (window.matchMedia('(display-mode: standalone)').matches) {
+      gtag('event', 'pwa_launch_icon', {
+          event_category: 'PWA',
+          event_label: 'Abertura via ícone'
+      });
+  }
+
+  /* 3) Primeira visita vs recorrente */
+  if (!localStorage.getItem('pwa_first_visit')) {
+      localStorage.setItem('pwa_first_visit', '1');
+      gtag('event', 'pwa_first_open');
+  } else {
+      gtag('event', 'pwa_return_open');
+  }
+
+  /* 4) Uso offline */
+  window.addEventListener('offline', () => {
+      gtag('event', 'pwa_offline_use');
+  });
+
+  /* 5) Erro de rede */
+  window.addEventListener('error', (e) => {
+      if (e.message && e.message.includes('Failed to fetch')) {
+          gtag('event', 'pwa_network_error');
+      }
+  });
+
+  /* 6) Origem social */
+  document.addEventListener('DOMContentLoaded', () => {
+      const ref = document.referrer;
+      if (ref.includes('whatsapp')) gtag('event', 'pwa_open_whatsapp');
+      if (ref.includes('instagram')) gtag('event', 'pwa_open_instagram');
+      if (ref.includes('facebook')) gtag('event', 'pwa_open_facebook');
+  });
+
+  /* 7) Atualização da PWA */
+  if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+          gtag('event', 'pwa_update_trigger');
+      });
+  }
+
+  /* 8) Atividade contínua */
+  setInterval(() => {
+      gtag('event', 'pwa_active_tick');
+  }, 15000);
+</script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -29,6 +94,22 @@
         margin-top: 10px;
         font-size: 24px;
         font-weight: bold;
+    }
+
+    .top-btn {
+        display: inline-block;
+        margin-bottom: 10px;
+        padding: 10px 18px;
+        border-radius: 18px;
+        background-color: #1F5C45;
+        border: 1px solid #D4AF37;
+        color: #D4AF37;
+        font-size: 15px;
+        text-decoration: none;
+    }
+
+    .top-btn:hover {
+        background-color: #2a7a5e;
     }
 
     .sec-title {
@@ -72,24 +153,6 @@
         opacity: 0.9;
     }
 
-    .btn {
-        display: block;
-        margin: 14px auto;
-        width: 80%;
-        padding: 12px;
-        border-radius: 18px;
-        background-color: #1F5C45;
-        border: 1px solid #D4AF37;
-        color: #D4AF37;
-        font-size: 16px;
-        cursor: pointer;
-        text-decoration: none;
-    }
-
-    .btn:hover {
-        background-color: #2a7a5e;
-    }
-
     .error-box {
         background-color: #8B0000;
         padding: 16px;
@@ -104,6 +167,7 @@
 <body>
 
 <header>
+    <a class="top-btn" href="seguranca.html">← Voltar à Segurança</a>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa">
     <h1>Meteorologia Crítica</h1>
     <p style="color:#D4AF37; font-size:14px;">Fonte: IPMA – Avisos Oficiais</p>
@@ -112,14 +176,6 @@
 <h2 class="sec-title">Estado Atual</h2>
 
 <div id="conteudo"></div>
-
-<a class="btn" href="https://www.ipma.pt/pt/otempo/prev-simples/" target="_blank">
-    Ver detalhes no IPMA
-</a>
-
-<a class="btn" href="meteorologia.html">
-    Voltar à Meteorologia Normal
-</a>
 
 <script>
 const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=meteo-ipma";
@@ -169,7 +225,6 @@ async function carregarAvisos() {
             const inicio = av.startTime || "Sem início indicado.";
             const fim = av.endTime || "Sem fim indicado.";
 
-            // Ícones por tipo
             let icone = "fa-circle-info";
             if (tipo.includes("Precip")) icone = "fa-cloud-rain";
             if (tipo.includes("Vento")) icone = "fa-wind";
@@ -178,7 +233,6 @@ async function carregarAvisos() {
             if (tipo.includes("Agitação")) icone = "fa-water";
             if (tipo.includes("Nevoeiro")) icone = "fa-smog";
 
-            // Ícones por nível
             let iconeNivel = "fa-check-circle";
             if (nivel === "yellow") iconeNivel = "fa-triangle-exclamation";
             if (nivel === "orange") iconeNivel = "fa-exclamation-circle";
@@ -224,6 +278,6 @@ async function carregarAvisos() {
 carregarAvisos();
 </script>
 
-
 </body>
 </html>
+
