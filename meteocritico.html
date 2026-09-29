@@ -61,6 +61,8 @@
 
     header img {
         width: 120px;
+        display: block;
+        margin: 0 auto;
     }
 
     h1 {
@@ -69,9 +71,10 @@
         font-weight: bold;
     }
 
-    .top-btn {
-        display: inline-block;
-        margin-top: 10px;
+    /* Botão voltar — igual ao da página de incêndios */
+    .btn-voltar {
+        display: block;
+        margin: 12px auto 0 auto;
         padding: 10px 18px;
         border-radius: 18px;
         background-color: #1F5C45;
@@ -79,9 +82,11 @@
         color: #D4AF37;
         font-size: 15px;
         text-decoration: none;
+        width: fit-content;
+        cursor: pointer;
     }
 
-    .top-btn:hover {
+    .btn-voltar:hover {
         background-color: #2a7a5e;
     }
 
@@ -161,10 +166,10 @@
 <body>
 
 <header>
-    <img src="assets/brasao.png" alt="Brasão da Lajeosa">
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
 
     <!-- Botão agora abaixo do brasão -->
-    <a class="top-btn" href="seguranca.html">← Voltar</a>
+    <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
 
     <h1>Meteorologia Crítica</h1>
     <p style="color:#D4AF37; font-size:14px;">Fonte: IPMA – Avisos Oficiais</p>
@@ -280,5 +285,12 @@ async function carregarAvisos() {
 carregarAvisos();
 </script>
 
+<script>
+function openPage(page) {
+    window.location.href = page;
+}
+</script>
+
 </body>
 </html>
+
