@@ -42,6 +42,7 @@
         font-weight: bold;
     }
 
+    /* Botão voltar — igual às outras páginas da Segurança */
     .btn-voltar {
         display: block;
         margin: 12px auto 0 auto;
@@ -68,29 +69,27 @@
         margin-bottom: 10px;
     }
 
-    .card-full {
+    .card {
         background-color: #1F5C45;
         padding: 18px;
         border-radius: 18px;
-        margin: 20px;
+        margin: 16px 20px;
         border: 1px solid rgba(212,175,55,0.4);
-        cursor: pointer;
-        transition: 0.2s;
         text-align: center;
     }
 
-    .card-full:hover {
-        background-color: #2a7a5e;
+    .card iframe {
+        border-radius: 12px;
+        width: 100%;
+        max-width: 480px;
+        height: 430px;
+        border: none;
     }
 
-    .card-full i {
-        font-size: 36px;
+    .card p {
+        font-size: 14px;
+        margin-top: 10px;
         color: #D4AF37;
-    }
-
-    .card-full p {
-        font-size: 17px;
-        margin-top: 8px;
     }
 </style>
 </head>
@@ -98,7 +97,7 @@
 <body>
 
 <header>
-    <img src="assets/brasao.png" alt="Brasão da Lajeosa">
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
     <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
 
     <h1>Trânsito</h1>
@@ -107,9 +106,21 @@
 
 <h2 class="sec-title">Estado Atual</h2>
 
-<div class="card-full" onclick="openPage('https://transitoagora.pt/transito/guarda?lat=39.6007&lon=-7.85&z=6.47')">
-    <i class="fa-solid fa-road"></i>
-    <p>Ver Trânsito em Tempo Real — Guarda</p>
+<div class="card">
+    <iframe 
+        src="https://transitoagora.pt/embed?distrito=guarda"
+        title="Trânsito em Guarda, ao vivo"
+        loading="lazy">
+    </iframe>
+
+    <p>
+        <a href="https://transitoagora.pt/transito/guarda" 
+           target="_blank" 
+           rel="noopener"
+           style="color:#D4AF37; text-decoration:none;">
+           Ver trânsito em tempo real em Guarda
+        </a>
+    </p>
 </div>
 
 <script>
