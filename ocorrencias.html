@@ -114,7 +114,6 @@
 </footer>
 
 <script>
-    // NOVO FEED
     const WORKER_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=ocorrencias-guarda";
 
     function tipoIcone(tipo) {
@@ -140,18 +139,25 @@
 
         const lista = dados.ocorrencias || [];
 
-        // Estados ativos da API nova
+        const estadosAtivos = [
+            "curso",
+            "vigil",
+            "resolução",
+            "despacho",
+            "alerta",
+            "socorro",
+            "assist",
+            "apoio"
+        ];
+
         const ativos = lista.filter(oc =>
-            oc.estado.toLowerCase().includes("curso")
+            oc.estado && estadosAtivos.some(e => oc.estado.toLowerCase().includes(e))
         );
 
         const concluidos = lista.filter(oc =>
-            oc.estado.toLowerCase().includes("conclu")
+            oc.estado && oc.estado.toLowerCase().includes("conclu")
         );
 
-        // ============================
-        // 🔥 OCORRÊNCIAS ATIVAS
-        // ============================
         let htmlAtivos = "";
 
         if (ativos.length === 0) {
@@ -186,9 +192,6 @@
 
         document.getElementById("ativos").innerHTML = htmlAtivos;
 
-        // ============================
-        // 🔥 OCORRÊNCIAS CONCLUÍDAS
-        // ============================
         let htmlConcluidos = "";
 
         concluidos.forEach(oc => {
@@ -225,3 +228,4 @@
 
 </body>
 </html>
+
