@@ -4,14 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Histórico da Competição — CRC Lajeosa</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FTEGNRDBJW');
-</script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTEGNRDBJW');
+  </script>
+
   <style>
     body {
       margin: 0;
@@ -55,6 +57,15 @@
       margin-top: 0;
     }
 
+    /* Imagens responsivas para PC e telemóvel */
+    .card img {
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin: 10px auto;
+      border-radius: 12px;
+    }
+
     .card ul {
       padding-left: 20px;
     }
@@ -71,14 +82,32 @@
 
 <div class="content">
 
-
   <!-- ========================= -->
   <!--        FEMININOS          -->
   <!-- ========================= -->
 
   <div class="card">
     <h3>👩 Sénior Feminino — Época 2026/2027</h3>
-    <p>Aguarda início da nova época.</p>
+
+    <p><strong>Jornada Atual</strong></p>
+    <img src="assets/jogadoras/jornadasf.jpg"
+         alt="Jornada atual da competição feminina">
+
+    <p style="margin-top:15px;"><strong>Classificação Atual</strong></p>
+    <img src="assets/jogadoras/classificacaof.jpg"
+         alt="Classificação atual da competição feminina">
+
+    <p style="margin-top:15px;"><strong>Taça Futsal Sénior Feminino</strong></p>
+    <img src="assets/jogadoras/tacaf.jpg"
+         alt="Taça Futsal Sénior Feminino">
+
+    <p style="margin-top:10px;">
+      <a href="https://resultados.fpf.pt"
+         target="_blank"
+         style="color:#D4AF37; font-weight:bold;">
+         Ver detalhes completos na FPF
+      </a>
+    </p>
   </div>
 
   <div class="card">
@@ -104,6 +133,10 @@
   </div>
 
 </div>
+
+</body>
+</html>
+
 
 </body>
 </html>
