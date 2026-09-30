@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocorrências — Beiras e Serra da Estrela</title>
 
+    <!-- Manifest para integrar esta página na PWA -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Ícone da app -->
+    <link rel="icon" href="assets/brasao.png">
+
     <style>
         body {
             margin: 0;
@@ -99,6 +105,9 @@
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
     <h1>Ocorrências — Beiras e Serra da Estrela</h1>
     <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
+    <p style="color:#D4AF37; font-size:13px; margin-top:6px; opacity:0.85;">
+        Fonte: ApiAberta / Proteção Civil
+    </p>
 </header>
 
 <p id="atualizado" style="opacity:0.8; font-size:14px;"></p>
@@ -139,7 +148,6 @@
 
         const lista = dados.ocorrencias || [];
 
-        // Estados considerados ativos
         const estadosAtivos = [
             "curso",
             "vigil",
@@ -222,10 +230,19 @@
 
     carregarOcorrencias();
 
+    /* Navegação em modo PWA (sem barra superior) */
     function openPage(page) {
-        window.location.href = page;
+        location.replace(page);
     }
+</script>
+
+<!-- Registo do service worker para manter modo standalone -->
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+}
 </script>
 
 </body>
 </html>
+
