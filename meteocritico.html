@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meteorologia Crítica – Lajeosa</title>
 
-<!-- Google Analytics (mesmo da index) -->
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -71,7 +71,6 @@
         font-weight: bold;
     }
 
-    /* Botão voltar — igual ao da página de incêndios */
     .btn-voltar {
         display: block;
         margin: 12px auto 0 auto;
@@ -107,32 +106,9 @@
         border: 1px solid rgba(212,175,55,0.4);
     }
 
-    .card i {
-        font-size: 32px;
-        color: #D4AF37;
-        margin-right: 10px;
-    }
-
-    /* Destaque para avisos amarelos */
-    .card.yellow {
-        background-color: #8a6f00;
-        border: 2px solid #D4AF37;
-        color: #fff;
-    }
-
-    /* Destaque para avisos laranja */
-    .card.orange {
-        background-color: #b85c00;
-        border: 2px solid #ffb347;
-        color: #fff;
-    }
-
-    /* Destaque para avisos vermelhos */
-    .card.red {
-        background-color: #8b0000;
-        border: 2px solid #ff4d4d;
-        color: #fff;
-    }
+    .card.yellow { background-color: #8a6f00; border: 2px solid #D4AF37; }
+    .card.orange { background-color: #b85c00; border: 2px solid #ffb347; }
+    .card.red { background-color: #8b0000; border: 2px solid #ff4d4d; }
 
     .status-title {
         font-size: 20px;
@@ -167,10 +143,7 @@
 
 <header>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
-
-    <!-- Botão agora abaixo do brasão -->
     <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
-
     <h1>Meteorologia Crítica</h1>
     <p style="color:#D4AF37; font-size:14px;">Fonte: IPMA – Avisos Oficiais</p>
 </header>
@@ -221,9 +194,44 @@ async function carregarAvisos() {
         let html = "";
 
         avisos.forEach(av => {
+
+            /* 🔥 IGNORAR AVISOS MARÍTIMOS */
+            const textoCompleto = (
+                (av.awarenessTypeName || "") + " " +
+                (av.text || "")
+            ).toLowerCase();
+
+            const ignorar = [
+                "agitação",
+                "marítima",
+                "maritima",
+                "ondulação",
+                "mar",
+                "costeiro",
+                "coastal",
+                "sea",
+                "wave"
+            ];
+
+            if (ignorAR.some(p => textoCompleto.includes(p))) {
+                return;
+            }
+
+            /* --- PROCESSAMENTO NORMAL DO AVISO --- */
+
             const tipo = av.awarenessTypeName || "Aviso";
             const nivel = av.awarenessLevelID || "green";
-            const texto = av.text || "Sem descrição disponível.";
+
+            /* ✔ Descrição automática quando não existe texto */
+            const nivelPT =
+                nivel === "yellow" ? "Amarelo" :
+                nivel === "orange" ? "Laranja" :
+                nivel === "red" ? "Vermelho" : "Verde";
+
+            const texto = av.text && av.text.trim() !== ""
+                ? av.text
+                : `Aviso de ${tipo.toLowerCase()} nível ${nivelPT}.`;
+
             const inicio = av.startTime || "Sem início indicado.";
             const fim = av.endTime || "Sem fim indicado.";
 
@@ -232,18 +240,12 @@ async function carregarAvisos() {
             if (tipo.includes("Vento")) icone = "fa-wind";
             if (tipo.includes("Trovoada")) icone = "fa-bolt";
             if (tipo.includes("Neve")) icone = "fa-snowflake";
-            if (tipo.includes("Agitação")) icone = "fa-water";
             if (tipo.includes("Nevoeiro")) icone = "fa-smog";
 
             let iconeNivel = "fa-check-circle";
             if (nivel === "yellow") iconeNivel = "fa-triangle-exclamation";
             if (nivel === "orange") iconeNivel = "fa-exclamation-circle";
             if (nivel === "red") iconeNivel = "fa-skull-crossbones";
-
-            const nivelPT =
-                nivel === "yellow" ? "Amarelo" :
-                nivel === "orange" ? "Laranja" :
-                nivel === "red" ? "Vermelho" : "Verde";
 
             const classeNivel =
                 nivel === "yellow" ? "yellow" :
@@ -293,4 +295,3 @@ function openPage(page) {
 
 </body>
 </html>
-
