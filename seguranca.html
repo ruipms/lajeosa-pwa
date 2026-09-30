@@ -162,33 +162,30 @@
 
 <div class="grid">
 
-  <div class="card" onclick="openPage('incendios.html')">
+    <div class="card" onclick="openPage('incendios.html')">
         <i class="fas fa-fire"></i>
         <p>Incêndios Ativos</p>
     </div>
 
-    <div class="card" onclick="openLink('ocorrencias.html')">
+    <div class="card" onclick="openPage('ocorrencias.html')">
         <i class="fas fa-exclamation-triangle"></i>
         <p>Ocorrências Ativas</p>
     </div>
 
-
-   <div class="card" onclick="openLink('meteocritico.html')">
+    <div class="card" onclick="openPage('meteocritico.html')">
         <i class="fas fa-cloud-bolt"></i>
         <p>Meteorologia Crítica</p>
     </div>
 
-
-    <div class="card" onclick="openLink('policia.html')">
+    <div class="card" onclick="openPage('policia.html')">
         <i class="fas fa-shield-halved"></i>
         <p>Comunicados da Polícia</p>
     </div>
 
-    <div class="card" onclick="openLink('transito.html')">
+    <div class="card" onclick="openPage('transito.html')">
         <i class="fas fa-road"></i>
         <p>Trânsito e Estradas</p>
     </div>
-
 
 </div>
 
@@ -203,12 +200,8 @@
 </footer>
 
 <script>
-    function openLink(url) {
-        window.open(url, '_blank');
-    }
-
     function openPage(page) {
-        window.location.href = page;
+        location.replace(page); /* mantém navegação dentro da PWA */
     }
 
     if ('serviceWorker' in navigator) {
