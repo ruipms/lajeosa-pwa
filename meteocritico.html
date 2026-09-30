@@ -213,7 +213,8 @@ async function carregarAvisos() {
                 "wave"
             ];
 
-            if (ignorAR.some(p => textoCompleto.includes(p))) {
+            if (ignorar.some(p => textoCompleto.includes(p))) {
+
                 return;
             }
 
