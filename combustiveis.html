@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preços dos Combustíveis – Guarda</title>
+
+<!-- Google tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<style>
+    body {
+        background-color: #0F3D2E;
+        color: white;
+        font-family: Arial, sans-serif;
+        padding: 20px;
+    }
+
+    h1 {
+        color: #D4AF37;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .card {
+        background-color: #134C3A;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 18px;
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeIn 0.4s forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .titulo {
+        font-size: 18px;
+        font-weight: bold;
+        color: #D4AF37;
+        margin-bottom: 8px;
+    }
+
+    .voltar {
+        display: inline-block;
+        margin-top: 30px;
+        color: #D4AF37;
+        font-size: 18px;
+        text-decoration: none;
+    }
+
+    .mensagem {
+        font-size: 16px;
+        opacity: 0.9;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    footer {
+        margin-top: 40px;
+        text-align: center;
+        opacity: 0.7;
+        font-size: 14px;
+    }
+
+    /* Skeleton */
+    .skeleton {
+        background: linear-gradient(90deg, #134C3A 25%, #1a5a47 50%, #134C3A 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 10px;
+        height: 80px;
+        margin-bottom: 18px;
+    }
+
+    @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<h1>Preços dos Combustíveis – Distrito da Guarda</h1>
+
+<p id="msg-aguarde" class="mensagem">
+    A carregar preços atualizados… aguarde uns segundos.
+</p>
+
+<div id="lista-combustiveis"></div>
+
+<a class="voltar" href="seguranca.html">← Voltar</a>
+
+<footer>
+    2026 Lajeosa do Mondego — ©RMS
+</footer>
+
+<script>
+const API_URL = "https://api.apiaberta.pt/v1/fuel/prices";
+
+/* Mostrar skeletons */
+function mostrarSkeletons() {
+    const caixa = document.getElementById("lista-combustiveis");
+    caixa.innerHTML = "";
+    for (let i = 0; i < 6; i++) {
+        caixa.innerHTML += `<div class="skeleton"></div>`;
+    }
+}
+
+async function carregarCombustiveisGuarda() {
+    const caixa = document.getElementById("lista-combustiveis");
+    const msg = document.getElementById("msg-aguarde");
+
+    msg.style.display = "block";
+    mostrarSkeletons();
+
+    try {
+        const resposta = await fetch(API_URL);
+        const dados = await resposta.json();
+
+        // Filtrar apenas postos do distrito da Guarda
+        const postos = dados.filter(p => p.district === "Guarda");
+
+        msg.style.display = "none";
+
+        if (postos.length === 0) {
+            caixa.innerHTML = `<p class="mensagem">Não há dados disponíveis para o distrito da Guarda.</p>`;
+            return;
+        }
+
+        let html = "";
+
+        postos.forEach(p => {
+            html += `
+                <div class="card">
+                    <div class="titulo">${p.brand} – ${p.municipality}</div>
+                    <p><strong>Gasolina 95:</strong> ${p.gasoline95 ?? "—"} €</p>
+                    <p><strong>Gasóleo:</strong> ${p.diesel ?? "—"} €</p>
+                    <p style="opacity:0.8; font-size:13px;">
+                        Atualizado em ${p.date}
+                    </p>
+                </div>
+            `;
+        });
+
+        caixa.innerHTML = html;
+
+    } catch (e) {
+        msg.style.display = "none";
+        caixa.innerHTML = `<p class="mensagem">Erro ao carregar preços de combustíveis.</p>`;
+    }
+}
+
+carregarCombustiveisGuarda();
+</script>
+
+</body>
+</html>
