@@ -108,7 +108,7 @@
 </footer>
 
 <script>
-const API_URL = "https://api.apiaberta.pt/v1/fuel/prices";
+const API_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=combustiveis-guarda";
 
 /* Mostrar skeletons */
 function mostrarSkeletons() {
@@ -117,6 +117,33 @@ function mostrarSkeletons() {
     for (let i = 0; i < 6; i++) {
         caixa.innerHTML += `<div class="skeleton"></div>`;
     }
+}
+
+/* Agrupar combustíveis por posto */
+function agruparPorPosto(items) {
+    const mapa = {};
+
+    items.forEach(p => {
+        if (!mapa[p.id]) {
+            mapa[p.id] = {
+                nome: p.nome,
+                marca: p.marca,
+                municipio: p.municipio,
+                distrito: p.distrito,
+                morada: p.morada,
+                localidade: p.localidade,
+                combustiveis: []
+            };
+        }
+
+        mapa[p.id].combustiveis.push({
+            tipo: p.combustivel,
+            preco: p.preco,
+            atualizado: p.atualizado
+        });
+    });
+
+    return Object.values(mapa);
 }
 
 async function carregarCombustiveisGuarda() {
@@ -130,26 +157,31 @@ async function carregarCombustiveisGuarda() {
         const resposta = await fetch(API_URL);
         const dados = await resposta.json();
 
-        // Filtrar apenas postos do distrito da Guarda
-        const postos = dados.filter(p => p.district === "Guarda");
-
         msg.style.display = "none";
 
-        if (postos.length === 0) {
+        if (!dados.items || dados.items.length === 0) {
             caixa.innerHTML = `<p class="mensagem">Não há dados disponíveis para o distrito da Guarda.</p>`;
             return;
         }
 
+        const postosAgrupados = agruparPorPosto(dados.items);
+
         let html = "";
 
-        postos.forEach(p => {
+        postosAgrupados.forEach(p => {
             html += `
                 <div class="card">
-                    <div class="titulo">${p.brand} – ${p.municipality}</div>
-                    <p><strong>Gasolina 95:</strong> ${p.gasoline95 ?? "—"} €</p>
-                    <p><strong>Gasóleo:</strong> ${p.diesel ?? "—"} €</p>
+                    <div class="titulo">${p.marca} – ${p.municipio}</div>
+                    <p><strong>${p.nome}</strong></p>
+                    <p style="opacity:0.8">${p.localidade}</p>
+                    <hr style="opacity:0.2">
+
+                    ${p.combustiveis.map(c => `
+                        <p><strong>${c.tipo}:</strong> ${c.preco.toFixed(3)} €</p>
+                    `).join("")}
+
                     <p style="opacity:0.8; font-size:13px;">
-                        Atualizado em ${p.date}
+                        Atualizado em ${p.combustiveis[0].atualizado}
                     </p>
                 </div>
             `;
