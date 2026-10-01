@@ -88,6 +88,15 @@
         0% { background-position: 200% 0; }
         100% { background-position: -200% 0; }
     }
+
+    /* Acordeão */
+    .conteudo {
+        display: none;
+    }
+
+    .conteudo.open {
+        display: block;
+    }
 </style>
 </head>
 
@@ -110,7 +119,7 @@
 <script>
 const API_URL = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=combustiveis-guarda";
 
-/* Mostrar skeletons */
+/* Skeletons */
 function mostrarSkeletons() {
     const caixa = document.getElementById("lista-combustiveis");
     caixa.innerHTML = "";
@@ -119,31 +128,76 @@ function mostrarSkeletons() {
     }
 }
 
+/* Agrupar por município */
+function agruparPorMunicipio(items) {
+    const mapa = {};
+    items.forEach(p => {
+        if (!mapa[p.municipio]) mapa[p.municipio] = [];
+        mapa[p.municipio].push(p);
+    });
+    return mapa;
+}
+
 /* Agrupar combustíveis por posto */
 function agruparPorPosto(items) {
     const mapa = {};
-
     items.forEach(p => {
         if (!mapa[p.id]) {
             mapa[p.id] = {
                 nome: p.nome,
                 marca: p.marca,
                 municipio: p.municipio,
-                distrito: p.distrito,
-                morada: p.morada,
                 localidade: p.localidade,
+                morada: p.morada,
                 combustiveis: []
             };
         }
-
         mapa[p.id].combustiveis.push({
             tipo: p.combustivel,
             preco: p.preco,
             atualizado: p.atualizado
         });
     });
-
     return Object.values(mapa);
+}
+
+/* Criar acordeão */
+function criarAcordeao(municipios) {
+    let html = "";
+
+    Object.keys(municipios).sort().forEach(municipio => {
+        const postosAgrupados = agruparPorPosto(municipios[municipio]);
+
+        html += `
+            <div class="card" style="cursor:pointer;" onclick="this.nextElementSibling.classList.toggle('open')">
+                <div class="titulo">📍 ${municipio}</div>
+            </div>
+
+            <div class="conteudo">
+        `;
+
+        postosAgrupados.forEach(p => {
+            html += `
+                <div class="card" style="background:#0f4a36;">
+                    <div class="titulo">${p.marca} – ${p.localidade}</div>
+                    <p><strong>${p.nome}</strong></p>
+                    <hr style="opacity:0.2">
+
+                    ${p.combustiveis.map(c => `
+                        <p><strong>${c.tipo}:</strong> ${c.preco.toFixed(3)} €</p>
+                    `).join("")}
+
+                    <p style="opacity:0.8; font-size:13px;">
+                        Atualizado em ${p.combustiveis[0].atualizado}
+                    </p>
+                </div>
+            `;
+        });
+
+        html += `</div>`;
+    });
+
+    return html;
 }
 
 async function carregarCombustiveisGuarda() {
@@ -164,30 +218,8 @@ async function carregarCombustiveisGuarda() {
             return;
         }
 
-        const postosAgrupados = agruparPorPosto(dados.items);
-
-        let html = "";
-
-        postosAgrupados.forEach(p => {
-            html += `
-                <div class="card">
-                    <div class="titulo">${p.marca} – ${p.municipio}</div>
-                    <p><strong>${p.nome}</strong></p>
-                    <p style="opacity:0.8">${p.localidade}</p>
-                    <hr style="opacity:0.2">
-
-                    ${p.combustiveis.map(c => `
-                        <p><strong>${c.tipo}:</strong> ${c.preco.toFixed(3)} €</p>
-                    `).join("")}
-
-                    <p style="opacity:0.8; font-size:13px;">
-                        Atualizado em ${p.combustiveis[0].atualizado}
-                    </p>
-                </div>
-            `;
-        });
-
-        caixa.innerHTML = html;
+        const municipios = agruparPorMunicipio(dados.items);
+        caixa.innerHTML = criarAcordeao(municipios);
 
     } catch (e) {
         msg.style.display = "none";
