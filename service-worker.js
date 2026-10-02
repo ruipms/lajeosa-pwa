@@ -37,12 +37,28 @@ self.addEventListener("activate", event => {
   clients.claim(); // força atualização da PWA
 });
 
-// Estratégia network-first para HTML
+// FETCH — inclui proxy da API + o teu código original
 self.addEventListener("fetch", event => {
+  const url = new URL(event.request.url);
+
+  // ⭐ PROXY PARA A API DE TRÂNSITO (evita CORS e protege a chave)
+  if (url.pathname === "/api-transito") {
+    event.respondWith(
+      fetch("https://transitoagora.pt/api/v1/incidents?district=guarda&format=json&key=ta_Wxzf2XdErYqc8tpibM0eL4AZZM08dOu")
+        .then(response => response)
+        .catch(() => new Response(JSON.stringify({ error: true }), {
+          headers: { "Content-Type": "application/json" }
+        }))
+    );
+    return; // impede que o resto do SW interfira
+  }
+
+  // ⭐ A PARTIR DAQUI É O TEU CÓDIGO ORIGINAL
+
   const request = event.request;
 
-  // Se for HTML → network-first
-  if (request.headers.get("accept").includes("text/html")) {
+  // Estratégia network-first para HTML
+  if (request.headers.get("accept") && request.headers.get("accept").includes("text/html")) {
     event.respondWith(
       fetch(request)
         .then(response => {
@@ -63,3 +79,4 @@ self.addEventListener("fetch", event => {
     })
   );
 });
+
