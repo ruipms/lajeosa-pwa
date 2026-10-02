@@ -91,7 +91,7 @@
 
 <script>
 async function carregarIncidentes() {
-    const url = "/api-transito"; // agora passa pelo service worker
+    const url = "/api-transito";
 
     try {
         const resposta = await fetch(url);
@@ -100,7 +100,6 @@ async function carregarIncidentes() {
         const lista = document.getElementById("lista");
         lista.innerHTML = "";
 
-        // A API devolve { count: X, incidents: [...] }
         const incidentes = dados.incidents || [];
 
         if (incidentes.length === 0) {
@@ -108,7 +107,28 @@ async function carregarIncidentes() {
             return;
         }
 
+        // ⭐ Remover duplicados: ficar só com o mais recente por título
+        const unicos = {};
+
         incidentes.forEach(item => {
+            const chave = item.title || item.id;
+
+            if (!unicos[chave]) {
+                unicos[chave] = item;
+            } else {
+                const atual = new Date(unicos[chave].updatedAt);
+                const novo = new Date(item.updatedAt);
+
+                if (novo > atual) {
+                    unicos[chave] = item;
+                }
+            }
+        });
+
+        // Converter o objeto em array
+        const listaFinal = Object.values(unicos);
+
+        listaFinal.forEach(item => {
             const card = document.createElement("div");
             card.className = "card";
 
