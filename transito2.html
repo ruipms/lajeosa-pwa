@@ -126,7 +126,18 @@ async function carregarIncidentes() {
         });
 
         // Converter o objeto em array
-        const listaFinal = Object.values(unicos);
+        
+    let listaFinal = Object.values(unicos);
+
+    // ⭐ Filtrar apenas incidentes recentes (últimas 48 horas)
+    const agora = Date.now();
+    const limite = 48 * 60 * 60 * 1000; // 48 horas em ms
+
+    listaFinal = listaFinal.filter(item => {
+    const atualizado = new Date(item.updatedAt).getTime();
+    return (agora - atualizado) <= limite;
+    });
+
 
         listaFinal.forEach(item => {
             const card = document.createElement("div");
