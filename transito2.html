@@ -125,18 +125,24 @@ async function carregarIncidentes() {
             }
         });
 
-        // Converter o objeto em array
-        
-    let listaFinal = Object.values(unicos);
+   // Converter o objeto em array
+let listaFinal = Object.values(unicos);
 
-    // ⭐ Filtrar apenas incidentes recentes (últimas 48 horas)
-    const agora = Date.now();
-    const limite = 48 * 60 * 60 * 1000; // 48 horas em ms
+// ⭐ Filtrar apenas incidentes recentes (últimas 48 horas)
+const agora = Date.now();
+const limite = 48 * 60 * 60 * 1000; // 48 horas em ms
 
-    listaFinal = listaFinal.filter(item => {
+listaFinal = listaFinal.filter(item => {
     const atualizado = new Date(item.updatedAt).getTime();
     return (agora - atualizado) <= limite;
-    });
+});
+
+// ⭐ Se não houver incidentes recentes → mostrar aviso
+if (listaFinal.length === 0) {
+    lista.innerHTML = "<p style='color:#D4AF37;'>Sem ocorrências no momento.</p>";
+    return;
+}
+
 
 
         listaFinal.forEach(item => {
