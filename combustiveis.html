@@ -5,15 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Preços dos Combustíveis – Guarda</title>
 
-<!-- Google tag -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FTEGNRDBJW');
-</script>
-
 <style>
     body {
         background-color: #0F3D2E;
@@ -74,7 +65,6 @@
         font-size: 14px;
     }
 
-    /* Skeleton */
     .skeleton {
         background: linear-gradient(90deg, #134C3A 25%, #1a5a47 50%, #134C3A 75%);
         background-size: 200% 100%;
@@ -89,7 +79,6 @@
         100% { background-position: -200% 0; }
     }
 
-    /* Acordeão */
     .conteudo {
         display: none;
     }
@@ -128,73 +117,27 @@ function mostrarSkeletons() {
     }
 }
 
-/* Agrupar por município */
-function agruparPorMunicipio(items) {
-    const mapa = {};
-    items.forEach(p => {
-        if (!mapa[p.municipio]) mapa[p.municipio] = [];
-        mapa[p.municipio].push(p);
-    });
-    return mapa;
-}
-
-/* Agrupar combustíveis por posto */
-function agruparPorPosto(items) {
-    const mapa = {};
-    items.forEach(p => {
-        if (!mapa[p.id]) {
-            mapa[p.id] = {
-                nome: p.nome,
-                marca: p.marca,
-                municipio: p.municipio,
-                localidade: p.localidade,
-                morada: p.morada,
-                combustiveis: []
-            };
-        }
-        mapa[p.id].combustiveis.push({
-            tipo: p.combustivel,
-            preco: p.preco,
-            atualizado: p.atualizado
-        });
-    });
-    return Object.values(mapa);
-}
-
 /* Criar acordeão */
-function criarAcordeao(municipios) {
+function criarAcordeao(items) {
     let html = "";
 
-    Object.keys(municipios).sort().forEach(municipio => {
-        const postosAgrupados = agruparPorPosto(municipios[municipio]);
-
+    items.forEach(p => {
         html += `
             <div class="card" style="cursor:pointer;" onclick="this.nextElementSibling.classList.toggle('open')">
-                <div class="titulo">📍 ${municipio}</div>
+                <div class="titulo">${p.marca} – ${p.nome}</div>
             </div>
 
             <div class="conteudo">
-        `;
-
-        postosAgrupados.forEach(p => {
-            html += `
                 <div class="card" style="background:#0f4a36;">
-                    <div class="titulo">${p.marca} – ${p.localidade}</div>
-                    <p><strong>${p.nome}</strong></p>
+                    <p><strong>Morada:</strong> ${p.morada}</p>
                     <hr style="opacity:0.2">
 
                     ${p.combustiveis.map(c => `
-                        <p><strong>${c.tipo}:</strong> ${c.preco.toFixed(3)} €</p>
+                        <p><strong>${c.tipo}:</strong> ${c.preco}</p>
                     `).join("")}
-
-                    <p style="opacity:0.8; font-size:13px;">
-                        Atualizado em ${p.combustiveis[0].atualizado}
-                    </p>
                 </div>
-            `;
-        });
-
-        html += `</div>`;
+            </div>
+        `;
     });
 
     return html;
@@ -218,8 +161,7 @@ async function carregarCombustiveisGuarda() {
             return;
         }
 
-        const municipios = agruparPorMunicipio(dados.items);
-        caixa.innerHTML = criarAcordeao(municipios);
+        caixa.innerHTML = criarAcordeao(dados.items);
 
     } catch (e) {
         msg.style.display = "none";
