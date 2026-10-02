@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trânsito – Lajeosa</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #0F3D2E;
+        color: white;
+        text-align: center;
+        padding-bottom: 40px;
+    }
+
+    header img {
+        width: 120px;
+        margin: 0 auto;
+        display: block;
+        padding-top: 20px;
+    }
+
+    .btn-voltar {
+        display: block;
+        margin: 12px auto 0 auto;
+        padding: 10px 18px;
+        border-radius: 18px;
+        background-color: #1F5C45;
+        border: 1px solid #D4AF37;
+        color: #D4AF37;
+        font-size: 15px;
+        text-decoration: none;
+        width: fit-content;
+        cursor: pointer;
+    }
+
+    .sec-title {
+        color: #D4AF37;
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .card {
+        background-color: #1F5C45;
+        padding: 16px;
+        border-radius: 18px;
+        margin: 16px 20px;
+        border: 1px solid rgba(212,175,55,0.4);
+        text-align: left;
+    }
+
+    .card i {
+        font-size: 26px;
+        color: #D4AF37;
+        margin-right: 10px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #D4AF37;
+        margin-bottom: 6px;
+    }
+
+    .card small {
+        opacity: 0.8;
+        font-size: 13px;
+    }
+
+    .source {
+        margin-top: 8px;
+        font-size: 12px;
+        color: #D4AF37;
+        opacity: 0.8;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa">
+    <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
+    <h1>Trânsito</h1>
+    <p style="color:#D4AF37; font-size:14px;">Fonte: transitoagora.pt</p>
+</header>
+
+<h2 class="sec-title">Ocorrências no Distrito da Guarda</h2>
+
+<div id="lista"></div>
+
+<script>
+async function carregarIncidentes() {
+    const url = "https://transitoagora.pt/api/v1/incidents?district=guarda&format=json";
+
+    try {
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
+
+        const lista = document.getElementById("lista");
+        lista.innerHTML = "";
+
+        if (dados.length === 0) {
+            lista.innerHTML = "<p style='color:#D4AF37;'>Sem ocorrências no momento.</p>";
+            return;
+        }
+
+        dados.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const icone = {
+                accident: "fa-car-burst",
+                fire: "fa-fire",
+                weather: "fa-cloud-rain",
+                traffic: "fa-road",
+                closure: "fa-ban",
+                transit: "fa-bus"
+            }[item.type] || "fa-circle-info";
+
+            card.innerHTML = `
+                <div class="card-title">
+                    <i class="fa-solid ${icone}"></i>
+                    ${item.type.toUpperCase()}
+                </div>
+
+                <p><strong>Concelho:</strong> ${item.municipality || "—"}</p>
+                <p><strong>Descrição:</strong> ${item.description || "—"}</p>
+                <p><strong>Início:</strong> ${new Date(item.start).toLocaleString("pt-PT")}</p>
+                <p><strong>Estrada:</strong> ${item.road || "Não especificado"}</p>
+
+                <div class="source">Fonte: ${item.source}</div>
+            `;
+
+            lista.appendChild(card);
+        });
+
+    } catch (erro) {
+        document.getElementById("lista").innerHTML =
+            "<p style='color:#D4AF37;'>Erro ao carregar dados.</p>";
+    }
+}
+
+function openPage(page) {
+    window.location.href = page;
+}
+
+carregarIncidentes();
+</script>
+
+</body>
+</html>
