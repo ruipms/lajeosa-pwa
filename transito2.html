@@ -67,11 +67,6 @@
         margin-bottom: 6px;
     }
 
-    .card small {
-        opacity: 0.8;
-        font-size: 13px;
-    }
-
     .source {
         margin-top: 8px;
         font-size: 12px;
@@ -96,7 +91,7 @@
 
 <script>
 async function carregarIncidentes() {
-    const url = "https://transitoagora.pt/api/v1/incidents?district=guarda&format=json";
+    const url = "/api-transito"; // agora passa pelo service worker
 
     try {
         const resposta = await fetch(url);
@@ -105,12 +100,15 @@ async function carregarIncidentes() {
         const lista = document.getElementById("lista");
         lista.innerHTML = "";
 
-        if (dados.length === 0) {
+        // A API devolve { count: X, incidents: [...] }
+        const incidentes = dados.incidents || [];
+
+        if (incidentes.length === 0) {
             lista.innerHTML = "<p style='color:#D4AF37;'>Sem ocorrências no momento.</p>";
             return;
         }
 
-        dados.forEach(item => {
+        incidentes.forEach(item => {
             const card = document.createElement("div");
             card.className = "card";
 
@@ -126,12 +124,13 @@ async function carregarIncidentes() {
             card.innerHTML = `
                 <div class="card-title">
                     <i class="fa-solid ${icone}"></i>
-                    ${item.type.toUpperCase()}
+                    ${item.title || item.type.toUpperCase()}
                 </div>
 
-                <p><strong>Concelho:</strong> ${item.municipality || "—"}</p>
+                <p><strong>Concelho:</strong> ${item.district || "—"}</p>
                 <p><strong>Descrição:</strong> ${item.description || "—"}</p>
-                <p><strong>Início:</strong> ${new Date(item.start).toLocaleString("pt-PT")}</p>
+                <p><strong>Início:</strong> ${new Date(item.startedAt).toLocaleString("pt-PT")}</p>
+                <p><strong>Última atualização:</strong> ${new Date(item.updatedAt).toLocaleString("pt-PT")}</p>
                 <p><strong>Estrada:</strong> ${item.road || "Não especificado"}</p>
 
                 <div class="source">Fonte: ${item.source}</div>
