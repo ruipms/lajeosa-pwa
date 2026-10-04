@@ -111,23 +111,18 @@ async function carregar() {
             const card = document.createElement("div");
             card.className = "posto-card";
 
-            let html = `
+            card.innerHTML = `
                 <div class="posto-nome">${p.nome} — ${p.marca}</div>
-                <div><strong>Local:</strong> ${p.localidade}, ${p.concelho}</div>
+                <div><strong>Município:</strong> ${p.municipio}</div>
+                <div><strong>Localidade:</strong> ${p.localidade}</div>
                 <div><strong>Morada:</strong> ${p.morada || "—"}</div>
                 <hr style="opacity:0.2">
+                <div class="combustivel">
+                    <strong>${p.combustivel}:</strong> ${p.preco}
+                    <span style="opacity:0.7; font-size:14px;">(${p.data})</span>
+                </div>
             `;
 
-            p.combustiveis.forEach(c => {
-                html += `
-                    <div class="combustivel">
-                        <strong>${c.tipo}:</strong> ${c.preco} € 
-                        <span style="opacity:0.7; font-size:14px;">(${c.data})</span>
-                    </div>
-                `;
-            });
-
-            card.innerHTML = html;
             lista.appendChild(card);
         });
 
