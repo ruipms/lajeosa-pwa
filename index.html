@@ -1,297 +1,145 @@
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lajeosa do Mondego</title>
-
-    <!-- Google tag -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-FTEGNRDBJW');
-    </script>
-
-    <!-- Métricas avançadas da PWA -->
-    <script>
-    /* 1) Instalação da PWA */
-    window.addEventListener('appinstalled', () => {
-        gtag('event', 'pwa_install', {
-            event_category: 'PWA',
-            event_label: 'Instalação da App'
-        });
-    });
-
-    /* 2) Abertura via ícone do ecrã inicial */
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-        gtag('event', 'pwa_launch_icon', {
-            event_category: 'PWA',
-            event_label: 'Abertura via ícone'
-        });
-    }
-
-    /* 3) Primeira visita vs visita recorrente */
-    if (!localStorage.getItem('pwa_first_visit')) {
-        localStorage.setItem('pwa_first_visit', '1');
-        gtag('event', 'pwa_first_open', {
-            event_category: 'PWA',
-            event_label: 'Primeira visita'
-        });
-    } else {
-        gtag('event', 'pwa_return_open', {
-            event_category: 'PWA',
-            event_label: 'Visita recorrente'
-        });
-    }
-
-    /* 4) Uso offline */
-    window.addEventListener('offline', () => {
-        gtag('event', 'pwa_offline_use', {
-            event_category: 'PWA',
-            event_label: 'Uso offline'
-        });
-    });
-
-    /* 5) Erro de rede */
-    window.addEventListener('error', (e) => {
-        if (e.message && e.message.includes('Failed to fetch')) {
-            gtag('event', 'pwa_network_error', {
-                event_category: 'PWA',
-                event_label: 'Erro de rede'
-            });
-        }
-    });
-
-    /* 6) Origem: WhatsApp / Instagram / Facebook */
-    document.addEventListener('DOMContentLoaded', () => {
-        const ref = document.referrer;
-
-        if (ref.includes('whatsapp')) gtag('event', 'pwa_open_whatsapp');
-        if (ref.includes('instagram')) gtag('event', 'pwa_open_instagram');
-        if (ref.includes('facebook')) gtag('event', 'pwa_open_facebook');
-    });
-
-    /* 7) Atualização da PWA */
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-            gtag('event', 'pwa_update_trigger', {
-                event_category: 'PWA',
-                event_label: 'Atualização da aplicação'
-            });
-        });
-    }
-
-    /* 8) Tempo real dentro da PWA (ping a cada 15s) */
-    setInterval(() => {
-        gtag('event', 'pwa_active_tick', {
-            event_category: 'PWA',
-            event_label: 'Atividade contínua'
-        });
-    }, 15000);
-    </script>
-
-    <!-- Manifest -->
-    <link rel="manifest" href="manifest.json">
-
-    <!-- Ícone -->
-    <link rel="icon" href="assets/brasao.png">
-
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0F3D2E;
-            color: white;
-            text-align: center;
-        }
-
-        header {
-            padding: 20px;
-        }
-
-        header img {
-            width: 140px;
-        }
-
-        h1 {
-            margin-top: 10px;
-            font-size: 26px;
-            font-weight: bold;
-        }
-
-        .sec-title {
-            color: #D4AF37;
-            font-size: 20px;
-            font-weight: bold;
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 16px;
-            padding: 10px 20px;
-        }
-
-        .card {
-            background-color: #1F5C45;
-            padding: 18px;
-            border-radius: 18px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .card:hover {
-            background-color: #2a7a5e;
-        }
-
-        .card i {
-            font-size: 36px;
-            color: #D4AF37;
-        }
-
-        .card p {
-            font-size: 17px;
-            margin-top: 8px;
-        }
-
-        .card-full {
-            background-color: #1F5C45;
-            padding: 18px;
-            border-radius: 18px;
-            margin: 16px 20px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .card-full:hover {
-            background-color: #2a7a5e;
-        }
-
-        .card-full i {
-            font-size: 36px;
-            color: #D4AF37;
-        }
-
-        footer {
-            margin-top: 30px;
-            padding: 10px;
-            font-size: 14px;
-            opacity: 0.7;
-        }
-    </style>
-
-    <!-- Ícones -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-</head>
-
 <body>
 
 <header>
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
     <h1>Lajeosa do Mondego</h1>
 
-   <p id="dataAtual" style="color:#D4AF37; font-size:14px; font-weight:bold; margin-top:4px;">
-    <!-- A data aparece aqui automaticamente -->
-   </p>
+    <p id="dataAtual" style="color:#D4AF37; font-size:14px; font-weight:bold; margin-top:4px;"></p>
 
+    <p style="color:#D4AF37; font-size:15px; font-weight:bold; margin-top:12px;">
+        📂 Carregue em cada categoria para revelar os vários menus disponíveis
+    </p>
 
     <p style="color:#D4AF37; font-size:13px; margin-top:2px; cursor:pointer;"
        onclick="openPage('changelog.html')">
         📜 Clique para ver histórico de alterações na app
     </p>
-
-    <p style="color:#D4AF37; font-size:13px; margin-top:6px; opacity:0.9;">
-        Continue a deslizar para ver mais conteúdos
-    </p>
 </header>
 
-<h2 class="sec-title">Instituições</h2>
-<div class="grid">
-    <div class="card" onclick="openPage('junta.html')">
-        <i class="fas fa-landmark"></i>
-        <p>Junta de Freguesia</p>
-    </div>
 
-    <div class="card" onclick="openPage('servicos.html')">
-        <i class="fas fa-briefcase"></i>
-        <p>Serviços na Freguesia</p>
-    </div>
+<!-- ============================
+     ACORDEÃO: INSTITUIÇÕES
+============================= -->
+<details class="accordion">
+    <summary class="sec-title">Instituições</summary>
 
-    <div class="card" onclick="openPage('noticias.html')">
-        <i class="fas fa-newspaper"></i>
-        <p>Notícias</p>
-    </div>
+    <div class="grid">
+        <div class="card" onclick="openPage('junta.html')">
+            <i class="fas fa-landmark"></i>
+            <p>Junta de Freguesia</p>
+        </div>
 
-    <div class="card" onclick="openPage('eventos.html')">
-        <i class="fas fa-calendar-alt"></i>
-        <p>Eventos</p>
-    </div>
-</div>
+        <div class="card" onclick="openPage('servicos.html')">
+            <i class="fas fa-briefcase"></i>
+            <p>Serviços na Freguesia</p>
+        </div>
 
-<h2 class="sec-title">Aldeia</h2>
-<div class="grid">
-    <div class="card" onclick="openPage('pontos.html')">
-        <i class="fas fa-map-marker-alt"></i>
-        <p>Pontos de Interesse</p>
-    </div>
+        <div class="card" onclick="openPage('noticias.html')">
+            <i class="fas fa-newspaper"></i>
+            <p>Notícias</p>
+        </div>
 
-    <div class="card" onclick="openPage('historia.html')">
-        <i class="fas fa-book"></i>
-        <p>História e Tradições</p>
+        <div class="card" onclick="openPage('eventos.html')">
+            <i class="fas fa-calendar-alt"></i>
+            <p>Eventos</p>
+        </div>
     </div>
+</details>
 
-    <div class="card" onclick="openPage('meteorologia.html')">
-        <i class="fas fa-cloud-sun"></i>
-        <p>Meteorologia</p>
-    </div>
 
-    <div class="card" onclick="openPage('redessociais.html')">
-        <i class="fas fa-share-alt"></i>
-        <p>Lajeosa nas redes sociais</p>
-    </div>
-</div>
+<!-- ============================
+     ACORDEÃO: ALDEIA
+============================= -->
+<details class="accordion">
+    <summary class="sec-title">Aldeia</summary>
 
-<h2 class="sec-title">Clube</h2>
-<div class="grid">
-    <div class="card" onclick="openPage('clube.html')">
-        <i class="fas fa-futbol"></i>
-        <p>CRC Lajeosa do Mondego</p>
-    </div>
-</div>
+    <div class="grid">
+        <div class="card" onclick="openPage('pontos.html')">
+            <i class="fas fa-map-marker-alt"></i>
+            <p>Pontos de Interesse</p>
+        </div>
 
-<h2 class="sec-title">Utilidade</h2>
-<div class="grid">
-    <div class="card" onclick="openPage('contactos.html')">
-        <i class="fas fa-phone"></i>
-        <p>Comércio e serviços</p>
-    </div>
-    <div class="card" onclick="openPage('associacoes.html')">
-        <i class="fas fa-people-group"></i>
-        <p>Associações</p>
-    </div>
+        <div class="card" onclick="openPage('historia.html')">
+            <i class="fas fa-book"></i>
+            <p>História e Tradições</p>
+        </div>
 
-    <div class="card" onclick="openPage('horarios.html')">
-        <i class="fas fa-bus"></i>
-        <p>Horários da Camioneta</p>
-    </div>
-   <div class="card" onclick="openPage('seguranca.html')">
-        <i class="fas fa-triangle-exclamation"></i>
-        <p>Segurança e avisos</p>
-    </div>
+        <div class="card" onclick="openPage('meteorologia.html')">
+            <i class="fas fa-cloud-sun"></i>
+            <p>Meteorologia</p>
+        </div>
 
-</div>
-<h2 class="sec-title">Jogos</h2>
-<div class="grid">
-    <div class="card" onclick="openPage('jogos.html')">
-        <i class="fas fa-gamepad"></i>
-        <p>Jogos</p>
+        <div class="card" onclick="openPage('redessociais.html')">
+            <i class="fas fa-share-alt"></i>
+            <p>Lajeosa nas redes sociais</p>
+        </div>
     </div>
-</div>
+</details>
 
+
+<!-- ============================
+     ACORDEÃO: CLUBE
+============================= -->
+<details class="accordion">
+    <summary class="sec-title">Clube</summary>
+
+    <div class="grid">
+        <div class="card" onclick="openPage('clube.html')">
+            <i class="fas fa-futbol"></i>
+            <p>CRC Lajeosa do Mondego</p>
+        </div>
+    </div>
+</details>
+
+
+<!-- ============================
+     ACORDEÃO: UTILIDADE
+============================= -->
+<details class="accordion">
+    <summary class="sec-title">Utilidade</summary>
+
+    <div class="grid">
+        <div class="card" onclick="openPage('contactos.html')">
+            <i class="fas fa-phone"></i>
+            <p>Comércio e serviços</p>
+        </div>
+
+        <div class="card" onclick="openPage('associacoes.html')">
+            <i class="fas fa-people-group"></i>
+            <p>Associações</p>
+        </div>
+
+        <div class="card" onclick="openPage('horarios.html')">
+            <i class="fas fa-bus"></i>
+            <p>Horários da Camioneta</p>
+        </div>
+
+        <div class="card" onclick="openPage('seguranca.html')">
+            <i class="fas fa-triangle-exclamation"></i>
+            <p>Segurança e avisos</p>
+        </div>
+    </div>
+</details>
+
+
+<!-- ============================
+     ACORDEÃO: JOGOS
+============================= -->
+<details class="accordion">
+    <summary class="sec-title">Jogos</summary>
+
+    <div class="grid">
+        <div class="card" onclick="openPage('jogos.html')">
+            <i class="fas fa-gamepad"></i>
+            <p>Jogos</p>
+        </div>
+    </div>
+</details>
+
+
+<!-- ============================
+     CARTÕES FINAIS
+============================= -->
 <div class="card-full" onclick="openPage('aplicacao.html')">
     <i class="fas fa-mobile-alt"></i>
     <p>Instalar como Aplicação</p>
@@ -317,21 +165,10 @@
         window.location.href = page;
     }
 
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js');
-    }
-</script>
-    <script>
-    function openPage(page) {
-        window.location.href = page;
-    }
-
-    // Mostrar data atual automaticamente
     const hoje = new Date();
     const dia = String(hoje.getDate()).padStart(2, '0');
     const mes = String(hoje.getMonth() + 1).padStart(2, '0');
     const ano = hoje.getFullYear();
-
     document.getElementById('dataAtual').textContent = `${dia}/${mes}/${ano}`;
 
     if ('serviceWorker' in navigator) {
@@ -339,6 +176,4 @@
     }
 </script>
 
-
 </body>
-</html>
