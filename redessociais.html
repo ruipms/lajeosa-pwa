@@ -39,13 +39,15 @@
         }
 
         /* Grelha de duas colunas responsiva */
-        .social-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            max-width: 500px;
-            margin: 0 auto;
-        }
+      .social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 900px; /* permite 2 colunas no telemóvel e 3 no PC */
+    margin: 0 auto;
+}
+
 
         .icon-card {
             background-color: #1F5C45;
