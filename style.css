@@ -77,7 +77,7 @@ header h1 {
        background-color: var(--cor-cartao-castanho) !important;
     */
 
-    background-color: var(--cor-cartao-escuro) !important; /* ← MUDA ESTA LINHA */
+    background-color: var(--cor-cartao-castanho-escuro) !important; /* ← MUDA ESTA LINHA */
 
     padding: 18px !important;
     border-radius: 20px !important;
