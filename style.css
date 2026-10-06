@@ -5,11 +5,14 @@
 :root {
     --verde-base: #0D3628;      /* Fundo premium */
     --verde-sec: #1F5C45;       /* Verde secundário */
-    --verde-light: #2A7A5E;     /* Verde claro (primavera) */
     --dourado: #E3C15A;         /* Dourado quente */
     --dourado-light: #e6c96a;   /* Dourado claro */
-    --cinza-quente: #C7C2B8;    /* Inverno */
-    --castanho-suave: #8C6E4A;  /* Outono */
+
+    /* Cores disponíveis para os cartões (para uso manual) */
+    --cor-cartao-verde-claro: #2A7A5E;   /* Primavera */
+    --cor-cartao-castanho: #8C6E4A;      /* Outono */
+    --cor-cartao-azul-suave: #3A7CA5;    /* Verão */
+    --cor-cartao-cinzento: #C7C2B8;      /* Inverno */
 }
 
 /* ===========================
@@ -56,10 +59,25 @@ header h1 {
 }
 
 /* ===========================
-   CARTÕES (cor vem do tema sazonal)
+   CARTÕES
    =========================== */
 
 .card {
+
+    /* ⭐⭐ ALTERA AQUI A COR DOS CARTÕES ⭐⭐
+       Escolhe uma das opções abaixo e substitui a variável:
+
+       Verde claro elegante  → var(--cor-cartao-verde-claro)
+       Castanho suave        → var(--cor-cartao-castanho)
+       Azul suave            → var(--cor-cartao-azul-suave)
+       Cinzento quente       → var(--cor-cartao-cinzento)
+
+       Exemplo:
+       background-color: var(--cor-cartao-castanho) !important;
+    */
+
+    background-color: var(--cor-cartao-castanho) !important; /* ← MUDA ESTA LINHA */
+
     padding: 18px !important;
     border-radius: 20px !important;
     margin: 16px 20px !important;
@@ -128,7 +146,7 @@ header h1 {
    =========================== */
 
 .alert-avisos {
-    background: linear-gradient(135deg, var(--verde-light), var(--verde-sec)) !important;
+    background: linear-gradient(135deg, var(--cor-cartao-verde-claro), var(--verde-sec)) !important;
     color: var(--dourado) !important;
     border: 2px solid var(--dourado) !important;
     box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
