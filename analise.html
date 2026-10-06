@@ -78,6 +78,25 @@
             line-height: 1.5;
         }
 
+        table {
+            width: 90%;
+            margin: auto;
+            margin-top: 20px;
+            color: white;
+            border-collapse: collapse;
+        }
+
+        th {
+            padding: 10px;
+            background-color: #1F5C45;
+            color: #D4AF37;
+        }
+
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #1F5C45;
+        }
+
         footer {
             margin-top: 30px;
             padding: 10px;
@@ -135,6 +154,13 @@
 <canvas id="grafico1"></canvas>
 <canvas id="grafico2"></canvas>
 
+<!-- PÁGINAS MAIS VISTAS -->
+<h2 style="color:#D4AF37; margin-top:40px;">📄 Páginas mais vistas</h2>
+
+<table id="tabelaPaginas"></table>
+
+<canvas id="graficoPaginas" style="margin-top:30px;"></canvas>
+
 <footer>
     2026 Lajeosa do Mondego — ©RMS
 </footer>
@@ -147,19 +173,16 @@ async function carregarAnalytics() {
 
         const rows = dados.analytics.rows || [];
 
-        // Extrair métricas (todas na mesma row)
         const activeUsers = rows[0]?.metricValues[0]?.value || 0;
         const newUsers = rows[0]?.metricValues[1]?.value || 0;
         const pageViews = rows[0]?.metricValues[2]?.value || 0;
         const eventCount = rows[0]?.metricValues[3]?.value || 0;
 
-        // Atualizar cartões
         document.getElementById("activeUsers").textContent = activeUsers;
         document.getElementById("newUsers").textContent = newUsers;
         document.getElementById("pageViews").textContent = pageViews;
         document.getElementById("eventCount").textContent = eventCount;
 
-        // GRÁFICO 1 — barras
         new Chart(document.getElementById("grafico1"), {
             type: "bar",
             data: {
@@ -176,7 +199,6 @@ async function carregarAnalytics() {
             }
         });
 
-        // GRÁFICO 2 — linha
         new Chart(document.getElementById("grafico2"), {
             type: "line",
             data: {
@@ -199,10 +221,68 @@ async function carregarAnalytics() {
     }
 }
 
+async function carregarPaginas() {
+    try {
+        const resp = await fetch("https://small-glade-3bb9.ruijpms.workers.dev/?feed=analytics-pages");
+        const dados = await resp.json();
+
+        const rows = dados.pages.rows || [];
+
+        let html = `
+            <tr>
+                <th>Página</th>
+                <th>Vistas</th>
+            </tr>
+        `;
+
+        const labels = [];
+        const valores = [];
+
+        rows.forEach(r => {
+            const pagina = r.dimensionValues[0].value;
+            const vistas = r.metricValues[0].value;
+
+            labels.push(pagina);
+            valores.push(vistas);
+
+            html += `
+                <tr>
+                    <td>${pagina}</td>
+                    <td>${vistas}</td>
+                </tr>
+            `;
+        });
+
+        document.getElementById("tabelaPaginas").innerHTML = html;
+
+        new Chart(document.getElementById("graficoPaginas"), {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: "Vistas por página",
+                    data: valores,
+                    backgroundColor: "#D4AF37"
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+    } catch (e) {
+        alert("Erro ao carregar páginas mais vistas.");
+        console.error(e);
+    }
+}
+
 carregarAnalytics();
+carregarPaginas();
 </script>
 
 </body>
 </html>
+
 
 
