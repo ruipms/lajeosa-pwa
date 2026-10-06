@@ -77,6 +77,20 @@
         background-color: #c09a2f;
     }
 
+    #countdownBox {
+        display: none;
+        font-size: 80px;
+        font-weight: bold;
+        color: #D4AF37;
+        margin-top: 20px;
+        background-color: #134C3A;
+        padding: 40px;
+        border-radius: 18px;
+        width: 200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     #jogoArea {
         position: relative;
         width: 100%;
@@ -174,12 +188,14 @@
     </ul>
     <p>Se falhares 5 alvos, o jogo termina.</p>
     <p>Boa sorte… podes vir a ser a nova contratação do CRC, mas primeiro tens de passar neste teste!</p>
-   <p>-------r</p>
-    <p>O tabuleiro do jogo está abaixo do botão iniciar jogo</p>
-   <p>Desliza o ecrã do telemóvel até o veres, antes de começar</p>
+   <p>-------</p>
+   <p>Assim que carregares no botão de iniciar o jogo, verás uma contagem decrescente de 5 segundos</p>
+   <p>Verás o tabuleiro de jogo mais abaixo no ecrã.</p>
 </div>
 
 <button id="btnStart">Iniciar Jogo</button>
+
+<div id="countdownBox">5</div>
 
 <div id="pontuacao">Pontuação: 0</div>
 <div id="falhas">Falhas: 0 / 5</div>
@@ -195,6 +211,41 @@
 let pontos = 0;
 let falhas = 0;
 let jogoAtivo = false;
+
+function iniciarContagem() {
+    const btn = document.getElementById("btnStart");
+    const box = document.getElementById("countdownBox");
+
+    btn.style.display = "none";
+    box.style.display = "block";
+
+    let n = 5;
+    box.textContent = n;
+
+    const intervalo = setInterval(() => {
+        n--;
+        box.textContent = n;
+
+        if (n === 0) {
+            clearInterval(intervalo);
+            box.style.display = "none";
+            iniciarJogo();
+        }
+    }, 1000);
+}
+
+function iniciarJogo() {
+    pontos = 0;
+    falhas = 0;
+    jogoAtivo = true;
+
+    document.getElementById("pontuacao").textContent = "Pontuação: 0";
+    document.getElementById("falhas").textContent = "Falhas: 0 / 5";
+
+    document.getElementById("jogoArea").style.display = "block";
+
+    gerarAlvo();
+}
 
 function gerarAlvo() {
     if (!jogoAtivo) return;
@@ -262,6 +313,9 @@ function terminarJogo() {
     }
 
     guardarPontuacao(nome, pontos);
+
+    document.getElementById("btnStart").style.display = "block";
+    document.getElementById("jogoArea").style.display = "none";
 }
 
 function guardarPontuacao(nome, p) {
@@ -304,18 +358,7 @@ function atualizarLeaderboard() {
     tabela.innerHTML = html;
 }
 
-document.getElementById("btnStart").onclick = () => {
-    pontos = 0;
-    falhas = 0;
-    jogoAtivo = true;
-
-    document.getElementById("pontuacao").textContent = "Pontuação: 0";
-    document.getElementById("falhas").textContent = "Falhas: 0 / 5";
-
-    document.getElementById("jogoArea").style.display = "block";
-
-    gerarAlvo();
-};
+document.getElementById("btnStart").onclick = iniciarContagem;
 
 atualizarLeaderboard();
 </script>
