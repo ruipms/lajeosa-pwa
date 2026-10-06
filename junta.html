@@ -35,6 +35,14 @@
       margin-bottom: 8px;
     }
 
+    /* Forçar telefone para a linha seguinte + evitar overflow */
+    .card li a {
+      display: block;
+      margin-top: 4px;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
     /* Imagens pequenas */
     .notice-img {
       width: 60%;
@@ -98,16 +106,19 @@
     <div class="card">
       <h3><i class="fas fa-users"></i> Executivo da Junta</h3>
       <ul>
-        <li><strong>Presidente:</strong> Rui Ascensão — 
-            <a href="tel:966313773">966 313 773</a>
+        <li>
+          <strong>Presidente:</strong> Rui Ascensão
+          <a href="tel:966313773">966 313 773</a>
         </li>
 
-        <li><strong>Secretária:</strong> Maria Ana Costa — 
-            <a href="tel:968023993">968 023 993</a>
+        <li>
+          <strong>Secretária:</strong> Maria Ana Costa
+          <a href="tel:968023993">968 023 993</a>
         </li>
 
-        <li><strong>Tesoureiro:</strong> Paulo Santos — 
-            <a href="tel:963255536">963 255 536</a>
+        <li>
+          <strong>Tesoureiro:</strong> Paulo Santos
+          <a href="tel:963255536">963 255 536</a>
         </li>
       </ul>
     </div>
@@ -122,20 +133,23 @@
     <div class="card">
       <h3><i class="fas fa-address-book"></i> Contactos</h3>
       <ul>
-        <li><i class="fas fa-phone"></i> 
-            <strong>Telefone:</strong> 
-            <a href="tel:271741880">271 741 880</a>
+        <li>
+          <i class="fas fa-phone"></i>
+          <strong>Telefone:</strong>
+          <a href="tel:271741880">271 741 880</a>
         </li>
 
-        <li><i class="fas fa-envelope"></i> 
-            <strong>Email:</strong> 
-            <a href="mailto:juntalageosamondego@hotmail.com">
-              juntalageosamondego@hotmail.com
-            </a>
+        <li>
+          <i class="fas fa-envelope"></i>
+          <strong>Email:</strong>
+          <a href="mailto:juntalageosamondego@hotmail.com">
+            juntalageosamondego@hotmail.com
+          </a>
         </li>
 
-        <li><i class="fas fa-map-marker-alt"></i> 
-            <strong>Morada:</strong> Rua de São Martinho, 6360-511 Lajeosa do Mondego
+        <li>
+          <i class="fas fa-map-marker-alt"></i>
+          <strong>Morada:</strong> Rua de São Martinho, 6360-511 Lajeosa do Mondego
         </li>
       </ul>
     </div>
@@ -189,4 +203,5 @@ window.onload = function() {
 
 </body>
 </html>
+
 
