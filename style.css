@@ -3,10 +3,10 @@
    =========================== */
 
 :root {
-    --verde-base: #0F3D2E;
+    --verde-base: #0D3628;
     --verde-sec: #1F5C45;
-    --verde-light: #2a7a5e;
-    --dourado: #D4AF37;
+    --verde-light: #2A7A5E;
+    --dourado: #E3C15A;
     --dourado-light: #e6c96a;
     --cinza-quente: #C7C2B8;
     --castanho-suave: #8C6E4A;
@@ -37,6 +37,7 @@ header {
 
 header h1 {
     color: var(--dourado) !important;
+    text-shadow: 0 0 6px rgba(227,193,90,0.4);
 }
 
 /* ===========================
@@ -44,25 +45,31 @@ header h1 {
    =========================== */
 
 .card {
-    background: linear-gradient(135deg, var(--verde-sec), var(--verde-base)) !important;
+    background-color: var(--verde-light) !important;
     padding: 18px !important;
     border-radius: 20px !important;
     margin: 16px 20px !important;
-    border: 1px solid rgba(212,175,55,0.4) !important;
+    border: 1px solid rgba(227,193,90,0.4) !important;
     color: white !important;
     text-align: left !important;
-    box-shadow: 0 0 12px rgba(212,175,55,0.35) !important;
+    box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
     transition: transform 0.25s, box-shadow 0.25s !important;
+    border-left: 4px solid var(--dourado) !important;
 }
 
 .card:hover {
     transform: translateY(-4px) !important;
-    box-shadow: 0 0 18px rgba(212,175,55,0.55) !important;
+    box-shadow: 0 0 18px rgba(227,193,90,0.55) !important;
 }
 
 .card h3 {
     color: var(--dourado) !important;
     font-size: 22px !important;
+    text-shadow: 0 0 6px rgba(227,193,90,0.4);
+}
+
+.card h3 i {
+    color: var(--castanho-suave) !important;
 }
 
 /* ===========================
@@ -72,7 +79,7 @@ header h1 {
 .notice-img {
     border: 3px solid var(--dourado) !important;
     border-radius: 14px !important;
-    box-shadow: 0 0 10px rgba(212,175,55,0.35) !important;
+    box-shadow: 0 0 10px rgba(227,193,90,0.35) !important;
     transition: transform 0.25s !important;
 }
 
@@ -88,7 +95,7 @@ header h1 {
     background: linear-gradient(135deg, var(--verde-light), var(--verde-sec)) !important;
     color: var(--dourado) !important;
     border: 2px solid var(--dourado) !important;
-    box-shadow: 0 0 12px rgba(212,175,55,0.35) !important;
+    box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
     border-radius: 16px !important;
 }
 
@@ -106,3 +113,30 @@ header h1 {
 .back-button:hover {
     color: var(--dourado-light) !important;
 }
+
+/* ===========================
+   LINKS E TEXTO
+   =========================== */
+
+.card li a {
+    display: block;
+    margin-top: 4px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    color: var(--dourado) !important;
+    font-weight: bold !important;
+}
+
+/* ===========================
+   DETALHES EXTRA
+   =========================== */
+
+.card li {
+    margin-bottom: 8px !important;
+}
+
+.card ul {
+    list-style: none !important;
+    padding-left: 20px !important;
+}
+
