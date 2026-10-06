@@ -6,7 +6,7 @@
     <title>Lajeosa nas Redes Sociais</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -42,33 +42,33 @@
         /* Grelha responsiva */
         .social-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 20px;
             width: 100%;
             max-width: 900px;
             margin: 0 auto;
         }
 
-        /* Ajuste dos cartões dentro da grelha */
+        /* Cartão compacto (override do style.css) */
         .social-grid .card {
-            width: 100%;
-            min-height: 160px;
+            padding: 14px !important;
+            margin: 0 !important;
+            min-height: 140px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center !important;
-            cursor: pointer;
         }
 
         .social-grid .card i {
-            font-size: 60px;
+            font-size: 50px;
             color: var(--dourado);
             margin-bottom: 10px;
         }
 
         .icon-label {
-            font-size: 18px;
+            font-size: 16px;
             color: var(--dourado);
         }
 
@@ -98,7 +98,6 @@
 
 <div class="social-grid">
 
-    <!-- Grupo da Lajeosa -->
     <a href="https://www.facebook.com/groups/178632112150037" target="_blank">
         <div class="card">
             <i class="fab fa-facebook"></i>
@@ -106,7 +105,6 @@
         </div>
     </a>
 
-    <!-- Junta de Freguesia -->
     <a href="https://www.facebook.com/lajeosadomondego" target="_blank">
         <div class="card">
             <i class="fab fa-facebook"></i>
@@ -114,7 +112,6 @@
         </div>
     </a>
 
-    <!-- CRC -->
     <a href="https://www.facebook.com/p/CRC-Lajeosa-do-Mondego-61576945611396/" target="_blank">
         <div class="card">
             <i class="fab fa-facebook"></i>
@@ -122,7 +119,6 @@
         </div>
     </a>
 
-    <!-- Página não oficial -->
     <a href="https://www.facebook.com/lageosamondego/" target="_blank">
         <div class="card">
             <i class="fab fa-facebook"></i>
@@ -130,7 +126,6 @@
         </div>
     </a>
 
-    <!-- X -->
     <a href="https://x.com/Lagmondego" target="_blank">
         <div class="card">
             <i class="fab fa-x-twitter"></i>
@@ -138,7 +133,6 @@
         </div>
     </a>
 
-    <!-- Instagram -->
     <a href="https://www.instagram.com/lageosa_do_mondego?igsh=MXAyMHZmb2ludGt2aw==" target="_blank">
         <div class="card">
             <i class="fab fa-instagram"></i>
@@ -146,7 +140,6 @@
         </div>
     </a>
 
-    <!-- WhatsApp -->
     <a href="https://whatsapp.com/channel/0029Vb82Q4v8PgsKSqxQHb46" target="_blank">
         <div class="card">
             <i class="fab fa-whatsapp"></i>
@@ -154,7 +147,6 @@
         </div>
     </a>
 
-    <!-- Telegram -->
     <a href="https://t.me/+3ePMiWdS-9NmMDI0" target="_blank">
         <div class="card">
             <i class="fab fa-telegram"></i>
