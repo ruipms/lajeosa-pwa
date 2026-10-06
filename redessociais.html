@@ -6,7 +6,7 @@
     <title>Lajeosa nas Redes Sociais</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- Google tag -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -49,13 +49,19 @@
             margin: 0 auto;
         }
 
-        /* Cartão global */
-        .card {
+        /* Ajuste dos cartões dentro da grelha */
+        .social-grid .card {
+            width: 100%;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center !important;
             cursor: pointer;
         }
 
-        .card i {
+        .social-grid .card i {
             font-size: 60px;
             color: var(--dourado);
             margin-bottom: 10px;
