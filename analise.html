@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise — Lajeosa do Mondego</title>
+
+    <link rel="icon" href="assets/brasao.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0F3D2E;
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        header img {
+            width: 120px;
+        }
+
+        h1 {
+            margin-top: 10px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #D4AF37;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #1F5C45;
+            padding: 18px;
+            border-radius: 18px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            background-color: #2a7a5e;
+        }
+
+        .card h2 {
+            font-size: 18px;
+            color: #D4AF37;
+            margin-bottom: 8px;
+        }
+
+        .valor {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        canvas {
+            background-color: #1F5C45;
+            padding: 20px;
+            border-radius: 18px;
+            margin: 20px;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 10px;
+            font-size: 14px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src="assets/brasao.png" alt="Brasão">
+    <h1>📊 Estatísticas da PWA</h1>
+    <p style="color:#D4AF37; font-size:14px;">Últimos 30 dias</p>
+</header>
+
+<!-- MÉTRICAS -->
+<div class="grid">
+    <div class="card">
+        <h2>Utilizadores Ativos</h2>
+        <div id="activeUsers" class="valor">—</div>
+    </div>
+
+    <div class="card">
+        <h2>Novos Utilizadores</h2>
+        <div id="newUsers" class="valor">—</div>
+    </div>
+
+    <div class="card">
+        <h2>Visualizações</h2>
+        <div id="pageViews" class="valor">—</div>
+    </div>
+
+    <div class="card">
+        <h2>Eventos</h2>
+        <div id="eventCount" class="valor">—</div>
+    </div>
+</div>
+
+<!-- GRÁFICOS -->
+<canvas id="grafico1"></canvas>
+<canvas id="grafico2"></canvas>
+
+<footer>
+    2026 Lajeosa do Mondego — ©RMS
+</footer>
+
+<script>
+async function carregarAnalytics() {
+    try {
+        const resp = await fetch("https://teu-worker.workers.dev/?feed=analytics");
+        const dados = await resp.json();
+
+        const rows = dados.analytics.rows || [];
+
+        // Extrair métricas
+        const activeUsers = rows[0]?.metricValues[0]?.value || 0;
+        const newUsers = rows[1]?.metricValues[0]?.value || 0;
+        const pageViews = rows[2]?.metricValues[0]?.value || 0;
+        const eventCount = rows[3]?.metricValues[0]?.value || 0;
+
+        // Atualizar cartões
+        document.getElementById("activeUsers").textContent = activeUsers;
+        document.getElementById("newUsers").textContent = newUsers;
+        document.getElementById("pageViews").textContent = pageViews;
+        document.getElementById("eventCount").textContent = eventCount;
+
+        // GRÁFICO 1 — barras
+        new Chart(document.getElementById("grafico1"), {
+            type: "bar",
+            data: {
+                labels: ["Ativos", "Novos", "Vistas", "Eventos"],
+                datasets: [{
+                    label: "Últimos 30 dias",
+                    data: [activeUsers, newUsers, pageViews, eventCount],
+                    backgroundColor: ["#D4AF37", "#D4AF37", "#D4AF37", "#D4AF37"]
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } },
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+
+        // GRÁFICO 2 — linha
+        new Chart(document.getElementById("grafico2"), {
+            type: "line",
+            data: {
+                labels: ["Ativos", "Novos", "Vistas", "Eventos"],
+                datasets: [{
+                    label: "Tendência",
+                    data: [activeUsers, newUsers, pageViews, eventCount],
+                    borderColor: "#D4AF37",
+                    backgroundColor: "rgba(212,175,55,0.3)"
+                }]
+            },
+            options: {
+                plugins: { legend: { display: false } }
+            }
+        });
+
+    } catch (e) {
+        alert("Erro ao carregar Analytics.");
+        console.error(e);
+    }
+}
+
+carregarAnalytics();
+</script>
+
+</body>
+</html>
