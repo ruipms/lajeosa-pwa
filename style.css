@@ -9,11 +9,11 @@
     --dourado-light: #e6c96a;   /* Dourado claro */
 
     /* Cores disponíveis para os cartões (para uso manual) */
-    --cor-cartao-verde-claro: #2A7A5E;   /* Primavera */
-    --cor-cartao-castanho: #8C6E4A;      /* Outono */
-    --cor-cartao-castanho-escuro: #5A432E;
-    --cor-cartao-azul-suave: #3A7CA5;    /* Verão */
-    --cor-cartao-cinzento: #C7C2B8;      /* Inverno */
+    --cor-cartao-verde-claro: #2A7A5E;        /* Verde claro elegante */
+    --cor-cartao-castanho: #8C6E4A;           /* Castanho suave */
+    --cor-cartao-castanho-escuro: #5A432E;    /* Castanho escuro */
+    --cor-cartao-azul-suave: #3A7CA5;         /* Azul suave */
+    --cor-cartao-cinzento: #C7C2B8;           /* Cinzento quente */
 }
 
 /* ===========================
@@ -70,11 +70,12 @@ header h1 {
 
        Verde claro elegante  → var(--cor-cartao-verde-claro)
        Castanho suave        → var(--cor-cartao-castanho)
+       Castanho escuro       → var(--cor-cartao-castanho-escuro)
        Azul suave            → var(--cor-cartao-azul-suave)
        Cinzento quente       → var(--cor-cartao-cinzento)
 
        Exemplo:
-       background-color: var(--cor-cartao-castanho) !important;
+       background-color: var(--cor-cartao-castanho-escuro) !important;
     */
 
     background-color: var(--cor-cartao-castanho-escuro) !important; /* ← MUDA ESTA LINHA */
@@ -155,5 +156,4 @@ header h1 {
     padding: 10px !important;
     margin: 10px !important;
 }
-
 
