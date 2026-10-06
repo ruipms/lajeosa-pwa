@@ -71,6 +71,13 @@
             margin: 20px;
         }
 
+        .explicacao {
+            color: #D4AF37;
+            font-size: 15px;
+            margin: 20px;
+            line-height: 1.5;
+        }
+
         footer {
             margin-top: 30px;
             padding: 10px;
@@ -110,6 +117,19 @@
         <div id="eventCount" class="valor">—</div>
     </div>
 </div>
+
+<!-- EXPLICAÇÃO -->
+<p class="explicacao">
+    As barras representam o valor total de cada métrica nos últimos 30 dias:
+    <br><br>
+    • <b>Ativos</b> — número de utilizadores que abriram a PWA.<br>
+    • <b>Novos</b> — pessoas que visitaram a PWA pela primeira vez.<br>
+    • <b>Vistas</b> — total de páginas visualizadas dentro da aplicação.<br>
+    • <b>Eventos</b> — ações registadas (cliques, navegação, interações).
+    <br><br>
+    O gráfico de linha mostra a mesma informação, mas em forma de tendência:
+    quanto mais alta a linha, maior o volume dessa métrica.
+</p>
 
 <!-- GRÁFICOS -->
 <canvas id="grafico1"></canvas>
@@ -184,4 +204,5 @@ carregarAnalytics();
 
 </body>
 </html>
+
 
