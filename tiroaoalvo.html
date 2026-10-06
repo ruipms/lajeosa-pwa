@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tiro ao Alvo – CRC Lajeosa</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #0F3D2E;
+        color: white;
+        text-align: center;
+        overflow-x: hidden;
+    }
+
+    header img {
+        width: 120px;
+        margin-top: 20px;
+    }
+
+    h1 {
+        color: #D4AF37;
+        margin-top: 10px;
+        font-size: 26px;
+    }
+
+    .btn-voltar {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 18px;
+        border-radius: 18px;
+        background-color: #1F5C45;
+        border: 1px solid #D4AF37;
+        color: #D4AF37;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    .explicacao {
+        background-color: #1F5C45;
+        padding: 18px;
+        border-radius: 18px;
+        margin: 20px;
+        text-align: left;
+        border: 1px solid rgba(212,175,55,0.4);
+    }
+
+    .explicacao h2 {
+        color: #D4AF37;
+        margin-bottom: 10px;
+    }
+
+    #btnStart {
+        background-color: #D4AF37;
+        color: #0F3D2E;
+        padding: 12px 20px;
+        border-radius: 18px;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    #btnStart:hover {
+        background-color: #c09a2f;
+    }
+
+    #jogoArea {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        background-color: #134C3A;
+        border-radius: 18px;
+        margin-top: 20px;
+        overflow: hidden;
+        display: none;
+    }
+
+    .alvo {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .normal { background-color: #D4AF37; }
+    .rapido { background-color: #ff4d4d; }
+    .bonus { background-color: #4CAF50; }
+    .fake { background-color: #555; }
+
+    #pontuacao {
+        font-size: 22px;
+        margin-top: 20px;
+        color: #D4AF37;
+    }
+
+    #falhas {
+        font-size: 18px;
+        margin-top: 5px;
+        opacity: 0.8;
+    }
+
+    #leaderboard {
+        margin-top: 30px;
+        background-color: #1F5C45;
+        padding: 18px;
+        border-radius: 18px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid rgba(212,175,55,0.4);
+    }
+
+    #leaderboard h2 {
+        color: #D4AF37;
+        margin-bottom: 10px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        color: white;
+    }
+
+    th {
+        background-color: #134C3A;
+        padding: 10px;
+        color: #D4AF37;
+    }
+
+    td {
+        padding: 8px;
+        border-bottom: 1px solid #134C3A;
+    }
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="assets/brasao.png" alt="Brasão">
+    <h1>Tiro ao Alvo</h1>
+    <a class="btn-voltar" href="jogos.html">← Voltar</a>
+</header>
+
+<div class="explicacao">
+    <h2>Como jogar?</h2>
+    <p>Um alvo aparece em posições aleatórias no ecrã. Toca nele antes que desapareça!</p>
+    <p>Existem vários tipos de alvo:</p>
+    <ul>
+        <li><b>Normal:</b> vale 1 ponto.</li>
+        <li><b>Rápido:</b> desaparece em 0.5s — vale 2 pontos.</li>
+        <li><b>Bónus:</b> vale 5 pontos.</li>
+        <li><b>Falso:</b> NÃO clicar — tira 1 ponto.</li>
+    </ul>
+    <p>Se falhares 5 alvos, o jogo termina.</p>
+    <p>Boa sorte… podes vir a ser a nova contratação do CRC, mas primeiro tens de passar neste teste!</p>
+</div>
+
+<button id="btnStart">Iniciar Jogo</button>
+
+<div id="pontuacao">Pontuação: 0</div>
+<div id="falhas">Falhas: 0 / 5</div>
+
+<div id="jogoArea"></div>
+
+<div id="leaderboard">
+    <h2>Top 10 Jogadores</h2>
+    <table id="tabelaLB"></table>
+</div>
+
+<script>
+let pontos = 0;
+let falhas = 0;
+let jogoAtivo = false;
+
+function gerarAlvo() {
+    if (!jogoAtivo) return;
+
+    const area = document.getElementById("jogoArea");
+    area.innerHTML = "";
+
+    const alvo = document.createElement("div");
+    alvo.classList.add("alvo");
+
+    const tipos = ["normal", "rapido", "bonus", "fake"];
+    const tipo = tipos[Math.floor(Math.random() * tipos.length)];
+    alvo.classList.add(tipo);
+
+    alvo.textContent =
+        tipo === "normal" ? "●" :
+        tipo === "rapido" ? "⚡" :
+        tipo === "bonus" ? "+" :
+        tipo === "fake" ? "X" : "●";
+
+    const x = Math.random() * (area.clientWidth - 60);
+    const y = Math.random() * (area.clientHeight - 60);
+
+    alvo.style.left = x + "px";
+    alvo.style.top = y + "px";
+
+    alvo.onclick = () => {
+        if (tipo === "normal") pontos += 1;
+        if (tipo === "rapido") pontos += 2;
+        if (tipo === "bonus") pontos += 5;
+        if (tipo === "fake") pontos -= 1;
+
+        document.getElementById("pontuacao").textContent = "Pontuação: " + pontos;
+        gerarAlvo();
+    };
+
+    area.appendChild(alvo);
+
+    const tempo =
+        tipo === "rapido" ? 500 :
+        tipo === "bonus" ? 1200 :
+        tipo === "fake" ? 900 : 800;
+
+    setTimeout(() => {
+        if (!area.contains(alvo)) return;
+        if (tipo !== "fake") {
+            falhas++;
+            document.getElementById("falhas").textContent = "Falhas: " + falhas + " / 5";
+        }
+        if (falhas >= 5) terminarJogo();
+        else gerarAlvo();
+    }, tempo);
+}
+
+function terminarJogo() {
+    jogoAtivo = false;
+    alert("Fim de jogo! Pontuação final: " + pontos);
+    guardarPontuacao(pontos);
+}
+
+function guardarPontuacao(p) {
+    let lb = JSON.parse(localStorage.getItem("lb_tiro") || "[]");
+    lb.push({ score: p, data: new Date().toLocaleString("pt-PT") });
+
+    lb.sort((a, b) => b.score - a.score);
+    lb = lb.slice(0, 10);
+
+    localStorage.setItem("lb_tiro", JSON.stringify(lb));
+    atualizarLeaderboard();
+}
+
+function atualizarLeaderboard() {
+    const tabela = document.getElementById("tabelaLB");
+    let lb = JSON.parse(localStorage.getItem("lb_tiro") || "[]");
+
+    let html = `
+        <tr>
+            <th>Posição</th>
+            <th>Pontuação</th>
+            <th>Data</th>
+        </tr>
+    `;
+
+    lb.forEach((item, i) => {
+        html += `
+            <tr>
+                <td>${i + 1}</td>
+                <td>${item.score}</td>
+                <td>${item.data}</td>
+            </tr>
+        `;
+    });
+
+    tabela.innerHTML = html;
+}
+
+document.getElementById("btnStart").onclick = () => {
+    pontos = 0;
+    falhas = 0;
+    jogoAtivo = true;
+
+    document.getElementById("pontuacao").textContent = "Pontuação: 0";
+    document.getElementById("falhas").textContent = "Falhas: 0 / 5";
+
+    document.getElementById("jogoArea").style.display = "block";
+
+    gerarAlvo();
+};
+
+atualizarLeaderboard();
+</script>
+
+</body>
+</html>
