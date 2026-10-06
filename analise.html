@@ -129,9 +129,10 @@ async function carregarAnalytics() {
 
         // Extrair métricas
         const activeUsers = rows[0]?.metricValues[0]?.value || 0;
-        const newUsers = rows[1]?.metricValues[0]?.value || 0;
-        const pageViews = rows[2]?.metricValues[0]?.value || 0;
-        const eventCount = rows[3]?.metricValues[0]?.value || 0;
+        const newUsers = rows[0]?.metricValues[1]?.value || 0;
+        const pageViews = rows[0]?.metricValues[2]?.value || 0;
+        const eventCount = rows[0]?.metricValues[3]?.value || 0;
+
 
         // Atualizar cartões
         document.getElementById("activeUsers").textContent = activeUsers;
