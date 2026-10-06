@@ -174,7 +174,9 @@
     </ul>
     <p>Se falhares 5 alvos, o jogo termina.</p>
     <p>Boa sorte… podes vir a ser a nova contratação do CRC, mas primeiro tens de passar neste teste!</p>
-    <p>O ecrã do jogo está abaixo do botão de iniciar o jogo. Desliza o ecrã para o veres antes de começar</p>
+   <p>-------r</p>
+    <p>O tabuleiro do jogo está abaixo do botão iniciar jogo</p>
+   <p>Desliza o ecrã do telemóvel até o veres, antes de começar</p>
 </div>
 
 <button id="btnStart">Iniciar Jogo</button>
@@ -267,8 +269,7 @@ function guardarPontuacao(nome, p) {
 
     lb.push({
         nome: nome,
-        score: p,
-        data: new Date().toLocaleString("pt-PT")
+        score: p
     });
 
     lb.sort((a, b) => b.score - a.score);
@@ -287,7 +288,6 @@ function atualizarLeaderboard() {
             <th>Posição</th>
             <th>Nome</th>
             <th>Pontuação</th>
-            <th>Data</th>
         </tr>
     `;
 
@@ -297,7 +297,6 @@ function atualizarLeaderboard() {
                 <td>${i + 1}</td>
                 <td>${item.nome}</td>
                 <td>${item.score}</td>
-                <td>${item.data}</td>
             </tr>
         `;
     });
