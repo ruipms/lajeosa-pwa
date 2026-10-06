@@ -151,7 +151,6 @@
         padding: 8px;
         border-bottom: 1px solid #134C3A;
     }
-
 </style>
 </head>
 
@@ -175,6 +174,7 @@
     </ul>
     <p>Se falhares 5 alvos, o jogo termina.</p>
     <p>Boa sorte… podes vir a ser a nova contratação do CRC, mas primeiro tens de passar neste teste!</p>
+    <p>O ecrã do jogo está abaixo do botão de iniciar o jogo. Desliza o ecrã para o veres antes de começar</p>
 </div>
 
 <button id="btnStart">Iniciar Jogo</button>
@@ -249,13 +249,27 @@ function gerarAlvo() {
 
 function terminarJogo() {
     jogoAtivo = false;
-    alert("Fim de jogo! Pontuação final: " + pontos);
-    guardarPontuacao(pontos);
+
+    let nome = prompt(
+        "Fim de jogo! Pontuação final: " + pontos +
+        "\n\nEscreve o teu nome para o Top 10:"
+    );
+
+    if (!nome || nome.trim() === "") {
+        nome = "Jogador desconhecido";
+    }
+
+    guardarPontuacao(nome, pontos);
 }
 
-function guardarPontuacao(p) {
+function guardarPontuacao(nome, p) {
     let lb = JSON.parse(localStorage.getItem("lb_tiro") || "[]");
-    lb.push({ score: p, data: new Date().toLocaleString("pt-PT") });
+
+    lb.push({
+        nome: nome,
+        score: p,
+        data: new Date().toLocaleString("pt-PT")
+    });
 
     lb.sort((a, b) => b.score - a.score);
     lb = lb.slice(0, 10);
@@ -271,6 +285,7 @@ function atualizarLeaderboard() {
     let html = `
         <tr>
             <th>Posição</th>
+            <th>Nome</th>
             <th>Pontuação</th>
             <th>Data</th>
         </tr>
@@ -280,6 +295,7 @@ function atualizarLeaderboard() {
         html += `
             <tr>
                 <td>${i + 1}</td>
+                <td>${item.nome}</td>
                 <td>${item.score}</td>
                 <td>${item.data}</td>
             </tr>
@@ -307,3 +323,4 @@ atualizarLeaderboard();
 
 </body>
 </html>
+
