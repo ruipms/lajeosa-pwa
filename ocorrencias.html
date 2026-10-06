@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocorrências — Beiras e Serra da Estrela</title>
 
+    <!-- Google tag (Analytics) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FTEGNRDBJW');
+    </script>
+
     <!-- Manifest para integrar esta página na PWA -->
     <link rel="manifest" href="manifest.json">
 
@@ -230,13 +239,11 @@
 
     carregarOcorrencias();
 
-    /* Navegação em modo PWA (sem barra superior) */
     function openPage(page) {
         location.replace(page);
     }
 </script>
 
-<!-- Registo do service worker para manter modo standalone -->
 <script>
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('service-worker.js');
