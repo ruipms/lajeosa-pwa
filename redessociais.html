@@ -6,7 +6,7 @@
     <title>Lajeosa nas Redes Sociais</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -20,7 +20,7 @@
 
     <style>
         body {
-            background-color: #0F3D2E;
+            background-color: var(--verde-base);
             color: white;
             font-family: Arial, sans-serif;
             padding: 20px;
@@ -29,7 +29,7 @@
         }
 
         h2 {
-            color: #D4AF37;
+            color: var(--dourado);
             margin-bottom: 10px;
         }
 
@@ -39,40 +39,31 @@
             font-size: 18px;
         }
 
-        /* Grelha de duas colunas responsiva */
-      .social-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    width: 100%;
-    max-width: 900px; /* permite 2 colunas no telemóvel e 3 no PC */
-    margin: 0 auto;
-}
+        /* Grelha responsiva */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-
-        .icon-card {
-            background-color: #1F5C45;
-            padding: 20px;
-            border-radius: 18px;
+        /* Cartão global */
+        .card {
+            text-align: center !important;
             cursor: pointer;
-            transition: 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.25);
-            /* Removido o auto que quebrava a grelha */
-            margin: 0;
         }
 
-        .icon-card:hover {
-            background-color: #2a7a5e;
-        }
-
-        .icon-card i {
+        .card i {
             font-size: 60px;
-            color: #D4AF37;
+            color: var(--dourado);
+            margin-bottom: 10px;
         }
 
         .icon-label {
-            margin-top: 10px;
             font-size: 18px;
+            color: var(--dourado);
         }
 
         a {
@@ -83,7 +74,7 @@
         .voltar {
             display: inline-block;
             margin-top: 30px;
-            color: #D4AF37;
+            color: var(--dourado);
             font-size: 18px;
             text-decoration: none;
         }
@@ -103,7 +94,7 @@
 
     <!-- Grupo da Lajeosa -->
     <a href="https://www.facebook.com/groups/178632112150037" target="_blank">
-        <div class="icon-card">
+        <div class="card">
             <i class="fab fa-facebook"></i>
             <div class="icon-label">Grupo da Lajeosa</div>
         </div>
@@ -111,7 +102,7 @@
 
     <!-- Junta de Freguesia -->
     <a href="https://www.facebook.com/lajeosadomondego" target="_blank">
-        <div class="icon-card">
+        <div class="card">
             <i class="fab fa-facebook"></i>
             <div class="icon-label">Junta de Freguesia</div>
         </div>
@@ -119,7 +110,7 @@
 
     <!-- CRC -->
     <a href="https://www.facebook.com/p/CRC-Lajeosa-do-Mondego-61576945611396/" target="_blank">
-        <div class="icon-card">
+        <div class="card">
             <i class="fab fa-facebook"></i>
             <div class="icon-label">CRC Lajeosa</div>
         </div>
@@ -127,7 +118,7 @@
 
     <!-- Página não oficial -->
     <a href="https://www.facebook.com/lageosamondego/" target="_blank">
-        <div class="icon-card">
+        <div class="card">
             <i class="fab fa-facebook"></i>
             <div class="icon-label">Página não oficial</div>
         </div>
@@ -135,7 +126,7 @@
 
     <!-- X -->
     <a href="https://x.com/Lagmondego" target="_blank">
-        <div class="icon-card">
+        <div class="card">
             <i class="fab fa-x-twitter"></i>
             <div class="icon-label">Lajeosa no X</div>
         </div>
@@ -143,7 +134,7 @@
 
     <!-- Instagram -->
     <a href="https://www.instagram.com/lageosa_do_mondego?igsh=MXAyMHZmb2ludGt2aw==" target="_blank">
-        <div class="icon-card">
+        <div class="card">
             <i class="fab fa-instagram"></i>
             <div class="icon-label">Lajeosa no Instagram</div>
         </div>
@@ -151,15 +142,15 @@
 
     <!-- WhatsApp -->
     <a href="https://whatsapp.com/channel/0029Vb82Q4v8PgsKSqxQHb46" target="_blank">
-        <div class="icon-card">
+        <div class="card">
             <i class="fab fa-whatsapp"></i>
-            <div class="icon-label">Canal WhatsApp Lajeosa</div>
+            <div class="icon-label">Canal WhatsApp</div>
         </div>
     </a>
 
     <!-- Telegram -->
     <a href="https://t.me/+3ePMiWdS-9NmMDI0" target="_blank">
-        <div class="icon-card">
+        <div class="card">
             <i class="fab fa-telegram"></i>
             <div class="icon-label">Canal Telegram</div>
         </div>
