@@ -4,8 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Notícias</title>
-   <link rel="stylesheet" href="style.css">
-<!-- Google tag (gtag.js) -->
+
+<!-- Estilo global -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Google tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -13,22 +16,27 @@
   gtag('js', new Date());
   gtag('config', 'G-FTEGNRDBJW');
 </script>
+
 <style>
+    /* Apenas ajustes mínimos, sem cores */
     body {
-        background-color: #0F3D2E;
-        color: white;
-        font-family: Arial, sans-serif;
         padding: 20px;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: var(--verde-base);
+        color: white;
     }
 
     h2 {
         margin-bottom: 20px;
+        color: var(--dourado);
+        text-align: center;
     }
 
     h3 {
         margin-top: 30px;
         margin-bottom: 10px;
-        color: #D4AF37;
+        color: var(--dourado);
     }
 
     ul {
@@ -36,28 +44,32 @@
         padding: 0;
     }
 
+    /* Remover estilos antigos dos <li> */
     li {
-        margin-bottom: 10px;
-        background-color: #134C3A;
-        padding: 10px;
-        border-radius: 6px;
+        background: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
 
-    a {
-        color: #D4AF37;
+    /* Link dentro do cartão */
+    .card a {
+        color: var(--dourado);
+        font-weight: bold;
         text-decoration: none;
-        font-size: 16px;
+        display: block;
+        margin-top: 4px;
     }
 
-    a:hover {
+    .card a:hover {
         text-decoration: underline;
     }
 
     .voltar {
         display: inline-block;
         margin-top: 30px;
-        color: #D4AF37;
+        color: var(--dourado);
         font-size: 18px;
+        text-decoration: none;
     }
 
     .mensagem {
@@ -66,80 +78,75 @@
     }
 </style>
 </head>
+
 <body>
 
 <h2>Notícias da Região</h2>
 
 <h3>Beira.pt</h3>
 <ul id="noticias-beira">
-    <li>A carregar notícias...</li>
+    <div class="card"><p>A carregar notícias...</p></div>
 </ul>
 
 <h3>Rádio Altitude</h3>
 <ul id="noticias-altitude">
-    <li>A carregar notícias...</li>
+    <div class="card"><p>A carregar notícias...</p></div>
 </ul>
 
 <h3>O Interior</h3>
 <ul id="noticias-ointerior">
-    <li>A carregar notícias...</li>
+    <div class="card"><p>A carregar notícias...</p></div>
 </ul>
 
 <h3>Rádio F</h3>
 <ul>
-    <li>
+    <div class="card">
         <a href="https://radiof.gmpress.pt/" target="_blank">
             Ver notícias da Rádio F no site oficial
         </a>
-    </li>
+    </div>
 </ul>
 
 <h3>Câmara Municipal da Guarda</h3>
 <ul id="noticias-guarda">
-    <li>A carregar notícias...</li>
+    <div class="card"><p>A carregar notícias...</p></div>
 </ul>
-  
+
 <h3>Freguesia da Guarda</h3>
 <ul id="noticias-freguesia">
-    <li>A carregar notícias...</li>
+    <div class="card"><p>A carregar notícias...</p></div>
 </ul>
 
 <h3>RTP – País</h3>
 <ul id="noticias-rtp-pais">
-    <li>A carregar notícias...</li>
+    <div class="card"><p>A carregar notícias...</p></div>
 </ul>
-
-
-<!--<h3>Terras da Guarda</h3>
-<ul id="noticias-terrasdaguarda">
-    <li>A carregar notícias...</li>
-</ul>-->
 
 <h3>Mais Beiras – Celorico da Beira</h3>
 <ul>
-    <li>
+    <div class="card">
         <a href="https://maisbeiras.sapo.pt/category/guarda/celorico-da-beira" target="_blank">
             Ver notícias de Celorico da Beira
         </a>
-    </li>
+    </div>
 </ul>
 
 <h3>Celorico da Beira</h3>
 <ul>
-    <li>
+    <div class="card">
         <a href="https://www.cm-celoricodabeira.pt/informacoes/noticias/" target="_blank">
             Ver notícias no site oficial
         </a>
-    </li>
+    </div>
 </ul>
 
 <h3>Freguesia da Guarda</h3>
 <ul>
-    <li>
+    <div class="card">
         <a href="https://www.freguesiadaguarda.pt/" target="_blank">
             Ver notícias no site oficial
         </a>
-    </li>
+    </div>
 </ul>
 
 <a class="voltar" href="index.html">← Voltar</a>
@@ -152,10 +159,8 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
         const resposta = await fetch(url);
         const texto = await resposta.text();
 
-        // Extrair <item> manualmente (RSS)
         let items = [...texto.matchAll(/<item>([\s\S]*?)<\/item>/g)];
 
-        // Se não houver <item>, tentar <entry> (ATOM)
         if (items.length === 0) {
             items = [...texto.matchAll(/<entry>([\s\S]*?)<\/entry>/g)];
         }
@@ -165,31 +170,29 @@ async function carregarFeed(url, elementoId, maxItems = 3) {
         items.slice(0, maxItems).forEach(match => {
             const bloco = match[1];
 
-            // Extrair título (igual ao código antigo)
             const tituloMatch = bloco.match(/<title>([\s\S]*?)<\/title>/);
             const titulo = tituloMatch ? tituloMatch[1] : "Sem título";
 
-            // Extrair link (RSS)
             let linkMatch = bloco.match(/<link>([\s\S]*?)<\/link>/);
             let link = linkMatch ? linkMatch[1] : null;
 
-            // Extrair link (ATOM)
             if (!link) {
                 const atomMatch = bloco.match(/<link[^>]*href="([^"]+)"/);
                 link = atomMatch ? atomMatch[1] : "#";
             }
 
-            const li = document.createElement("li");
-            li.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
-            lista.appendChild(li);
+            const card = document.createElement("div");
+            card.classList.add("card");
+            card.innerHTML = `<a href="${link}" target="_blank">${titulo}</a>`;
+            lista.appendChild(card);
         });
 
         if (items.length === 0) {
-            lista.innerHTML = "<li class='mensagem'>Nenhuma notícia encontrada.</li>";
+            lista.innerHTML = "<div class='card'><p class='mensagem'>Nenhuma notícia encontrada.</p></div>";
         }
 
     } catch (erro) {
-        lista.innerHTML = "<li class='mensagem'>Erro ao carregar notícias.</li>";
+        lista.innerHTML = "<div class='card'><p class='mensagem'>Erro ao carregar notícias.</p></div>";
     }
 }
 
@@ -201,11 +204,7 @@ carregarFeed(worker + "ointerior", "noticias-ointerior", 3);
 carregarFeed(worker + "guarda", "noticias-guarda", 3);
 carregarFeed(worker + "freguesia", "noticias-freguesia", 3);
 carregarFeed(worker + "rtp-pais", "noticias-rtp-pais", 3);
-
-
-//carregarFeed(worker + "terrasdaguarda", "noticias-terrasdaguarda", 3);
 </script>
 
 </body>
 </html>
-
