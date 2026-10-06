@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trânsito – Lajeosa</title>
 
+<!-- Google tag (Analytics) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FTEGNRDBJW');
+</script>
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -107,7 +116,7 @@ async function carregarIncidentes() {
             return;
         }
 
-        // ⭐ Remover duplicados: ficar só com o mais recente por título
+        // ⭐ Remover duplicados
         const unicos = {};
 
         incidentes.forEach(item => {
@@ -125,25 +134,21 @@ async function carregarIncidentes() {
             }
         });
 
-   // Converter o objeto em array
-let listaFinal = Object.values(unicos);
+        let listaFinal = Object.values(unicos);
 
-// ⭐ Filtrar apenas incidentes recentes (últimas 48 horas)
-const agora = Date.now();
-const limite = 48 * 60 * 60 * 1000; // 48 horas em ms
+        // ⭐ Filtrar últimos 48h
+        const agora = Date.now();
+        const limite = 48 * 60 * 60 * 1000;
 
-listaFinal = listaFinal.filter(item => {
-    const atualizado = new Date(item.updatedAt).getTime();
-    return (agora - atualizado) <= limite;
-});
+        listaFinal = listaFinal.filter(item => {
+            const atualizado = new Date(item.updatedAt).getTime();
+            return (agora - atualizado) <= limite;
+        });
 
-// ⭐ Se não houver incidentes recentes → mostrar aviso
-if (listaFinal.length === 0) {
-    lista.innerHTML = "<p style='color:#D4AF37;'>Sem ocorrências no momento.</p>";
-    return;
-}
-
-
+        if (listaFinal.length === 0) {
+            lista.innerHTML = "<p style='color:#D4AF37;'>Sem ocorrências no momento.</p>";
+            return;
+        }
 
         listaFinal.forEach(item => {
             const card = document.createElement("div");
