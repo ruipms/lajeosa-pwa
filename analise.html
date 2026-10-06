@@ -122,17 +122,16 @@
 <script>
 async function carregarAnalytics() {
     try {
-        const resp = await fetch("https://teu-worker.workers.dev/?feed=analytics");
+        const resp = await fetch("https://small-glade-3bb9.ruijpms.workers.dev/?feed=analytics");
         const dados = await resp.json();
 
         const rows = dados.analytics.rows || [];
 
-        // Extrair métricas
+        // Extrair métricas (todas na mesma row)
         const activeUsers = rows[0]?.metricValues[0]?.value || 0;
         const newUsers = rows[0]?.metricValues[1]?.value || 0;
         const pageViews = rows[0]?.metricValues[2]?.value || 0;
         const eventCount = rows[0]?.metricValues[3]?.value || 0;
-
 
         // Atualizar cartões
         document.getElementById("activeUsers").textContent = activeUsers;
@@ -185,3 +184,4 @@ carregarAnalytics();
 
 </body>
 </html>
+
