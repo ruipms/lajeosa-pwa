@@ -1,15 +1,15 @@
 /* ===========================
-   PALETA DE CORES CRC
+   PALETA DE CORES BASE CRC
    =========================== */
 
 :root {
-    --verde-base: #0D3628;
-    --verde-sec: #1F5C45;
-    --verde-light: #2A7A5E;
-    --dourado: #E3C15A;
-    --dourado-light: #e6c96a;
-    --cinza-quente: #C7C2B8;
-    --castanho-suave: #8C6E4A;
+    --verde-base: #0D3628;      /* Fundo premium */
+    --verde-sec: #1F5C45;       /* Verde secundário */
+    --verde-light: #2A7A5E;     /* Verde claro (primavera) */
+    --dourado: #E3C15A;         /* Dourado quente */
+    --dourado-light: #e6c96a;   /* Dourado claro */
+    --cinza-quente: #C7C2B8;    /* Inverno */
+    --castanho-suave: #8C6E4A;  /* Outono */
 }
 
 /* ===========================
@@ -41,11 +41,25 @@ header h1 {
 }
 
 /* ===========================
-   CARTÕES
+   BOTÃO VOLTAR
+   =========================== */
+
+.back-button {
+    color: var(--dourado) !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    transition: color 0.25s !important;
+}
+
+.back-button:hover {
+    color: var(--dourado-light) !important;
+}
+
+/* ===========================
+   CARTÕES (cor vem do tema sazonal)
    =========================== */
 
 .card {
-    background-color: var(--verde-light) !important;
     padding: 18px !important;
     border-radius: 20px !important;
     margin: 16px 20px !important;
@@ -73,6 +87,28 @@ header h1 {
 }
 
 /* ===========================
+   LISTAS E LINKS
+   =========================== */
+
+.card ul {
+    list-style: none !important;
+    padding-left: 20px !important;
+}
+
+.card li {
+    margin-bottom: 8px !important;
+}
+
+.card li a {
+    display: block;
+    margin-top: 4px;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    color: var(--dourado) !important;
+    font-weight: bold !important;
+}
+
+/* ===========================
    IMAGENS DE AVISOS
    =========================== */
 
@@ -97,46 +133,8 @@ header h1 {
     border: 2px solid var(--dourado) !important;
     box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
     border-radius: 16px !important;
+    padding: 10px !important;
+    margin: 10px !important;
 }
 
-/* ===========================
-   BOTÃO VOLTAR
-   =========================== */
-
-.back-button {
-    color: var(--dourado) !important;
-    font-weight: bold !important;
-    font-size: 18px !important;
-    transition: color 0.25s !important;
-}
-
-.back-button:hover {
-    color: var(--dourado-light) !important;
-}
-
-/* ===========================
-   LINKS E TEXTO
-   =========================== */
-
-.card li a {
-    display: block;
-    margin-top: 4px;
-    word-break: break-word;
-    overflow-wrap: break-word;
-    color: var(--dourado) !important;
-    font-weight: bold !important;
-}
-
-/* ===========================
-   DETALHES EXTRA
-   =========================== */
-
-.card li {
-    margin-bottom: 8px !important;
-}
-
-.card ul {
-    list-style: none !important;
-    padding-left: 20px !important;
-}
 
