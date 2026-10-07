@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calendário — Sénior Feminino</title>
+  <link rel="stylesheet" href="style.css">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
@@ -18,7 +19,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0F3D2E;
+      background-color: var(--verde-base);
       color: white;
       text-align: center;
     }
@@ -35,7 +36,7 @@
       display: inline-block;
       margin-top: 10px;
       text-decoration: none;
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
@@ -43,17 +44,21 @@
       padding: 20px;
     }
 
+    /* Cartão castanho premium */
     .card {
-      background-color: #1F5C45;
-      padding: 18px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 18px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      text-align: left !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
     }
 
     .card h3 {
-      color: #D4AF37;
+      color: var(--dourado);
       margin-top: 0;
     }
 
@@ -72,7 +77,8 @@
       display: block;
       cursor: pointer;
       transition: 0.2s;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      border: 2px solid var(--dourado);
+      box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
     .game-img:hover {
@@ -100,6 +106,7 @@
       max-height: 90%;
       border-radius: 10px;
       pointer-events: none;
+      border: 2px solid var(--dourado);
     }
 
     .close-btn {
@@ -129,16 +136,6 @@
     <h3>📅 Calendário — Pré‑Época</h3>
 
     <ul>
-      <!--<li>
-        <strong>12/9 (sábado) — 20h — Viseu</strong><br>
-        Lusitano × CRCLM
-      </li>-->
-
-     <!-- <li>
-        <strong>19/9 (sábado) — 20h — Sernancelhe</strong><br>
-        Sernancelhe × CRCLM
-      </li> -->
-
       <li>
         <strong>26/9 (sábado) — 20h — Celorico</strong><br>
         CRCLM × Lusitano
@@ -146,33 +143,22 @@
     </ul>
   </div>
 
-  <!-- Imagem do jogo (nova) -->
-  <!--<img src="assets/jogadoras/resultadojogofem.jpg"
-       alt="Resultado do jogo Sénior Feminino"
-       class="game-img"
-       onclick="openModal('assets/jogadoras/resultadojogofem.jpg')">
-  <br>
-<img src="assets/jogadoras/jogofem2.jpg"
-       alt="Amigável Sénior Feminino"
-       class="game-img"
-       onclick="openModal('assets/jogadoras/jogofem2.jpg')"> -->
-
   <!-- Resultado do Jogo -->
-<div class="card">
-  <h3>📊 Resultado — Sénior Feminino</h3>
+  <div class="card">
+    <h3>📊 Resultado — Sénior Feminino</h3>
 
-  <ul style="padding-left:20px; font-size:18px;">
-    <li><strong>Jogo:</strong> CRC Lajeosa do Mondego 1 × 0 Clube Desportivo de Sernancelhe</li>
-    <li><strong>Marcadora:</strong></li>
-    <ul>
-      <li>⚽ Beatriz</li>
+    <ul style="padding-left:20px; font-size:18px;">
+      <li><strong>Jogo:</strong> CRC Lajeosa do Mondego 1 × 0 Clube Desportivo de Sernancelhe</li>
+      <li><strong>Marcadora:</strong></li>
+      <ul>
+        <li>⚽ Beatriz</li>
+      </ul>
     </ul>
-  </ul>
 
-  <p style="opacity:0.8; font-size:14px; margin-top:10px;">
-    Atualizado 28/9/2026
-  </p>
-</div>
+    <p style="opacity:0.8; font-size:14px; margin-top:10px;">
+      Atualizado 28/9/2026
+    </p>
+  </div>
 
   <!-- Top de Marcadoras -->
   <div class="card">
