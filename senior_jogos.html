@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jogos da Pré‑Época — Sénior Masculino</title>
+  <link rel="stylesheet" href="style.css">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
@@ -18,7 +19,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0F3D2E;
+      background-color: var(--verde-base);
       color: white;
       text-align: center;
     }
@@ -35,7 +36,7 @@
       display: inline-block;
       margin-top: 10px;
       text-decoration: none;
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
@@ -43,17 +44,21 @@
       padding: 20px;
     }
 
+    /* Cartão castanho premium */
     .card {
-      background-color: #1F5C45;
-      padding: 18px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 20px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      text-align: left !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
     }
 
     .card h3 {
-      color: #D4AF37;
+      color: var(--dourado);
       margin-top: 0;
     }
 
@@ -64,6 +69,7 @@
       margin-bottom: 20px;
       cursor: pointer;
       transition: 0.2s;
+      border: 2px solid var(--dourado);
     }
 
     .aviso-img:hover {
@@ -125,64 +131,52 @@
   <div class="card">
     <h3>⚽ Jogos da Pré‑Época 2026/2027</h3>
 
-    <!-- Cartaz / Resultado -->
-   <!-- <div style="text-align:center; margin-top:20px;">
-      <img src="assets/resultado.jpg"
-           alt="Resultado do jogo de pré-época — CRC Lajeosa"
-           class="aviso-img"
-           onclick="openModal('assets/resultado.jpg')">
-    </div> -->
-
-    <h4 style="color:#D4AF37; margin-top:15px;">📌 Resultado</h4>
+    <!-- Resultado 1 -->
+    <h4 style="color:var(--dourado); margin-top:15px;">📌 Resultado</h4>
     <p style="font-size:16px;">
       <strong>S. Martinho da Cortiça</strong> 1 — <strong>4 CRC Lajeosa do Mondego</strong>
     </p>
 
-    <h4 style="color:#D4AF37; margin-top:15px;">🎯 Marcadores</h4>
+    <h4 style="color:var(--dourado); margin-top:15px;">🎯 Marcadores</h4>
     <ul style="padding-left:20px; font-size:16px;">
       <li>Amorim ×2</li>
       <li>Serafim</li>
       <li>Alexandre</li>
     </ul>
 
-    <h4 style="color:#D4AF37; margin-top:15px;">📌 Resultado</h4>
-  <p style="font-size:16px;">
-    <strong>CRC Lajeosa do Mondego</strong> 4 — <strong>3 Grupo Desportivo Casa do Povo do Ferro</strong>
-  </p>
+    <!-- Resultado 2 -->
+    <h4 style="color:var(--dourado); margin-top:15px;">📌 Resultado</h4>
+    <p style="font-size:16px;">
+      <strong>CRC Lajeosa do Mondego</strong> 4 — <strong>3 Grupo Desportivo Casa do Povo do Ferro</strong>
+    </p>
 
-  <h4 style="color:#D4AF37; margin-top:15px;">🎯 Marcadores</h4>
-  <ul style="padding-left:20px; font-size:16px;">
-  <li>Fuiza</li>
-  <li>Manu</li>
-  <li>Gabriel Custódio</li>
-  <li>Alexandre Custódio</li>
-  </ul>
+    <h4 style="color:var(--dourado); margin-top:15px;">🎯 Marcadores</h4>
+    <ul style="padding-left:20px; font-size:16px;">
+      <li>Fuiza</li>
+      <li>Manu</li>
+      <li>Gabriel Custódio</li>
+      <li>Alexandre Custódio</li>
+    </ul>
 
-<p style="opacity:0.8; font-size:14px; margin-top:10px;">
-  📅 Jogo de pré‑época — Atualizado 28/9/2026
-</p>
+    <p style="opacity:0.8; font-size:14px; margin-top:10px;">
+      📅 Jogo de pré‑época — Atualizado 28/9/2026
+    </p>
 
+    <!-- Top de Marcadores -->
+    <h3 style="color:var(--dourado); margin-top:25px;">🏆 Top de Marcadores — Pré‑Época</h3>
 
-   <!-- <p style="opacity:0.8; font-size:14px; margin-top:10px;">
-      📅 Jogo de pré‑época — Data a confirmar
-    </p> -->
+    <ul style="padding-left:20px; font-size:16px;">
+      <li><strong>João Amorim</strong> — 2 golos 🥇</li>
+      <li><strong>Alexandre Custódio</strong> — 2 golos 🥈</li>
+      <li><strong>Fuiza</strong> — 1 golo</li>
+      <li><strong>Manu</strong> — 1 golo</li>
+      <li><strong>Gabriel Custódio</strong> — 1 golo</li>
+      <li><strong>Serafim</strong> — 1 golo</li>
+    </ul>
 
-    <!-- Top de Marcadores integrado -->
-    <h3 style="color:#D4AF37; margin-top:25px;">🏆 Top de Marcadores — Pré‑Época</h3>
-
-<ul style="padding-left:20px; font-size:16px;">
-  <li><strong>João Amorim</strong> — 2 golos 🥇</li>
-  <li><strong>Alexandre Custódio</strong> — 2 golos 🥈</li>
-  <li><strong>Fuiza</strong> — 1 golo</li>
-  <li><strong>Manu</strong> — 1 golo</li>
-  <li><strong>Gabriel Custódio</strong> — 1 golo</li>
-  <li><strong>Serafim</strong> — 1 golo</li>
-</ul>
-
-<p style="opacity:0.8; font-size:14px; margin-top:10px;">
-  Atualizado após o jogo frente ao GD Casa do Povo do Ferro
-</p>
-
+    <p style="opacity:0.8; font-size:14px; margin-top:10px;">
+      Atualizado após o jogo frente ao GD Casa do Povo do Ferro
+    </p>
 
   </div>
 
