@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Avisos — Sénior Masculino</title>
+  <link rel="stylesheet" href="style.css">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
@@ -18,7 +19,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0F3D2E;
+      background-color: var(--verde-base);
       color: white;
       text-align: center;
     }
@@ -35,12 +36,31 @@
       display: inline-block;
       margin-top: 10px;
       text-decoration: none;
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
     .content {
       padding: 20px;
+    }
+
+    /* Cartão castanho premium */
+    .card {
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 20px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      text-align: center !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
+    }
+
+    .card h3 {
+      color: var(--dourado);
+      margin-top: 0;
+      margin-bottom: 20px;
     }
 
     .aviso-img {
@@ -50,6 +70,7 @@
       margin-bottom: 20px;
       cursor: pointer;
       transition: 0.2s;
+      border: 2px solid var(--dourado);
     }
 
     .aviso-img:hover {
@@ -108,26 +129,32 @@
 
 <div class="content">
 
-  <h3 style="color:#D4AF37; margin-bottom:20px;">📢 Avisos</h3>
+  <div class="card">
+    <h3>📢 Avisos</h3>
 
-  <!-- Aviso 1 -->
-  <img src="assets/preepoca.jpg"
-       alt="Aviso de pré-época"
-       class="aviso-img"
-       onclick="openModal('assets/preepoca.jpg')">
+    <!-- Aviso 1 -->
+    <img src="assets/preepoca.jpg"
+         alt="Aviso de pré-época"
+         class="aviso-img"
+         onclick="openModal('assets/preepoca.jpg')">
 
-  <!-- Aviso 2 -->
-<!-- <img src="assets/jogadores/tacafem2026.jpg"
-       alt="Taca feminina"
-       class="aviso-img"
-       onclick="openModal('assets/jogadores/tacafem2026.jpg')">-->
+    <!-- Aviso 2 -->
+    <!--
+    <img src="assets/jogadores/tacafem2026.jpg"
+         alt="Taça feminina"
+         class="aviso-img"
+         onclick="openModal('assets/jogadores/tacafem2026.jpg')">
+    -->
 
-  
-  <!-- Aviso 3 -->
-  <!--<img src="assets/jogadores/jogomasculino.jpg"
-       alt="jogo"
-       class="aviso-img"
-       onclick="openModal('assets/jogadores/jogomasculino.jpg')">-->
+    <!-- Aviso 3 -->
+    <!--
+    <img src="assets/jogadores/jogomasculino.jpg"
+         alt="Jogo"
+         class="aviso-img"
+         onclick="openModal('assets/jogadores/jogomasculino.jpg')">
+    -->
+  </div>
+
 </div>
 
 <!-- Modal -->
@@ -157,3 +184,4 @@ function closeModal() {
 
 </body>
 </html>
+
