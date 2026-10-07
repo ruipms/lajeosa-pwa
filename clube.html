@@ -19,7 +19,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0F3D2E;
+      background-color: var(--verde-base);
       color: white;
       text-align: center;
     }
@@ -36,14 +36,14 @@
       display: inline-block;
       margin-top: 10px;
       text-decoration: none;
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
-    /* Aviso no topo (dinâmico) */
+    /* Aviso no topo */
     .alert-avisos {
-      background-color: #154f3c;
-      color: #D4AF37;
+      background-color: var(--cor-cartao-castanho-escuro);
+      color: var(--dourado);
       padding: 12px;
       margin: 10px 20px;
       border-radius: 12px;
@@ -51,60 +51,70 @@
       text-align: center;
       font-weight: bold;
       box-shadow: 0 2px 5px rgba(0,0,0,0.25);
-      display: none; /* começa escondido */
+      display: none;
+      border-left: 4px solid var(--dourado);
     }
 
     .content {
       padding: 20px;
     }
 
+    /* Cartão premium (avisos) */
     .card {
-      background-color: #1F5C45;
-      padding: 14px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      text-align: left;
-      color: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 18px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      text-align: left !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
     }
 
     .card h3 {
       margin-top: 0;
-      color: #D4AF37;
+      color: var(--dourado);
     }
 
+    /* Grelha 2 colunas */
     .grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* força 2 colunas */
-  gap: 16px;
-  margin-top: 20px;
-}
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
 
+    /* Cartões do menu (História, Órgãos, Equipas) */
     .menu-card {
-      background-color: #1F5C45;
-      padding: 20px;
-      border-radius: 18px;
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 18px !important;
+      border-radius: 20px !important;
+      text-align: center !important;
       cursor: pointer;
-      transition: 0.2s;
-      text-align: center;
-      margin-bottom: 20px;
+      transition: 0.25s !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
     }
 
     .menu-card:hover {
-      background-color: #2a7a5e;
+      transform: translateY(-4px) !important;
+      box-shadow: 0 0 18px rgba(227,193,90,0.55) !important;
     }
 
     .menu-card i {
       font-size: 40px;
-      color: #D4AF37;
+      color: var(--dourado) !important;
     }
 
     .menu-card p {
       margin-top: 10px;
       font-size: 18px;
+      color: white !important;
     }
 
-    /* Imagens pequenas dos avisos */
+    /* Imagens dos avisos */
     .notice-img {
       width: 60%;
       max-width: 250px;
@@ -112,7 +122,7 @@
       margin: 10px auto;
       display: block;
       cursor: pointer;
-      border: 2px solid #D4AF37;
+      border: 2px solid var(--dourado);
     }
 
     /* Modal */
@@ -129,15 +139,13 @@
       align-items: center;
     }
 
-    /* Imagem grande */
     #imgModal img {
       max-width: 90%;
       max-height: 90%;
       border-radius: 10px;
-      pointer-events: none; /* compatibilidade Edge */
+      pointer-events: none;
     }
 
-    /* Botão X */
     .close-btn {
       position: fixed;
       top: 20px;
@@ -163,25 +171,23 @@
     <a href="index.html" class="back-button">⬅ Voltar</a>
 </header>
 
-<!-- Aviso no topo (dinâmico) -->
+<!-- Aviso no topo -->
 <div id="alertAvisos" class="alert-avisos">
   📢 Existem avisos ativos no final da página.
 </div>
 
 <div class="content">
 
-<!-- História + Órgãos Sociais (2 colunas) -->
-<h3 style="color:#D4AF37; margin-top:20px;">📘 Clube</h3>
+<!-- História + Órgãos Sociais -->
+<h3 style="color:var(--dourado); margin-top:20px;">📘 Clube</h3>
 
 <div class="grid">
 
-  <!-- História do Clube -->
   <div class="menu-card" onclick="openPage('historia_clube.html')">
     <i class="fas fa-book"></i>
     <p>História do Clube</p>
   </div>
 
-  <!-- Órgãos Sociais -->
   <div class="menu-card" onclick="openPage('orgaos.html')">
     <i class="fas fa-landmark"></i>
     <p>Órgãos Sociais</p>
@@ -189,12 +195,11 @@
 
 </div>
 
-<!-- Menu das Equipas -->
-<h3 style="color:#D4AF37; margin-top:30px;">⚽ Equipas do Clube</h3>
+<!-- Equipas -->
+<h3 style="color:var(--dourado); margin-top:30px;">⚽ Equipas do Clube</h3>
 
 <div class="grid">
 
-  <!-- Linha 1 -->
   <div class="menu-card" onclick="openPage('clube_masculino.html')">
     <i class="fas fa-male"></i>
     <p>Equipa Masculina</p>
@@ -205,28 +210,21 @@
     <p>Equipa Feminina</p>
   </div>
 
-  <!-- Linha 2 -->
   <div class="menu-card" onclick="openPage('clube_formacao.html')">
     <i class="fas fa-users"></i>
     <p>Futsal Formação</p>
   </div>
 
-  <!--<div class="menu-card" onclick="openPage('clube_historico.html')">
-    <i class="fas fa-chart-line"></i>
-    <p>Histórico da Competição</p>
-  </div>-->
-
 </div>
 
-<!-- Avisos do Clube -->
+<!-- Avisos -->
 <div class="card avisos">
   <h3>📢 Avisos do Clube</h3>
 
   <img src="assets/convocatoria.jpg" alt="Aviso 1" class="notice-img" onclick="openModal(this.src)">
- <!-- <img src="assets/apresentacao.jpg" alt="Aviso 2" class="notice-img" onclick="openModal(this.src)"> 
-  --><img src="assets/reg1.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)">
-   <img src="assets/reg2.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)">
-   <img src="assets/reg3.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)">
+  <img src="assets/reg1.jpg" alt="Aviso 2" class="notice-img" onclick="openModal(this.src)">
+  <img src="assets/reg2.jpg" alt="Aviso 3" class="notice-img" onclick="openModal(this.src)">
+  <img src="assets/reg3.jpg" alt="Aviso 4" class="notice-img" onclick="openModal(this.src)">
 </div>
 
 </div>
@@ -251,18 +249,15 @@ function closeModal() {
   document.getElementById("imgModal").style.display = "none";
 }
 
-/* Aviso dinâmico */
 window.onload = function() {
     const avisos = document.querySelectorAll(".notice-img");
     const alerta = document.getElementById("alertAvisos");
 
-    if (avisos.length > 0) {
-        alerta.style.display = "block"; // mostra aviso
-    } else {
-        alerta.style.display = "none"; // esconde aviso
-    }
+    alerta.style.display = avisos.length > 0 ? "block" : "none";
 };
 </script>
 
 </body>
 </html>
+
+
