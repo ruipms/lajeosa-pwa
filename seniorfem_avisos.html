@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Avisos — Sénior Feminino</title>
+  <link rel="stylesheet" href="style.css">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
@@ -18,7 +19,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0F3D2E;
+      background-color: var(--verde-base);
       color: white;
       text-align: center;
     }
@@ -35,12 +36,30 @@
       display: inline-block;
       margin-top: 10px;
       text-decoration: none;
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
     .content {
       padding: 20px;
+    }
+
+    /* Cartão castanho premium */
+    .card {
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 20px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      text-align: center !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
+    }
+
+    .card h3 {
+      color: var(--dourado);
+      margin-bottom: 20px;
     }
 
     .aviso-img {
@@ -50,6 +69,7 @@
       margin-bottom: 20px;
       cursor: pointer;
       transition: 0.2s;
+      border: 2px solid var(--dourado);
     }
 
     .aviso-img:hover {
@@ -77,6 +97,7 @@
       max-height: 90%;
       border-radius: 10px;
       pointer-events: none;
+      border: 2px solid var(--dourado);
     }
 
     .close-btn {
@@ -102,19 +123,21 @@
 
 <div class="content">
 
-  <h3 style="color:#D4AF37; margin-bottom:20px;">📢 Avisos</h3>
+  <div class="card">
+    <h3>📢 Avisos</h3>
 
-  <!-- Mensagem dinâmica -->
-  <p id="noAvisosMsg" style="color:#D4AF37; font-size:20px; font-weight:bold; margin-top:20px;">
-    Não há avisos
-  </p>
+    <!-- Mensagem dinâmica -->
+    <p id="noAvisosMsg" style="color:var(--dourado); font-size:20px; font-weight:bold; margin-top:20px;">
+      Não há avisos
+    </p>
 
-  <!-- Quando houver avisos, colocas aqui imagens como esta:-->
-  <img src="assets/jogadoras/tacafem2026.jpg"
-       alt="Aviso"
-       class="aviso-img"
-       onclick="openModal('assets/jogadoras/tacafem2026.jpg')">
-  
+    <!-- Aviso -->
+    <img src="assets/jogadoras/tacafem2026.jpg"
+         alt="Aviso"
+         class="aviso-img"
+         onclick="openModal('assets/jogadoras/tacafem2026.jpg')">
+
+  </div>
 
 </div>
 
@@ -140,10 +163,10 @@ function closeModal() {
 window.onload = function() {
   const avisos = document.querySelectorAll('.aviso-img');
   const msg = document.getElementById('noAvisosMsg');
-
   msg.style.display = avisos.length > 0 ? 'none' : 'block';
 };
 </script>
 
 </body>
 </html>
+
