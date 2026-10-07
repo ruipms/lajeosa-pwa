@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sénior Feminino — CRC Lajeosa</title>
+  <link rel="stylesheet" href="style.css">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
@@ -18,7 +19,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0F3D2E;
+      background-color: var(--verde-base);
       color: white;
       text-align: center;
     }
@@ -35,39 +36,43 @@
       display: inline-block;
       margin-top: 10px;
       text-decoration: none;
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
     .section-title {
-      color: #D4AF37;
+      color: var(--dourado);
       font-size: 22px;
       margin-top: 20px;
       margin-bottom: 10px;
       font-weight: bold;
     }
 
+    /* Cartões castanhos premium */
     .card-full {
-      background-color: #1F5C45;
-      padding: 18px;
-      border-radius: 18px;
-      margin: 16px 20px;
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 18px !important;
+      border-radius: 20px !important;
+      margin: 16px 20px !important;
       cursor: pointer;
-      transition: 0.2s;
-      text-align: left;
-      font-size: 20px;
-      color: white;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      transition: 0.25s !important;
+      text-align: left !important;
+      font-size: 20px !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
     }
 
     .card-full:hover {
-      transform: scale(1.02);
+      transform: translateY(-4px) !important;
+      box-shadow: 0 0 18px rgba(227,193,90,0.55) !important;
     }
 
     .card-full i {
       margin-right: 10px;
       font-size: 22px;
-      color: #D4AF37;
+      color: var(--dourado) !important;
     }
   </style>
 </head>
@@ -89,6 +94,7 @@
 <div class="card-full" onclick="openPage('seniorfem_plantel.html')">
   <i>👩</i> Plantel
 </div>
+
 <div class="card-full" onclick="openPage('seniorfem_avisos.html')">
   <i>📢</i> Avisos
 </div>
@@ -97,10 +103,9 @@
   <i>📅</i> Pré‑Época e amigáveis
 </div>
 
-  <div class="card-full" onclick="openPage('epocafeminina.html')">
+<div class="card-full" onclick="openPage('epocafeminina.html')">
   <i>📅</i> Histórico de competição
 </div>
-
 
 <script>
 function openPage(page) {
@@ -110,3 +115,4 @@ function openPage(page) {
 
 </body>
 </html>
+
