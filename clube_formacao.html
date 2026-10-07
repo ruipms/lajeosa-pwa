@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Futsal Formação — CRC Lajeosa</title>
+  <link rel="stylesheet" href="style.css">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
@@ -18,7 +19,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0F3D2E;
+      background-color: var(--verde-base);
       color: white;
       text-align: center;
     }
@@ -35,37 +36,43 @@
       display: inline-block;
       margin-top: 10px;
       text-decoration: none;
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
+    /* Aviso no topo */
     .alert-avisos {
-      background-color:#154f3c;
-      color:#D4AF37;
-      padding:12px;
-      margin:10px 20px;
-      border-radius:12px;
-      font-size:18px;
-      text-align:center;
-      font-weight:bold;
-      box-shadow:0 2px 5px rgba(0,0,0,0.25);
+      background-color: var(--cor-cartao-castanho-escuro);
+      color: var(--dourado);
+      padding: 12px;
+      margin: 10px 20px;
+      border-radius: 12px;
+      font-size: 18px;
+      text-align: center;
+      font-weight: bold;
+      border-left: 4px solid var(--dourado);
+      box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
     .content {
       padding: 20px;
     }
 
+    /* Cartão castanho premium */
     .card {
-      background-color: #1F5C45;
-      padding: 14px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 18px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      text-align: left !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
     }
 
     .card h3 {
-      color: #D4AF37;
+      color: var(--dourado);
       margin-top: 0;
     }
 
@@ -84,18 +91,18 @@
     }
 
     .player-link:hover {
-      color: #D4AF37;
+      color: var(--dourado);
     }
 
     .player-hint {
       text-align: left;
       font-size: 16px;
-      color: #D4AF37;
+      color: var(--dourado);
       margin-bottom: 10px;
       font-weight: bold;
     }
 
-    /* Avisos - corrigido */
+    /* Imagens */
     .aviso-img {
       width: 90%;
       max-width: 600px;
@@ -103,6 +110,8 @@
       margin-bottom: 20px;
       cursor: pointer;
       transition: 0.2s;
+      border: 2px solid var(--dourado);
+      box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
     .aviso-img:hover {
@@ -130,6 +139,7 @@
       max-height: 90%;
       border-radius: 10px;
       pointer-events: none;
+      border: 2px solid var(--dourado);
     }
 
     #imgModal p {
@@ -171,12 +181,12 @@
     <h3>📋 Equipa Técnica</h3>
     <ul>
       <li class="player-link" onclick="openModal('assets/formacao/elainesantos.jpg')"><strong>Treinadora Principal:</strong> Elaine Santos (clique para ver foto)</li>
-      <!--<li><strong>Treinador Principal:</strong> Elaine Santos</li>-->
       <li><strong>Treinadora Adjunta:</strong> Lara</li>
       <li><strong>Treinadora Adjunta e Diretora:</strong> Joana Brás</li>
       <li><strong>Técnica SBV/DAE:</strong> Mónica</li>
     </ul>
   </div>
+
 <!-- Foto da Equipa da Formação -->
 <div style="text-align:center; margin-bottom:20px;">
   <img src="assets/formacao/todosformacao.jpg"
@@ -184,6 +194,7 @@
        class="aviso-img"
        onclick="openModal('assets/formacao/todosformacao.jpg')">
 </div>
+
   <!-- Plantel -->
   <div class="card">
     <h3>👨‍🦱 Plantel — Formação</h3>
@@ -206,16 +217,15 @@
       <li class="player-link" onclick="openModal('assets/formacao/Erica_Marques.jpg')">Érica Marques</li>
       <li class="player-link" onclick="openModal('assets/formacao/gabrieltavares.jpg')">Gabriel Tavares</li>
       <li class="player-link" onclick="openModal('assets/formacao/laura3.jpg')">Laura</li>
-     <li class="player-link" onclick="openModal('assets/formacao/tiagoribeiro13.jpg')">Tiago Ribeiro</li>
+      <li class="player-link" onclick="openModal('assets/formacao/tiagoribeiro13.jpg')">Tiago Ribeiro</li>
     </ul>
   </div>
-<!-- Resultados Recentes -->
+
 <!-- Resultados Recentes -->
 <div class="card">
   <h3>📊 Resultados Recentes — Formação</h3>
 
   <ul>
-    <!-- Jogo anterior -->
     <li><strong>Jogo:</strong> CRC Lajeosa do Mondego 2 × 6 Sporting Clube do Sabugal</li>
     <li><strong>Marcadores do CRC:</strong></li>
     <ul>
@@ -225,7 +235,6 @@
 
     <hr style="opacity:0.3; margin:15px 0;">
 
-    <!-- Novo jogo -->
     <li><strong>Jogo:</strong> Sporting Clube do Sabugal 7 × 3 CRC Lajeosa do Mondego</li>
     <li><strong>Marcadores do CRC:</strong></li>
     <ul>
@@ -239,33 +248,28 @@
 <div class="card">
   <h3>🏆 Top de Marcadores — Formação</h3>
   <ul>
-    <li> <strong>Martim Terras</strong> — 2 golos</li>
-    <li> <strong>Tomás Lopes</strong> — 2 golos</li>
-    <li> <strong>Ana Margarida</strong> — 1 golo</li>
+    <li><strong>Martim Terras</strong> — 2 golos</li>
+    <li><strong>Tomás Lopes</strong> — 2 golos</li>
+    <li><strong>Ana Margarida</strong> — 1 golo</li>
   </ul>
 </div>
 
-  <!-- Avisos -->
-  <div style="margin-top:30px; text-align:center;">
-    <h3 style="color:#D4AF37;">📢 Avisos</h3>
+<!-- Avisos -->
+<div style="margin-top:30px; text-align:center;">
+  <h3 style="color:var(--dourado);">📢 Avisos</h3>
+</div>
 
-    <!--<img src="assets/formacao/treinoformacao.jpg" 
-         alt="Aviso de treino"
-         class="aviso-img"
-         onclick="openModal('assets/formacao/treinoformacao.jpg')">-->
-  </div>
+<!-- Entrevista -->
+<div class="card">
+  <h3>🎤 Entrevista — Lara Sequeira</h3>
+  <p>Assista à entrevista completa da treinadora adjunta Lara Sequeira.</p>
 
-  <!-- Entrevista Lara Sequeira -->
-  <div class="card">
-    <h3>🎤 Entrevista — Lara Sequeira</h3>
-    <p>Assista à entrevista completa da treinadora adjunta Lara Sequeira.</p>
-
-    <a href="https://www.facebook.com/share/v/14nnSEhB2Xy/" 
-       target="_blank"
-       style="color:#D4AF37; font-weight:bold;">
-       Ver entrevista no Facebook
-    </a>
-  </div>
+  <a href="https://www.facebook.com/share/v/14nnSEhB2Xy/" 
+     target="_blank"
+     style="color:var(--dourado); font-weight:bold;">
+     Ver entrevista no Facebook
+  </a>
+</div>
 
 </div>
 
