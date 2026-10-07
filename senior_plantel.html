@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plantel — Sénior Masculino</title>
+  <link rel="stylesheet" href="style.css">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
@@ -18,7 +19,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0F3D2E;
+      background-color: var(--verde-base);
       color: white;
       text-align: center;
     }
@@ -35,7 +36,7 @@
       display: inline-block;
       margin-top: 10px;
       text-decoration: none;
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
@@ -43,17 +44,21 @@
       padding: 20px;
     }
 
+    /* Cartão castanho premium */
     .card {
-      background-color: #1F5C45;
-      padding: 18px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 18px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      text-align: left !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
     }
 
     .card h3 {
-      color: #D4AF37;
+      color: var(--dourado);
       margin-top: 0;
     }
 
@@ -63,7 +68,7 @@
     }
 
     .pos {
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
@@ -73,13 +78,13 @@
     }
 
     .player-link:hover {
-      color: #D4AF37;
+      color: var(--dourado);
     }
 
     .player-hint {
       text-align: left;
       font-size: 16px;
-      color: #D4AF37;
+      color: var(--dourado);
       margin-bottom: 10px;
       font-weight: bold;
     }
@@ -142,7 +147,7 @@
     <p class="player-hint">📸 Clique no nome para ver a foto</p>
 
     <!-- Guarda-Redes -->
-    <h4 style="color:#D4AF37;">Guarda‑Redes</h4>
+    <h4 style="color:var(--dourado);">Guarda‑Redes</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadores/Rui_Pedro_1.jpg')">
         Rui Pedro — <span class="pos">Guarda‑Redes #1</span>
@@ -158,7 +163,7 @@
     </ul>
 
     <!-- Fixo / Fixo-Ala / Pivô-Fixo -->
-    <h4 style="color:#D4AF37;">Fixo / Fixo‑Ala / Pivô‑Fixo</h4>
+    <h4 style="color:var(--dourado);">Fixo / Fixo‑Ala / Pivô‑Fixo</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadores/Oscar_7.jpg')">
         Óscar — <span class="pos">Fixo #7</span>
@@ -178,7 +183,7 @@
     </ul>
 
     <!-- Alas -->
-    <h4 style="color:#D4AF37;">Alas</h4>
+    <h4 style="color:var(--dourado);">Alas</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadores/Rodrigo_Burcio_5.jpg')">
         Rodrigo Búrcio — <span class="pos">Ala #5</span>
@@ -194,7 +199,7 @@
     </ul>
 
     <!-- Universal -->
-    <h4 style="color:#D4AF37;">Universal</h4>
+    <h4 style="color:var(--dourado);">Universal</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadores/gabrielcustodio4.jpg')">
         Gabriel Custódio — <span class="pos">Universal #4</span>
@@ -202,7 +207,7 @@
     </ul>
 
     <!-- Pivô / Ala-Pivô -->
-    <h4 style="color:#D4AF37;">Pivô / Ala‑Pivô</h4>
+    <h4 style="color:var(--dourado);">Pivô / Ala‑Pivô</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadores/Joao_Amorim_10.jpg')">
         João Amorim — <span class="pos">Pivô #10</span>
@@ -211,6 +216,7 @@
       <li class="player-link" onclick="openModal('assets/jogadores/rodrigogranjal12.jpg')">
         Rodrigo Granjal — <span class="pos">Ala/Pivô #12</span>
       </li>
+
       <li class="player-link" onclick="openModal('assets/jogadores/leandrosantos13.jpg')">
         Leandro Santos — <span class="pos">Ala/Pivô #13</span>
       </li>
@@ -252,3 +258,4 @@ function closeModal() {
 
 </body>
 </html>
+
