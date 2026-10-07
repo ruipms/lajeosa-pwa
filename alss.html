@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ALSS - Lajeosa do Mondego</title>
 
+    <link rel="stylesheet" href="style.css">
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
     <script>
@@ -18,7 +20,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0F3D2E;
+            background-color: var(--verde-base);
             color: white;
             text-align: center;
         }
@@ -28,51 +30,58 @@
         }
 
         header button {
-            background-color: #1F5C45;
+            background-color: var(--cor-cartao-castanho-escuro);
             border: none;
             padding: 10px 16px;
             border-radius: 18px;
-            color: #D4AF37;
+            color: var(--dourado);
             font-size: 15px;
             cursor: pointer;
             margin-bottom: 10px;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         header button:hover {
-            background-color: #2a7a5e;
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(227,193,90,0.55);
         }
 
         h1 {
             margin-top: 10px;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
-            color: #D4AF37;
+            color: var(--dourado);
         }
 
+        /* Accordion premium */
         .accordion {
-            background-color: #1F5C45;
+            background-color: var(--cor-cartao-castanho-escuro);
             margin: 16px 20px;
             border-radius: 18px;
             padding: 0;
             text-align: left;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         .accordion-header {
             padding: 18px;
             font-size: 18px;
-            color: #D4AF37;
+            color: var(--dourado);
             cursor: pointer;
+            transition: 0.25s;
         }
 
         .accordion-header:hover {
-            background-color: #2a7a5e;
+            background-color: var(--cor-cartao-castanho-claro);
         }
 
         .accordion-content {
             padding: 0 18px 18px 18px;
             display: none;
-            font-size: 15px;
-            line-height: 1.5;
+            font-size: 16px;
+            line-height: 1.6;
             color: white;
         }
 
@@ -82,10 +91,11 @@
 
         .quote {
             font-style: italic;
-            border-left: 3px solid #D4AF37;
+            border-left: 3px solid var(--dourado);
             padding-left: 10px;
             margin-top: 10px;
             font-size: 14px;
+            opacity: 0.9;
         }
     </style>
 
@@ -112,14 +122,12 @@
     <div class="accordion-content" id="sec1">
         <p>
             A <strong>Associação Lageosense de Solidariedade Social (ALSS)</strong> é uma IPSS
-            que desenvolve atividades de apoio à população idosa e a crianças, servindo a
-            comunidade da Lageosa do Mondego desde 1981.
+            que desenvolve atividades de apoio à população idosa e à comunidade desde 1981.
         </p>
         <p>
             Tem acordo de cooperação com a <strong>Segurança Social</strong> para as valências:
-            <strong>Creche</strong>, <strong>Jardim de Infância</strong>, <strong>Centro de Dia</strong>,
-            <strong>Lar de Idosos (ERPI)</strong>, <strong>Apoio Domiciliário (SAD)</strong> e
-            <strong>CATL</strong>.
+            <strong>Centro de Dia</strong>, <strong>Lar de Idosos (ERPI)</strong>,
+            <strong>Apoio Domiciliário (SAD)</strong> e <strong>CATL</strong>.
         </p>
         <p>
             Estatutos registados na <strong>DGAS</strong>, nº <strong>32/82</strong>, desde
@@ -128,9 +136,8 @@
 
         <div class="quote">
             “Aquele que envelhece e que segue atentamente esse processo poderá observar como,
-            apesar de as forças falharem e as potencialidades deixarem de ser as que eram,
-            a vida pode, até bastante tarde, ano após ano e até ao fim, ainda ser capaz de
-            aumentar e multiplicar a interminável rede das suas relações.”
+            apesar de as forças falharem, a vida pode, até bastante tarde, aumentar e multiplicar
+            a rede das suas relações.”
         </div>
     </div>
 </div>
@@ -157,19 +164,7 @@
     </div>
     <div class="accordion-content" id="sec3">
 
-       <!-- <h3 style="color:#D4AF37;">Creche</h3>
-        <p>A partir dos 4 meses, com cuidados individualizados e personalizados.</p>
-
-        <h3 style="color:#D4AF37;">Jardim de Infância</h3>
-        <p>Educação pré-escolar até aos 6 anos.</p>
-
-        <h3 style="color:#D4AF37;">CATL — Centro de Atividades de Tempos Livres</h3>
-        <p>Acolhimento de crianças em idade escolar.</p>
-
-        <h3 style="color:#D4AF37;">Centro de Dia</h3>
-        <p>Permite às pessoas idosas manterem-se no seu meio familiar, com apoio diário.</p> -->
-
-        <h3 style="color:#D4AF37;">ERPI — Lar de Idosos</h3>
+        <h3 style="color:var(--dourado);">ERPI — Lar de Idosos</h3>
         <ul>
             <li>Estadia, alimentação e higiene pessoal</li>
             <li>Tratamento de roupa</li>
@@ -179,7 +174,7 @@
             <li>Apoio em deslocações ao exterior</li>
         </ul>
 
-        <h3 style="color:#D4AF37; margin-top:12px;">SAD — Apoio Domiciliário</h3>
+        <h3 style="color:var(--dourado); margin-top:12px;">SAD — Apoio Domiciliário</h3>
         <ul>
             <li>Distribuição de refeições</li>
             <li>Higiene pessoal</li>
@@ -236,3 +231,4 @@
 
 </body>
 </html>
+
