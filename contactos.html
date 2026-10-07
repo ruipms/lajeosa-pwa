@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Contactos na Lajeosa do Mondego</title>
+  <link rel="stylesheet" href="style.css">
 
   <style>
     body {
-      background-color: #0F3D2E;
+      background-color: var(--verde-base);
       color: white;
       font-family: Arial, sans-serif;
       padding: 20px;
@@ -18,19 +19,21 @@
       font-size: 32px;
       margin-bottom: 26px;
       text-align: center;
-      color: #D4AF37;
+      color: var(--dourado);
     }
 
+    /* Cartões castanhos premium */
     .card {
-      background-color: #134C3A;
-      padding: 18px;
-      border-radius: 10px;
-      margin-bottom: 16px;
-      box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 18px !important;
+      border-radius: 14px !important;
+      margin-bottom: 16px !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
     }
 
     .card strong {
-      color: #D4AF37;
+      color: var(--dourado);
       font-size: 20px;
     }
 
@@ -41,7 +44,7 @@
     }
 
     a {
-      color: #D4AF37;
+      color: var(--dourado);
       text-decoration: none;
       font-size: 18px;
     }
@@ -50,28 +53,31 @@
       text-decoration: underline;
     }
 
-    /* Accordion */
+    /* Accordion premium */
     .accordion {
-      background-color: #134C3A;
-      color: #D4AF37;
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      color: var(--dourado) !important;
       cursor: pointer;
       padding: 16px;
       width: 100%;
-      border: none;
+      border: 1px solid rgba(227,193,90,0.4);
       text-align: left;
       outline: none;
       font-size: 22px;
       border-radius: 10px;
       margin-bottom: 10px;
-      transition: 0.2s;
+      transition: 0.25s;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35);
+      border-left: 4px solid var(--dourado);
     }
 
     .accordion:hover {
-      background-color: #1A5A45;
+      transform: translateY(-3px);
+      box-shadow: 0 0 18px rgba(227,193,90,0.55);
     }
 
     .accordion.active {
-      background-color: #1A5A45;
+      background-color: var(--cor-cartao-castanho-claro) !important;
     }
 
     .panel {
@@ -93,9 +99,11 @@
       <p>Clique aqui para contactar a Junta de Freguesia</p>
   </div>
 </a>
-<p style="color:#D4AF37; text-align:center; margin-bottom:20px; font-size:18px;">
+
+<p style="color:var(--dourado); text-align:center; margin-bottom:20px; font-size:18px;">
   Toque numa categoria para ver os contactos
 </p>
+
 <!-- 🛒 Comércio Local -->
 <button class="accordion">🛒 Comércio Local</button>
 <div class="panel">
@@ -246,3 +254,4 @@
 
 </body>
 </html>
+
