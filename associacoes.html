@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Associações - Lajeosa do Mondego</title>
 
+    <link rel="stylesheet" href="style.css">
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
     <script>
@@ -18,7 +20,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0F3D2E;
+            background-color: var(--verde-base);
             color: white;
             text-align: center;
         }
@@ -28,25 +30,28 @@
         }
 
         header button {
-            background-color: #1F5C45;
+            background-color: var(--cor-cartao-castanho-escuro);
             border: none;
             padding: 10px 16px;
             border-radius: 18px;
-            color: #D4AF37;
+            color: var(--dourado);
             font-size: 15px;
             cursor: pointer;
             margin-bottom: 10px;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         header button:hover {
-            background-color: #2a7a5e;
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(227,193,90,0.55);
         }
 
         h1 {
             margin-top: 10px;
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
-            color: #D4AF37;
+            color: var(--dourado);
         }
 
         .grid {
@@ -56,26 +61,31 @@
             padding: 10px 20px;
         }
 
+        /* Cartões castanhos premium */
         .card {
-            background-color: #1F5C45;
-            padding: 18px;
-            border-radius: 18px;
+            background-color: var(--cor-cartao-castanho-escuro) !important;
+            padding: 18px !important;
+            border-radius: 18px !important;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.25s;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         .card:hover {
-            background-color: #2a7a5e;
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(227,193,90,0.55);
         }
 
         .card i {
             font-size: 36px;
-            color: #D4AF37;
+            color: var(--dourado);
         }
 
         .card p {
             font-size: 17px;
             margin-top: 8px;
+            color: white;
         }
     </style>
 
@@ -96,10 +106,12 @@
         <p>Solidariedade Social (ALSS)</p>
     </div>
 
-   <!-- <div class="card" onclick="openPage('associacao_juvenil.html')">
+    <!--
+    <div class="card" onclick="openPage('associacao_juvenil.html')">
         <i class="fas fa-users"></i>
         <p>Associação Juvenil</p>
-    </div>-->
+    </div>
+    -->
 
 </div>
 
@@ -111,3 +123,4 @@
 
 </body>
 </html>
+
