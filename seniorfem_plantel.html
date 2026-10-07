@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plantel — Sénior Feminino</title>
+  <link rel="stylesheet" href="style.css">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
@@ -18,7 +19,7 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #0F3D2E;
+      background-color: var(--verde-base);
       color: white;
       text-align: center;
     }
@@ -35,7 +36,7 @@
       display: inline-block;
       margin-top: 10px;
       text-decoration: none;
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
@@ -43,17 +44,21 @@
       padding: 20px;
     }
 
+    /* Cartão castanho premium */
     .card {
-      background-color: #1F5C45;
-      padding: 18px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 18px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      text-align: left !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
     }
 
     .card h3 {
-      color: #D4AF37;
+      color: var(--dourado);
       margin-top: 0;
     }
 
@@ -63,7 +68,7 @@
     }
 
     .pos {
-      color: #D4AF37;
+      color: var(--dourado);
       font-weight: bold;
     }
 
@@ -73,13 +78,13 @@
     }
 
     .player-link:hover {
-      color: #D4AF37;
+      color: var(--dourado);
     }
 
     .player-hint {
       text-align: left;
       font-size: 16px;
-      color: #D4AF37;
+      color: var(--dourado);
       margin-bottom: 10px;
       font-weight: bold;
     }
@@ -105,6 +110,7 @@
       max-height: 90%;
       border-radius: 10px;
       pointer-events: none;
+      border: 2px solid var(--dourado);
     }
 
     .close-btn {
@@ -136,7 +142,7 @@
     <p class="player-hint">📸 Clique no nome para ver a foto</p>
 
     <!-- Guarda‑Redes / Universal -->
-    <h4 style="color:#D4AF37;">Guarda‑Redes / Universal</h4>
+    <h4 style="color:var(--dourado);">Guarda‑Redes / Universal</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadoras/Mariana_3.jpg')">
         Mariana — <span class="pos">#3 • Guarda‑Redes / Universal</span>
@@ -152,7 +158,7 @@
     </ul>
 
     <!-- Fixa -->
-    <h4 style="color:#D4AF37;">Fixa</h4>
+    <h4 style="color:var(--dourado);">Fixa</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadoras/Joana_Braz_4.jpg')">
         Joana Brás — <span class="pos">#4 • Fixa</span>
@@ -164,7 +170,7 @@
     </ul>
 
     <!-- Ala -->
-    <h4 style="color:#D4AF37;">Ala</h4>
+    <h4 style="color:var(--dourado);">Ala</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadoras/Catarina_2.jpg')">
         Catarina — <span class="pos">#2 • Ala</span>
@@ -180,7 +186,7 @@
     </ul>
 
     <!-- Ala / Pivot -->
-    <h4 style="color:#D4AF37;">Ala / Pivot</h4>
+    <h4 style="color:var(--dourado);">Ala / Pivot</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadoras/Pisca_6.jpg')">
         Pisca — <span class="pos">#6 • Ala / Pivot</span>
@@ -196,7 +202,7 @@
     </ul>
 
     <!-- Pivot -->
-    <h4 style="color:#D4AF37;">Pivot</h4>
+    <h4 style="color:var(--dourado);">Pivot</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadoras/Beatriz_Caldeira_10.jpg')">
         Beatriz Caldeira — <span class="pos">#10 • Pivot</span>
@@ -204,7 +210,7 @@
     </ul>
 
     <!-- Ala / Fixo -->
-    <h4 style="color:#D4AF37;">Ala / Fixo</h4>
+    <h4 style="color:var(--dourado);">Ala / Fixo</h4>
     <ul>
       <li class="player-link" onclick="openModal('assets/jogadoras/Susana_11.jpg')">
         Susana Tomaz — <span class="pos">#11 • Ala / Fixo</span>
@@ -234,3 +240,4 @@ function closeModal() {
 
 </body>
 </html>
+
