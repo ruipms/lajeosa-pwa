@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Memória</title>
 
-    <!-- Firebase SDK (compatível com GitHub Pages) -->
-   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <!-- Carregar style.css -->
+    <link rel="stylesheet" href="style.css">
 
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
     <script>
       const firebaseConfig = {
@@ -29,7 +31,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0F3D2E;
+            background-color: var(--verde-base);
             color: white;
             text-align: center;
             padding-bottom: 40px;
@@ -47,52 +49,48 @@
             margin-top: 10px;
             font-size: 26px;
             font-weight: bold;
-            color: #D4AF37;
+            color: var(--dourado);
+        }
+
+        /* Botões premium */
+        #voltar, #btnStart, #reiniciar {
+            background-color: var(--cor-cartao-castanho-escuro);
+            color: var(--dourado);
+            border: none;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: 0.25s;
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         #voltar {
-            margin-top: 10px;
             padding: 10px 20px;
-            background-color: #1F5C45;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
             font-size: 16px;
         }
 
         #btnStart {
             padding: 14px 26px;
-            background-color: #1F5C45;
-            color: white;
-            border: none;
-            border-radius: 14px;
             font-size: 20px;
-            cursor: pointer;
             margin-top: 20px;
         }
 
-        #info {
+        #reiniciar {
+            padding: 10px 20px;
+            font-size: 16px;
             margin-top: 10px;
-            font-size: 18px;
+        }
+
+        #voltar:hover, #btnStart:hover, #reiniciar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(227,193,90,0.55);
         }
 
         #info span {
-            color: #D4AF37;
+            color: var(--dourado);
             font-weight: bold;
         }
 
-        #reiniciar {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #1F5C45;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
+        /* Tabuleiro */
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 80px);
@@ -101,10 +99,11 @@
             margin-top: 25px;
         }
 
+        /* Cartas castanhas premium */
         .card {
             width: 80px;
             height: 80px;
-            background-color: #1F5C45;
+            background-color: var(--cor-cartao-castanho-escuro);
             border-radius: 12px;
             display: flex;
             justify-content: center;
@@ -112,30 +111,37 @@
             font-size: 40px;
             cursor: pointer;
             transition: 0.3s;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
+            color: transparent;
         }
 
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        /* Carta revelada */
         .card.revelada {
-            background-color: #ffffff;
+            background-color: var(--dourado);
             color: #0F3D2E;
+            border-left: 4px solid #0F3D2E;
         }
 
+        /* Leaderboard premium */
         #leaderboard {
             margin-top: 30px;
             padding: 20px;
-            background-color: #1F5C45;
+            background-color: var(--cor-cartao-castanho-escuro);
             border-radius: 12px;
             width: 80%;
             margin-left: auto;
             margin-right: auto;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         #leaderboard h2 {
-            color: #D4AF37;
-        }
-
-        #leaderboard ul {
-            list-style: none;
-            padding: 0;
+            color: var(--dourado);
         }
 
         #leaderboard li {
@@ -154,7 +160,7 @@
 </header>
 
 <div id="inicio">
-    <p style="color:#D4AF37; font-size:18px; margin-bottom:14px;">
+    <p style="color:var(--dourado); font-size:18px; margin-bottom:14px;">
         Neste jogo o objetivo é juntar duas cartas iguais.
     </p>
 
