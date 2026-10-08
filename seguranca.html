@@ -94,7 +94,8 @@
             padding: 10px 20px;
         }
 
-        .card {
+        /* Cartões quadrados */
+        .card-menu {
             background-color: var(--cor-cartao-castanho-escuro);
             padding: 18px;
             border-radius: 18px;
@@ -102,22 +103,32 @@
             transition: 0.2s;
             border-left: 4px solid var(--dourado);
             box-shadow: 0 0 12px rgba(227,193,90,0.35);
+
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
-        .card:hover {
+        .card-menu:hover {
             background-color: var(--cor-cartao-castanho-claro);
             transform: translateY(-3px);
             box-shadow: 0 0 18px rgba(227,193,90,0.55);
         }
 
-        .card i {
+        .card-menu i {
             font-size: 36px;
             color: var(--dourado);
         }
 
-        .card p {
+        .card-menu p {
             font-size: 17px;
             margin-top: 8px;
+            overflow-wrap: break-word;
+            padding: 0 6px;
         }
 
         .back-btn {
@@ -164,32 +175,32 @@
 
 <div class="grid">
 
-    <div class="card" onclick="openPage('incendios.html')">
+    <div class="card-menu" onclick="openPage('incendios.html')">
         <i class="fas fa-fire"></i>
         <p>Incêndios Ativos</p>
     </div>
 
-    <div class="card" onclick="openPage('ocorrencias.html')">
+    <div class="card-menu" onclick="openPage('ocorrencias.html')">
         <i class="fas fa-exclamation-triangle"></i>
         <p>Ocorrências Ativas</p>
     </div>
 
-    <div class="card" onclick="openPage('meteocritico.html')">
+    <div class="card-menu" onclick="openPage('meteocritico.html')">
         <i class="fas fa-cloud-bolt"></i>
         <p>Meteorologia Crítica</p>
     </div>
 
-    <div class="card" onclick="openPage('policia.html')">
+    <div class="card-menu" onclick="openPage('policia.html')">
         <i class="fas fa-shield-halved"></i>
         <p>Comunicados da Polícia</p>
     </div>
 
-    <div class="card" onclick="openPage('transito2.html')">
+    <div class="card-menu" onclick="openPage('transito2.html')">
         <i class="fas fa-road"></i>
         <p>Trânsito e Estradas</p>
     </div>
     
-    <div class="card" onclick="openPage('combustiveis3.html')">
+    <div class="card-menu" onclick="openPage('combustiveis3.html')">
         <i class="fas fa-gas-pump"></i>
         <p>Preços dos combustíveis</p>
     </div>
