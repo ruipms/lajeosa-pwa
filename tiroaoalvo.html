@@ -7,12 +7,31 @@
 
 <link rel="stylesheet" href="style.css">
 
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+const firebaseConfig = {
+    apiKey: "AIzaSyCTnteZsANQ6wH0O96Jn_7H0esaqkiMT4w",
+    authDomain: "lajeosaapp.firebaseapp.com",
+    databaseURL: "https://lajeosaapp-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "lajeosaapp",
+    storageBucket: "lajeosaapp.firebasestorage.app",
+    messagingSenderId: "646170764557",
+    appId: "1:646170764557:web:202ceb63c421979cc27c44"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
 </script>
 
 <style>
@@ -112,7 +131,6 @@
         box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
-    /* Alvos do jogo — isolados do estilo global */
     .alvo {
         position: absolute;
         width: 60px;
@@ -125,8 +143,6 @@
         font-size: 22px;
         font-weight: bold;
         color: white;
-
-        /* impedir interferência do .card global */
         margin: 0 !important;
         padding: 0 !important;
         box-shadow: none !important;
@@ -199,9 +215,9 @@
     <p>Um alvo aparece em posições aleatórias no ecrã. Toca nele antes que desapareça!</p>
     <ul>
         <li><b>Normal:</b> vale 1 ponto.</li>
-        <li><b>Rápido:</b> desaparece em 0.5s — vale 2 pontos.</li>
+        <li><b>Rápido:</b> vale 2 pontos.</li>
         <li><b>Bónus:</b> vale 5 pontos.</li>
-        <li><b>Falso:</b> NÃO clicar — tira 1 ponto.</li>
+        <li><b>Falso:</b> tira 1 ponto.</li>
     </ul>
     <p>Se falhares 5 alvos, o jogo termina.</p>
 </div>
@@ -221,7 +237,142 @@
 </div>
 
 <script>
-/* O teu JavaScript original permanece intacto */
+let pontuacao = 0;
+let falhas = 0;
+let jogoAtivo = false;
+let alvoTimeout = null;
+
+const jogoArea = document.getElementById("jogoArea");
+const countdownBox = document.getElementById("countdownBox");
+const pontuacaoEl = document.getElementById("pontuacao");
+const falhasEl = document.getElementById("falhas");
+const tabelaLB = document.getElementById("tabelaLB");
+
+document.getElementById("btnStart").addEventListener("click", iniciarCountdown);
+
+function iniciarCountdown() {
+    let count = 5;
+    countdownBox.style.display = "block";
+    countdownBox.textContent = count;
+
+    const interval = setInterval(() => {
+        count--;
+        countdownBox.textContent = count;
+
+        if (count === 0) {
+            clearInterval(interval);
+            countdownBox.style.display = "none";
+            iniciarJogo();
+        }
+    }, 1000);
+}
+
+function iniciarJogo() {
+    pontuacao = 0;
+    falhas = 0;
+    jogoAtivo = true;
+
+    pontuacaoEl.textContent = "Pontuação: 0";
+    falhasEl.textContent = "Falhas: 0 / 5";
+
+    jogoArea.style.display = "block";
+
+    criarAlvo();
+}
+
+function criarAlvo() {
+    if (!jogoAtivo) return;
+
+    const alvo = document.createElement("div");
+    alvo.classList.add("alvo");
+
+    const tipos = ["normal", "rapido", "bonus", "fake"];
+    const tipo = tipos[Math.floor(Math.random() * tipos.length)];
+    alvo.classList.add(tipo);
+
+    let tempoVida = 1500;
+    if (tipo === "rapido") tempoVida = 1000;
+    if (tipo === "bonus") tempoVida = 1200;
+    if (tipo === "fake") tempoVida = 1500;
+
+    const maxX = jogoArea.clientWidth - 60;
+    const maxY = jogoArea.clientHeight - 60;
+
+    alvo.style.left = Math.random() * maxX + "px";
+    alvo.style.top = Math.random() * maxY + "px";
+
+    alvo.addEventListener("click", () => {
+        if (!jogoAtivo) return;
+
+        if (tipo === "normal") pontuacao += 1;
+        if (tipo === "rapido") pontuacao += 2;
+        if (tipo === "bonus") pontuacao += 5;
+        if (tipo === "fake") pontuacao -= 1;
+
+        pontuacaoEl.textContent = "Pontuação: " + pontuacao;
+
+        alvo.remove();
+        clearTimeout(alvoTimeout);
+        criarAlvo();
+    });
+
+    jogoArea.appendChild(alvo);
+
+    alvoTimeout = setTimeout(() => {
+        if (document.body.contains(alvo)) {
+            alvo.remove();
+            falhas++;
+            falhasEl.textContent = `Falhas: ${falhas} / 5`;
+
+            if (falhas >= 5) terminarJogo();
+            else criarAlvo();
+        }
+    }, tempoVida);
+}
+
+function terminarJogo() {
+    jogoAtivo = false;
+    jogoArea.style.display = "none";
+
+    const nome = prompt("Fim do jogo! Escreve o teu nome:");
+
+    if (nome) {
+        guardarPontuacao(nome, pontuacao);
+    }
+
+    carregarLeaderboard();
+}
+
+function guardarPontuacao(nome, pontos) {
+    db.ref("tiroAlvoTop").once("value", snapshot => {
+        const top = snapshot.val() || [];
+
+        top.push({ nome, pontos });
+
+        top.sort((a, b) => b.pontos - a.pontos);
+
+        const top10 = top.slice(0, 10);
+
+        db.ref("tiroAlvoTop").set(top10);
+    });
+}
+
+function carregarLeaderboard() {
+    db.ref("tiroAlvoTop").once("value", snapshot => {
+        const top = snapshot.val() || [];
+        tabelaLB.innerHTML = "";
+
+        let html = "<tr><th>Nome</th><th>Pontos</th></tr>";
+
+        top.forEach(j => {
+            html += `<tr><td>${j.nome}</td><td>${j.pontos}</td></tr>`;
+        });
+
+        tabelaLB.innerHTML = html;
+    });
+}
+
+carregarLeaderboard();
 </script>
 
 </body>
