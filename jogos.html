@@ -42,7 +42,8 @@
             padding: 20px;
         }
 
-        .card {
+        /* Cartões quadrados */
+        .card-menu {
             background-color: var(--cor-cartao-castanho-escuro);
             padding: 18px;
             border-radius: 18px;
@@ -50,22 +51,32 @@
             transition: 0.2s;
             border-left: 4px solid var(--dourado);
             box-shadow: 0 0 12px rgba(227,193,90,0.35);
+
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
-        .card:hover {
+        .card-menu:hover {
             background-color: var(--cor-cartao-castanho-claro);
             transform: translateY(-3px);
             box-shadow: 0 0 18px rgba(227,193,90,0.55);
         }
 
-        .card i {
+        .card-menu i {
             font-size: 36px;
             color: var(--dourado);
         }
 
-        .card p {
+        .card-menu p {
             font-size: 17px;
             margin-top: 8px;
+            overflow-wrap: break-word;
+            padding: 0 6px;
         }
 
         #voltar {
@@ -98,17 +109,17 @@
 
 <div class="grid">
 
-    <div class="card" onclick="openPage('jogo-memoria.html')">
+    <div class="card-menu" onclick="openPage('jogo-memoria.html')">
         <i class="fas fa-brain"></i>
         <p>Jogo da Memória</p>
     </div>
 
-    <div class="card" onclick="openPage('crc_runner_vertical.html')">
+    <div class="card-menu" onclick="openPage('crc_runner_vertical.html')">
         <i class="fas fa-running"></i>
         <p>Treino reflexos do CRC</p>
     </div>
 
-    <div class="card" onclick="openPage('tiroaoalvo.html')">
+    <div class="card-menu" onclick="openPage('tiroaoalvo.html')">
         <i class="fas fa-bullseye"></i>
         <p>Tiro ao Alvo</p>
     </div>
@@ -123,4 +134,5 @@
 
 </body>
 </html>
+
 
