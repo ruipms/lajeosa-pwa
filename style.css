@@ -8,9 +8,23 @@
     --dourado: #E3C15A;         /* Dourado quente */
     --dourado-light: #e6c96a;   /* Dourado claro */
 
-    /* NOVO SISTEMA UNIFICADO DE COR DOS CARTÕES */
+    /* ============================================================
+       🎨 SISTEMA UNIFICADO DE COR DOS CARTÕES
+       👉 SE UM DIA QUISERES MUDAR A COR DOS CARTÕES,
+          É APENAS AQUI QUE PRECISAS DE ALTERAR.
+       ============================================================ */
+
     --cor-cartao-base: #7A563A;          /* Castanho escuro (cor principal) */
     --cor-cartao-base-hover: #8C6E4A;    /* Castanho claro (hover) */
+
+    /* ============================================================
+       🔄 COMPATIBILIDADE COM PÁGINAS ANTIGAS
+       Estas variáveis antigas são agora ALIAS das novas.
+       Assim, páginas antigas continuam a funcionar sem alterações.
+       ============================================================ */
+
+    --cor-cartao-castanho-escuro: var(--cor-cartao-base);
+    --cor-cartao-castanho-claro: var(--cor-cartao-base-hover);
 
     /* Cores opcionais para temas futuros */
     --cor-cartao-verde-claro: #2A7A5E;
@@ -203,4 +217,3 @@ header h1 {
     overflow-wrap: break-word !important;
     padding: 0 6px !important;
 }
-
