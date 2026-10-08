@@ -60,15 +60,11 @@ header h1 {
 }
 
 /* ===========================
-   CARTÕES
+   CARTÕES (GENÉRICOS)
    =========================== */
 
 .card {
-
-    /* ⭐⭐ ALTERA AQUI A COR DOS CARTÕES ⭐⭐ */
-
     background-color: var(--cor-cartao-castanho-escuro) !important;
-
     padding: 18px !important;
     border-radius: 20px !important;
     margin: 16px 20px !important;
@@ -151,8 +147,12 @@ header h1 {
    =========================== */
 
 .card-menu {
-    aspect-ratio: 1 / 1;                 /* Mantém formato quadrado */
-    overflow: hidden;                    /* Impede texto de sair */
+    background-color: var(--cor-cartao-castanho-escuro) !important;
+    border-left: 4px solid var(--dourado) !important;
+    box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -161,34 +161,50 @@ header h1 {
     padding: 16px !important;
 }
 
+.card-menu:hover {
+    background-color: var(--cor-cartao-castanho-claro) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 0 18px rgba(227,193,90,0.55) !important;
+}
+
 .card-menu p {
     margin-top: 8px !important;
     font-size: 16px !important;
     overflow-wrap: break-word !important;
-    padding: 0 6px !important;           /* Evita texto encostar às bordas */
+    padding: 0 6px !important;
 }
+
 /* ===========================
-   EXCEÇÃO: Cartões CRC e Jogos
+   EXCEÇÃO: CRC + JOGOS (retangulares)
    =========================== */
 
-/* CRC Lajeosa do Mondego */
-.card-menu i.fa-futbol {
-    /* remove formato quadrado */
-}
-.card-menu:has(i.fa-futbol) {
-    aspect-ratio: auto !important;
+.card-menu-alt {
+    background-color: var(--cor-cartao-castanho-escuro) !important;
+    border-left: 4px solid var(--dourado) !important;
+    box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+
+    /* Sem quadrado */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center !important;
+    padding: 16px !important;
     height: auto !important;
-    padding: 18px !important;
 }
 
-/* Jogos */
-.card-menu i.fa-gamepad {
-    /* remove formato quadrado */
+.card-menu-alt:hover {
+    background-color: var(--cor-cartao-castanho-claro) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 0 18px rgba(227,193,90,0.55) !important;
 }
-.card-menu:has(i.fa-gamepad) {
-    aspect-ratio: auto !important;
-    height: auto !important;
-    padding: 18px !important;
+
+.card-menu-alt p {
+    margin-top: 8px !important;
+    font-size: 16px !important;
+    overflow-wrap: break-word !important;
+    padding: 0 6px !important;
 }
 
 
