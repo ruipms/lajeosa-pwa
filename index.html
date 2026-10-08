@@ -86,7 +86,8 @@
             padding: 10px 20px 20px 20px;
         }
 
-        .card {
+        /* Cartões quadrados */
+        .card-menu {
             background-color: var(--cor-cartao-castanho-escuro);
             padding: 18px;
             border-radius: 18px;
@@ -94,24 +95,35 @@
             transition: 0.2s;
             border-left: 4px solid var(--dourado);
             box-shadow: 0 0 12px rgba(227,193,90,0.35);
+
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
         }
 
-        .card:hover {
+        .card-menu:hover {
             background-color: var(--cor-cartao-castanho-claro);
             transform: translateY(-3px);
             box-shadow: 0 0 18px rgba(227,193,90,0.55);
         }
 
-        .card i {
+        .card-menu i {
             font-size: 36px;
             color: var(--dourado);
         }
 
-        .card p {
+        .card-menu p {
             font-size: 17px;
             margin-top: 8px;
+            overflow-wrap: break-word;
+            padding: 0 6px;
         }
 
+        /* Cartões grandes finais */
         .card-full {
             background-color: var(--cor-cartao-castanho-escuro);
             padding: 18px;
@@ -158,10 +170,10 @@
 <details class="accordion">
     <summary>Instituições</summary>
     <div class="grid">
-        <div class="card" onclick="openPage('junta.html')"><i class="fas fa-landmark"></i><p>Junta de Freguesia</p></div>
-        <div class="card" onclick="openPage('servicos.html')"><i class="fas fa-briefcase"></i><p>Serviços na Freguesia</p></div>
-        <div class="card" onclick="openPage('noticias.html')"><i class="fas fa-newspaper"></i><p>Notícias</p></div>
-        <div class="card" onclick="openPage('eventos.html')"><i class="fas fa-calendar-alt"></i><p>Eventos</p></div>
+        <div class="card-menu" onclick="openPage('junta.html')"><i class="fas fa-landmark"></i><p>Junta de Freguesia</p></div>
+        <div class="card-menu" onclick="openPage('servicos.html')"><i class="fas fa-briefcase"></i><p>Serviços na Freguesia</p></div>
+        <div class="card-menu" onclick="openPage('noticias.html')"><i class="fas fa-newspaper"></i><p>Notícias</p></div>
+        <div class="card-menu" onclick="openPage('eventos.html')"><i class="fas fa-calendar-alt"></i><p>Eventos</p></div>
     </div>
 </details>
 
@@ -169,10 +181,10 @@
 <details class="accordion">
     <summary>Aldeia</summary>
     <div class="grid">
-        <div class="card" onclick="openPage('pontos.html')"><i class="fas fa-map-marker-alt"></i><p>Pontos de Interesse</p></div>
-        <div class="card" onclick="openPage('historia.html')"><i class="fas fa-book"></i><p>História e Tradições</p></div>
-        <div class="card" onclick="openPage('meteorologia.html')"><i class="fas fa-cloud-sun"></i><p>Meteorologia</p></div>
-        <div class="card" onclick="openPage('redessociais.html')"><i class="fas fa-share-alt"></i><p>Lajeosa nas redes sociais</p></div>
+        <div class="card-menu" onclick="openPage('pontos.html')"><i class="fas fa-map-marker-alt"></i><p>Pontos de Interesse</p></div>
+        <div class="card-menu" onclick="openPage('historia.html')"><i class="fas fa-book"></i><p>História e Tradições</p></div>
+        <div class="card-menu" onclick="openPage('meteorologia.html')"><i class="fas fa-cloud-sun"></i><p>Meteorologia</p></div>
+        <div class="card-menu" onclick="openPage('redessociais.html')"><i class="fas fa-share-alt"></i><p>Lajeosa nas redes sociais</p></div>
     </div>
 </details>
 
@@ -180,7 +192,7 @@
 <details class="accordion">
     <summary>Clube</summary>
     <div class="grid">
-        <div class="card" onclick="openPage('clube.html')"><i class="fas fa-futbol"></i><p>CRC Lajeosa do Mondego</p></div>
+        <div class="card-menu" onclick="openPage('clube.html')"><i class="fas fa-futbol"></i><p>CRC Lajeosa do Mondego</p></div>
     </div>
 </details>
 
@@ -188,10 +200,10 @@
 <details class="accordion">
     <summary>Utilidade</summary>
     <div class="grid">
-        <div class="card" onclick="openPage('contactos.html')"><i class="fas fa-phone"></i><p>Comércio e serviços</p></div>
-        <div class="card" onclick="openPage('associacoes.html')"><i class="fas fa-people-group"></i><p>Associações</p></div>
-        <div class="card" onclick="openPage('horarios.html')"><i class="fas fa-bus"></i><p>Horários da Camioneta</p></div>
-        <div class="card" onclick="openPage('seguranca.html')"><i class="fas fa-triangle-exclamation"></i><p>Segurança e avisos</p></div>
+        <div class="card-menu" onclick="openPage('contactos.html')"><i class="fas fa-phone"></i><p>Comércio e serviços</p></div>
+        <div class="card-menu" onclick="openPage('associacoes.html')"><i class="fas fa-people-group"></i><p>Associações</p></div>
+        <div class="card-menu" onclick="openPage('horarios.html')"><i class="fas fa-bus"></i><p>Horários da Camioneta</p></div>
+        <div class="card-menu" onclick="openPage('seguranca.html')"><i class="fas fa-triangle-exclamation"></i><p>Segurança e avisos</p></div>
     </div>
 </details>
 
@@ -199,7 +211,7 @@
 <details class="accordion">
     <summary>Jogos</summary>
     <div class="grid">
-        <div class="card" onclick="openPage('jogos.html')"><i class="fas fa-gamepad"></i><p>Jogos</p></div>
+        <div class="card-menu" onclick="openPage('jogos.html')"><i class="fas fa-gamepad"></i><p>Jogos</p></div>
     </div>
 </details>
 
@@ -238,3 +250,4 @@
 
 </body>
 </html>
+
