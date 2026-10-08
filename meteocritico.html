@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meteorologia Crítica – Lajeosa</title>
 
+<!-- Carregar style.css -->
+<link rel="stylesheet" href="style.css">
+
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
@@ -12,35 +15,6 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-FTEGNRDBJW');
-
-  window.addEventListener('appinstalled', () => gtag('event', 'pwa_install'));
-  if (window.matchMedia('(display-mode: standalone)').matches) gtag('event', 'pwa_launch_icon');
-
-  if (!localStorage.getItem('pwa_first_visit')) {
-      localStorage.setItem('pwa_first_visit', '1');
-      gtag('event', 'pwa_first_open');
-  } else gtag('event', 'pwa_return_open');
-
-  window.addEventListener('offline', () => gtag('event', 'pwa_offline_use'));
-
-  window.addEventListener('error', (e) => {
-      if (e.message && e.message.includes('Failed to fetch')) gtag('event', 'pwa_network_error');
-  });
-
-  document.addEventListener('DOMContentLoaded', () => {
-      const ref = document.referrer;
-      if (ref.includes('whatsapp')) gtag('event', 'pwa_open_whatsapp');
-      if (ref.includes('instagram')) gtag('event', 'pwa_open_instagram');
-      if (ref.includes('facebook')) gtag('event', 'pwa_open_facebook');
-  });
-
-  if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-          gtag('event', 'pwa_update_trigger');
-      });
-  }
-
-  setInterval(() => gtag('event', 'pwa_active_tick'), 15000);
 </script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -49,7 +23,7 @@
     body {
         margin: 0;
         font-family: Arial, sans-serif;
-        background-color: #0F3D2E;
+        background-color: var(--verde-base);
         color: white;
         text-align: center;
         padding-bottom: 40px;
@@ -69,6 +43,7 @@
         margin-top: 10px;
         font-size: 24px;
         font-weight: bold;
+        color: var(--dourado);
     }
 
     .btn-voltar {
@@ -76,44 +51,50 @@
         margin: 12px auto 0 auto;
         padding: 10px 18px;
         border-radius: 18px;
-        background-color: #1F5C45;
-        border: 1px solid #D4AF37;
-        color: #D4AF37;
+        background-color: var(--cor-cartao-castanho-escuro);
+        border-left: 4px solid var(--dourado);
+        color: var(--dourado);
         font-size: 15px;
         text-decoration: none;
         width: fit-content;
         cursor: pointer;
+        box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
     .btn-voltar:hover {
-        background-color: #2a7a5e;
+        transform: translateY(-3px);
+        box-shadow: 0 0 18px rgba(227,193,90,0.55);
     }
 
     .sec-title {
-        color: #D4AF37;
+        color: var(--dourado);
         font-size: 20px;
         font-weight: bold;
         margin-top: 20px;
         margin-bottom: 10px;
     }
 
+    /* Cartão base castanho */
     .card {
-        background-color: #1F5C45;
+        background-color: var(--cor-cartao-castanho-escuro);
         padding: 18px;
         border-radius: 18px;
         margin: 16px 20px;
         text-align: left;
-        border: 1px solid rgba(212,175,55,0.4);
+        border-left: 4px solid var(--dourado);
+        box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
-    .card.yellow { background-color: #8a6f00; border: 2px solid #D4AF37; }
-    .card.orange { background-color: #b85c00; border: 2px solid #ffb347; }
-    .card.red { background-color: #8b0000; border: 2px solid #ff4d4d; }
+    /* Avisos coloridos */
+    .card.yellow { background-color: #8a6f00; border-left: 4px solid #D4AF37; }
+    .card.orange { background-color: #b85c00; border-left: 4px solid #ffb347; }
+    .card.red { background-color: #8b0000; border-left: 4px solid #ff4d4d; }
 
     .status-title {
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 6px;
+        color: var(--dourado);
     }
 
     .status-desc {
@@ -126,6 +107,7 @@
         margin-top: 12px;
         font-size: 13px;
         opacity: 0.9;
+        color: var(--dourado);
     }
 
     .error-box {
@@ -133,8 +115,9 @@
         padding: 16px;
         border-radius: 18px;
         margin: 20px;
-        border: 1px solid #D4AF37;
+        border-left: 4px solid var(--dourado);
         font-size: 15px;
+        box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 </style>
 </head>
@@ -145,7 +128,7 @@
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
     <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
     <h1>Meteorologia Crítica</h1>
-    <p style="color:#D4AF37; font-size:14px;">Fonte: IPMA – Avisos Oficiais</p>
+    <p style="color:var(--dourado); font-size:14px;">Fonte: IPMA – Avisos Oficiais</p>
 </header>
 
 <h2 class="sec-title">Estado Atual</h2>
@@ -195,35 +178,22 @@ async function carregarAvisos() {
 
         avisos.forEach(av => {
 
-            /* 🔥 IGNORAR AVISOS MARÍTIMOS */
+            /* IGNORAR AVISOS MARÍTIMOS */
             const textoCompleto = (
                 (av.awarenessTypeName || "") + " " +
                 (av.text || "")
             ).toLowerCase();
 
             const ignorar = [
-                "agitação",
-                "marítima",
-                "maritima",
-                "ondulação",
-                "mar",
-                "costeiro",
-                "coastal",
-                "sea",
-                "wave"
+                "agitação","marítima","maritima","ondulação",
+                "mar","costeiro","coastal","sea","wave"
             ];
 
-            if (ignorar.some(p => textoCompleto.includes(p))) {
-
-                return;
-            }
-
-            /* --- PROCESSAMENTO NORMAL DO AVISO --- */
+            if (ignorar.some(p => textoCompleto.includes(p))) return;
 
             const tipo = av.awarenessTypeName || "Aviso";
             const nivel = av.awarenessLevelID || "green";
 
-            /* ✔ Descrição automática quando não existe texto */
             const nivelPT =
                 nivel === "yellow" ? "Amarelo" :
                 nivel === "orange" ? "Laranja" :
@@ -296,3 +266,4 @@ function openPage(page) {
 
 </body>
 </html>
+
