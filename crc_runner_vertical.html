@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRC Runner Vertical — Lajeosa do Mondego</title>
+
+    <!-- Carregar style.css -->
     <link rel="stylesheet" href="style.css">
 
     <!-- Google Analytics -->
@@ -38,7 +40,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0F3D2E;
+            background-color: var(--verde-base);
             color: white;
             text-align: center;
         }
@@ -55,43 +57,51 @@
             margin-top: 10px;
             font-size: 24px;
             font-weight: bold;
-            color: #D4AF37;
+            color: var(--dourado);
         }
 
+        /* Botão voltar */
         #voltar {
             margin-top: 10px;
             padding: 10px 20px;
-            background-color: #1F5C45;
-            color: white;
+            background-color: var(--cor-cartao-castanho-escuro);
+            color: var(--dourado);
             border: none;
             border-radius: 10px;
             cursor: pointer;
             font-size: 16px;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
+        /* Caixa explicação */
         #explicacao {
             margin: 20px auto;
             width: 85%;
-            background-color: #1F5C45;
+            background-color: var(--cor-cartao-castanho-escuro);
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
             padding: 16px;
             border-radius: 12px;
             font-size: 15px;
             line-height: 1.4;
         }
 
+        /* Área do jogo */
         #jogoArea {
             margin: 20px auto;
             width: 90%;
             max-width: 420px;
             height: 360px;
-            background-color: #144d3a;
+            background-color: var(--cor-cartao-castanho-claro);
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
             border-radius: 12px;
             position: relative;
             overflow: hidden;
-            border: 2px solid #D4AF37;
         }
 
-        /* Personagem CRC ao fundo, centrado */
+        /* Personagem */
         #personagem {
             position: absolute;
             bottom: 10px;
@@ -170,20 +180,24 @@
         #hud {
             margin-top: 10px;
             font-size: 16px;
+            color: var(--dourado);
         }
 
+        /* Leaderboard */
         #leaderboard {
             margin-top: 30px;
             padding: 20px;
-            background-color: #1F5C45;
+            background-color: var(--cor-cartao-castanho-escuro);
             border-radius: 12px;
             width: 80%;
             margin-left: auto;
             margin-right: auto;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         #leaderboard h2 {
-            color: #D4AF37;
+            color: var(--dourado);
         }
 
         #leaderboard ul {
@@ -196,14 +210,18 @@
             font-size: 16px;
         }
 
+        /* Botões fim de jogo */
         #fimJogo button {
             padding: 10px 20px;
             border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
             margin: 5px;
+            border: none;
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
     </style>
+
 </head>
 
 <body>
@@ -256,8 +274,11 @@
 </div>
 
 <div id="hud">
-    Tempo: <span id="tempo">0s</span><br><br>
-    <button id="btnIniciar" onclick="iniciarJogo()" style="padding:10px 20px; background:#D4AF37; color:#0F3D2E; border:none; border-radius:10px; font-weight:bold; cursor:pointer;">
+    Tempo: <span id="tempo" style="color:var(--dourado); font-weight:bold;">0s</span><br><br>
+
+    <!-- BOTÃO INICIAR JOGO (premium) -->
+    <button id="btnIniciar" onclick="iniciarJogo()" 
+    style="padding:10px 20px; background:var(--cor-cartao-castanho-escuro); color:var(--dourado); border:none; border-radius:14px; font-weight:bold; cursor:pointer; border-left:4px solid var(--dourado); box-shadow:0 0 12px rgba(227,193,90,0.35);">
         ▶ Começar jogo
     </button>
 </div>
@@ -268,8 +289,18 @@
 </div>
 
 <div id="fimJogo" style="display:none;">
-    <button onclick="reiniciarJogo()" style="background:#D4AF37; color:#0F3D2E;">🔄 Novo jogo</button>
-    <button onclick="openPage('jogos.html')" style="background:#1F5C45; color:white;">← Voltar aos Jogos</button>
+
+    <!-- BOTÃO NOVO JOGO (premium dourado) -->
+    <button onclick="reiniciarJogo()" 
+    style="background:var(--dourado); color:var(--verde-base); border:none; border-radius:14px; padding:10px 20px; font-weight:bold; cursor:pointer; box-shadow:0 0 12px rgba(227,193,90,0.35);">
+        🔄 Novo jogo
+    </button>
+
+    <!-- BOTÃO VOLTAR AOS JOGOS (premium castanho) -->
+    <button onclick="openPage('jogos.html')" 
+    style="background:var(--cor-cartao-castanho-escuro); color:var(--dourado); border:none; border-radius:14px; padding:10px 20px; font-weight:bold; cursor:pointer; border-left:4px solid var(--dourado); box-shadow:0 0 12px rgba(227,193,90,0.35);">
+        ← Voltar aos Jogos
+    </button>
 </div>
 
 <script>
@@ -458,7 +489,6 @@
 
         if (nome) {
             guardarPontuacao(nome, tempo);
-        
         }
 
         document.getElementById("fimJogo").style.display = "block";
@@ -508,20 +538,19 @@
     /* --- LEADERBOARD --- */
 
     function guardarPontuacao(nome, tempoFinal) {
-    db.ref("topCRCVertical").once("value", snapshot => {
-        let top = snapshot.val() || [];
+        db.ref("topCRCVertical").once("value", snapshot => {
+            let top = snapshot.val() || [];
 
-        top.push({ nome, tempo: tempoFinal });
+            top.push({ nome, tempo: tempoFinal });
 
-        top.sort((a, b) => b.tempo - a.tempo);
+            top.sort((a, b) => b.tempo - a.tempo);
 
-        const top10 = top.slice(0, 10);
+            const top10 = top.slice(0, 10);
 
-        db.ref("topCRCVertical").set(top10, () => {
-            // Só atualiza o leaderboard depois de guardar
-            mostrarLeaderboard();
+            db.ref("topCRCVertical").set(top10, () => {
+                mostrarLeaderboard();
+            });
         });
-    });
     }
 
     function mostrarLeaderboard() {
