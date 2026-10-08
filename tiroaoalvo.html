@@ -118,10 +118,12 @@ const db = firebase.database();
         box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
+    /* Tabuleiro responsivo */
     #jogoArea {
         position: relative;
         width: 100%;
-        height: 500px;
+        height: 65vh;              /* responsivo ao ecrã */
+        max-height: 500px;         /* limite em desktop */
         background-color: var(--cor-cartao-castanho-claro);
         border-radius: 18px;
         margin-top: 20px;
@@ -149,10 +151,10 @@ const db = firebase.database();
         border-left: none !important;
     }
 
-    .normal { background-color: var(--dourado); }
-    .rapido { background-color: #ff4d4d; }
-    .bonus { background-color: #4CAF50; }
-    .fake  { background-color: #555; }
+    .normal { background-color: var(--dourado); }   /* dourado = normal */
+    .rapido { background-color: #ff4d4d; }          /* vermelho = rápido */
+    .bonus { background-color: #4CAF50; }           /* verde = bónus */
+    .fake  { background-color: #555; }              /* cinzento = falso */
 
     #pontuacao {
         font-size: 22px;
@@ -214,10 +216,10 @@ const db = firebase.database();
     <h2>Como jogar?</h2>
     <p>Um alvo aparece em posições aleatórias no ecrã. Toca nele antes que desapareça!</p>
     <ul>
-        <li><b>Normal:</b> vale 1 ponto.</li>
-        <li><b>Rápido:</b> vale 2 pontos.</li>
-        <li><b>Bónus:</b> vale 5 pontos.</li>
-        <li><b>Falso:</b> tira 1 ponto.</li>
+        <li><b>🟡 Normal (dourado):</b> vale 1 ponto — aparece durante 1.5s.</li>
+        <li><b>🔴 Rápido (vermelho):</b> vale 2 pontos — aparece durante 1s.</li>
+        <li><b>🟢 Bónus (verde):</b> vale 5 pontos — aparece durante 1.2s.</li>
+        <li><b>⚫ Falso (cinzento):</b> tira 1 ponto — aparece durante 1.5s.</li>
     </ul>
     <p>Se falhares 5 alvos, o jogo termina.</p>
 </div>
