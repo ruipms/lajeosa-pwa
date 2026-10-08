@@ -183,7 +183,6 @@ header h1 {
     border-left: 4px solid var(--dourado) !important;
     box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
 
-    /* Sem quadrado */
     overflow: hidden;
     display: flex;
     flex-direction: column;
