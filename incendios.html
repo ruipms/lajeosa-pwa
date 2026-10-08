@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Incêndios — Distrito da Guarda</title>
 
+    <!-- Carregar style.css -->
+    <link rel="stylesheet" href="style.css">
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
     <script>
@@ -18,7 +21,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0F3D2E;
+            background-color: var(--verde-base);
             color: white;
             text-align: center;
         }
@@ -35,12 +38,12 @@
             margin-top: 10px;
             font-size: 26px;
             font-weight: bold;
-            color: #D4AF37;
+            color: var(--dourado);
         }
 
         .btn-voltar {
-            background-color: #1F5C45;
-            color: #D4AF37;
+            background-color: var(--cor-cartao-castanho-escuro);
+            color: var(--dourado);
             padding: 10px 18px;
             border-radius: 18px;
             text-decoration: none;
@@ -48,14 +51,17 @@
             display: inline-block;
             margin-top: 10px;
             transition: 0.2s;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         .btn-voltar:hover {
-            background-color: #2a7a5e;
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(227,193,90,0.55);
         }
 
         .sec-title {
-            color: #D4AF37;
+            color: var(--dourado);
             font-size: 20px;
             font-weight: bold;
             margin-top: 25px;
@@ -63,15 +69,17 @@
         }
 
         .card-inc {
-            background-color: #1F5C45;
+            background-color: var(--cor-cartao-castanho-escuro);
             padding: 18px;
             border-radius: 18px;
             margin: 16px 20px;
             text-align: left;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         .linha-titulo {
-            color: #D4AF37;
+            color: var(--dourado);
             font-size: 17px;
             font-weight: bold;
             margin-bottom: 8px;
@@ -98,6 +106,7 @@
             padding: 10px;
             font-size: 14px;
             opacity: 0.7;
+            color: var(--dourado);
         }
     </style>
 </head>
@@ -110,7 +119,7 @@
     <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
 </header>
 
-<p id="atualizado" style="opacity:0.8; font-size:14px;"></p>
+<p id="atualizado" style="opacity:0.8; font-size:14px; color:var(--dourado);"></p>
 
 <h2 class="sec-title">Incêndios Ativos</h2>
 <div id="ativos"></div>
@@ -161,7 +170,7 @@
 
         if (ativos.length === 0) {
             htmlAtivos = `
-                <p style="opacity:0.8; font-size:16px; margin-top:10px;">
+                <p style="opacity:0.8; font-size:16px; margin-top:10px; color:var(--dourado);">
                     Não há incêndios ativos no distrito da Guarda neste momento.
                 </p>
             `;
@@ -198,7 +207,7 @@
 
         if (concluidos.length === 0) {
             htmlConcluidos = `
-                <p style="opacity:0.8; font-size:16px; margin-top:10px;">
+                <p style="opacity:0.8; font-size:16px; margin-top:10px; color:var(--dourado);">
                     Não há incêndios concluídos recentes no distrito da Guarda.
                 </p>
             `;
