@@ -167,4 +167,28 @@ header h1 {
     overflow-wrap: break-word !important;
     padding: 0 6px !important;           /* Evita texto encostar às bordas */
 }
+/* ===========================
+   EXCEÇÃO: Cartões CRC e Jogos
+   =========================== */
+
+/* CRC Lajeosa do Mondego */
+.card-menu i.fa-futbol {
+    /* remove formato quadrado */
+}
+.card-menu:has(i.fa-futbol) {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    padding: 18px !important;
+}
+
+/* Jogos */
+.card-menu i.fa-gamepad {
+    /* remove formato quadrado */
+}
+.card-menu:has(i.fa-gamepad) {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    padding: 18px !important;
+}
+
 
