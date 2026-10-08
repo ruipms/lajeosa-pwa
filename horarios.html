@@ -5,388 +5,406 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Horários da Camioneta</title>
 
-<!-- Google tag (gtag.js) -->
+<!-- Google tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-FTEGNRDBJW');
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FTEGNRDBJW');
 </script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-color: #0F3D2E;
-        color: white;
-        text-align: center;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--verde-base);
+    color: white;
+    text-align: center;
+}
 
-    header {
-        padding: 20px;
-    }
+header {
+    padding: 20px;
+}
 
-    h1 {
-        margin-top: 10px;
-        font-size: 26px;
-        font-weight: bold;
-    }
+h1 {
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: bold;
+    color: var(--dourado);
+}
 
-    .toggle-btn {
-        background-color: #1F5C45;
-        padding: 14px;
-        border-radius: 18px;
-        cursor: pointer;
-        transition: 0.2s;
-        display: inline-block;
-        margin-top: 10px;
-        font-size: 16px;
-        color: #D4AF37;
-        font-weight: bold;
-    }
+/* Botão toggle */
+.toggle-btn {
+    background-color: var(--cor-cartao-castanho-escuro);
+    padding: 14px;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: 0.25s;
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: var(--dourado);
+    font-weight: bold;
+    border-left: 4px solid var(--dourado);
+    box-shadow: 0 0 12px rgba(227,193,90,0.35);
+}
 
-    .toggle-btn:hover {
-        background-color: #2a7a5e;
-    }
+.toggle-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(227,193,90,0.55);
+}
 
-    .toggle-msg {
-        margin-top: 8px;
-        font-size: 14px;
-        color: #D4AF37;
-        opacity: 0.9;
-    }
+.toggle-msg {
+    margin-top: 8px;
+    font-size: 14px;
+    color: var(--dourado);
+    opacity: 0.9;
+}
 
-    .info {
-        color: #D4AF37;
-        font-size: 13px;
-        margin-top: 10px;
-        opacity: 0.9;
-    }
+.info {
+    color: var(--dourado);
+    font-size: 13px;
+    margin-top: 10px;
+    opacity: 0.9;
+}
 
-    .card {
-        background-color: #1F5C45;
-        padding: 18px;
-        border-radius: 18px;
-        margin: 20px;
-        text-align: left;
-    }
+/* Cartões castanhos premium */
+.card {
+    background-color: var(--cor-cartao-castanho-escuro);
+    padding: 18px;
+    border-radius: 20px;
+    margin: 20px;
+    text-align: left;
+    border-left: 4px solid var(--dourado);
+    border: 1px solid rgba(227,193,90,0.4);
+    box-shadow: 0 0 12px rgba(227,193,90,0.35);
+}
 
-    .card h2 {
-        margin-top: 0;
-        color: #D4AF37;
-        font-size: 22px;
-        text-align: center;
-    }
+.card h2 {
+    margin-top: 0;
+    color: var(--dourado);
+    font-size: 22px;
+    text-align: center;
+}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 15px;
-    }
+/* Tabelas premium */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: var(--cor-cartao-castanho-escuro);
+    border-radius: 12px;
+    overflow: hidden;
+}
 
-    th, td {
-        padding: 10px;
-        border-bottom: 1px solid rgba(255,255,255,0.2);
-    }
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(227,193,90,0.25);
+}
 
-    th {
-        color: #D4AF37;
-        font-size: 18px;
-    }
+th {
+    color: var(--dourado);
+    font-size: 18px;
+    background-color: var(--cor-cartao-castanho-claro);
+}
 
-    .lajeosa {
-        background-color: rgba(212,175,55,0.25);
-        font-weight: bold;
-    }
+tr:hover {
+    background-color: rgba(227,193,90,0.1);
+}
 
-    .nota {
-        margin-top: 10px;
-        font-size: 14px;
-        opacity: 0.8;
-        text-align: center;
-    }
+/* Destaque da Lajeosa */
+.lajeosa {
+    background-color: rgba(227,193,90,0.15);
+    font-weight: bold;
+    color: var(--dourado);
+}
 
-    .voltar {
-        margin: 20px;
-        padding: 15px;
-        background-color: #1F5C45;
-        border-radius: 18px;
-        cursor: pointer;
-        transition: 0.2s;
-        display: inline-block;
-    }
+/* Nota */
+.nota {
+    margin-top: 10px;
+    font-size: 14px;
+    opacity: 0.8;
+    text-align: center;
+    color: var(--dourado);
+}
 
-    .voltar:hover {
-        background-color: #2a7a5e;
-    }
+/* Botão voltar */
+.voltar {
+    margin: 20px;
+    padding: 15px;
+    background-color: var(--cor-cartao-castanho-escuro);
+    border-radius: 18px;
+    cursor: pointer;
+    transition: 0.25s;
+    display: inline-block;
+    border-left: 4px solid var(--dourado);
+    box-shadow: 0 0 12px rgba(227,193,90,0.35);
+}
 
-    .voltar i {
-        color: #D4AF37;
-        font-size: 20px;
-        margin-right: 8px;
-    }
+.voltar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 18px rgba(227,193,90,0.55);
+}
 
-    .proxima {
-        background-color: #1F5C45;
-        padding: 18px;
-        border-radius: 18px;
-        margin: 20px;
-        text-align: center;
-        transition: 0.3s;
-    }
+.voltar i {
+    color: var(--dourado);
+    font-size: 20px;
+    margin-right: 8px;
+}
 
-    .proxima.alerta {
-        background-color: #D4AF37 !important;
-        color: #0F3D2E !important;
-    }
+/* Próxima camioneta */
+.proxima {
+    background-color: var(--cor-cartao-castanho-escuro);
+    padding: 18px;
+    border-radius: 20px;
+    margin: 20px;
+    text-align: center;
+    transition: 0.3s;
+    border-left: 4px solid var(--dourado);
+    box-shadow: 0 0 12px rgba(227,193,90,0.35);
+}
 
-    .proxima.alerta h2 {
-        color: #0F3D2E !important;
-    }
+.proxima.alerta {
+    background-color: var(--dourado) !important;
+    color: #0F3D2E !important;
+}
 
-    .proxima.alerta p {
-        color: #0F3D2E !important;
-    }
+.proxima.alerta h2 {
+    color: #0F3D2E !important;
+}
 
-    .proxima p {
-        font-size: 18px;
-        margin-top: 10px;
-    }
+.proxima.alerta p {
+    color: #0F3D2E !important;
+}
 
-    .fade {
-        transition: opacity 0.4s ease;
-    }
+.proxima p {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.fade {
+    transition: opacity 0.4s ease;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-    <i class="fas fa-bus" style="font-size:48px; color:#D4AF37;"></i>
-    <h1>Horários da Camioneta</h1>
+<i class="fas fa-bus" style="font-size:48px; color:var(--dourado);"></i>
+<h1>Horários da Camioneta</h1>
 
-    <!-- Botão toggle -->
-    <div class="toggle-btn" onclick="toggleLajeosa()" id="toggleBtn">
-        Mostrar só a Lajeosa
-    </div>
+<div class="toggle-btn" onclick="toggleLajeosa()" id="toggleBtn">
+Mostrar só a Lajeosa
+</div>
 
-    <!-- Mensagem dinâmica -->
-    <div class="toggle-msg" id="toggleMsg">
-        A mostrar todos os horários completos.
-    </div>
+<div class="toggle-msg" id="toggleMsg">
+A mostrar todos os horários completos.
+</div>
 
-    <p class="info">
-        Horários fornecidos pela empresa Marques Barraqueiro — 
-        <a href="https://marques.pt" style="color:#D4AF37;">marques.pt</a>
-    </p>
+<p class="info">
+Horários fornecidos pela empresa Marques Barraqueiro —
+<a href="https://marques.pt" style="color:var(--dourado);">marques.pt</a>
+</p>
 
-    <p style="color:#D4AF37; font-size:14px; opacity:0.9;">Guarda ⇄ Seia / São Romão</p>
+<p style="color:var(--dourado); font-size:14px; opacity:0.9;">Guarda ⇄ Seia / São Romão</p>
 </header>
 
 <!-- Próxima camioneta -->
 <div class="proxima" id="proximaBox">
-    <h2 style="color:#D4AF37;">Próxima camioneta na Lajeosa</h2>
-    <p id="proximaTexto">A calcular…</p>
-    <p id="faltamTexto" style="font-size:16px; opacity:0.9; margin-top:6px;"></p>
+<h2 style="color:var(--dourado);">Próxima camioneta na Lajeosa</h2>
+<p id="proximaTexto">A calcular…</p>
+<p id="faltamTexto" style="font-size:16px; opacity:0.9; margin-top:6px;"></p>
 </div>
 
 <!-- IDA -->
 <div class="card fade" id="idaCard">
-    <h2>Guarda → São Romão</h2>
-    <p class="nota">A - Não se efetua aos sábados, domingos e feriados</p>
+<h2>Guarda → São Romão</h2>
+<p class="nota">A - Não se efetua aos sábados, domingos e feriados</p>
 
-    <table>
-        <tr><th>Local</th><th>Hora</th></tr>
-
-        <tr><td>Guarda</td><td>16:45</td></tr>
-        <tr><td>Maçainhas Baixo</td><td>16:51</td></tr>
-        <tr><td>Cubo</td><td>16:53</td></tr>
-        <tr><td>Prado</td><td>16:54</td></tr>
-        <tr><td>Chaos</td><td>16:56</td></tr>
-        <tr><td>Mirante</td><td>16:57</td></tr>
-        <tr><td>Quinta Nova</td><td>17:00</td></tr>
-        <tr><td>Ramalhosa</td><td>17:02</td></tr>
-        <tr><td>Cavadoude</td><td>17:05</td></tr>
-        <tr><td>Porto da Carne</td><td>17:08</td></tr>
-        <tr><td>Vila Cortez Mondego</td><td>17:12</td></tr>
-
-        <tr class="lajeosa"><td>Lajeosa do Mondego</td><td>17:16</td></tr>
-
-        <tr><td>Ratoeira</td><td>17:20</td></tr>
-        <tr><td>Celorico da Beira</td><td>17:30</td></tr>
-        <tr><td>Cortico da Serra</td><td>17:38</td></tr>
-        <tr><td>Carvalheda</td><td>17:42</td></tr>
-        <tr><td>Mesquitela</td><td>17:45</td></tr>
-        <tr><td>Vale da Ribeira</td><td>17:48</td></tr>
-        <tr><td>Carrapichana</td><td>17:52</td></tr>
-        <tr><td>Vila Cortes da Serra</td><td>17:57</td></tr>
-        <tr><td>Salgueiro</td><td>18:01</td></tr>
-        <tr><td>São Paio</td><td>18:08</td></tr>
-        <tr><td>Gouveia</td><td>18:12</td></tr>
-        <tr><td>Vinho</td><td>18:20</td></tr>
-        <tr><td>Moimenta da Serra</td><td>18:25</td></tr>
-        <tr><td>Paços da Serra</td><td>18:30</td></tr>
-        <tr><td>Eiro</td><td>18:32</td></tr>
-        <tr><td>Santa Marinha</td><td>18:35</td></tr>
-        <tr><td>Arrifana</td><td>18:40</td></tr>
-        <tr><td>Seia</td><td>18:47</td></tr>
-        <tr><td>São Romão</td><td>18:54</td></tr>
-    </table>
+<table>
+<tr><th>Local</th><th>Hora</th></tr>
+<tr><td>Guarda</td><td>16:45</td></tr>
+<tr><td>Maçainhas Baixo</td><td>16:51</td></tr>
+<tr><td>Cubo</td><td>16:53</td></tr>
+<tr><td>Prado</td><td>16:54</td></tr>
+<tr><td>Chaos</td><td>16:56</td></tr>
+<tr><td>Mirante</td><td>16:57</td></tr>
+<tr><td>Quinta Nova</td><td>17:00</td></tr>
+<tr><td>Ramalhosa</td><td>17:02</td></tr>
+<tr><td>Cavadoude</td><td>17:05</td></tr>
+<tr><td>Porto da Carne</td><td>17:08</td></tr>
+<tr><td>Vila Cortez Mondego</td><td>17:12</td></tr>
+<tr class="lajeosa"><td>Lajeosa do Mondego</td><td>17:16</td></tr>
+<tr><td>Ratoeira</td><td>17:20</td></tr>
+<tr><td>Celorico da Beira</td><td>17:30</td></tr>
+<tr><td>Cortico da Serra</td><td>17:38</td></tr>
+<tr><td>Carvalheda</td><td>17:42</td></tr>
+<tr><td>Mesquitela</td><td>17:45</td></tr>
+<tr><td>Vale da Ribeira</td><td>17:48</td></tr>
+<tr><td>Carrapichana</td><td>17:52</td></tr>
+<tr><td>Vila Cortes da Serra</td><td>17:57</td></tr>
+<tr><td>Salgueiro</td><td>18:01</td></tr>
+<tr><td>São Paio</td><td>18:08</td></tr>
+<tr><td>Gouveia</td><td>18:12</td></tr>
+<tr><td>Vinho</td><td>18:20</td></tr>
+<tr><td>Moimenta da Serra</td><td>18:25</td></tr>
+<tr><td>Paços da Serra</td><td>18:30</td></tr>
+<tr><td>Eiro</td><td>18:32</td></tr>
+<tr><td>Santa Marinha</td><td>18:35</td></tr>
+<tr><td>Arrifana</td><td>18:40</td></tr>
+<tr><td>Seia</td><td>18:47</td></tr>
+<tr><td>São Romão</td><td>18:54</td></tr>
+</table>
 </div>
 
 <!-- VOLTA -->
 <div class="card fade" id="voltaCard">
-    <h2>São Romão → Guarda</h2>
-    <p class="nota">A - Não se efetua aos sábados, domingos e feriados</p>
+<h2>São Romão → Guarda</h2>
+<p class="nota">A - Não se efetua aos sábados, domingos e feriados</p>
 
-    <table>
-        <tr><th>Local</th><th>Hora</th></tr>
-
-        <tr><td>São Romão</td><td>06:50</td></tr>
-        <tr><td>Seia</td><td>06:57</td></tr>
-        <tr><td>Arrifana</td><td>07:04</td></tr>
-        <tr><td>Santa Marinha</td><td>07:09</td></tr>
-        <tr><td>Eiro</td><td>07:12</td></tr>
-        <tr><td>Paços da Serra</td><td>07:14</td></tr>
-        <tr><td>Moimenta da Serra</td><td>07:19</td></tr>
-        <tr><td>Vinho</td><td>07:24</td></tr>
-        <tr><td>Gouveia</td><td>07:32</td></tr>
-        <tr><td>São Paio</td><td>07:36</td></tr>
-        <tr><td>Salgueiro</td><td>07:43</td></tr>
-        <tr><td>Vila Cortes da Serra</td><td>07:47</td></tr>
-        <tr><td>Carrapichana</td><td>07:52</td></tr>
-        <tr><td>Vale da Ribeira</td><td>07:56</td></tr>
-        <tr><td>Mesquitela</td><td>07:59</td></tr>
-        <tr><td>Carvalheda</td><td>08:02</td></tr>
-        <tr><td>Cortico da Serra</td><td>08:06</td></tr>
-        <tr><td>Celorico da Beira</td><td>08:14</td></tr>
-        <tr><td>Ratoeira</td><td>08:24</td></tr>
-
-        <tr class="lajeosa"><td>Lajeosa do Mondego</td><td>08:28</td></tr>
-
-        <tr><td>Vila Cortez Mondego</td><td>08:32</td></tr>
-        <tr><td>Porto da Carne</td><td>08:36</td></tr>
-        <tr><td>Cavadoude</td><td>08:39</td></tr>
-        <tr><td>Ramalhosa</td><td>08:42</td></tr>
-        <tr><td>Quinta Nova</td><td>08:44</td></tr>
-        <tr><td>Mirante</td><td>08:47</td></tr>
-        <tr><td>Chaos</td><td>08:48</td></tr>
-        <tr><td>Prado</td><td>08:50</td></tr>
-        <tr><td>Cubo</td><td>08:51</td></tr>
-        <tr><td>Maçainhas Baixo</td><td>08:53</td></tr>
-        <tr><td>Guarda</td><td>08:59</td></tr>
-    </table>
+<table>
+<tr><th>Local</th><th>Hora</th></tr>
+<tr><td>São Romão</td><td>06:50</td></tr>
+<tr><td>Seia</td><td>06:57</td></tr>
+<tr><td>Arrifana</td><td>07:04</td></tr>
+<tr><td>Santa Marinha</td><td>07:09</td></tr>
+<tr><td>Eiro</td><td>07:12</td></tr>
+<tr><td>Paços da Serra</td><td>07:14</td></tr>
+<tr><td>Moimenta da Serra</td><td>07:19</td></tr>
+<tr><td>Vinho</td><td>07:24</td></tr>
+<tr><td>Gouveia</td><td>07:32</td></tr>
+<tr><td>São Paio</td><td>07:36</td></tr>
+<tr><td>Salgueiro</td><td>07:43</td></tr>
+<tr><td>Vila Cortes da Serra</td><td>07:47</td></tr>
+<tr><td>Carrapichana</td><td>07:52</td></tr>
+<tr><td>Vale da Ribeira</td><td>07:56</td></tr>
+<tr><td>Mesquitela</td><td>07:59</td></tr>
+<tr><td>Carvalheda</td><td>08:02</td></tr>
+<tr><td>Cortico da Serra</td><td>08:06</td></tr>
+<tr><td>Celorico da Beira</td><td>08:14</td></tr>
+<tr><td>Ratoeira</td><td>08:24</td></tr>
+<tr class="lajeosa"><td>Lajeosa do Mondego</td><td>08:28</td></tr>
+<tr><td>Vila Cortez Mondego</td><td>08:32</td></tr>
+<tr><td>Porto da Carne</td><td>08:36</td></tr>
+<tr><td>Cavadoude</td><td>08:39</td></tr>
+<tr><td>Ramalhosa</td><td>08:42</td></tr>
+<tr><td>Quinta Nova</td><td>08:44</td></tr>
+<tr><td>Mirante</td><td>08:47</td></tr>
+<tr><td>Chaos</td><td>08:48</td></tr>
+<tr><td>Prado</td><td>08:50</td></tr>
+<tr><td>Cubo</td><td>08:51</td></tr>
+<tr><td>Maçainhas Baixo</td><td>08:53</td></tr>
+<tr><td>Guarda</td><td>08:59</td></tr>
+</table>
 </div>
 
 <!-- Botão voltar -->
 <div class="voltar" onclick="window.location.href='index.html'">
-    <i class="fas fa-arrow-left"></i> Voltar ao Menu
+<i class="fas fa-arrow-left"></i> Voltar ao Menu
 </div>
 
 <script>
-    // Horários da Lajeosa
-    const horariosLajeosa = ["08:28", "17:16"];
+// Horários da Lajeosa
+const horariosLajeosa = ["08:28", "17:16"];
 
-    function toDate(hora) {
-        const [h, m] = hora.split(":");
-        const d = new Date();
-        d.setHours(h);
-        d.setMinutes(m);
-        d.setSeconds(0);
-        return d;
+function toDate(hora) {
+    const [h, m] = hora.split(":");
+    const d = new Date();
+    d.setHours(h);
+    d.setMinutes(m);
+    d.setSeconds(0);
+    return d;
+}
+
+function calcularProxima() {
+    const agora = new Date();
+    const diaSemana = agora.getDay();
+    const texto = document.getElementById("proximaTexto");
+    const faltam = document.getElementById("faltamTexto");
+    const box = document.getElementById("proximaBox");
+
+    if (diaSemana === 0 || diaSemana === 6) {
+        texto.innerHTML = "Não há camionetas a passar na Lajeosa aos sábados e domingos.";
+        faltam.innerHTML = "";
+        box.classList.remove("alerta");
+        return;
     }
 
-    function calcularProxima() {
-        const agora = new Date();
-        const diaSemana = agora.getDay(); // 0 domingo, 6 sábado
+    const futuras = horariosLajeosa
+        .map(h => ({ hora: h, date: toDate(h) }))
+        .filter(h => h.date > agora);
 
-        const texto = document.getElementById("proximaTexto");
-        const faltam = document.getElementById("faltamTexto");
-        const box = document.getElementById("proximaBox");
-
-        // Sábados e domingos → não há camionetas
-        if (diaSemana === 0 || diaSemana === 6) {
-            texto.innerHTML = "Não há camionetas a passar na Lajeosa aos sábados e domingos.";
-            faltam.innerHTML = "";
-            box.classList.remove("alerta");
-            return;
-        }
-
-        const futuras = horariosLajeosa
-            .map(h => ({ hora: h, date: toDate(h) }))
-            .filter(h => h.date > agora);
-
-        if (futuras.length === 0) {
-            texto.innerHTML = "Não há mais camionetas a passar na Lajeosa hoje.";
-            faltam.innerHTML = "";
-            box.classList.remove("alerta");
-            return;
-        }
-
-        const proxima = futuras[0];
-        texto.innerHTML = `A próxima camioneta passa às <strong>${proxima.hora}</strong>.`;
-
-        const diffMs = proxima.date - agora;
-        const diffSec = Math.floor(diffMs / 1000);
-        const diffMin = Math.floor(diffSec / 60);
-        const diffHoras = Math.floor(diffMin / 60);
-        const diffMinRestantes = diffMin % 60;
-        const diffSecRestantes = diffSec % 60;
-
-        if (diffHoras > 0) {
-            faltam.innerHTML = `Faltam ${diffHoras}h ${diffMinRestantes}min ${diffSecRestantes}s.`;
-        } else if (diffMin > 0) {
-            faltam.innerHTML = `Faltam ${diffMin}min ${diffSecRestantes}s.`;
-        } else {
-            faltam.innerHTML = `Faltam ${diffSecRestantes}s.`;
-        }
-
-        if (diffMin <= 10) {
-            box.classList.add("alerta");
-        } else {
-            box.classList.remove("alerta");
-        }
+    if (futuras.length === 0) {
+        texto.innerHTML = "Não há mais camionetas a passar na Lajeosa hoje.";
+        faltam.innerHTML = "";
+        box.classList.remove("alerta");
+        return;
     }
 
-    // Toggle Lajeosa
-    let modoLajeosa = false;
+    const proxima = futuras[0];
+    texto.innerHTML = `A próxima camioneta passa às <strong>${proxima.hora}</strong>.`;
 
-    function toggleLajeosa() {
-        modoLajeosa = !modoLajeosa;
+    const diffMs = proxima.date - agora;
+    const diffSec = Math.floor(diffMs / 1000);
+    const diffMin = Math.floor(diffSec / 60);
+    const diffHoras = Math.floor(diffMin / 60);
+    const diffMinRestantes = diffMin % 60;
+    const diffSecRestantes = diffSec % 60;
 
-        const ida = document.getElementById("idaCard");
-        const volta = document.getElementById("voltaCard");
-        const btn = document.getElementById("toggleBtn");
-        const msg = document.getElementById("toggleMsg");
-
-        if (modoLajeosa) {
-            ida.style.opacity = "0";
-            volta.style.opacity = "0";
-            setTimeout(() => {
-                ida.style.display = "none";
-                volta.style.display = "none";
-            }, 400);
-
-            btn.innerHTML = "Mostrar todos os horários";
-            msg.innerHTML = "A mostrar apenas os horários da Lajeosa do Mondego.";
-        } else {
-            ida.style.display = "block";
-            volta.style.display = "block";
-            setTimeout(() => {
-                ida.style.opacity = "1";
-                volta.style.opacity = "1";
-            }, 10);
-
-            btn.innerHTML = "Mostrar só a Lajeosa";
-            msg.innerHTML = "A mostrar todos os horários completos.";
-        }
+    if (diffHoras > 0) {
+        faltam.innerHTML = `Faltam ${diffHoras}h ${diffMinRestantes}min ${diffSecRestantes}s.`;
+    } else if (diffMin > 0) {
+        faltam.innerHTML = `Faltam ${diffMin}min ${diffSecRestantes}s.`;
+    } else {
+        faltam.innerHTML = `Faltam ${diffSecRestantes}s.`;
     }
 
-    calcularProxima();
-    setInterval(calcularProxima, 1000);
+    if (diffMin <= 10) {
+        box.classList.add("alerta");
+    } else {
+        box.classList.remove("alerta");
+    }
+}
+
+let modoLajeosa = false;
+
+function toggleLajeosa() {
+    modoLajeosa = !modoLajeosa;
+
+    const ida = document.getElementById("idaCard");
+    const volta = document.getElementById("voltaCard");
+    const btn = document.getElementById("toggleBtn");
+    const msg = document.getElementById("toggleMsg");
+
+    if (modoLajeosa) {
+        ida.style.opacity = "0";
+        volta.style.opacity = "0";
+        setTimeout(() => {
+            ida.style.display = "none";
+            volta.style.display = "none";
+        }, 400);
+
+        btn.innerHTML = "Mostrar todos os horários";
+        msg.innerHTML = "A mostrar apenas os horários da Lajeosa do Mondego.";
+    } else {
+        ida.style.display = "block";
+        volta.style.display = "block";
+        setTimeout(() => {
+            ida.style.opacity = "1";
+            volta.style.opacity = "1";
+        }, 10);
+
+        btn.innerHTML = "Mostrar só a Lajeosa";
+        msg.innerHTML = "A mostrar todos os horários completos.";
+    }
+}
+
+calcularProxima();
+setInterval(calcularProxima, 1000);
 </script>
 
 </body>
