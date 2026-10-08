@@ -325,14 +325,23 @@ function criarAlvo() {
     alvoTimeout = setTimeout(() => {
         if (document.body.contains(alvo)) {
             alvo.remove();
-            falhas++;
-            falhasEl.textContent = `Falhas: ${falhas} / 5`;
 
-            if (falhas >= 5) terminarJogo();
-            else criarAlvo();
+            // ⭐ CORREÇÃO IMPORTANTE ⭐
+            if (tipo !== "fake") {
+                falhas++;
+                falhasEl.textContent = `Falhas: ${falhas} / 5`;
+
+                if (falhas >= 5) {
+                    terminarJogo();
+                    return;
+                }
+            }
+
+            criarAlvo();
         }
     }, tempoVida);
 }
+
 
 function terminarJogo() {
     jogoAtivo = false;
