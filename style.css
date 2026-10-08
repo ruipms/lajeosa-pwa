@@ -8,12 +8,14 @@
     --dourado: #E3C15A;         /* Dourado quente */
     --dourado-light: #e6c96a;   /* Dourado claro */
 
-    /* Cores disponíveis para os cartões (para uso manual) */
-    --cor-cartao-verde-claro: #2A7A5E;        /* Verde claro elegante */
-    --cor-cartao-castanho: #8C6E4A;           /* Castanho suave */
-    --cor-cartao-castanho-escuro: #7A563A;    /* Castanho escuro */
-    --cor-cartao-azul-suave: #3A7CA5;         /* Azul suave */
-    --cor-cartao-cinzento: #C7C2B8;           /* Cinzento quente */
+    /* NOVO SISTEMA UNIFICADO DE COR DOS CARTÕES */
+    --cor-cartao-base: #7A563A;          /* Castanho escuro (cor principal) */
+    --cor-cartao-base-hover: #8C6E4A;    /* Castanho claro (hover) */
+
+    /* Cores opcionais para temas futuros */
+    --cor-cartao-verde-claro: #2A7A5E;
+    --cor-cartao-azul-suave: #3A7CA5;
+    --cor-cartao-cinzento: #C7C2B8;
 }
 
 /* ===========================
@@ -64,7 +66,7 @@ header h1 {
    =========================== */
 
 .card {
-    background-color: var(--cor-cartao-castanho-escuro) !important;
+    background-color: var(--cor-cartao-base) !important;
     padding: 18px !important;
     border-radius: 20px !important;
     margin: 16px 20px !important;
@@ -85,10 +87,6 @@ header h1 {
     color: var(--dourado) !important;
     font-size: 22px !important;
     text-shadow: 0 0 6px rgba(227,193,90,0.4);
-}
-
-.card h3 i {
-    color: var(--castanho-suave) !important;
 }
 
 /* ===========================
@@ -147,7 +145,7 @@ header h1 {
    =========================== */
 
 .card-menu {
-    background-color: var(--cor-cartao-castanho-escuro) !important;
+    background-color: var(--cor-cartao-base) !important;
     border-left: 4px solid var(--dourado) !important;
     box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
 
@@ -162,7 +160,7 @@ header h1 {
 }
 
 .card-menu:hover {
-    background-color: var(--cor-cartao-castanho-claro) !important;
+    background-color: var(--cor-cartao-base-hover) !important;
     transform: translateY(-3px) !important;
     box-shadow: 0 0 18px rgba(227,193,90,0.55) !important;
 }
@@ -179,7 +177,7 @@ header h1 {
    =========================== */
 
 .card-menu-alt {
-    background-color: var(--cor-cartao-castanho-escuro) !important;
+    background-color: var(--cor-cartao-base) !important;
     border-left: 4px solid var(--dourado) !important;
     box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
 
@@ -194,7 +192,7 @@ header h1 {
 }
 
 .card-menu-alt:hover {
-    background-color: var(--cor-cartao-castanho-claro) !important;
+    background-color: var(--cor-cartao-base-hover) !important;
     transform: translateY(-3px) !important;
     box-shadow: 0 0 18px rgba(227,193,90,0.55) !important;
 }
@@ -205,5 +203,4 @@ header h1 {
     overflow-wrap: break-word !important;
     padding: 0 6px !important;
 }
-
 
