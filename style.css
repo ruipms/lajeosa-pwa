@@ -65,20 +65,9 @@ header h1 {
 
 .card {
 
-    /* ⭐⭐ ALTERA AQUI A COR DOS CARTÕES ⭐⭐
-       Escolhe uma das opções abaixo e substitui a variável:
+    /* ⭐⭐ ALTERA AQUI A COR DOS CARTÕES ⭐⭐ */
 
-       Verde claro elegante  → var(--cor-cartao-verde-claro)
-       Castanho suave        → var(--cor-cartao-castanho)
-       Castanho escuro       → var(--cor-cartao-castanho-escuro)
-       Azul suave            → var(--cor-cartao-azul-suave)
-       Cinzento quente       → var(--cor-cartao-cinzento)
-
-       Exemplo:
-       background-color: var(--cor-cartao-castanho-escuro) !important;
-    */
-
-    background-color: var(--cor-cartao-castanho-escuro) !important; /* ← MUDA ESTA LINHA */
+    background-color: var(--cor-cartao-castanho-escuro) !important;
 
     padding: 18px !important;
     border-radius: 20px !important;
@@ -155,5 +144,27 @@ header h1 {
     border-radius: 16px !important;
     padding: 10px !important;
     margin: 10px !important;
+}
+
+/* ===========================
+   CARTÕES DE MENU (quadrados)
+   =========================== */
+
+.card-menu {
+    aspect-ratio: 1 / 1;                 /* Mantém formato quadrado */
+    overflow: hidden;                    /* Impede texto de sair */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center !important;
+    padding: 16px !important;
+}
+
+.card-menu p {
+    margin-top: 8px !important;
+    font-size: 16px !important;
+    overflow-wrap: break-word !important;
+    padding: 0 6px !important;           /* Evita texto encostar às bordas */
 }
 
