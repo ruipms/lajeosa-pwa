@@ -2,13 +2,13 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta viewport="width=device-width, initial-scale=1.0">
   <title>Histórico de Versões — Lajeosa do Mondego</title>
 
-  <!-- Carregar estilo global -->
+  <!-- Estilo global -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -18,7 +18,6 @@
   </script>
 
   <style>
-    /* Ajustes específicos desta página */
     body {
       background-color: var(--verde-base);
       color: white;
@@ -32,33 +31,62 @@
       margin-bottom: 30px;
     }
 
-    /* Cartões castanhos unificados */
-    .version {
-      background-color: var(--cor-cartao-base);
-      padding: 18px;
-      border-radius: 18px;
-      margin-bottom: 20px;
-      text-align: left;
-      box-shadow: 0 0 12px rgba(227,193,90,0.35);
-      border-left: 4px solid var(--dourado);
+    /* Acordeão */
+    details {
       max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      transition: 0.25s;
+      margin: 0 auto 16px auto;
     }
 
-    .version:hover {
+    summary {
+      background-color: var(--cor-cartao-base);
+      padding: 16px;
+      border-radius: 16px;
+      cursor: pointer;
+      border-left: 4px solid var(--dourado);
+      box-shadow: 0 0 12px rgba(227,193,90,0.35);
+      font-size: 20px;
+      text-align: left;
+      list-style: none;
+      transition: 0.25s;
+      color: var(--dourado);
+    }
+
+    summary:hover {
       background-color: var(--cor-cartao-base-hover);
       transform: translateY(-3px);
       box-shadow: 0 0 18px rgba(227,193,90,0.55);
     }
 
-    .version h2 {
-      margin: 0;
-      color: var(--dourado);
+    summary::marker {
+      display: none;
     }
 
-    .version p {
+    summary::after {
+      content: "▼";
+      float: right;
+      transition: transform 0.25s;
+    }
+
+    details[open] summary::after {
+      transform: rotate(180deg);
+    }
+
+    .conteudo {
+      background-color: var(--cor-cartao-base);
+      padding: 16px;
+      border-radius: 0 0 16px 16px;
+      border-left: 4px solid var(--dourado);
+      box-shadow: 0 0 12px rgba(227,193,90,0.35);
+      text-align: left;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .conteudo p {
       margin: 6px 0;
     }
 
@@ -76,200 +104,235 @@
 
 <h1>📜 Histórico de Versões</h1>
 
-  <!-- VERSÃO 8 Out -->
-<div class="version">
-   <h2>08/10/2026</h2>
-   <p>• Alteração visual de todas as páginas</p>
-  <p>• Tema Outono (castanho)</p>
-</div>
+<!-- MODELO DE ACORDEÃO -->
+<details>
+  <summary>08/10/2026</summary>
+  <div class="conteudo">
+    <p>• Alteração visual de todas as páginas</p>
+    <p>• Tema Outono (castanho)</p>
+  </div>
+</details>
 
-<!-- VERSÃO 4.8.0 -->
-<div class="version">
-   <h2>Versão 4.8.0 — 06/10/2026</h2>
-   <p>• Novo jogo - Tiro ao alvo</p>
-</div>
+<details>
+  <summary>06/10/2026</summary>
+  <div class="conteudo">
+    <p>• Novo jogo - Tiro ao alvo</p>
+  </div>
+</details>
 
-<!-- VERSÃO 4.7.0 -->
-<div class="version">
-   <h2>Versão 4.7.0 — 04/10/2026</h2>
-   <p>• Atualização jogos da equipa de formação</p>
-   <p>• Nova página de preços dos combustíveis</p>
-</div>
+<details>
+  <summary>04/10/2026</summary>
+  <div class="conteudo">
+    <p>• Atualização jogos da equipa de formação</p>
+    <p>• Nova página de preços dos combustíveis</p>
+  </div>
+</details>
 
-<!-- VERSÃO 4.6.0 -->
-<div class="version">
-   <h2>Versão 4.6.0 — 02/10/2026</h2>
-   <p>• Reformulação completa da página Trânsito</p>
-   <p>• Atualização da página “Redes Sociais”</p>
-</div>
+<details>
+  <summary>02/10/2026</summary>
+  <div class="conteudo">
+    <p>• Reformulação completa da página Trânsito</p>
+    <p>• Atualização da página “Redes Sociais”</p>
+  </div>
+</details>
 
-<!-- VERSÃO 4.5.0 -->
-<div class="version">
-   <h2>Versão 4.5.0 — 29/09/2026</h2>
-   <p>• Criação da página “Segurança e Avisos”</p>
-   <p>• Subpáginas internas: Incêndios, Meteorologia Crítica, Avisos da Proteção Civil, Avisos da PJ, Cortes de Estradas e Alertas Locais</p>
-   <p>• Adicionadas novas fontes de notícias na secção Notícias</p>
-   <p>• Melhorias visuais gerais</p>
-</div>
+<details>
+  <summary>29/09/2026</summary>
+  <div class="conteudo">
+    <p>• Criação da página “Segurança e Avisos”</p>
+    <p>• Subpáginas internas: Incêndios, Meteorologia Crítica, Avisos da Proteção Civil, Avisos da PJ, Cortes de Estradas e Alertas Locais</p>
+    <p>• Adicionadas novas fontes de notícias na secção Notícias</p>
+    <p>• Melhorias visuais gerais</p>
+  </div>
+</details>
 
-<!-- VERSÃO 4.4.0 -->
-<div class="version">
-  <h2>Versão 4.4.0 — 27/09/2026</h2>
-  <p>• Criação da nova página “Associações”</p>
-  <p>• Adicionado cartão dedicado na página inicial</p>
-  <p>• Criação da página completa da Associação Lageosense de Solidariedade Social (ALSS)</p>
-</div>
+<details>
+  <summary>27/09/2026</summary>
+  <div class="conteudo">
+    <p>• Criação da nova página “Associações”</p>
+    <p>• Adicionado cartão dedicado na página inicial</p>
+    <p>• Criação da página completa da Associação Lageosense de Solidariedade Social (ALSS)</p>
+  </div>
+</details>
 
-<!-- VERSÃO 4.3.0 -->
-<div class="version">
-  <h2>Versão 4.3.0 — 21/09/2026</h2>
-  <p>• Novos menus nas equipas</p>
-  <p>• Histórico de competição em cada equipa</p>
-</div>
+<details>
+  <summary>21/09/2026</summary>
+  <div class="conteudo">
+    <p>• Novos menus nas equipas</p>
+    <p>• Histórico de competição em cada equipa</p>
+  </div>
+</details>
 
-<!-- VERSÃO 4.2.0 -->
-<div class="version">
-  <h2>Versão 4.2.0 — 18/09/2026</h2>
-  <p>• Adicionada categoria jogos na página inicial</p>
-  <p>• Criação da página de jogos</p>
-  <p>• Novo jogo - Treino para a equipa do CRC</p>
-  <p>• Top 10 de jogadores</p>
-</div>
+<details>
+  <summary>18/09/2026</summary>
+  <div class="conteudo">
+    <p>• Adicionada categoria jogos na página inicial</p>
+    <p>• Criação da página de jogos</p>
+    <p>• Novo jogo - Treino para a equipa do CRC</p>
+    <p>• Top 10 de jogadores</p>
+  </div>
+</details>
 
-<!-- VERSÃO 4.1.0 -->
-<div class="version">
-  <h2>Versão 4.1.0 — 15/09/2026</h2>
-  <p>• Lançado o novo sistema top jogadores do Jogo da Memória</p>
-  <p>• Ranking sincronizado entre todos os utilizadores, em tempo real</p>
-  <p>• Registo automático de nome, tempo e número de jogadas</p>
-  <p>• Ordenação inteligente por desempenho</p>
-</div>
+<details>
+  <summary>15/09/2026</summary>
+  <div class="conteudo">
+    <p>• Lançado o novo sistema top jogadores do Jogo da Memória</p>
+    <p>• Ranking sincronizado entre todos os utilizadores, em tempo real</p>
+    <p>• Registo automático de nome, tempo e número de jogadas</p>
+    <p>• Ordenação inteligente por desempenho</p>
+  </div>
+</details>
 
-<!-- VERSÃO 4.0.0 -->
-<div class="version">
-  <h2>Versão 4.0.0 — 12/09/2026</h2>
-  <p>• Reorganização completa da secção Sénior Feminino</p>
-  <p>• Criação do Top de Marcadoras da Pré‑Época</p>
-</div>
+<details>
+  <summary>12/09/2026</summary>
+  <div class="conteudo">
+    <p>• Reorganização completa da secção Sénior Feminino</p>
+    <p>• Criação do Top de Marcadoras da Pré‑Época</p>
+  </div>
+</details>
 
-<!-- VERSÃO 3.9.0 -->
-<div class="version">
-  <h2>Versão 3.9.0 — 11/09/2026</h2>
-  <p>• Reorganização completa da secção Masculina e feminina</p>
-  <p>• Criação de novas subpáginas dedicadas</p>
-  <p>• Integração do Top de Marcadores</p>
-  <p>• Melhoria da navegação</p>
-</div>
+<details>
+  <summary>11/09/2026</summary>
+  <div class="conteudo">
+    <p>• Reorganização completa da secção Masculina e feminina</p>
+    <p>• Criação de novas subpáginas dedicadas</p>
+    <p>• Integração do Top de Marcadores</p>
+    <p>• Melhoria da navegação</p>
+  </div>
+</details>
 
-<!-- VERSÃO 3.8.0 -->
-<div class="version">
-  <h2>Versão 3.8.0 — 08/09/2026</h2>
-  <p>• Adicionado novo jogo “Jogo da Memória”</p>
-  <p>• Criação da página dedicada</p>
-  <p>• Top Jogadores com nome, tempo e jogadas</p>
-  <p>• Cartão dedicado na página inicial</p>
-</div>
+<details>
+  <summary>08/09/2026</summary>
+  <div class="conteudo">
+    <p>• Adicionado novo jogo “Jogo da Memória”</p>
+    <p>• Criação da página dedicada</p>
+    <p>• Top Jogadores com nome, tempo e jogadas</p>
+    <p>• Cartão dedicado na página inicial</p>
+  </div>
+</details>
 
-<!-- VERSÃO 3.7.0 -->
-<div class="version">
-  <h2>Versão 3.7.0 — 06/09/2026</h2>
-  <p>• Adicionada secção “Jogos da Pré‑Época” na página Sénior Masculino</p>
-  <p>• Adicionado cartão do jogo vs S. Martinho da Cortiça</p>
-  <p>• Top de Marcadores da Pré‑Época</p>
-</div>
+<details>
+  <summary>06/09/2026</summary>
+  <div class="conteudo">
+    <p>• Adicionada secção “Jogos da Pré‑Época” na página Sénior Masculino</p>
+    <p>• Adicionado cartão do jogo vs S. Martinho da Cortiça</p>
+    <p>• Top de Marcadores da Pré‑Época</p>
+  </div>
+</details>
 
-<!-- VERSÃO 3.6.0 -->
-<div class="version">
-  <h2>Versão 3.6.0 — 01/09/2026</h2>
-  <p>• Criação da página “Horários da Camioneta”</p>
-  <p>• Integração com a página inicial</p>
-  <p>• Destaque especial à passagem pela Lajeosa</p>
-  <p>• Cálculo automático da próxima camioneta</p>
-  <p>• Contagem decrescente e alerta visual</p>
-</div>
+<details>
+  <summary>01/09/2026</summary>
+  <div class="conteudo">
+    <p>• Criação da página “Horários da Camioneta”</p>
+    <p>• Integração com a página inicial</p>
+    <p>• Destaque especial à passagem pela Lajeosa</p>
+    <p>• Cálculo automático da próxima camioneta</p>
+    <p>• Contagem decrescente e alerta visual</p>
+  </div>
+</details>
 
-<!-- VERSÃO 3.5.0 -->
-<div class="version">
-  <h2>Versão 3.5.0 — 31/08/2026</h2>
-  <p>• Reformulação completa da página inicial</p>
-  <p>• Novo layout por secções</p>
-  <p>• Ícones atualizados e corrigidos</p>
-  <p>• Criação da nova página “Instalar como Aplicação"</p>
-  <p>• Melhorias de UX e organização visual</p>
-</div>
+<details>
+  <summary>31/08/2026</summary>
+  <div class="conteudo">
+    <p>• Reformulação completa da página inicial</p>
+    <p>• Novo layout por secções</p>
+    <p>• Ícones atualizados e corrigidos</p>
+    <p>• Criação da nova página “Instalar como Aplicação"</p>
+    <p>• Melhorias de UX e organização visual</p>
+  </div>
+</details>
 
-<!-- VERSÃO 3.4.1 -->
-<div class="version">
-  <h2>Versão 3.4.1 — 27/08/2026</h2>
-  <p>• Adicionada jogadora Andreia Santos</p>
-  <p>• Adicionado aviso CRC</p>
-  <p>• Adicionado aviso treino formação</p>
-</div>
+<details>
+  <summary>27/08/2026</summary>
+  <div class="conteudo">
+    <p>• Adicionada jogadora Andreia Santos</p>
+    <p>• Adicionado aviso CRC</p>
+    <p>• Adicionado aviso treino formação</p>
+  </div>
+</details>
 
-<!-- VERSÃO 3.4.0 -->
-<div class="version">
-  <h2>Versão 3.4.0 — 24/08/2026</h2>
-  <p>• Avisos na página Sénior Masculino</p>
-  <p>• Imagens de treino e pré‑época</p>
-  <p>• Aviso global no topo da página</p>
-  <p>• Melhorias de UX e consistência visual</p>
-</div>
+<details>
+  <summary>24/08/2026</summary>
+  <div class="conteudo">
+    <p>• Avisos na página Sénior Masculino</p>
+    <p>• Imagens de treino e pré‑época</p>
+    <p>• Aviso global no topo da página</p>
+    <p>• Melhorias de UX e consistência visual</p>
+  </div>
+</details>
 
-<div class="version">
-  <h2>Versão 3.3.0 — 22/08/2026</h2>
-  <p>• Página de Histórico da Competição</p>
-  <p>• Reorganização dos cartões das equipas</p>
-  <p>• Preparação para a nova época 2026/2027</p>
-</div>
+<details>
+  <summary>22/08/2026</summary>
+  <div class="conteudo">
+    <p>• Página de Histórico da Competição</p>
+    <p>• Reorganização dos cartões das equipas</p>
+    <p>• Preparação para a nova época 2026/2027</p>
+  </div>
+</details>
 
-<div class="version">
-  <h2>Versão 3.2.1 — 21/08/2026</h2>
-  <p>• Atualizações de conteúdo nas páginas de Pontos de Interesse e Eventos</p>
-  <p>• Links (Facebook e mapas)</p>
-  <p>• Pequenos ajustes de layout</p>
-</div>
+<details>
+  <summary>21/08/2026</summary>
+  <div class="conteudo">
+    <p>• Atualizações de conteúdo nas páginas de Pontos de Interesse e Eventos</p>
+    <p>• Links (Facebook e mapas)</p>
+    <p>• Pequenos ajustes de layout</p>
+  </div>
+</details>
 
-<div class="version">
-  <h2>Versão 3.2.0 — 20/08/2026</h2>
-  <p>• Fotos clicáveis nas equipas Sénior Feminina, Sénior Masculino e Formação</p>
-  <p>• Modal com fallback “Foto indisponível”</p>
-  <p>• Melhorias de usabilidade no telemóvel</p>
-  <p>• Organização das pastas de imagens</p>
-  <p>• Ajustes visuais e consistência entre páginas</p>
-</div>
+<details>
+  <summary>20/08/2026</summary>
+  <div class="conteudo">
+    <p>• Fotos clicáveis nas equipas Sénior Feminina, Sénior Masculino e Formação</p>
+    <p>• Modal com fallback “Foto indisponível”</p>
+    <p>• Melhorias de usabilidade no telemóvel</p>
+    <p>• Organização das pastas de imagens</p>
+    <p>• Ajustes visuais e consistência entre páginas</p>
+  </div>
+</details>
 
-<div class="version">
-  <h2>Versão 3.1.4 — 17/08/2026</h2>
-  <p>• Correções de conteúdo nas páginas do clube</p>
-  <p>• Ajustes menores de layout</p>
-</div>
+<details>
+  <summary>17/08/2026</summary>
+  <div class="conteudo">
+    <p>• Correções de conteúdo nas páginas do clube</p>
+    <p>• Ajustes menores de layout</p>
+  </div>
+</details>
 
-<div class="version">
-  <h2>Versão 3.1.3 — 14/08/2026</h2>
-  <p>• Atualização de plantéis</p>
-  <p>• Melhorias na navegação interna</p>
-</div>
+<details>
+  <summary>14/08/2026</summary>
+  <div class="conteudo">
+    <p>• Atualização de plantéis</p>
+    <p>• Melhorias na navegação interna</p>
+  </div>
+</details>
 
-<div class="version">
-  <h2>Versão 3.1.0 — 10/08/2026</h2>
-  <p>• Reestruturação das páginas do clube</p>
-  <p>• Criação de novas páginas internas</p>
-  <p>• Navegação mais simples e modular</p>
-</div>
+<details>
+  <summary>10/08/2026</summary>
+  <div class="conteudo">
+    <p>• Reestruturação das páginas do clube</p>
+    <p>• Criação de novas páginas internas</p>
+    <p>• Navegação mais simples e modular</p>
+  </div>
+</details>
 
-<div class="version">
-  <h2>Versão 3.0.0 — 01/08/2026</h2>
-  <p>• Lançamento da versão completa do site</p>
-  <p>• Estrutura inicial da PWA</p>
-</div>
+<details>
+  <summary>01/08/2026</summary>
+  <div class="conteudo">
+    <p>• Lançamento da versão completa do site</p>
+    <p>• Estrutura inicial da PWA</p>
+  </div>
+</details>
 
-<div class="version">
-  <h2>Versões anteriores sem número</h2>
-  <p>• Estrutura do site</p>
-  <p>• Início do projecto</p>
-</div>
+<details>
+  <summary>Versões anteriores</summary>
+  <div class="conteudo">
+    <p>• Estrutura do site</p>
+    <p>• Início do projecto</p>
+  </div>
+</details>
 
 <p class="back" onclick="window.location.href='index.html'">⬅ Voltar ao início</p>
 
 </body>
 </html>
+
