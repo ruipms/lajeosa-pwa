@@ -245,6 +245,8 @@ let pontuacao = 0;
 let falhas = 0;
 let jogoAtivo = false;
 let alvoTimeout = null;
+let dificuldade = 1; // começa fácil
+
 
 const jogoArea = document.getElementById("jogoArea");
 const countdownBox = document.getElementById("countdownBox");
@@ -287,6 +289,9 @@ function iniciarJogo() {
 function criarAlvo() {
     if (!jogoAtivo) return;
 
+    // Aumentar dificuldade ao longo do tempo
+    dificuldade += 0.05; // sobe lentamente a cada alvo
+
     const alvo = document.createElement("div");
     alvo.classList.add("alvo");
 
@@ -294,11 +299,21 @@ function criarAlvo() {
     const tipo = tipos[Math.floor(Math.random() * tipos.length)];
     alvo.classList.add(tipo);
 
+    // Tempo base
     let tempoVida = 1500;
-    if (tipo === "rapido") tempoVida = 1000;
+
+    // Ajustes por tipo
+    if (tipo === "rapido") tempoVida = 900;
     if (tipo === "bonus") tempoVida = 1200;
     if (tipo === "fake") tempoVida = 1500;
 
+    // Dificuldade progressiva → tempo de vida reduzido
+    tempoVida = tempoVida / dificuldade;
+
+    // Limite mínimo (para não ficar impossível)
+    if (tempoVida < 450) tempoVida = 450;
+
+    // Posição aleatória
     const maxX = jogoArea.clientWidth - 60;
     const maxY = jogoArea.clientHeight - 60;
 
@@ -325,19 +340,11 @@ function criarAlvo() {
     alvoTimeout = setTimeout(() => {
         if (document.body.contains(alvo)) {
             alvo.remove();
+            falhas++;
+            falhasEl.textContent = `Falhas: ${falhas} / 5`;
 
-            // ⭐ CORREÇÃO IMPORTANTE ⭐
-            if (tipo !== "fake") {
-                falhas++;
-                falhasEl.textContent = `Falhas: ${falhas} / 5`;
-
-                if (falhas >= 5) {
-                    terminarJogo();
-                    return;
-                }
-            }
-
-            criarAlvo();
+            if (falhas >= 5) terminarJogo();
+            else criarAlvo();
         }
     }, tempoVida);
 }
