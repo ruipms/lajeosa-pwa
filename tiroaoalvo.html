@@ -118,20 +118,22 @@ const db = firebase.database();
         box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
-    /* Tabuleiro responsivo */
-    #jogoArea {
-        position: relative;
-        width: 100%;
-        height: 65vh;              /* responsivo ao ecrã */
-        max-height: 500px;         /* limite em desktop */
-        background-color: var(--cor-cartao-castanho-claro);
-        border-radius: 18px;
-        margin-top: 20px;
-        overflow: hidden;
-        display: none;
-        border-left: 4px solid var(--dourado);
-        box-shadow: 0 0 12px rgba(227,193,90,0.35);
-    }
+   #jogoArea {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;   /* impede que bordas aumentem a largura */
+    height: 55dvh;
+    max-height: 420px;
+    background-color: var(--cor-cartao-base-hover);
+    border-radius: 18px;
+    margin-top: 20px;
+    overflow: hidden;
+    display: none;
+    border-left: 4px solid var(--dourado);
+    box-shadow: 0 0 12px rgba(227,193,90,0.35);
+}
+
 
     .alvo {
         position: absolute;
