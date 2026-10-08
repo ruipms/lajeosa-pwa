@@ -88,7 +88,7 @@
 
         /* Cartões quadrados */
         .card-menu {
-            background-color: var(--cor-cartao-castanho-escuro);
+            background-color: var(--cor-cartao-base);
             padding: 18px;
             border-radius: 18px;
             cursor: pointer;
@@ -106,7 +106,7 @@
         }
 
         .card-menu:hover {
-            background-color: var(--cor-cartao-castanho-claro);
+            background-color: var(--cor-cartao-base-hover);
             transform: translateY(-3px);
             box-shadow: 0 0 18px rgba(227,193,90,0.55);
         }
@@ -123,9 +123,10 @@
             padding: 0 6px;
         }
 
-        /* Cartões grandes finais */
+        /* Cartões retangulares (CRC, Jogos, Instalar, Sobre mim) */
+        .card-menu-alt,
         .card-full {
-            background-color: var(--cor-cartao-castanho-escuro);
+            background-color: var(--cor-cartao-base);
             padding: 18px;
             border-radius: 18px;
             margin: 16px 20px;
@@ -133,11 +134,26 @@
             transition: 0.2s;
             border-left: 4px solid var(--dourado);
             box-shadow: 0 0 12px rgba(227,193,90,0.35);
+
+            height: auto;
+            aspect-ratio: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
+        .card-menu-alt:hover,
         .card-full:hover {
-            background-color: var(--cor-cartao-castanho-claro);
+            background-color: var(--cor-cartao-base-hover);
             transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(227,193,90,0.55);
+        }
+
+        .card-full i {
+            font-size: 36px;
+            color: var(--dourado);
+            margin-bottom: 8px;
         }
 
         footer {
@@ -215,7 +231,7 @@
     </div>
 </details>
 
-<!-- CARTÕES FINAIS -->
+<!-- CARTÕES FINAIS RETANGULARES -->
 <div class="card-full" onclick="openPage('aplicacao.html')">
     <i class="fas fa-mobile-alt"></i>
     <p>Instalar como Aplicação</p>
@@ -250,4 +266,3 @@
 
 </body>
 </html>
-
