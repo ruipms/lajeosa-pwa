@@ -94,13 +94,13 @@
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 80px);
-            gap: 12px;
+            gap: 12px; /* espaçamento entre cartas */
             justify-content: center;
             margin-top: 25px;
         }
 
-        /* Cartas castanhas premium */
-        .card {
+        /* Cartas do jogo (isoladas do estilo global) */
+        .memory-card {
             width: 80px;
             height: 80px;
             background-color: var(--cor-cartao-castanho-escuro);
@@ -111,20 +111,24 @@
             font-size: 40px;
             cursor: pointer;
             transition: 0.3s;
-            border-left: 4px solid var(--dourado);
-            box-shadow: 0 0 12px rgba(227,193,90,0.35);
             color: transparent;
+
+            /* Remover interferência do estilo global .card */
+            margin: 0 !important;
+            border-left: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
         }
 
-        .card:hover {
+        .memory-card:hover {
             transform: scale(1.05);
         }
 
         /* Carta revelada */
-        .card.revelada {
+        .memory-card.revelada {
             background-color: var(--dourado);
             color: #0F3D2E;
-            border-left: 4px solid #0F3D2E;
+            border-left: none !important;
         }
 
         /* Leaderboard premium */
@@ -221,7 +225,7 @@
 
         cartas.forEach((icone, index) => {
             const div = document.createElement("div");
-            div.classList.add("card");
+            div.classList.add("memory-card");
             div.dataset.icone = icone;
             div.dataset.index = index;
             div.addEventListener("click", clicarCarta);
@@ -283,7 +287,7 @@
     }
 
     function verificarVitoria() {
-        const todas = document.querySelectorAll(".card");
+        const todas = document.querySelectorAll(".memory-card");
         const reveladas = [...todas].filter(c => c.classList.contains("revelada"));
 
         if (reveladas.length === cartas.length) {
