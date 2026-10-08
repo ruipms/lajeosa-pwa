@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Polícia Judiciária – Região da Guarda</title>
 
+<!-- Carregar style.css -->
+<link rel="stylesheet" href="style.css">
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
@@ -16,26 +19,28 @@
 
 <style>
     body {
-        background-color: #0F3D2E;
+        background-color: var(--verde-base);
         color: white;
         font-family: Arial, sans-serif;
         padding: 20px;
     }
 
     h1 {
-        color: #D4AF37;
+        color: var(--dourado);
         text-align: center;
         margin-bottom: 20px;
     }
 
     .card {
-        background-color: #134C3A;
+        background-color: var(--cor-cartao-castanho-claro);
         padding: 15px;
-        border-radius: 10px;
+        border-radius: 12px;
         margin-bottom: 18px;
         opacity: 0;
         transform: translateY(10px);
         animation: fadeIn 0.4s forwards;
+        border-left: 4px solid var(--dourado);
+        box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
     @keyframes fadeIn {
@@ -48,18 +53,19 @@
     .titulo {
         font-size: 18px;
         font-weight: bold;
-        color: #D4AF37;
+        color: var(--dourado);
         margin-bottom: 12px;
     }
 
     .btn-link {
         display: inline-block;
-        background-color: #D4AF37;
-        color: #0F3D2E;
+        background-color: var(--dourado);
+        color: var(--verde-base);
         padding: 8px 14px;
-        border-radius: 6px;
+        border-radius: 8px;
         font-weight: bold;
         text-decoration: none;
+        box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
     .btn-link:hover {
@@ -69,9 +75,11 @@
     .voltar {
         display: inline-block;
         margin-top: 30px;
-        color: #D4AF37;
+        color: var(--dourado);
         font-size: 18px;
         text-decoration: none;
+        border-left: 4px solid var(--dourado);
+        padding-left: 10px;
     }
 
     .mensagem {
@@ -79,6 +87,7 @@
         opacity: 0.9;
         margin-top: 10px;
         text-align: center;
+        color: var(--dourado);
     }
 
     footer {
@@ -86,6 +95,7 @@
         text-align: center;
         opacity: 0.7;
         font-size: 14px;
+        color: var(--dourado);
     }
 
     .pj-final {
@@ -93,16 +103,19 @@
         text-align: center;
         font-size: 15px;
         opacity: 0.9;
+        color: var(--dourado);
     }
 
-    /* ⭐ SKELETON SIMPLES */
+    /* ⭐ SKELETON PREMIUM */
     .skeleton {
-        background: linear-gradient(90deg, #134C3A 25%, #1a5a47 50%, #134C3A 75%);
+        background: linear-gradient(90deg, var(--cor-cartao-castanho-claro) 25%, var(--cor-cartao-castanho-escuro) 50%, var(--cor-cartao-castanho-claro) 75%);
         background-size: 200% 100%;
         animation: shimmer 1.5s infinite;
-        border-radius: 10px;
+        border-radius: 12px;
         height: 70px;
         margin-bottom: 18px;
+        border-left: 4px solid var(--dourado);
+        box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
     @keyframes shimmer {
@@ -126,7 +139,7 @@
 
 <div class="pj-final">
     Para informação mais completa, consulte a página da Polícia Judiciária.<br>
-    <a href="https://www.policiajudiciaria.pt" target="_blank" style="color:#D4AF37;">
+    <a href="https://www.policiajudiciaria.pt" target="_blank" style="color:var(--dourado);">
         www.policiajudiaria.pt
     </a>
 </div>
@@ -200,3 +213,4 @@ carregarNoticiasPJ();
 
 </body>
 </html>
+
