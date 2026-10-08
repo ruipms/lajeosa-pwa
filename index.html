@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lajeosa do Mondego</title>
 
+    <!-- Carregar estilo global -->
+    <link rel="stylesheet" href="style.css">
+
     <!-- Google tag -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
     <script>
@@ -25,7 +28,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #0F3D2E;
+            background-color: var(--verde-base);
             color: white;
             text-align: center;
         }
@@ -42,43 +45,32 @@
             margin-top: 10px;
             font-size: 26px;
             font-weight: bold;
+            color: var(--dourado);
         }
 
-        /* Texto de instrução */
         .instrucao {
-            color: #D4AF37;
+            color: var(--dourado);
             font-size: 16px;
             font-weight: bold;
             margin-top: 14px;
         }
 
-        /* Estilo dos acordeões */
-        details.accordion {
-            margin: 0;
-            padding: 0;
-        }
-
+        /* Acordeões */
         details.accordion summary {
-            color: #D4AF37;
+            color: var(--dourado);
             font-size: 22px;
             font-weight: bold;
             padding: 20px 0 10px 0;
             cursor: pointer;
-            list-style: none;
             display: flex;
-            align-items: center;
             justify-content: center;
             gap: 10px;
-        }
-
-        details.accordion summary::-webkit-details-marker {
-            display: none;
         }
 
         details.accordion summary::after {
             content: "▼";
             font-size: 16px;
-            color: #D4AF37;
+            color: var(--dourado);
             transition: transform 0.25s ease;
         }
 
@@ -95,20 +87,24 @@
         }
 
         .card {
-            background-color: #1F5C45;
+            background-color: var(--cor-cartao-castanho-escuro);
             padding: 18px;
             border-radius: 18px;
             cursor: pointer;
             transition: 0.2s;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         .card:hover {
-            background-color: #2a7a5e;
+            background-color: var(--cor-cartao-castanho-claro);
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(227,193,90,0.55);
         }
 
         .card i {
             font-size: 36px;
-            color: #D4AF37;
+            color: var(--dourado);
         }
 
         .card p {
@@ -117,21 +113,19 @@
         }
 
         .card-full {
-            background-color: #1F5C45;
+            background-color: var(--cor-cartao-castanho-escuro);
             padding: 18px;
             border-radius: 18px;
             margin: 16px 20px;
             cursor: pointer;
             transition: 0.2s;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
         }
 
         .card-full:hover {
-            background-color: #2a7a5e;
-        }
-
-        .card-full i {
-            font-size: 36px;
-            color: #D4AF37;
+            background-color: var(--cor-cartao-castanho-claro);
+            transform: translateY(-3px);
         }
 
         footer {
@@ -139,6 +133,7 @@
             padding: 10px;
             font-size: 14px;
             opacity: 0.7;
+            color: var(--dourado);
         }
     </style>
 </head>
@@ -149,140 +144,66 @@
     <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
     <h1>Lajeosa do Mondego</h1>
 
-    <p id="dataAtual" style="color:#D4AF37; font-size:14px; font-weight:bold; margin-top:4px;"></p>
+    <p id="dataAtual" style="color:var(--dourado); font-size:14px; font-weight:bold; margin-top:4px;"></p>
 
     <p class="instrucao">📂 Toque em cada categoria para revelar os menus</p>
 
-    <p style="color:#D4AF37; font-size:13px; margin-top:2px; cursor:pointer;"
+    <p style="color:var(--dourado); font-size:13px; margin-top:2px; cursor:pointer;"
        onclick="openPage('changelog.html')">
         📜 Clique para ver histórico de alterações na app
     </p>
 </header>
 
-
-<!-- ============================
-     ACORDEÃO: INSTITUIÇÕES
-============================= -->
+<!-- INSTITUIÇÕES -->
 <details class="accordion">
     <summary>Instituições</summary>
-
     <div class="grid">
-        <div class="card" onclick="openPage('junta.html')">
-            <i class="fas fa-landmark"></i>
-            <p>Junta de Freguesia</p>
-        </div>
-
-        <div class="card" onclick="openPage('servicos.html')">
-            <i class="fas fa-briefcase"></i>
-            <p>Serviços na Freguesia</p>
-        </div>
-
-        <div class="card" onclick="openPage('noticias.html')">
-            <i class="fas fa-newspaper"></i>
-            <p>Notícias</p>
-        </div>
-
-        <div class="card" onclick="openPage('eventos.html')">
-            <i class="fas fa-calendar-alt"></i>
-            <p>Eventos</p>
-        </div>
+        <div class="card" onclick="openPage('junta.html')"><i class="fas fa-landmark"></i><p>Junta de Freguesia</p></div>
+        <div class="card" onclick="openPage('servicos.html')"><i class="fas fa-briefcase"></i><p>Serviços na Freguesia</p></div>
+        <div class="card" onclick="openPage('noticias.html')"><i class="fas fa-newspaper"></i><p>Notícias</p></div>
+        <div class="card" onclick="openPage('eventos.html')"><i class="fas fa-calendar-alt"></i><p>Eventos</p></div>
     </div>
 </details>
 
-
-<!-- ============================
-     ACORDEÃO: ALDEIA
-============================= -->
+<!-- ALDEIA -->
 <details class="accordion">
     <summary>Aldeia</summary>
-
     <div class="grid">
-        <div class="card" onclick="openPage('pontos.html')">
-            <i class="fas fa-map-marker-alt"></i>
-            <p>Pontos de Interesse</p>
-        </div>
-
-        <div class="card" onclick="openPage('historia.html')">
-            <i class="fas fa-book"></i>
-            <p>História e Tradições</p>
-        </div>
-
-        <div class="card" onclick="openPage('meteorologia.html')">
-            <i class="fas fa-cloud-sun"></i>
-            <p>Meteorologia</p>
-        </div>
-
-        <div class="card" onclick="openPage('redessociais.html')">
-            <i class="fas fa-share-alt"></i>
-            <p>Lajeosa nas redes sociais</p>
-        </div>
+        <div class="card" onclick="openPage('pontos.html')"><i class="fas fa-map-marker-alt"></i><p>Pontos de Interesse</p></div>
+        <div class="card" onclick="openPage('historia.html')"><i class="fas fa-book"></i><p>História e Tradições</p></div>
+        <div class="card" onclick="openPage('meteorologia.html')"><i class="fas fa-cloud-sun"></i><p>Meteorologia</p></div>
+        <div class="card" onclick="openPage('redessociais.html')"><i class="fas fa-share-alt"></i><p>Lajeosa nas redes sociais</p></div>
     </div>
 </details>
 
-
-<!-- ============================
-     ACORDEÃO: CLUBE
-============================= -->
+<!-- CLUBE -->
 <details class="accordion">
     <summary>Clube</summary>
-
     <div class="grid">
-        <div class="card" onclick="openPage('clube.html')">
-            <i class="fas fa-futbol"></i>
-            <p>CRC Lajeosa do Mondego</p>
-        </div>
+        <div class="card" onclick="openPage('clube.html')"><i class="fas fa-futbol"></i><p>CRC Lajeosa do Mondego</p></div>
     </div>
 </details>
 
-
-<!-- ============================
-     ACORDEÃO: UTILIDADE
-============================= -->
+<!-- UTILIDADE -->
 <details class="accordion">
     <summary>Utilidade</summary>
-
     <div class="grid">
-        <div class="card" onclick="openPage('contactos.html')">
-            <i class="fas fa-phone"></i>
-            <p>Comércio e serviços</p>
-        </div>
-
-        <div class="card" onclick="openPage('associacoes.html')">
-            <i class="fas fa-people-group"></i>
-            <p>Associações</p>
-        </div>
-
-        <div class="card" onclick="openPage('horarios.html')">
-            <i class="fas fa-bus"></i>
-            <p>Horários da Camioneta</p>
-        </div>
-
-        <div class="card" onclick="openPage('seguranca.html')">
-            <i class="fas fa-triangle-exclamation"></i>
-            <p>Segurança e avisos</p>
-        </div>
+        <div class="card" onclick="openPage('contactos.html')"><i class="fas fa-phone"></i><p>Comércio e serviços</p></div>
+        <div class="card" onclick="openPage('associacoes.html')"><i class="fas fa-people-group"></i><p>Associações</p></div>
+        <div class="card" onclick="openPage('horarios.html')"><i class="fas fa-bus"></i><p>Horários da Camioneta</p></div>
+        <div class="card" onclick="openPage('seguranca.html')"><i class="fas fa-triangle-exclamation"></i><p>Segurança e avisos</p></div>
     </div>
 </details>
 
-
-<!-- ============================
-     ACORDEÃO: JOGOS
-============================= -->
+<!-- JOGOS -->
 <details class="accordion">
     <summary>Jogos</summary>
-
     <div class="grid">
-        <div class="card" onclick="openPage('jogos.html')">
-            <i class="fas fa-gamepad"></i>
-            <p>Jogos</p>
-        </div>
+        <div class="card" onclick="openPage('jogos.html')"><i class="fas fa-gamepad"></i><p>Jogos</p></div>
     </div>
 </details>
 
-
-<!-- ============================
-     CARTÕES FINAIS
-============================= -->
+<!-- CARTÕES FINAIS -->
 <div class="card-full" onclick="openPage('aplicacao.html')">
     <i class="fas fa-mobile-alt"></i>
     <p>Instalar como Aplicação</p>
@@ -294,9 +215,7 @@
 </div>
 
 <div class="card-full" style="text-align:center;">
-    <p style="font-size:14px; opacity:0.8; margin-top:8px;">
-        Site em manutenção ativa
-    </p>
+    <p style="font-size:14px; opacity:0.8; margin-top:8px;">Site em manutenção ativa</p>
 </div>
 
 <footer>
@@ -309,10 +228,8 @@
     }
 
     const hoje = new Date();
-    const dia = String(hoje.getDate()).padStart(2, '0');
-    const mes = String(hoje.getMonth() + 1).padStart(2, '0');
-    const ano = hoje.getFullYear();
-    document.getElementById('dataAtual').textContent = `${dia}/${mes}/${ano}`;
+    document.getElementById('dataAtual').textContent =
+        `${String(hoje.getDate()).padStart(2,'0')}/${String(hoje.getMonth()+1).padStart(2,'0')}/${hoje.getFullYear()}`;
 
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('service-worker.js');
