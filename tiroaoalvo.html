@@ -337,16 +337,25 @@ function criarAlvo() {
 
     jogoArea.appendChild(alvo);
 
-    alvoTimeout = setTimeout(() => {
-        if (document.body.contains(alvo)) {
-            alvo.remove();
+   alvoTimeout = setTimeout(() => {
+    if (document.body.contains(alvo)) {
+        alvo.remove();
+
+        // ❗ Só conta falha se NÃO for falso
+        if (tipo !== "fake") {
             falhas++;
             falhasEl.textContent = `Falhas: ${falhas} / 5`;
 
-            if (falhas >= 5) terminarJogo();
-            else criarAlvo();
+            if (falhas >= 5) {
+                terminarJogo();
+                return;
+            }
         }
-    }, tempoVida);
+
+        criarAlvo();
+    }
+}, tempoVida);
+
 }
 
 
