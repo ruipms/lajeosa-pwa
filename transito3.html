@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Trânsito em Tempo Real</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+    .mapa {
+        width: 100%;
+        height: 320px;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 20px;
+        box-shadow: 0 0 12px rgba(227,193,90,0.35);
+    }
+
+    .cartao {
+        background-color: var(--cor-cartao-base);
+        padding: 16px;
+        margin: 12px 20px;
+        border-radius: 14px;
+        border-left: 4px solid var(--dourado);
+        box-shadow: 0 0 12px rgba(227,193,90,0.35);
+    }
+
+    .cartao h3 {
+        margin: 0;
+        color: var(--dourado);
+    }
+
+    .cartao p {
+        margin: 4px 0;
+    }
+
+    .cartao a {
+        color: var(--dourado);
+        font-weight: bold;
+        text-decoration: none;
+    }
+</style>
+</head>
+
+<body>
+
+<h2 style="color:var(--dourado); margin-top:20px;">Trânsito em Tempo Real</h2>
+
+<!-- MAPA GOOGLE -->
+<div class="mapa">
+    <iframe
+        width="100%" height="100%"
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12263.5!2d-7.265!3d40.537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1&layer=traffic"
+        style="border:0;" allowfullscreen>
+    </iframe>
+</div>
+
+<h2 style="color:var(--dourado);">Ocorrências na região</h2>
+
+<div id="lista"></div>
+
+<script>
+async function carregarWaze() {
+    const lista = document.getElementById("lista");
+
+    try {
+        const resp = await fetch("https://corsproxy.io/?https://www.waze.com/row-rtserver/web/TGeoRSS?types=alerts&format=JSON");
+        const dados = await resp.json();
+
+        const alertas = dados.alerts || [];
+
+        alertas.forEach(a => {
+            const tipo = a.type || "Ocorrência";
+            const local = a.location || "Local não especificado";
+            const hora = new Date(a.pubMillis).toLocaleTimeString("pt-PT", { hour: "2-digit", minute: "2-digit" });
+
+            const lat = a.latitude;
+            const lon = a.longitude;
+
+            lista.innerHTML += `
+                <div class="cartao">
+                    <h3>${tipo}</h3>
+                    <p><strong>Local:</strong> ${local}</p>
+                    <p><strong>Hora:</strong> ${hora}</p>
+                    <p><a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank">Abrir no mapa →</a></p>
+                </div>
+            `;
+        });
+
+    } catch (e) {
+        lista.innerHTML = "<p style='color:var(--dourado);'>Não foi possível carregar dados do Waze.</p>";
+    }
+}
+
+carregarWaze();
+</script>
+
+</body>
+</html>
