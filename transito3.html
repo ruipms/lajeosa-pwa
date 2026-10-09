@@ -12,50 +12,50 @@
         background-color: var(--verde-base);
         color: white;
         text-align: center;
+        font-size: 18px; /* texto maior no telemóvel */
     }
 
     h2 {
         color: var(--dourado);
         margin-top: 20px;
         margin-bottom: 10px;
+        font-size: 24px; /* maior */
     }
 
-    /* MAPA */
-    .mapa {
-        width: 100%;
-        height: 320px;
-        border-radius: 12px;
-        overflow: hidden;
-        margin: 20px auto;
-        box-shadow: 0 0 12px rgba(227,193,90,0.35);
+    /* Container principal para telemóvel */
+    main {
+        max-width: 420px;
+        margin: 0 auto;
     }
 
-    /* CARTÕES */
+    /* Cartões */
     .cartao {
         background-color: var(--cor-cartao-base);
-        padding: 16px;
-        margin: 12px 20px;
-        border-radius: 14px;
+        padding: 18px;
+        margin: 16px 20px;
+        border-radius: 16px;
         border-left: 4px solid var(--dourado);
         box-shadow: 0 0 12px rgba(227,193,90,0.35);
         text-align: left;
+        font-size: 18px; /* texto maior */
     }
 
     .cartao h3 {
         margin: 0;
         color: var(--dourado);
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .cartao p {
         margin: 6px 0;
-        font-size: 15px;
+        font-size: 17px;
     }
 
     .cartao a {
         color: var(--dourado);
         font-weight: bold;
         text-decoration: none;
+        font-size: 17px;
     }
 
     .cartao a:hover {
@@ -66,27 +66,19 @@
 
 <body>
 
-<h2>Trânsito em Tempo Real</h2>
-
-<!-- MAPA GOOGLE MAPS (SEM API, SEM ERROS) -->
-<div class="mapa">
-    <iframe
-        width="100%" height="100%"
-        src="https://www.google.com/maps/@40.537,-7.265,13z?hl=pt&entry=ttu&layer=traffic"
-        style="border:0;" allowfullscreen>
-    </iframe>
-</div>
+<main>
 
 <h2>Ocorrências na Região</h2>
 
 <div id="lista"></div>
+
+</main>
 
 <script>
 async function carregarWaze() {
     const lista = document.getElementById("lista");
 
     try {
-        // Waze JSON (não oficial, mas gratuito)
         const resp = await fetch("https://corsproxy.io/?https://www.waze.com/row-rtserver/web/TGeoRSS?types=alerts&format=JSON");
         const dados = await resp.json();
 
