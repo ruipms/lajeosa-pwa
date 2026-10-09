@@ -218,7 +218,8 @@ async function carregarAlertasProgramados() {
         const lista = document.getElementById("alertas-programados");
         lista.innerHTML = "";
 
-        const avisos = dados.data.items || [];
+       const avisos = dados.items || [];
+
 
         if (avisos.length === 0) {
             lista.innerHTML = "<p style='color:var(--dourado);'>Sem alertas programados.</p>";
