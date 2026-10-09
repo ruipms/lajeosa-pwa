@@ -214,10 +214,35 @@ async function carregarAlertasProgramados() {
         const lista = document.getElementById("alertas-programados");
         lista.innerHTML = "";
 
-        const avisos = dados.items || [];
+        // FILTRAR SÓ DO MÊS CORRENTE + SÓ DE TRÂNSITO
+        const agora = new Date();
+        const avisos = (dados.items || [])
+            .filter(item => {
+                const data = new Date(item.created_at);
+
+                const titulo = (item.title || "").toLowerCase();
+
+                const ehTransito =
+                    titulo.includes("trânsito") ||
+                    titulo.includes("condicionamento") ||
+                    titulo.includes("via") ||
+                    titulo.includes("sinalização") ||
+                    titulo.includes("pavimentação") ||
+                    titulo.includes("circulação") ||
+                    titulo.includes("estrada") ||
+                    titulo.includes("em") ||
+                    titulo.includes("en");
+
+                return (
+                    data.getMonth() === agora.getMonth() &&
+                    data.getFullYear() === agora.getFullYear() &&
+                    ehTransito
+                );
+            })
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
         if (avisos.length === 0) {
-            lista.innerHTML = "<p style='color:var(--dourado);'>Sem alertas programados.</p>";
+            lista.innerHTML = "<p style='color:var(--dourado);'>Sem alertas de trânsito este mês.</p>";
             return;
         }
 
