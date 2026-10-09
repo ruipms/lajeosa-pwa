@@ -208,7 +208,8 @@ async function carregarIncidentes() {
    ALERTAS PROGRAMADOS (Câmara Municipal da Guarda)
    ============================================================ */
 async function carregarAlertasProgramados() {
-    const url = "https://od.mun-guarda.pt/OpenData/Datasets/app-municipal-alerts?format=json";
+    const url = "/api-alertas-municipio";
+
 
     try {
         const resposta = await fetch(url);
