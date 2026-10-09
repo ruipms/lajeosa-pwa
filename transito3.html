@@ -6,15 +6,31 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: var(--verde-base);
+        color: white;
+        text-align: center;
+    }
+
+    h2 {
+        color: var(--dourado);
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    /* MAPA */
     .mapa {
         width: 100%;
         height: 320px;
         border-radius: 12px;
         overflow: hidden;
-        margin-bottom: 20px;
+        margin: 20px auto;
         box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
+    /* CARTÕES */
     .cartao {
         background-color: var(--cor-cartao-base);
         padding: 16px;
@@ -22,15 +38,18 @@
         border-radius: 14px;
         border-left: 4px solid var(--dourado);
         box-shadow: 0 0 12px rgba(227,193,90,0.35);
+        text-align: left;
     }
 
     .cartao h3 {
         margin: 0;
         color: var(--dourado);
+        font-size: 20px;
     }
 
     .cartao p {
-        margin: 4px 0;
+        margin: 6px 0;
+        font-size: 15px;
     }
 
     .cartao a {
@@ -38,23 +57,27 @@
         font-weight: bold;
         text-decoration: none;
     }
+
+    .cartao a:hover {
+        text-decoration: underline;
+    }
 </style>
 </head>
 
 <body>
 
-<h2 style="color:var(--dourado); margin-top:20px;">Trânsito em Tempo Real</h2>
+<h2>Trânsito em Tempo Real</h2>
 
-<!-- MAPA GOOGLE -->
+<!-- MAPA GOOGLE MAPS (SEM API, SEM ERROS) -->
 <div class="mapa">
     <iframe
         width="100%" height="100%"
-        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12263.5!2d-7.265!3d40.537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1&layer=traffic"
+        src="https://www.google.com/maps/@40.537,-7.265,13z?hl=pt&entry=ttu&layer=traffic"
         style="border:0;" allowfullscreen>
     </iframe>
 </div>
 
-<h2 style="color:var(--dourado);">Ocorrências na região</h2>
+<h2>Ocorrências na Região</h2>
 
 <div id="lista"></div>
 
@@ -63,10 +86,16 @@ async function carregarWaze() {
     const lista = document.getElementById("lista");
 
     try {
+        // Waze JSON (não oficial, mas gratuito)
         const resp = await fetch("https://corsproxy.io/?https://www.waze.com/row-rtserver/web/TGeoRSS?types=alerts&format=JSON");
         const dados = await resp.json();
 
         const alertas = dados.alerts || [];
+
+        if (alertas.length === 0) {
+            lista.innerHTML = "<p style='color:var(--dourado); margin-top:20px;'>Sem ocorrências de momento.</p>";
+            return;
+        }
 
         alertas.forEach(a => {
             const tipo = a.type || "Ocorrência";
@@ -87,7 +116,7 @@ async function carregarWaze() {
         });
 
     } catch (e) {
-        lista.innerHTML = "<p style='color:var(--dourado);'>Não foi possível carregar dados do Waze.</p>";
+        lista.innerHTML = "<p style='color:var(--dourado); margin-top:20px;'>Não foi possível carregar dados do Waze.</p>";
     }
 }
 
