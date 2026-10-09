@@ -104,11 +104,18 @@
     <p style="color:var(--dourado); font-size:14px;">Fonte: transitoagora.pt</p>
 </header>
 
+<!-- OCORRÊNCIAS EM TEMPO REAL -->
 <h2 class="sec-title">Ocorrências no Distrito da Guarda</h2>
-
 <div id="lista"></div>
 
+<!-- ALERTAS PROGRAMADOS -->
+<h2 class="sec-title">Alertas Programados – Município da Guarda</h2>
+<div id="alertas-programados"></div>
+
 <script>
+/* ============================================================
+   OCORRÊNCIAS EM TEMPO REAL (api-transito)
+   ============================================================ */
 async function carregarIncidentes() {
     const url = "/api-transito";
 
@@ -126,7 +133,7 @@ async function carregarIncidentes() {
             return;
         }
 
-        // ⭐ Remover duplicados
+        // Remover duplicados
         const unicos = {};
 
         incidentes.forEach(item => {
@@ -146,7 +153,7 @@ async function carregarIncidentes() {
 
         let listaFinal = Object.values(unicos);
 
-        // ⭐ Filtrar últimos 48h
+        // Filtrar últimos 48h
         const agora = Date.now();
         const limite = 48 * 60 * 60 * 1000;
 
@@ -197,11 +204,59 @@ async function carregarIncidentes() {
     }
 }
 
+/* ============================================================
+   ALERTAS PROGRAMADOS (Câmara Municipal da Guarda)
+   ============================================================ */
+async function carregarAlertasProgramados() {
+    const url = "https://od.mun-guarda.pt/OpenData/Datasets/app-municipal-alerts?format=json";
+
+    try {
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
+
+        const lista = document.getElementById("alertas-programados");
+        lista.innerHTML = "";
+
+        const avisos = dados.data.items || [];
+
+        if (avisos.length === 0) {
+            lista.innerHTML = "<p style='color:var(--dourado);'>Sem alertas programados.</p>";
+            return;
+        }
+
+        avisos.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const texto = item.content?.[0]?.setup?.text || "—";
+
+            card.innerHTML = `
+                <div class="card-title">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    ${item.title}
+                </div>
+
+                <p><strong>Publicado:</strong> ${new Date(item.created_at).toLocaleString("pt-PT")}</p>
+                <p>${texto}</p>
+
+                <div class="source">Fonte: Município da Guarda</div>
+            `;
+
+            lista.appendChild(card);
+        });
+
+    } catch (erro) {
+        document.getElementById("alertas-programados").innerHTML =
+            "<p style='color:var(--dourado);'>Erro ao carregar alertas programados.</p>";
+    }
+}
+
 function openPage(page) {
     window.location.href = page;
 }
 
 carregarIncidentes();
+carregarAlertasProgramados();
 </script>
 
 </body>
