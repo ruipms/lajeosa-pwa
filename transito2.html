@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trânsito – Lajeosa</title>
 
-<!-- Carregar style.css -->
 <link rel="stylesheet" href="style.css">
 
-<!-- Google tag (Analytics) -->
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -133,7 +132,6 @@ async function carregarIncidentes() {
             return;
         }
 
-        // Remover duplicados
         const unicos = {};
 
         incidentes.forEach(item => {
@@ -153,7 +151,6 @@ async function carregarIncidentes() {
 
         let listaFinal = Object.values(unicos);
 
-        // Filtrar últimos 48h
         const agora = Date.now();
         const limite = 48 * 60 * 60 * 1000;
 
@@ -210,7 +207,6 @@ async function carregarIncidentes() {
 async function carregarAlertasProgramados() {
     const url = "/api-alertas-municipio";
 
-
     try {
         const resposta = await fetch(url);
         const dados = await resposta.json();
@@ -218,8 +214,7 @@ async function carregarAlertasProgramados() {
         const lista = document.getElementById("alertas-programados");
         lista.innerHTML = "";
 
-       const avisos = dados.items || [];
-
+        const avisos = dados.items || [];
 
         if (avisos.length === 0) {
             lista.innerHTML = "<p style='color:var(--dourado);'>Sem alertas programados.</p>";
@@ -230,7 +225,7 @@ async function carregarAlertasProgramados() {
             const card = document.createElement("div");
             card.className = "card";
 
-            const texto = item.content?.[0]?.setup?.text || "—";
+            const texto = item?.content?.[0]?.setup?.text || "—";
 
             card.innerHTML = `
                 <div class="card-title">
@@ -263,3 +258,4 @@ carregarAlertasProgramados();
 
 </body>
 </html>
+
