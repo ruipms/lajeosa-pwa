@@ -2,8 +2,21 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<title>Trânsito em Tempo Real</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trânsito – Lajeosa</title>
+
 <link rel="stylesheet" href="style.css">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
     body {
@@ -12,107 +25,216 @@
         background-color: var(--verde-base);
         color: white;
         text-align: center;
-        font-size: 18px; /* texto maior no telemóvel */
+        padding-bottom: 40px;
     }
 
-    h2 {
-        color: var(--dourado);
-        margin-top: 20px;
-        margin-bottom: 10px;
-        font-size: 24px; /* maior */
-    }
-
-    /* Container principal para telemóvel */
-    main {
-        max-width: 420px;
+    header img {
+        width: 120px;
         margin: 0 auto;
+        display: block;
+        padding-top: 20px;
     }
 
-    /* Cartões */
-    .cartao {
-        background-color: var(--cor-cartao-base);
-        padding: 18px;
-        margin: 16px 20px;
-        border-radius: 16px;
+    .btn-voltar {
+        display: block;
+        margin: 12px auto 0 auto;
+        padding: 10px 18px;
+        border-radius: 18px;
+        background-color: var(--cor-cartao-castanho-escuro);
         border-left: 4px solid var(--dourado);
-        box-shadow: 0 0 12px rgba(227,193,90,0.35);
-        text-align: left;
-        font-size: 18px; /* texto maior */
-    }
-
-    .cartao h3 {
-        margin: 0;
         color: var(--dourado);
-        font-size: 22px;
-    }
-
-    .cartao p {
-        margin: 6px 0;
-        font-size: 17px;
-    }
-
-    .cartao a {
-        color: var(--dourado);
-        font-weight: bold;
+        font-size: 15px;
         text-decoration: none;
-        font-size: 17px;
+        width: fit-content;
+        cursor: pointer;
+        box-shadow: 0 0 12px rgba(227,193,90,0.35);
     }
 
-    .cartao a:hover {
-        text-decoration: underline;
+    .btn-voltar:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 0 18px rgba(227,193,90,0.55);
+    }
+
+    .sec-title {
+        color: var(--dourado);
+        font-size: 20px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+
+    .card {
+        background-color: var(--cor-cartao-castanho-escuro);
+        padding: 16px;
+        border-radius: 18px;
+        margin: 16px 20px;
+        border-left: 4px solid var(--dourado);
+        text-align: left;
+        box-shadow: 0 0 12px rgba(227,193,90,0.35);
+    }
+
+    .card i {
+        font-size: 26px;
+        color: var(--dourado);
+        margin-right: 10px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: var(--dourado);
+        margin-bottom: 6px;
+    }
+
+    .source {
+        margin-top: 8px;
+        font-size: 12px;
+        color: var(--dourado);
+        opacity: 0.8;
     }
 </style>
 </head>
 
 <body>
 
-<main>
+<header>
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa">
+    <a class="btn-voltar" onclick="openPage('seguranca.html')">← Voltar</a>
+    <h1 style="color:var(--dourado);">Trânsito</h1>
+    <p style="color:var(--dourado); font-size:14px;">Fonte: Ocorrências Ativas + Município da Guarda</p>
+</header>
 
-<h2>Ocorrências na Região</h2>
-
+<!-- OCORRÊNCIAS EM TEMPO REAL -->
+<h2 class="sec-title">Ocorrências no Distrito da Guarda</h2>
 <div id="lista"></div>
 
-</main>
+<!-- ALERTAS PROGRAMADOS -->
+<h2 class="sec-title">Alertas Programados – Município da Guarda</h2>
+<div id="alertas-programados"></div>
 
 <script>
-async function carregarWaze() {
-    const lista = document.getElementById("lista");
+/* ============================================================
+   OCORRÊNCIAS ATIVAS (Worker)
+   ============================================================ */
+async function carregarOcorrenciasAtivas() {
+    const url = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=ocorrencias-ativas";
 
     try {
-        const resp = await fetch("https://corsproxy.io/?https://www.waze.com/row-rtserver/web/TGeoRSS?types=alerts&format=JSON");
-        const dados = await resp.json();
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
 
-        const alertas = dados.alerts || [];
+        const lista = document.getElementById("lista");
+        lista.innerHTML = "";
 
-        if (alertas.length === 0) {
-            lista.innerHTML = "<p style='color:var(--dourado); margin-top:20px;'>Sem ocorrências de momento.</p>";
+        const ocorrencias = dados.ocorrencias || [];
+
+        if (ocorrencias.length === 0) {
+            lista.innerHTML = "<p style='color:var(--dourado);'>Sem ocorrências no momento.</p>";
             return;
         }
 
-        alertas.forEach(a => {
-            const tipo = a.type || "Ocorrência";
-            const local = a.location || "Local não especificado";
-            const hora = new Date(a.pubMillis).toLocaleTimeString("pt-PT", { hour: "2-digit", minute: "2-digit" });
+        ocorrencias.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "card";
 
-            const lat = a.latitude;
-            const lon = a.longitude;
-
-            lista.innerHTML += `
-                <div class="cartao">
-                    <h3>${tipo}</h3>
-                    <p><strong>Local:</strong> ${local}</p>
-                    <p><strong>Hora:</strong> ${hora}</p>
-                    <p><a href="https://www.google.com/maps?q=${lat},${lon}" target="_blank">Abrir no mapa →</a></p>
+            card.innerHTML = `
+                <div class="card-title">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    ${item.natureza}
                 </div>
+
+                <p><strong>Hora:</strong> ${item.hora}</p>
+                <p><strong>Concelho:</strong> ${item.concelho}</p>
+                <p><strong>Freguesia:</strong> ${item.freguesia}</p>
+                <p><strong>Estado:</strong> ${item.estado}</p>
+
+                <div class="source">Fonte: Ocorrências Ativas</div>
             `;
+
+            lista.appendChild(card);
         });
 
-    } catch (e) {
-        lista.innerHTML = "<p style='color:var(--dourado); margin-top:20px;'>Não foi possível carregar dados do Waze.</p>";
+    } catch (erro) {
+        document.getElementById("lista").innerHTML =
+            "<p style='color:var(--dourado);'>Erro ao carregar ocorrências.</p>";
     }
 }
 
-carregarWaze();
+/* ============================================================
+   ALERTAS PROGRAMADOS (Câmara Municipal da Guarda)
+   ============================================================ */
+async function carregarAlertasProgramados() {
+    const url = "https://small-glade-3bb9.ruijpms.workers.dev/?feed=alertas-municipio";
+
+    try {
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
+
+        const lista = document.getElementById("alertas-programados");
+        lista.innerHTML = "";
+
+        const agora = new Date();
+        const avisos = (dados.items || [])
+            .filter(item => {
+                const data = new Date(item.created_at);
+                const titulo = (item.title || "").toLowerCase();
+
+                const ehTransito =
+                    titulo.includes("trânsito") ||
+                    titulo.includes("condicionamento") ||
+                    titulo.includes("via") ||
+                    titulo.includes("sinalização") ||
+                    titulo.includes("pavimentação") ||
+                    titulo.includes("circulação") ||
+                    titulo.includes("estrada") ||
+                    titulo.includes("em") ||
+                    titulo.includes("en");
+
+                return (
+                    data.getMonth() === agora.getMonth() &&
+                    data.getFullYear() === agora.getFullYear() &&
+                    ehTransito
+                );
+            })
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+        if (avisos.length === 0) {
+            lista.innerHTML = "<p style='color:var(--dourado);'>Sem alertas de trânsito este mês.</p>";
+            return;
+        }
+
+        avisos.forEach(item => {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const texto = item?.content?.[0]?.setup?.text || "—";
+
+            card.innerHTML = `
+                <div class="card-title">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    ${item.title}
+                </div>
+
+                <p><strong>Publicado:</strong> ${new Date(item.created_at).toLocaleString("pt-PT")}</p>
+                <p>${texto}</p>
+
+                <div class="source">Fonte: Município da Guarda</div>
+            `;
+
+            lista.appendChild(card);
+        });
+
+    } catch (erro) {
+        document.getElementById("alertas-programados").innerHTML =
+            "<p style='color:var(--dourado);'>Erro ao carregar alertas programados.</p>";
+    }
+}
+
+function openPage(page) {
+    window.location.href = page;
+}
+
+carregarOcorrenciasAtivas();
+carregarAlertasProgramados();
 </script>
 
 </body>
