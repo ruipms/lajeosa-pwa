@@ -5,15 +5,65 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const data = await getCompetitionData(competitionId, seasonId);
 
-    console.log("Dados FPF Feminino:", data);
+    // ============================
+    // 1) JORNADA ATUAL
+    // ============================
+    const jornadaAtual = data.journeys[0]; // primeira jornada
+    const jornadaDiv = document.getElementById("jornada-atual");
 
-    // Exemplo: mostrar a jornada atual no console
-    const jornadaAtual = data.journeys[0];
-    console.log("Jornada atual:", jornadaAtual);
+    let jogosHTML = `
+      <h3 style="color:var(--dourado);">Jornada ${jornadaAtual.jornada}</h3>
+      <ul>
+    `;
 
-    // Aqui vais substituir as imagens estáticas por dados reais
-    // Exemplo:
-    // document.getElementById("jornada-atual").innerText = jornadaAtual.jornada;
+    jornadaAtual.matches.forEach(match => {
+      jogosHTML += `
+        <li>
+          <strong>${match.HomeTeamName}</strong> ${match.HomeGoals ?? "-"}
+          vs
+          ${match.AwayGoals ?? "-"} <strong>${match.AwayTeamName}</strong>
+          <br>
+          <small>${match.MatchDate}</small>
+        </li>
+      `;
+    });
+
+    jogosHTML += "</ul>";
+    jornadaDiv.innerHTML = jogosHTML;
+
+    // ============================
+    // 2) CLASSIFICAÇÃO ATUAL
+    // ============================
+    const classDiv = document.getElementById("classificacao-atual");
+
+    let classHTML = `
+      <h3 style="color:var(--dourado);">Classificação Atual</h3>
+      <table style="width:100%; color:white;">
+        <tr>
+          <th>#</th>
+          <th>Equipa</th>
+          <th>P</th>
+          <th>J</th>
+          <th>GM</th>
+          <th>GS</th>
+        </tr>
+    `;
+
+    data.classification.forEach(team => {
+      classHTML += `
+        <tr>
+          <td>${team.Position}</td>
+          <td>${team.TeamName}</td>
+          <td>${team.Points}</td>
+          <td>${team.Played}</td>
+          <td>${team.GoalsFor}</td>
+          <td>${team.GoalsAgainst}</td>
+        </tr>
+      `;
+    });
+
+    classHTML += "</table>";
+    classDiv.innerHTML = classHTML;
 
   } catch (e) {
     console.error("Erro ao carregar dados da FPF:", e);
