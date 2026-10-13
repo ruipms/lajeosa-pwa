@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico da Competição — CRC Lajeosa</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTEGNRDBJW');
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--verde-base);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    .club-logo {
+      width: 120px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: var(--dourado);
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    /* Cartões castanhos premium */
+    .card {
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 18px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      text-align: left !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
+    }
+
+    .card h3 {
+      color: var(--dourado);
+      margin-top: 0;
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+
+    .card-section {
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="assets/CRC Lajeosa logo.jpg" class="club-logo">
+  <h1>Histórico da Competição</h1>
+  <a href="clube_feminino.html" class="back-button">⬅ Voltar ao Clube</a>
+</header>
+
+<div class="content">
+
+  <!-- ========================= -->
+  <!--        FEMININOS          -->
+  <!-- ========================= -->
+
+  <div class="card">
+    <h3>👩 Sénior Feminino — Época 2026/2027</h3>
+
+    <p><strong>Jornada Atual</strong></p>
+    <div id="jornada-atual" class="card-section">
+      <!-- Conteúdo real da FPF será inserido aqui -->
+    </div>
+
+    <p style="margin-top:15px;"><strong>Classificação Atual</strong></p>
+    <div id="classificacao-atual" class="card-section">
+      <!-- Conteúdo real da FPF será inserido aqui -->
+    </div>
+
+    <p style="margin-top:15px;"><strong>Taça Futsal Sénior Feminino</strong></p>
+    <div id="taca-atual" class="card-section">
+      <!-- Podemos preencher depois -->
+      <em style="color:var(--dourado);">Dados da Taça serão adicionados em breve</em>
+    </div>
+
+    <p style="margin-top:10px;">
+      <a href="https://resultados.fpf.pt"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver detalhes completos na FPF
+      </a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>👩 Sénior Feminino — Época 2025/2026</h3>
+    <p><strong>Classificação Final — LIGA FUTSAL SÉNIOR FEMININO JUVAN</strong></p>
+
+    <ul>
+      <li><strong>Posição Final:</strong> 5.º lugar</li>
+      <li><strong>Pontos:</strong> 11</li>
+      <li><strong>Jogos:</strong> 12</li>
+      <li><strong>Vitórias:</strong> 3</li>
+      <li><strong>Empates:</strong> 2</li>
+      <li><strong>Derrotas:</strong> 7</li>
+      <li><strong>Golos Marcados:</strong> 23</li>
+      <li><strong>Golos Sofridos:</strong> 32</li>
+    </ul>
+
+    <a href="https://resultados.fpf.pt/Competition/Details?competitionId=28442&seasonId=105"
+       target="_blank"
+       style="color:var(--dourado); font-weight:bold;">
+       Ver percurso completo na FPF
+    </a>
+  </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="js/fpf-api.js"></script>
+<script src="js/feminino.js"></script>
+
+</body>
+</html>
