@@ -1,0 +1,21 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  const competitionId = 30347; // Feminino
+  const seasonId = 106;        // Época atual
+
+  try {
+    const data = await getCompetitionData(competitionId, seasonId);
+
+    console.log("Dados FPF Feminino:", data);
+
+    // Exemplo: mostrar a jornada atual no console
+    const jornadaAtual = data.journeys[0];
+    console.log("Jornada atual:", jornadaAtual);
+
+    // Aqui vais substituir as imagens estáticas por dados reais
+    // Exemplo:
+    // document.getElementById("jornada-atual").innerText = jornadaAtual.jornada;
+
+  } catch (e) {
+    console.error("Erro ao carregar dados da FPF:", e);
+  }
+});
