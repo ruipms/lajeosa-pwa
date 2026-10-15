@@ -1,0 +1,337 @@
+<!-- ========================= -->
+<!-- ÉPOCA ATUAL — MASCULINO -->
+<!-- ========================= -->
+
+<!-- MENSAGEM AUTOMÁTICA DO PRÓXIMO JOGO -->
+<div id="mensagem-proximo-jogo" class="card" style="margin-bottom:25px;">
+  <h3>📢 Informação</h3>
+  <p id="texto-proximo-jogo"></p>
+</div>
+
+<div class="card">
+  <h3>👨‍🦱 Sénior Masculino — Época 2026/2027</h3>
+
+  <!-- ========================= -->
+  <!-- JORNADAS LIGA MASCULINA -->
+  <!-- ========================= -->
+
+  <p><strong>Jornadas — Liga Masculina</strong></p>
+
+  <div class="jogo">
+    <p><strong>Gd Sameiro vs Adrc Aguiar Beira / Viagens Victor Correia</strong></p>
+    <p>📅 14 nov — 🕘 21:00</p>
+    <p>📍 Pavilhão Desportivo de Manteigas</p>
+  </div>
+
+  <div class="jogo">
+    <p><strong>Agd Mêda vs Acd Estrela Almeida</strong></p>
+    <p>📅 14 nov — 🕘 21:00</p>
+    <p>📍 Pavilhão Gimnodesportivo Municipal Meda</p>
+  </div>
+
+  <div class="jogo">
+    <p><strong>Adrc Penaverdense vs Sc Sabugal</strong></p>
+    <p>📅 14 nov — 🕘 21:00</p>
+    <p>📍 Pavilhão Escola Secundária Fornos Alg.</p>
+  </div>
+
+  <div class="jogo lajeosa">
+    <p><strong style="color:var(--dourado);">Crc Lageosa Mondego - A. vs Gcr Casal Cinza</strong></p>
+    <p>📅 14 nov — 🕘 21:00</p>
+    <p>📍 Pavilhão Municipal Celorico Da Beira</p>
+  </div>
+
+  <hr class="section-separator">
+
+  <!-- ========================= -->
+  <!-- CLASSIFICAÇÃO LIGA MASCULINA -->
+  <!-- ========================= -->
+
+  <p><strong>Classificação — Liga Masculina</strong></p>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('lm1')">
+      <span class="pos">1</span> Acd Estrela Almeida
+    </div>
+    <div class="acordeao-content" id="lm1">
+      <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('lm2')">
+      <span class="pos">2</span> Adrc Aguiar Beira / Viagens Victor Correia
+    </div>
+    <div class="acordeao-content" id="lm2">
+      <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('lm3')">
+      <span class="pos">3</span> Adrc Penaverdense
+    </div>
+    <div class="acordeao-content" id="lm3">
+      <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('lm4')">
+      <span class="pos">4</span> Agd Mêda
+    </div>
+    <div class="acordeao-content" id="lm4">
+      <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item lajeosa">
+    <div class="acordeao-header" onclick="toggleAcordeao('lm5')">
+      <span class="pos">5</span>
+      <span style="color:var(--dourado);">Crc Lageosa Mondego - A.</span>
+    </div>
+    <div class="acordeao-content" id="lm5">
+      <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('lm6')">
+      <span class="pos">6</span> Gcr Casal Cinza
+    </div>
+    <div class="acordeao-content" id="lm6">
+      <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('lm7')">
+      <span class="pos">7</span> Gd Sameiro
+    </div>
+    <div class="acordeao-content" id="lm7">
+      <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('lm8')">
+      <span class="pos">8</span> Sc Sabugal
+    </div>
+    <div class="acordeao-content" id="lm8">
+      <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+  <hr class="section-separator">
+
+  <!-- ========================= -->
+  <!-- JORNADAS TAÇA SÉRIE A -->
+  <!-- ========================= -->
+
+  <p><strong>Jornadas — Taça Distrital (Série A)</strong></p>
+
+  <div class="jogo">
+    <p><strong>Acd Estrela Almeida 2 - 1 Adrc Penaverdense</strong></p>
+    <p>📅 10 out</p>
+    <p>📍 Pavilhão Gimnodesportivo Almeida</p>
+  </div>
+
+  <div class="jogo lajeosa">
+    <p><strong style="color:var(--dourado);">Crc Lageosa Mondego - A. 1 - 5 Sc Sabugal</strong></p>
+    <p>📅 10 out</p>
+    <p>📍 Pavilhão Municipal Celorico da Beira</p>
+  </div>
+
+  <hr class="section-separator">
+
+  <!-- ========================= -->
+  <!-- CLASSIFICAÇÃO TAÇA SÉRIE A -->
+  <!-- ========================= -->
+
+  <p><strong>Classificação — Taça Distrital (Série A)</strong></p>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('sa1')">
+      <span class="pos">1</span> Sc Sabugal
+    </div>
+    <div class="acordeao-content" id="sa1">
+      <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 1</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 5</p><p><strong>GS:</strong> 1</p><p><strong>PTS:</strong> 3</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('sa2')">
+      <span class="pos">2</span> Acd Estrela Almeida
+    </div>
+    <div class="acordeao-content" id="sa2">
+      <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 1</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 2</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 3</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('sa3')">
+      <span class="pos">3</span> Adrc Penaverdense
+    </div>
+    <div class="acordeao-content" id="sa3">
+      <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 1</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 1</p><p><strong>GS:</strong> 1</p><p><strong>PTS:</strong> 2</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item lajeosa">
+    <div class="acordeao-header" onclick="toggleAcordeao('sa4')">
+      <span class="pos">4</span>
+      <span style="color:var(--dourado);">Crc Lageosa Mondego - A.</span>
+    </div>
+    <div class="acordeao-content" id="sa4">
+      <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 1</p><p><strong>GM:</strong> 1</p><p><strong>GS:</strong> 5</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+  <hr class="section-separator">
+
+  <!-- ========================= -->
+  <!-- JORNADAS TAÇA SÉRIE B -->
+  <!-- ========================= -->
+
+  <p><strong>Jornadas — Taça Distrital (Série B)</strong></p>
+
+  <div class="jogo">
+    <p><strong>Agd Méda 0 - 5 Gd Sameiro</strong></p>
+    <p>📅 10 out</p>
+    <p>📍 Pavilhão Gimnodesportivo Municipal Méda</p>
+  </div>
+
+  <div class="jogo">
+    <p><strong>Gcr Casal Cinza 4 - 6 Adrc Aguiar Beira / Viagens Victor Correia</strong></p>
+    <p>📅 10 out</p>
+    <p>📍 Pavilhão De Casal De Cinza</p>
+  </div>
+
+  <hr class="section-separator">
+
+  <!-- ========================= -->
+  <!-- CLASSIFICAÇÃO TAÇA SÉRIE B -->
+  <!-- ========================= -->
+
+  <p><strong>Classificação — Taça Distrital (Série B)</strong></p>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('sb1')">
+      <span class="pos">1</span> Gd Sameiro
+    </div>
+    <div class="acordeao-content" id="sb1">
+      <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 1</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 5</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 3</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('sb2')">
+      <span class="pos">2</span> Adrc Aguiar Beira / Viagens Victor Correia
+    </div>
+    <div class="acordeao-content" id="sb2">
+      <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 1</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 4</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 3</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('sb3')">
+      <span class="pos">3</span> Agd Méda
+    </div>
+    <div class="acordeao-content" id="sb3">
+      <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 1</p>
+      <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 5</p><p><strong>GS:</strong> 5</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+  <div class="acordeao-item">
+    <div class="acordeao-header" onclick="toggleAcordeao('sb4')">
+      <span class="pos">4</span> Gcr Casal Cinza
+    </div>
+    <div class="acordeao-content" id="sb4">
+      <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+      <p><strong>D:</strong> 1</p><p><strong>GM:</strong> 4</p><p><strong>GS:</strong> 6</p><p><strong>PTS:</strong> 0</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ========================= -->
+<!-- SCRIPT AUTOMÁTICO DO PRÓXIMO JOGO -->
+<!-- ========================= -->
+
+<script>
+  function parseData(diaMes, hora) {
+    const meses = {
+      "jan":0, "fev":1, "mar":2, "abr":3, "mai":4, "jun":5,
+      "jul":6, "ago":7, "set":8, "out":9, "nov":10, "dez":11
+    };
+
+    const partes = diaMes.toLowerCase().split(" ");
+    const dia = parseInt(partes[0]);
+    const mes = meses[partes[1]];
+
+    const anoAtual = new Date().getFullYear();
+    return new Date(
+      anoAtual,
+      mes,
+      dia,
+      parseInt(hora.split(":")[0]),
+      parseInt(hora.split(":")[1])
+    );
+  }
+
+  // Seleciona todos os jogos do CRC (classe .jogo.lajeosa)
+  const jogosCRC = [...document.querySelectorAll(".jogo.lajeosa")];
+  const agora = new Date();
+  let proximo = null;
+
+  jogosCRC.forEach(jogo => {
+    const linhas = jogo.querySelectorAll("p");
+
+    // Linha da data: "📅 14 nov — 🕘 21:00"
+    const textoData = linhas[1].innerText;
+
+    const diaMes = textoData.split("📅")[1].split("—")[0].trim();
+    const hora = textoData.split("🕘")[1].trim();
+
+    const dataJogo = parseData(diaMes, hora);
+
+    if (dataJogo > agora) {
+      if (!proximo || dataJogo < proximo.data) {
+        proximo = {
+          data: dataJogo,
+          diaMes,
+          hora,
+          adversario: linhas[0].innerText.replace(/Crc Lageosa Mondego - A\. ?(vs|v\.s\.) ?/i, "")
+        };
+      }
+    }
+  });
+
+  const texto = document.getElementById("texto-proximo-jogo");
+
+  if (proximo) {
+    texto.innerHTML =
+      `Próximo jogo do CRC: <strong>${proximo.diaMes}</strong> às <strong>${proximo.hora}</strong><br>
+       🆚 <strong>${proximo.adversario}</strong>`;
+  } else {
+    texto.innerHTML =
+      `O último jogo já foi disputado.<br>
+       Não há mais jogos agendados neste momento.`;
+  }
+</script>
+
