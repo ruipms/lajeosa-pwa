@@ -75,35 +75,64 @@
       border-left: 3px solid var(--dourado);
     }
 
-    table {
-      width: 100%;
-      color: white;
-      border-collapse: collapse;
-      table-layout: fixed;
-      font-size: 0.85rem;
+    /* Destaque especial para CRC Lajeosa */
+    .jogo.lajeosa {
+      background-color: rgba(227,193,90,0.15);
+      border-left: 4px solid var(--dourado);
     }
 
-    table td {
-      padding: 4px 2px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      word-wrap: break-word;
-    }
-
-    @media (max-width: 600px) {
-      table {
-        font-size: 0.75rem;
-      }
-      table td {
-        padding: 3px 2px;
-      }
-    }
-
+    /* Separadores */
     .section-separator {
       border: 0;
       border-top: 1px solid rgba(227,193,90,0.4);
-      margin: 20px 0;
+      margin: 25px 0;
+    }
+
+    /* Acordeão */
+    .acordeao-item {
+      background-color: rgba(255,255,255,0.05);
+      border-left: 3px solid var(--dourado);
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    .acordeao-item.lajeosa {
+      background-color: rgba(227,193,90,0.15);
+      border-left: 4px solid var(--dourado);
+    }
+
+    .acordeao-header {
+      padding: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .acordeao-header span {
+      color: var(--dourado);
+    }
+
+    .acordeao-content {
+      display: none;
+      padding: 10px 15px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    .acordeao-content p {
+      margin: 4px 0;
     }
   </style>
+
+  <script>
+    function toggleAcordeao(id) {
+      const content = document.getElementById(id);
+      content.style.display = content.style.display === "block" ? "none" : "block";
+    }
+  </script>
+
 </head>
 
 <body>
@@ -143,8 +172,9 @@
       <p>📍 Pavilhão Escola Secundária de Fornos de Algodres</p>
     </div>
 
-    <div class="jogo">
-      <p><strong>Crc Lageosa Mondego - A. vs Gcr Casal Cinza</strong></p>
+    <!-- Destaque CRC Lajeosa -->
+    <div class="jogo lajeosa">
+      <p><strong style="color:var(--dourado);">Crc Lageosa Mondego - A. vs Gcr Casal Cinza</strong></p>
       <p>📅 14 nov — 🕘 21:00</p>
       <p>📍 Pavilhão Municipal de Celorico da Beira</p>
     </div>
@@ -153,20 +183,87 @@
 
     <p><strong>Classificação — Liga Masculina</strong></p>
 
-    <table>
-      <tr style="color:var(--dourado); font-weight:bold;">
-        <td>POS</td><td>Equipa</td><td>JGS</td><td>V</td><td>E</td><td>D</td><td>GM</td><td>GS</td><td>PTS</td>
-      </tr>
+    <!-- Acordeão -->
+    <div class="acordeao-item">
+      <div class="acordeao-header" onclick="toggleAcordeao('eq1')">
+        <span>1</span> Acd Estrela Almeida
+      </div>
+      <div class="acordeao-content" id="eq1">
+        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+      </div>
+    </div>
 
-      <tr><td>1</td><td>Acd Estrela Almeida</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Adrc Aguiar Beira / Viagens Victor Correia</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Adrc Penaverdense</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Agd Mêda</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Crc Lageosa Mondego - A.</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Gcr Casal Cinza</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Gd Sameiro</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Sc Sabugal</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-    </table>
+    <div class="acordeao-item">
+      <div class="acordeao-header" onclick="toggleAcordeao('eq2')">
+        <span>1</span> Adrc Aguiar Beira / Viagens Victor Correia
+      </div>
+      <div class="acordeao-content" id="eq2">
+        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+      </div>
+    </div>
+
+    <div class="acordeao-item">
+      <div class="acordeao-header" onclick="toggleAcordeao('eq3')">
+        <span>1</span> Adrc Penaverdense
+      </div>
+      <div class="acordeao-content" id="eq3">
+        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+      </div>
+    </div>
+
+    <div class="acordeao-item">
+      <div class="acordeao-header" onclick="toggleAcordeao('eq4')">
+        <span>1</span> Agd Mêda
+      </div>
+      <div class="acordeao-content" id="eq4">
+        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+      </div>
+    </div>
+
+    <!-- CRC Lajeosa destacado -->
+    <div class="acordeao-item lajeosa">
+      <div class="acordeao-header" onclick="toggleAcordeao('eq5')">
+        <span>1</span> <span style="color:var(--dourado);">Crc Lageosa Mondego - A.</span>
+      </div>
+      <div class="acordeao-content" id="eq5">
+        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+      </div>
+    </div>
+
+    <div class="acordeao-item">
+      <div class="acordeao-header" onclick="toggleAcordeao('eq6')">
+        <span>1</span> Gcr Casal Cinza
+      </div>
+      <div class="acordeao-content" id="eq6">
+        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+      </div>
+    </div>
+
+    <div class="acordeao-item">
+      <div class="acordeao-header" onclick="toggleAcordeao('eq7')">
+        <span>1</span> Gd Sameiro
+      </div>
+      <div class="acordeao-content" id="eq7">
+        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+      </div>
+    </div>
+
+    <div class="acordeao-item">
+      <div class="acordeao-header" onclick="toggleAcordeao('eq8')">
+        <span>1</span> Sc Sabugal
+      </div>
+      <div class="acordeao-content" id="eq8">
+        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
+        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
+      </div>
+    </div>
 
     <hr class="section-separator">
 
@@ -178,8 +275,8 @@
       <p>📍 Pavilhão Gimnodesportivo Almeida</p>
     </div>
 
-    <div class="jogo">
-      <p><strong>Crc Lageosa Mondego - A. 1 - 5 Sc Sabugal</strong></p>
+    <div class="jogo lajeosa">
+      <p><strong style="color:var(--dourado);">Crc Lageosa Mondego - A. 1 - 5 Sc Sabugal</strong></p>
       <p>📅 10 out</p>
       <p>📍 Pavilhão Municipal Celorico da Beira</p>
     </div>
@@ -239,3 +336,4 @@
 
 </body>
 </html>
+
