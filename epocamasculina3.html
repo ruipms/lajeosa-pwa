@@ -106,7 +106,7 @@
   </div>
 
   <!-- CONTEÚDO MODULAR -->
-  <div id="epoca-masc-liga"></div>
+  <div id="epoca-masc-liga" style="display:block;"></div>
   <div id="epoca-masc-taca" style="display:none;"></div>
 
   <script>
@@ -118,13 +118,13 @@
       .then(r => r.text())
       .then(html => {
         document.getElementById("epoca-masc-liga").innerHTML = html;
+        iniciarProximoJogo(); // CORRE AQUI
       });
 
     fetch("epoca_masc_taca.html")
       .then(r => r.text())
       .then(html => {
         document.getElementById("epoca-masc-taca").innerHTML = html;
-        iniciarProximoJogo(); // corre depois de tudo carregado
       });
 
     /* ============================
@@ -224,10 +224,39 @@
     }
   </script>
 
+  <!-- ============================
+       ÉPOCA ANTERIOR
+       ============================ -->
+
+  <div class="card">
+    <h3>📜 Sénior Masculino — Época 2025/2026</h3>
+    <p><strong>Classificação Final — LIGA FUTSAL SÉNIOR MASCULINO DAPPIN</strong></p>
+
+    <ul>
+      <li><strong>Posição Final:</strong> 7.º lugar</li>
+      <li><strong>Pontos:</strong> 4</li>
+      <li><strong>Jogos:</strong> 14</li>
+      <li><strong>Vitórias:</strong> 1</li>
+      <li><strong>Empates:</strong> 1</li>
+      <li><strong>Derrotas:</strong> 12</li>
+      <li><strong>Golos Marcados:</strong> 35</li>
+      <li><strong>Golos Sofridos:</strong> 61</li>
+    </ul>
+
+    <p>
+      <a href="https://resultados.fpf.pt/Competition/GetCompetitionsByAssociation?associationId=226&seasonId=106"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver percurso completo na FPF
+      </a>
+    </p>
+  </div>
+
 </div>
 
 </body>
 </html>
+
 
 
 
