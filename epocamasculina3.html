@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -44,7 +45,6 @@
       padding: 20px;
     }
 
-    /* Cartões castanhos premium */
     .card {
       background-color: var(--cor-cartao-castanho-escuro) !important;
       padding: 18px !important;
@@ -62,71 +62,12 @@
       margin-top: 0;
     }
 
-    /* Blocos de jogos */
-    .jogo {
-      background-color: rgba(255,255,255,0.05);
-      padding: 12px;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      border-left: 3px solid var(--dourado);
-    }
-
-    /* Destaque CRC */
-    .jogo.lajeosa,
-    .acordeao-item.lajeosa {
-      background-color: rgba(227,193,90,0.15);
-      border-left: 4px solid var(--dourado);
-    }
-
-    /* Separadores */
     .section-separator {
       border: 0;
       border-top: 1px solid rgba(227,193,90,0.4);
       margin: 25px 0;
     }
-
-    /* Acordeão */
-    .acordeao-item {
-      background-color: rgba(255,255,255,0.05);
-      border-left: 3px solid var(--dourado);
-      margin-bottom: 10px;
-      border-radius: 10px;
-    }
-
-    .acordeao-header {
-      padding: 12px;
-      cursor: pointer;
-      font-weight: bold;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .acordeao-header span.pos {
-      color: var(--dourado);
-      font-weight: bold;
-      min-width: 20px;
-    }
-
-    .acordeao-content {
-      display: none;
-      padding: 10px 15px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.9rem;
-    }
-
-    .acordeao-content p {
-      margin: 4px 0;
-    }
   </style>
-
-  <script>
-    function toggleAcordeao(id) {
-      const content = document.getElementById(id);
-      content.style.display = content.style.display === "block" ? "none" : "block";
-    }
-  </script>
-
 </head>
 
 <body>
@@ -138,288 +79,23 @@
 </header>
 
 <div class="content">
+
   <!-- ========================= -->
-  <!-- ÉPOCA ATUAL -->
+  <!-- BLOCO MODULAR DA ÉPOCA ATUAL -->
   <!-- ========================= -->
 
-  <div class="card">
-    <h3>👨‍🦱 Sénior Masculino — Época 2026/2027</h3>
+  <div id="epoca-masc"></div>
 
-    <!-- ========================= -->
-    <!-- JORNADAS LIGA MASCULINA -->
-    <!-- ========================= -->
+  <script>
+    fetch("epoca_masc.html")
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById("epoca-masc").innerHTML = html;
+      });
+  </script>
 
-    <p><strong>Jornadas — Liga Masculina</strong></p>
-
-    <div class="jogo">
-      <p><strong>Gd Sameiro vs Adrc Aguiar Beira / Viagens Victor Correia</strong></p>
-      <p>📅 14 nov — 🕘 21:00</p>
-      <p>📍 Pavilhão Desportivo de Manteigas</p>
-    </div>
-
-    <div class="jogo">
-      <p><strong>Agd Mêda vs Acd Estrela Almeida</strong></p>
-      <p>📅 14 nov — 🕘 21:00</p>
-      <p>📍 Pavilhão Gimnodesportivo Municipal Meda</p>
-    </div>
-
-    <div class="jogo">
-      <p><strong>Adrc Penaverdense vs Sc Sabugal</strong></p>
-      <p>📅 14 nov — 🕘 21:00</p>
-      <p>📍 Pavilhão Escola Secundária Fornos Alg.</p>
-    </div>
-
-    <div class="jogo lajeosa">
-      <p><strong style="color:var(--dourado);">Crc Lageosa Mondego - A. vs Gcr Casal Cinza</strong></p>
-      <p>📅 14 nov — 🕘 21:00</p>
-      <p>📍 Pavilhão Municipal Celorico Da Beira</p>
-    </div>
-
-    <hr class="section-separator">
-
-    <!-- ========================= -->
-    <!-- CLASSIFICAÇÃO LIGA MASCULINA (todos a 0) -->
-    <!-- ========================= -->
-
-    <p><strong>Classificação — Liga Masculina</strong></p>
-
-    <!-- POS 1 - Acd Estrela Almeida -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('lm1')">
-        <span class="pos">1</span> Acd Estrela Almeida
-      </div>
-      <div class="acordeao-content" id="lm1">
-        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-    <!-- POS 2 - Adrc Aguiar Beira / Viagens Victor Correia -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('lm2')">
-        <span class="pos">2</span> Adrc Aguiar Beira / Viagens Victor Correia
-      </div>
-      <div class="acordeao-content" id="lm2">
-        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-    <!-- POS 3 - Adrc Penaverdense -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('lm3')">
-        <span class="pos">3</span> Adrc Penaverdense
-      </div>
-      <div class="acordeao-content" id="lm3">
-        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-    <!-- POS 4 - Agd Mêda -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('lm4')">
-        <span class="pos">4</span> Agd Mêda
-      </div>
-      <div class="acordeao-content" id="lm4">
-        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-    <!-- POS 5 - CRC LAJEOSA (destacado) -->
-    <div class="acordeao-item lajeosa">
-      <div class="acordeao-header" onclick="toggleAcordeao('lm5')">
-        <span class="pos">5</span>
-        <span style="color:var(--dourado);">Crc Lageosa Mondego - A.</span>
-      </div>
-      <div class="acordeao-content" id="lm5">
-        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-    <!-- POS 6 - Gcr Casal Cinza -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('lm6')">
-        <span class="pos">6</span> Gcr Casal Cinza
-      </div>
-      <div class="acordeao-content" id="lm6">
-        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-    <!-- POS 7 - Gd Sameiro -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('lm7')">
-        <span class="pos">7</span> Gd Sameiro
-      </div>
-      <div class="acordeao-content" id="lm7">
-        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-    <!-- POS 8 - Sc Sabugal -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('lm8')">
-        <span class="pos">8</span> Sc Sabugal
-      </div>
-      <div class="acordeao-content" id="lm8">
-        <p><strong>JGS:</strong> 0</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 0</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-    <hr class="section-separator">
-
-    <!-- ========================= -->
-    <!-- JORNADAS TAÇA SÉRIE A -->
-    <!-- ========================= -->
-
-    <p><strong>Jornadas — Taça Distrital (Série A)</strong></p>
-
-    <div class="jogo">
-      <p><strong>Acd Estrela Almeida 2 - 1 Adrc Penaverdense</strong></p>
-      <p>📅 10 out</p>
-      <p>📍 Pavilhão Gimnodesportivo Almeida</p>
-    </div>
-
-    <div class="jogo lajeosa">
-      <p><strong style="color:var(--dourado);">Crc Lageosa Mondego - A. 1 - 5 Sc Sabugal</strong></p>
-      <p>📅 10 out</p>
-      <p>📍 Pavilhão Municipal Celorico da Beira</p>
-    </div>
-
-    <hr class="section-separator">
-
-    <!-- ========================= -->
-    <!-- CLASSIFICAÇÃO TAÇA SÉRIE A (corrigida) -->
-    <!-- ========================= -->
-
-    <p><strong>Classificação — Taça Distrital (Série A)</strong></p>
-
-    <!-- POS 1 - Sc Sabugal -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('sa1')">
-        <span class="pos">1</span> Sc Sabugal
-      </div>
-      <div class="acordeao-content" id="sa1">
-        <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 1</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 5</p><p><strong>GS:</strong> 1</p><p><strong>PTS:</strong> 3</p>
-      </div>
-    </div>
-
-    <!-- POS 2 - Acd Estrela Almeida -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('sa2')">
-        <span class="pos">2</span> Acd Estrela Almeida
-      </div>
-      <div class="acordeao-content" id="sa2">
-        <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 1</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 2</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 3</p>
-      </div>
-    </div>
-
-    <!-- POS 3 - Adrc Penaverdense -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('sa3')">
-        <span class="pos">3</span> Adrc Penaverdense
-      </div>
-      <div class="acordeao-content" id="sa3">
-        <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 1</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 1</p><p><strong>GS:</strong> 1</p><p><strong>PTS:</strong> 2</p>
-      </div>
-    </div>
-
-    <!-- POS 4 - CRC LAJEOSA (destacado) -->
-    <div class="acordeao-item lajeosa">
-      <div class="acordeao-header" onclick="toggleAcordeao('sa4')">
-        <span class="pos">4</span>
-        <span style="color:var(--dourado);">Crc Lageosa Mondego - A.</span>
-      </div>
-      <div class="acordeao-content" id="sa4">
-        <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 1</p><p><strong>GM:</strong> 1</p><p><strong>GS:</strong> 5</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-    <hr class="section-separator">
-
-    <!-- ========================= -->
-    <!-- JORNADAS TAÇA SÉRIE B -->
-    <!-- ========================= -->
-
-    <p><strong>Jornadas — Taça Distrital (Série B)</strong></p>
-
-    <div class="jogo">
-      <p><strong>Agd Méda 0 - 5 Gd Sameiro</strong></p>
-      <p>📅 10 out</p>
-      <p>📍 Pavilhão Gimnodesportivo Municipal Méda</p>
-    </div>
-
-    <div class="jogo">
-      <p><strong>Gcr Casal Cinza 4 - 6 Adrc Aguiar Beira / Viagens Victor Correia</strong></p>
-      <p>📅 10 out</p>
-      <p>📍 Pavilhão De Casal De Cinza</p>
-    </div>
-
-    <hr class="section-separator">
-
-    <!-- ========================= -->
-    <!-- CLASSIFICAÇÃO TAÇA SÉRIE B (corrigida) -->
-    <!-- ========================= -->
-
-    <p><strong>Classificação — Taça Distrital (Série B)</strong></p>
-
-    <!-- POS 1 - Gd Sameiro -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('sb1')">
-        <span class="pos">1</span> Gd Sameiro
-      </div>
-      <div class="acordeao-content" id="sb1">
-        <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 1</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 5</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 3</p>
-      </div>
-    </div>
-
-    <!-- POS 2 - Adrc Aguiar Beira / Viagens Victor Correia -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('sb2')">
-        <span class="pos">2</span> Adrc Aguiar Beira / Viagens Victor Correia
-      </div>
-      <div class="acordeao-content" id="sb2">
-        <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 1</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 4</p><p><strong>GS:</strong> 0</p><p><strong>PTS:</strong> 3</p>
-      </div>
-    </div>
-
-    <!-- POS 3 - Agd Méda -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('sb3')">
-        <span class="pos">3</span> Agd Méda
-      </div>
-      <div class="acordeao-content" id="sb3">
-        <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 1</p>
-        <p><strong>D:</strong> 0</p><p><strong>GM:</strong> 5</p><p><strong>GS:</strong> 5</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-    <!-- POS 4 - Gcr Casal Cinza -->
-    <div class="acordeao-item">
-      <div class="acordeao-header" onclick="toggleAcordeao('sb4')">
-        <span class="pos">4</span> Gcr Casal Cinza
-      </div>
-      <div class="acordeao-content" id="sb4">
-        <p><strong>JGS:</strong> 1</p><p><strong>V:</strong> 0</p><p><strong>E:</strong> 0</p>
-        <p><strong>D:</strong> 1</p><p><strong>GM:</strong> 4</p><p><strong>GS:</strong> 6</p><p><strong>PTS:</strong> 0</p>
-      </div>
-    </div>
-
-  </div>
   <!-- ========================= -->
-  <!-- ÉPOCA ANTERIOR -->
+  <!-- ÉPOCA ANTERIOR (PARTE 3) -->
   <!-- ========================= -->
 
   <div class="card">
@@ -446,10 +122,11 @@
     </p>
   </div>
 
-</div> <!-- fim do content -->
+</div>
 
 </body>
 </html>
+
 
 
 
