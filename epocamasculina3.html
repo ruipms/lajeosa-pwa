@@ -7,6 +7,82 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--verde-base);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    .club-logo {
+      width: 120px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: var(--dourado);
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .card {
+      background-color: var(--cor-cartao-castanho-escuro);
+      padding: 18px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      text-align: left;
+      color: white;
+      border: 1px solid rgba(227,193,90,0.4);
+      box-shadow: 0 0 12px rgba(227,193,90,0.35);
+      border-left: 4px solid var(--dourado);
+    }
+
+    .card h3 {
+      color: var(--dourado);
+      margin-top: 0;
+    }
+
+    .section-separator {
+      border: 0;
+      border-top: 1px solid rgba(227,193,90,0.4);
+      margin: 25px 0;
+    }
+
+    /* Tabs Liga/Taça */
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      background-color: var(--cor-cartao-castanho-escuro);
+      border: 1px solid var(--dourado);
+      border-radius: 10px;
+      color: var(--dourado);
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .tab-btn.active {
+      background-color: var(--dourado);
+      color: black;
+    }
+
+    /* Acordeão */
     .acordeao-content { display:none; }
     .seta { transition: transform 0.3s ease; }
     .seta.aberta { transform: rotate(90deg); }
@@ -23,22 +99,58 @@
 
 <div class="content">
 
-  <!-- BLOCO MODULAR -->
-  <div id="epoca-masc"></div>
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="mostrarLiga()">Liga</button>
+    <button class="tab-btn" onclick="mostrarTaca()">Taça</button>
+  </div>
+
+  <!-- CONTEÚDO MODULAR -->
+  <div id="epoca-masc-liga"></div>
+  <div id="epoca-masc-taca" style="display:none;"></div>
 
   <script>
-    fetch("epoca_masc.html")
+    /* ============================
+       CARREGAR FICHEIROS MODULARES
+       ============================ */
+
+    fetch("epoca_masc_liga.html")
       .then(r => r.text())
       .then(html => {
-        document.getElementById("epoca-masc").innerHTML = html;
-
-        // Agora que o HTML está no DOM, ativamos o JS
-        iniciarProximoJogo();
+        document.getElementById("epoca-masc-liga").innerHTML = html;
       });
 
-    // ============================
-    // ACORDEÃO
-    // ============================
+    fetch("epoca_masc_taca.html")
+      .then(r => r.text())
+      .then(html => {
+        document.getElementById("epoca-masc-taca").innerHTML = html;
+        iniciarProximoJogo(); // corre depois de tudo carregado
+      });
+
+    /* ============================
+       TABS LIGA / TAÇA
+       ============================ */
+
+    function mostrarLiga() {
+      document.getElementById("epoca-masc-liga").style.display = "block";
+      document.getElementById("epoca-masc-taca").style.display = "none";
+
+      document.querySelectorAll(".tab-btn")[0].classList.add("active");
+      document.querySelectorAll(".tab-btn")[1].classList.remove("active");
+    }
+
+    function mostrarTaca() {
+      document.getElementById("epoca-masc-liga").style.display = "none";
+      document.getElementById("epoca-masc-taca").style.display = "block";
+
+      document.querySelectorAll(".tab-btn")[0].classList.remove("active");
+      document.querySelectorAll(".tab-btn")[1].classList.add("active");
+    }
+
+    /* ============================
+       ACORDEÃO
+       ============================ */
+
     function toggleAcordeao(id, header) {
       const content = document.getElementById(id);
       const seta = header.querySelector(".seta");
@@ -52,9 +164,10 @@
       }
     }
 
-    // ============================
-    // PRÓXIMO JOGO
-    // ============================
+    /* ============================
+       PRÓXIMO JOGO CRC
+       ============================ */
+
     function iniciarProximoJogo() {
 
       function parseData(diaMes, hora) {
@@ -97,7 +210,6 @@
       });
 
       const texto = document.getElementById("texto-proximo-jogo");
-
       if (!texto) return;
 
       if (proximo) {
@@ -111,12 +223,6 @@
       }
     }
   </script>
-
-  <!-- ÉPOCA ANTERIOR -->
-  <div class="card">
-    <h3>Época 2025/2026</h3>
-    <p>Classificação final: 7.º lugar</p>
-  </div>
 
 </div>
 
