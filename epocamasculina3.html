@@ -91,7 +91,70 @@
       .then(response => response.text())
       .then(html => {
         document.getElementById("epoca-masc").innerHTML = html;
+
+        // Só corre depois do HTML modular estar carregado
+        iniciarProximoJogo();
       });
+
+    function iniciarProximoJogo() {
+
+      function parseData(diaMes, hora) {
+        const meses = {
+          "jan":0, "fev":1, "mar":2, "abr":3, "mai":4, "jun":5,
+          "jul":6, "ago":7, "set":8, "out":9, "nov":10, "dez":11
+        };
+
+        const partes = diaMes.toLowerCase().split(" ");
+        const dia = parseInt(partes[0]);
+        const mes = meses[partes[1]];
+        const anoAtual = new Date().getFullYear();
+
+        return new Date(
+          anoAtual,
+          mes,
+          dia,
+          parseInt(hora.split(":")[0]),
+          parseInt(hora.split(":")[1])
+        );
+      }
+
+      const jogosCRC = [...document.querySelectorAll(".jogo.lajeosa")];
+      const agora = new Date();
+      let proximo = null;
+
+      jogosCRC.forEach(jogo => {
+        const linhas = jogo.querySelectorAll("p");
+        const textoData = linhas[1].innerText;
+
+        const diaMes = textoData.split("📅")[1].split("—")[0].trim();
+        const hora = textoData.split("🕘")[1].trim();
+
+        const dataJogo = parseData(diaMes, hora);
+
+        if (dataJogo > agora) {
+          if (!proximo || dataJogo < proximo.data) {
+            proximo = {
+              data: dataJogo,
+              diaMes,
+              hora,
+              adversario: linhas[0].innerText.replace(/Crc Lageosa Mondego - A\. ?(vs|v\.s\.) ?/i, "")
+            };
+          }
+        }
+      });
+
+      const texto = document.getElementById("texto-proximo-jogo");
+
+      if (proximo) {
+        texto.innerHTML =
+          `Próximo jogo do CRC: <strong>${proximo.diaMes}</strong> às <strong>${proximo.hora}</strong><br>
+           🆚 <strong>${proximo.adversario}</strong>`;
+      } else {
+        texto.innerHTML =
+          `O último jogo já foi disputado.<br>
+           Não há mais jogos agendados neste momento.`;
+      }
+    }
   </script>
 
   <!-- ========================= -->
