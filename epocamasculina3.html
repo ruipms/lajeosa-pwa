@@ -75,9 +75,33 @@
       border-left: 3px solid var(--dourado);
     }
 
+    table {
+      width: 100%;
+      color: white;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: 0.85rem;
+    }
+
     table td {
-      padding: 6px 4px;
+      padding: 4px 2px;
       border-bottom: 1px solid rgba(255,255,255,0.1);
+      word-wrap: break-word;
+    }
+
+    @media (max-width: 600px) {
+      table {
+        font-size: 0.75rem;
+      }
+      table td {
+        padding: 3px 2px;
+      }
+    }
+
+    .section-separator {
+      border: 0;
+      border-top: 1px solid rgba(227,193,90,0.4);
+      margin: 20px 0;
     }
   </style>
 </head>
@@ -125,24 +149,28 @@
       <p>📍 Pavilhão Municipal de Celorico da Beira</p>
     </div>
 
-    <p style="margin-top:20px;"><strong>Classificação — Liga Masculina</strong></p>
+    <hr class="section-separator">
 
-    <table style="width:100%; color:white; border-collapse:collapse;">
+    <p><strong>Classificação — Liga Masculina</strong></p>
+
+    <table>
       <tr style="color:var(--dourado); font-weight:bold;">
-        <td>POS</td><td>Equipa</td><td>JG</td><td>SV</td><td>ED</td><td>GM</td><td>GS</td><td>PTS</td>
+        <td>POS</td><td>Equipa</td><td>JGS</td><td>V</td><td>E</td><td>D</td><td>GM</td><td>GS</td><td>PTS</td>
       </tr>
 
-      <tr><td>1</td><td>Acd Estrela Almeida</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Adrc Aguiar Beira / Viagens Victor Correia</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Adrc Penaverdense</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Agd Mêda</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Crc Lageosa Mondego - A.</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Gcr Casal Cinza</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Gd Sameiro</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-      <tr><td>1</td><td>Sc Sabugal</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>Acd Estrela Almeida</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>Adrc Aguiar Beira / Viagens Victor Correia</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>Adrc Penaverdense</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>Agd Mêda</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>Crc Lageosa Mondego - A.</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>Gcr Casal Cinza</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>Gd Sameiro</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td>1</td><td>Sc Sabugal</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
     </table>
 
-    <p style="margin-top:20px;"><strong>Taça Distrital — Série A</strong></p>
+    <hr class="section-separator">
+
+    <p><strong>Taça Distrital — Série A</strong></p>
 
     <div class="jogo">
       <p><strong>Acd Estrela Almeida 2 - 1 Adrc Penaverdense</strong></p>
