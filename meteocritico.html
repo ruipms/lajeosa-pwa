@@ -189,10 +189,17 @@ async function carregarAvisos() {
                 "mar","costeiro","coastal","sea","wave"
             ];
 
-            if (ignorar.some(p => textoCompleto.includes(p))) return;
+            if (ignorarm.some(p => textoCompleto.includes(p))) return;
 
             const tipo = av.awarenessTypeName || "Aviso";
-            const nivel = av.awarenessLevelID || "green";
+
+            /* CORREÇÃO: mapear níveis numéricos → cores */
+            let nivel = av.awarenessLevelID;
+
+            if (nivel === 1 || nivel === "1") nivel = "green";
+            if (nivel === 2 || nivel === "2") nivel = "yellow";
+            if (nivel === 3 || nivel === "3") nivel = "orange";
+            if (nivel === 4 || nivel === "4") nivel = "red";
 
             const nivelPT =
                 nivel === "yellow" ? "Amarelo" :
@@ -218,10 +225,11 @@ async function carregarAvisos() {
             if (nivel === "orange") iconeNivel = "fa-exclamation-circle";
             if (nivel === "red") iconeNivel = "fa-skull-crossbones";
 
+            /* CORREÇÃO: aplicar classe CSS correta */
             const classeNivel =
                 nivel === "yellow" ? "yellow" :
                 nivel === "orange" ? "orange" :
-                nivel === "red" ? "red" : "";
+                nivel === "red" ? "red" : "green";
 
             html += `
                 <div class="card ${classeNivel}">
@@ -266,4 +274,3 @@ function openPage(page) {
 
 </body>
 </html>
-
