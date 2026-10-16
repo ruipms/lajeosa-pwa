@@ -5,10 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Meteorologia Crítica – Lajeosa</title>
 
-<!-- Carregar style.css -->
 <link rel="stylesheet" href="style.css">
 
-<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -83,18 +81,39 @@
         text-align: left;
         border-left: 4px solid var(--dourado);
         box-shadow: 0 0 12px rgba(227,193,90,0.35);
+        position: relative;
     }
 
-    /* Avisos coloridos */
-    .card.yellow { background-color: #8a6f00; border-left: 4px solid #D4AF37; }
-    .card.orange { background-color: #b85c00; border-left: 4px solid #ffb347; }
-    .card.red { background-color: #8b0000; border-left: 4px solid #ff4d4d; }
+    /* Barra superior colorida */
+    .card::before {
+        content: "";
+        display: block;
+        height: 6px;
+        border-radius: 6px 6px 0 0;
+        margin-bottom: 10px;
+    }
+
+    .card.yellow::before { background-color: #FFD700; }
+    .card.orange::before { background-color: #FFA500; }
+    .card.red::before { background-color: #FF4D4D; }
+    .card.green::before { background-color: #00CC66; }
+
+    /* Título colorido */
+    .titulo-yellow { color: #FFD700 !important; }
+    .titulo-orange { color: #FFA500 !important; }
+    .titulo-red { color: #FF4D4D !important; }
+    .titulo-green { color: #00CC66 !important; }
+
+    /* Ícone colorido */
+    .icon-yellow { color: #FFD700 !important; }
+    .icon-orange { color: #FFA500 !important; }
+    .icon-red { color: #FF4D4D !important; }
+    .icon-green { color: #00CC66 !important; }
 
     .status-title {
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 6px;
-        color: var(--dourado);
     }
 
     .status-desc {
@@ -158,9 +177,9 @@ async function carregarAvisos() {
 
         if (avisos.length === 0) {
             div.innerHTML = `
-                <div class="card">
-                    <div class="status-title">
-                        <i class="fa-solid fa-check-circle"></i>
+                <div class="card green">
+                    <div class="status-title titulo-green">
+                        <i class="fa-solid fa-check-circle icon-green"></i>
                         Sem avisos ativos
                     </div>
                     <div class="status-desc">
@@ -178,7 +197,6 @@ async function carregarAvisos() {
 
         avisos.forEach(av => {
 
-            /* IGNORAR AVISOS MARÍTIMOS */
             const textoCompleto = (
                 (av.awarenessTypeName || "") + " " +
                 (av.text || "")
@@ -193,7 +211,6 @@ async function carregarAvisos() {
 
             const tipo = av.awarenessTypeName || "Aviso";
 
-            /* CORREÇÃO: mapear níveis numéricos → cores */
             let nivel = av.awarenessLevelID;
 
             if (nivel === 1 || nivel === "1") nivel = "green";
@@ -225,16 +242,25 @@ async function carregarAvisos() {
             if (nivel === "orange") iconeNivel = "fa-exclamation-circle";
             if (nivel === "red") iconeNivel = "fa-skull-crossbones";
 
-            /* CORREÇÃO: aplicar classe CSS correta */
             const classeNivel =
                 nivel === "yellow" ? "yellow" :
                 nivel === "orange" ? "orange" :
                 nivel === "red" ? "red" : "green";
 
+            const classeTitulo =
+                nivel === "yellow" ? "titulo-yellow" :
+                nivel === "orange" ? "titulo-orange" :
+                nivel === "red" ? "titulo-red" : "titulo-green";
+
+            const classeIcone =
+                nivel === "yellow" ? "icon-yellow" :
+                nivel === "orange" ? "icon-orange" :
+                nivel === "red" ? "icon-red" : "icon-green";
+
             html += `
                 <div class="card ${classeNivel}">
-                    <div class="status-title">
-                        <i class="fa-solid ${iconeNivel}"></i>
+                    <div class="status-title ${classeTitulo}">
+                        <i class="fa-solid ${iconeNivel} ${classeIcone}"></i>
                         ${tipo} – ${nivelPT}
                     </div>
 
