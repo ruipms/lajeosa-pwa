@@ -189,7 +189,7 @@ async function carregarAvisos() {
                 "mar","costeiro","coastal","sea","wave"
             ];
 
-            if (ignorarm.some(p => textoCompleto.includes(p))) return;
+            if (ignorar.some(p => textoCompleto.includes(p))) return;
 
             const tipo = av.awarenessTypeName || "Aviso";
 
