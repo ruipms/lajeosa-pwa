@@ -208,6 +208,13 @@
       margin: 0 0 4px;
     }
 
+    .separador {
+      height: 6px;
+      border-radius: 3px;
+      background-color: var(--verde-base);
+      margin: 22px 0;
+    }
+
     .fase {
       margin: 12px 0 2px;
       font-weight: bold;
@@ -249,7 +256,18 @@
     <div id="jornada-jogos"></div>
     <p class="nota">Dados do Centro de Resultados da FPF, recolhidos a 17 out 2026. Os resultados só se tornam oficiais quinze dias após cada encontro.</p>
 
-    <p style="margin-top:15px;"><strong>Taça Distrital Sénior Feminino</strong></p>
+    <p style="margin-top:10px;">
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30347&seasonId=106"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver liga completa na FPF
+      </a>
+    </p>
+
+    <div class="separador"></div>
+
+    <!-- Taça Distrital 2026/2027: competitionId=30349, seasonId=106 -->
+    <p style="margin-top:0;"><strong>Taça Distrital Sénior Feminino</strong></p>
     <div id="taca-distrital"></div>
     <p style="margin-top:6px;">
       <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30349&seasonId=106"
@@ -259,16 +277,11 @@
       </a>
     </p>
 
-    <p style="margin-top:15px;"><strong>Taça de Portugal Sénior Feminino</strong></p>
-    <p class="nota">Ainda sem jogos publicados na FPF para esta época.</p>
+    <div class="separador"></div>
 
-    <p style="margin-top:10px;">
-      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30347&seasonId=106"
-         target="_blank"
-         style="color:var(--dourado); font-weight:bold;">
-         Ver detalhes completos na FPF
-      </a>
-    </p>
+    <!-- Taça de Portugal 2026/2027: link ainda por definir (a edição 2025/2026 é competitionId=25536, seasonId=105) -->
+    <p style="margin-top:0;"><strong>Taça de Portugal Sénior Feminino</strong></p>
+    <p class="nota">Ainda sem jogos publicados na FPF para esta época.</p>
   </div>
 
   <div class="card">
@@ -292,15 +305,6 @@
        Ver percurso completo na FPF
     </a>
 
-    <p style="margin-top:20px;"><strong>Taça de Portugal Sénior Feminino</strong></p>
-    <div id="taca-pt-2526"></div>
-    <p style="margin-top:6px;">
-      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=25536&seasonId=105"
-         target="_blank"
-         style="color:var(--dourado); font-weight:bold;">
-         Ver Taça de Portugal na FPF
-      </a>
-    </p>
   </div>
 
 </div>
@@ -482,22 +486,8 @@
     ]}
   ]);
 
-  /* Taça de Portugal 2025/2026 — Lajeosa no grupo D (FPF) */
-  desenharTaca("taca-pt-2526", [
-    { nome: "1.ª Eliminatória — Série D", jogos: [
-      { h: "Obsc Gresart Futsal Feminino", a: "Gd Ilha", d: "8 nov", v: "Pav. Gimnodesportivo Portomar", hs: 15, as: 0 },
-      { h: "Ccdr Covão Lobo", a: "Crc Lageosa Mondego", d: "8 nov", v: "Pav. Gimnodesportivo Covão Lobo", hs: 5, as: 0 },
-      { h: "Gcr Casal Cinza", a: "Domus Nostra", d: "8 nov", v: "Pavilhão de Casal de Cinza", hs: 2, as: 0 },
-      { h: "Casa Benfica Mortágua", a: "Gd Tabuense", d: "8 nov", v: "Pav. Municipal de Mortágua", hs: 4, as: 3 },
-      { h: "Cria", a: "Ad Fundão", d: "8 nov", v: "Pav. Esc. Sec. Dr. Joaquim Carvalho", hs: 6, as: 2 },
-      { h: "Casa Povo Ccd Miranda Corvo", a: "Norte E Soure Cscd Paleão", d: "9 nov", v: "Pav. Municipal Miranda do Corvo", hs: 0, as: 4 }
-    ]}
-  ]);
-
   desenhar();
 </script>
 
 </body>
 </html>
-
-  
