@@ -207,6 +207,12 @@
       opacity: 0.8;
       margin: 0 0 4px;
     }
+
+    .fase {
+      margin: 12px 0 2px;
+      font-weight: bold;
+      color: var(--dourado);
+    }
   </style>
 </head>
 
@@ -243,13 +249,18 @@
     <div id="jornada-jogos"></div>
     <p class="nota">Dados do Centro de Resultados da FPF, recolhidos a 17 out 2026. Os resultados só se tornam oficiais quinze dias após cada encontro.</p>
 
-    <p style="margin-top:15px;"><strong>Taça Futsal Sénior Feminino</strong></p>
-    <img src="assets/jogadoras/tacaf.jpg"
-         alt="Taça Futsal Sénior Feminino">
+    <p style="margin-top:15px;"><strong>Taça Distrital Sénior Feminino</strong></p>
+    <div id="taca-distrital"></div>
+    <p style="margin-top:6px;">
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30349&seasonId=106"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver Taça Distrital na FPF
+      </a>
+    </p>
 
     <p style="margin-top:15px;"><strong>Taça de Portugal Sénior Feminino</strong></p>
-    <img src="assets/jogadoras/tacaptfem.jpg"
-         alt="Taça de Portugal Futsal Sénior Feminino">
+    <p class="nota">Ainda sem jogos publicados na FPF para esta época.</p>
 
     <p style="margin-top:10px;">
       <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30347&seasonId=106"
@@ -280,6 +291,16 @@
        style="color:var(--dourado); font-weight:bold;">
        Ver percurso completo na FPF
     </a>
+
+    <p style="margin-top:20px;"><strong>Taça de Portugal Sénior Feminino</strong></p>
+    <div id="taca-pt-2526"></div>
+    <p style="margin-top:6px;">
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=25536&seasonId=105"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver Taça de Portugal na FPF
+      </a>
+    </p>
   </div>
 
 </div>
@@ -428,8 +449,55 @@
     desenhar();
   });
 
+  /* ====== TAÇAS ====== */
+  /* Cada fase: nome + jogos. Jogo por disputar = sem golos (hs/as), com hora em t. */
+  function jogoTaca(x) {
+    var lajeosa = /lageosa/i.test(x.h + " " + x.a);
+    var jogado = (x.hs !== undefined);
+    var meio = jogado ? (x.hs + " - " + x.as) : x.t;
+    var cCasa = (jogado && x.hs > x.as) ? "casa vencedor" : "casa";
+    var cFora = (jogado && x.as > x.hs) ? "vencedor" : "";
+    return '<div class="jogo' + (lajeosa ? " lajeosa" : "") + '">' +
+      '<div class="jogo-linha"><span class="' + cCasa + '">' + x.h + '</span>' +
+      '<span class="marcador">' + meio + '</span>' +
+      '<span class="' + cFora + '">' + x.a + '</span></div>' +
+      '<div class="jogo-info">' + x.d + ' · ' + x.v + '</div></div>';
+  }
+
+  function desenharTaca(id, fases) {
+    var html = "";
+    fases.forEach(function (f) {
+      html += '<p class="fase">' + f.nome + '</p>';
+      f.jogos.forEach(function (x) { html += jogoTaca(x); });
+    });
+    document.getElementById(id).innerHTML = html;
+  }
+
+  /* Taça Distrital 2026/2027 (FPF, 17 out 2026) */
+  desenharTaca("taca-distrital", [
+    { nome: "Pré-Eliminatória", jogos: [
+      { h: "Sc Vilar Formoso", a: "Gd Trancoso", d: "1 dez", t: "18:30", v: "Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso" },
+      { h: "Adrc Penaverdense", a: "Nds Guarda/Comunilog", d: "1 dez", t: "18:30", v: "Pav. Escola Secundária Fornos Alg." },
+      { h: "Crc Lageosa Mondego - A.", a: "Gcr Casal Cinza", d: "1 dez", t: "18:30", v: "Pav. Municipal Celorico da Beira" }
+    ]}
+  ]);
+
+  /* Taça de Portugal 2025/2026 — Lajeosa no grupo D (FPF) */
+  desenharTaca("taca-pt-2526", [
+    { nome: "1.ª Eliminatória — Série D", jogos: [
+      { h: "Obsc Gresart Futsal Feminino", a: "Gd Ilha", d: "8 nov", v: "Pav. Gimnodesportivo Portomar", hs: 15, as: 0 },
+      { h: "Ccdr Covão Lobo", a: "Crc Lageosa Mondego", d: "8 nov", v: "Pav. Gimnodesportivo Covão Lobo", hs: 5, as: 0 },
+      { h: "Gcr Casal Cinza", a: "Domus Nostra", d: "8 nov", v: "Pavilhão de Casal de Cinza", hs: 2, as: 0 },
+      { h: "Casa Benfica Mortágua", a: "Gd Tabuense", d: "8 nov", v: "Pav. Municipal de Mortágua", hs: 4, as: 3 },
+      { h: "Cria", a: "Ad Fundão", d: "8 nov", v: "Pav. Esc. Sec. Dr. Joaquim Carvalho", hs: 6, as: 2 },
+      { h: "Casa Povo Ccd Miranda Corvo", a: "Norte E Soure Cscd Paleão", d: "9 nov", v: "Pav. Municipal Miranda do Corvo", hs: 0, as: 4 }
+    ]}
+  ]);
+
   desenhar();
 </script>
 
 </body>
 </html>
+
+  
