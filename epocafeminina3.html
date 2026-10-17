@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico da Competição — CRC Lajeosa</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTEGNRDBJW');
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--verde-base);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    .club-logo {
+      width: 120px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: var(--dourado);
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    /* Cartões castanhos premium */
+    .card {
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 18px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      text-align: left !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
+    }
+
+    .card h3 {
+      color: var(--dourado);
+      margin-top: 0;
+    }
+
+    .card img {
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin: 10px auto;
+      border-radius: 12px;
+      border: 2px solid var(--dourado);
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+
+    /* Classificação e jornadas (mesmas cores da página) */
+    .tabela-wrap {
+      overflow-x: auto;
+      margin: 10px 0;
+    }
+
+    .tabela {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .tabela th {
+      color: var(--dourado);
+      padding: 8px 5px;
+      text-align: center;
+      border-bottom: 1px solid rgba(227,193,90,0.4);
+    }
+
+    .tabela td {
+      padding: 8px 5px;
+      text-align: center;
+      border-bottom: 1px solid rgba(227,193,90,0.2);
+      white-space: nowrap;
+    }
+
+    .tabela th:nth-child(2),
+    .tabela td:nth-child(2) {
+      text-align: left;
+      white-space: normal;
+      min-width: 130px;
+    }
+
+    .tabela tr.lajeosa td {
+      color: var(--dourado);
+      font-weight: bold;
+      background-color: rgba(227,193,90,0.15);
+    }
+
+    .tabela tr.lajeosa td:first-child {
+      box-shadow: inset 4px 0 0 var(--dourado);
+    }
+
+    .jornadas-barra {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px 0 10px;
+    }
+
+    .jornadas-barra button,
+    .btn-lajeosa {
+      font-size: 14px;
+      font-weight: bold;
+      min-width: 40px;
+      padding: 8px 10px;
+      border: 1px solid rgba(227,193,90,0.4);
+      border-radius: 10px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+    }
+
+    .jornadas-barra button[aria-pressed="true"],
+    .btn-lajeosa[aria-pressed="true"] {
+      background-color: var(--dourado);
+      color: var(--cor-cartao-castanho-escuro);
+    }
+
+    .topo-jogos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .jogo {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(227,193,90,0.2);
+    }
+
+    .jogo.lajeosa {
+      background-color: rgba(227,193,90,0.15);
+      box-shadow: inset 4px 0 0 var(--dourado);
+      padding-left: 12px;
+      border-radius: 6px;
+    }
+
+    .jogo-linha {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .jogo-linha .casa {
+      text-align: right;
+    }
+
+    .jogo-linha .marcador {
+      font-weight: bold;
+      font-size: 18px;
+      white-space: nowrap;
+    }
+
+    .jogo-linha .vencedor {
+      font-weight: bold;
+    }
+
+    .jogo-info {
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+
+    .nota {
+      font-size: 13px;
+      opacity: 0.8;
+      margin: 8px 0 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="assets/CRC Lajeosa logo.jpg" class="club-logo">
+  <h1>Histórico da Competição</h1>
+  <a href="clube_feminino.html" class="back-button">⬅ Voltar ao Clube</a>
+</header>
+
+<div class="content">
+
+  <!-- ========================= -->
+  <!--        FEMININOS          -->
+  <!-- ========================= -->
+
+  <div class="card">
+    <h3>👩 Sénior Feminino — Época 2026/2027</h3>
+
+    <p><strong>Classificação Atual</strong></p>
+    <div class="tabela-wrap">
+      <table class="tabela" id="tabela-classificacao"></table>
+    </div>
+
+    <p style="margin-top:15px;"><strong>Jogos por Jornada</strong></p>
+    <div class="jornadas-barra" id="jornadas-barra" role="group" aria-label="Jornadas"></div>
+    <div class="topo-jogos">
+      <span id="jornada-titulo"></span>
+      <button class="btn-lajeosa" id="btn-lajeosa" aria-pressed="false">Só Lajeosa</button>
+    </div>
+    <div id="jornada-jogos"></div>
+    <p class="nota">Dados do Centro de Resultados da FPF, recolhidos a 17 out 2026. Os resultados só se tornam oficiais quinze dias após cada encontro.</p>
+
+    <p style="margin-top:15px;"><strong>Taça Futsal Sénior Feminino</strong></p>
+    <img src="assets/jogadoras/tacaf.jpg"
+         alt="Taça Futsal Sénior Feminino">
+
+    <p style="margin-top:15px;"><strong>Taça de Portugal Sénior Feminino</strong></p>
+    <img src="assets/jogadoras/tacaptfem.jpg"
+         alt="Taça de Portugal Futsal Sénior Feminino">
+
+    <p style="margin-top:10px;">
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30347&seasonId=106"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver detalhes completos na FPF
+      </a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>👩 Sénior Feminino — Época 2025/2026</h3>
+    <p><strong>Classificação Final — LIGA FUTSAL SÉNIOR FEMININO JUVAN</strong></p>
+
+    <ul>
+      <li><strong>Posição Final:</strong> 5.º lugar</li>
+      <li><strong>Pontos:</strong> 11</li>
+      <li><strong>Jogos:</strong> 12</li>
+      <li><strong>Vitórias:</strong> 3</li>
+      <li><strong>Empates:</strong> 2</li>
+      <li><strong>Derrotas:</strong> 7</li>
+      <li><strong>Golos Marcados:</strong> 23</li>
+      <li><strong>Golos Sofridos:</strong> 32</li>
+    </ul>
+
+    <a href="https://resultados.fpf.pt/Competition/Details?competitionId=28442&seasonId=105"
+       target="_blank"
+       style="color:var(--dourado); font-weight:bold;">
+       Ver percurso completo na FPF
+    </a>
+  </div>
+
+</div>
+
+<script>
+  /* ====== DADOS: Sénior Feminino 2026/2027 (FPF, 17 out 2026) ====== */
+  var NOME_LAJEOSA = "Crc Lageosa Mondego - A.";
+
+  var EQUIPAS = {
+    NDS: "Núcleo Desp. Social",
+    ASC: "Ar Santo Cristo",
+    GCC: "Gcr Casal Cinza",
+    CLM: NOME_LAJEOSA,
+    MAC: "Gd Macedense",
+    TRA: "Gd Trancoso",
+    PEN: "Adrc Penaverdense",
+    SVF: "Sc Vilar Formoso",
+    EST: "Acd Estrela Almeida"
+  };
+
+  var PAVILHOES = {
+    "in": "Pav. Gimnodesportivo Inatel",
+    "fo": "Pav. Escola Secundária Fornos Alg.",
+    "ce": "Pav. Municipal Celorico da Beira",
+    "ma": "Pav. Municipal Macedo Cavaleiros",
+    "to": "Pav. Municipal Torre Moncorvo",
+    "al": "Pav. Gimnodesportivo Almeida",
+    "ca": "Pavilhão de Casal de Cinza",
+    "tr": "Pav. Multiusos de Trancoso",
+    "vi": "Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"
+  };
+
+  /* g(casa, fora, data, pavilhão, golosCasa, golosFora, hora)
+     Sem golos = jogo por disputar. Hora por omissão: 18:30. */
+  function g(h, a, d, v, hs, as, t) {
+    var jogado = (hs !== undefined && hs !== null);
+    return { h: h, a: a, d: d, v: v, hs: jogado ? hs : null, as: jogado ? as : null, t: jogado ? "" : (t || "18:30") };
+  }
+
+  var JORNADAS = [
+    [g("PEN","ASC","3 out","fo",3,6), g("CLM","EST","3 out","ce",4,0), g("NDS","MAC","4 out","in",2,0), g("SVF","TRA","17 out","vi",2,3)],
+    [g("EST","NDS","10 out","al",0,7), g("MAC","PEN","10 out","ma",4,3), g("ASC","SVF","8 dez","to",null,null,"16:00"), g("TRA","GCC","9 jan","tr")],
+    [g("NDS","CLM","24 out","in"), g("GCC","ASC","24 out","ca"), g("PEN","EST","24 out","fo"), g("SVF","MAC","25 out","vi",null,null,"18:00")],
+    [g("ASC","TRA","31 out","to"), g("EST","SVF","31 out","al"), g("CLM","PEN","31 out","ce"), g("MAC","GCC","1 nov","ma",null,null,"17:00")],
+    [g("TRA","MAC","14 nov","tr"), g("SVF","CLM","14 nov","vi"), g("GCC","EST","14 nov","ca"), g("PEN","NDS","14 nov","fo")],
+    [g("NDS","SVF","21 nov","in"), g("EST","TRA","21 nov","al"), g("MAC","ASC","21 nov","ma"), g("CLM","GCC","21 nov","ce")],
+    [g("TRA","CLM","28 nov","tr"), g("SVF","PEN","28 nov","vi"), g("GCC","NDS","28 nov","ca"), g("ASC","EST","28 nov","to")],
+    [g("NDS","TRA","5 dez","in"), g("PEN","GCC","5 dez","fo"), g("EST","MAC","5 dez","al"), g("CLM","ASC","5 dez","ce")],
+    [g("TRA","PEN","12 dez","tr"), g("GCC","SVF","12 dez","ca"), g("ASC","NDS","12 dez","to"), g("MAC","CLM","12 dez","ma")],
+    [g("TRA","SVF","19 dez","tr"), g("ASC","PEN","19 dez","to"), g("EST","CLM","19 dez","al"), g("MAC","NDS","19 dez","ma")],
+    [g("GCC","TRA","10 out","ca",5,2), g("PEN","MAC","9 jan","fo"), g("SVF","ASC","9 jan","vi"), g("NDS","EST","9 jan","in")],
+    [g("ASC","GCC","16 jan","to"), g("EST","PEN","16 jan","al"), g("MAC","SVF","16 jan","ma"), g("CLM","NDS","16 jan","ce")],
+    [g("TRA","ASC","23 jan","tr"), g("SVF","EST","23 jan","vi"), g("GCC","MAC","23 jan","ca"), g("PEN","CLM","23 jan","fo")],
+    [g("NDS","PEN","30 jan","in"), g("EST","GCC","30 jan","al"), g("MAC","TRA","30 jan","ma"), g("CLM","SVF","30 jan","ce")],
+    [g("TRA","EST","13 fev","tr"), g("SVF","NDS","13 fev","vi"), g("GCC","CLM","13 fev","ca"), g("ASC","MAC","13 fev","to")],
+    [g("NDS","GCC","20 fev","in"), g("PEN","SVF","20 fev","fo"), g("EST","ASC","20 fev","al"), g("CLM","TRA","20 fev","ce")],
+    [g("TRA","NDS","27 fev","tr"), g("GCC","PEN","27 fev","ca"), g("ASC","CLM","27 fev","to"), g("MAC","EST","27 fev","ma")],
+    [g("SVF","GCC","6 mar","vi"), g("NDS","ASC","6 mar","in"), g("PEN","TRA","6 mar","fo"), g("CLM","MAC","6 mar","ce")]
+  ];
+
+  /* [equipa, J, V, E, D, GM, GS, Pts] */
+  var CLASSIFICACAO = [
+    ["NDS",2,2,0,0,9,0,6],
+    ["GCC",1,1,0,0,5,2,3],
+    ["ASC",1,1,0,0,6,3,3],
+    ["CLM",1,1,0,0,4,0,3],
+    ["MAC",2,1,0,1,4,5,3],
+    ["TRA",2,1,0,1,5,7,3],
+    ["PEN",2,0,0,2,6,10,0],
+    ["SVF",1,0,0,1,2,3,0],
+    ["EST",2,0,0,2,0,11,0]
+  ];
+
+  /* ====== CLASSIFICAÇÃO ====== */
+  (function () {
+    var html = "<tr><th>#</th><th>Equipa</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GM</th><th>GS</th><th>Pts</th></tr>";
+    CLASSIFICACAO.forEach(function (r, i) {
+      html += '<tr class="' + (r[0] === "CLM" ? "lajeosa" : "") + '"><td>' + (i + 1) + "</td><td>" + EQUIPAS[r[0]] + "</td>";
+      for (var k = 1; k <= 7; k++) html += "<td>" + r[k] + "</td>";
+      html += "</tr>";
+    });
+    document.getElementById("tabela-classificacao").innerHTML = html;
+  })();
+
+  /* ====== JORNADAS ====== */
+  var selecionada = 0;
+  var soLajeosa = false;
+
+  for (var i = 0; i < JORNADAS.length; i++) {
+    var porJogar = JORNADAS[i].some(function (x) { return x.hs === null; });
+    if (porJogar) { selecionada = i; break; }
+    selecionada = JORNADAS.length - 1;
+  }
+
+  function cartaoJogo(x, numJornada) {
+    var lajeosa = (x.h === "CLM" || x.a === "CLM");
+    var jogado = (x.hs !== null);
+    var meio = jogado ? '<span class="marcador">' + x.hs + " - " + x.as + "</span>"
+                      : '<span class="marcador">' + x.t + "</span>";
+    var cCasa = (jogado && x.hs > x.as) ? "casa vencedor" : "casa";
+    var cFora = (jogado && x.as > x.hs) ? "vencedor" : "";
+    return '<div class="jogo' + (lajeosa ? " lajeosa" : "") + '">' +
+      '<div class="jogo-linha"><span class="' + cCasa + '">' + EQUIPAS[x.h] + "</span>" + meio +
+      '<span class="' + cFora + '">' + EQUIPAS[x.a] + "</span></div>" +
+      '<div class="jogo-info">' + (numJornada ? "Jornada " + numJornada + " · " : "") + x.d + " · " + PAVILHOES[x.v] + "</div></div>";
+  }
+
+  function desenhar() {
+    var barra = "";
+    for (var i = 0; i < JORNADAS.length; i++) {
+      barra += '<button data-i="' + i + '" aria-pressed="' + (!soLajeosa && i === selecionada) + '">' + (i + 1) + "</button>";
+    }
+    document.getElementById("jornadas-barra").innerHTML = barra;
+    document.getElementById("btn-lajeosa").setAttribute("aria-pressed", soLajeosa);
+
+    var saida = "";
+    if (soLajeosa) {
+      document.getElementById("jornada-titulo").textContent = "Todos os jogos da Lajeosa";
+      JORNADAS.forEach(function (j, i) {
+        var x = j.filter(function (y) { return y.h === "CLM" || y.a === "CLM"; })[0];
+        saida += x ? cartaoJogo(x, i + 1)
+                   : '<p class="nota">Jornada ' + (i + 1) + " · " + NOME_LAJEOSA + " descansa</p>";
+      });
+    } else {
+      var jogos = JORNADAS[selecionada];
+      var ocupadas = {};
+      jogos.forEach(function (x) { ocupadas[x.h] = true; ocupadas[x.a] = true; });
+      var descansa = Object.keys(EQUIPAS).filter(function (k) { return !ocupadas[k]; })[0];
+      document.getElementById("jornada-titulo").textContent = "Jornada " + (selecionada + 1);
+      jogos.forEach(function (x) { saida += cartaoJogo(x); });
+      saida += '<p class="nota">Descansa: ' + EQUIPAS[descansa] + "</p>";
+    }
+    document.getElementById("jornada-jogos").innerHTML = saida;
+  }
+
+  document.getElementById("jornadas-barra").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    selecionada = parseInt(b.getAttribute("data-i"), 10);
+    soLajeosa = false;
+    desenhar();
+  });
+
+  document.getElementById("btn-lajeosa").addEventListener("click", function () {
+    soLajeosa = !soLajeosa;
+    desenhar();
+  });
+
+  desenhar();
+</script>
+
+</body>
+</html>
