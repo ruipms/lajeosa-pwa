@@ -41,15 +41,19 @@
     }
 
     .content {
-      padding: 20px;
+      padding: 20px 6px;
     }
 
     /* Cartões castanhos premium */
     .card {
       background-color: var(--cor-cartao-castanho-escuro) !important;
-      padding: 18px !important;
+      padding: 14px 10px !important;
       border-radius: 20px !important;
       margin-bottom: 20px !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: auto !important;
+      max-width: none !important;
       text-align: left !important;
       color: white !important;
       border: 1px solid rgba(227,193,90,0.4) !important;
@@ -197,6 +201,12 @@
       opacity: 0.8;
       margin: 8px 0 0;
     }
+
+    .dica {
+      font-size: 13px;
+      opacity: 0.8;
+      margin: 0 0 4px;
+    }
   </style>
 </head>
 
@@ -218,11 +228,13 @@
     <h3>👩 Sénior Feminino — Época 2026/2027</h3>
 
     <p><strong>Classificação Atual</strong></p>
+    <p class="dica">↔ Desliza para ver mais colunas</p>
     <div class="tabela-wrap">
       <table class="tabela" id="tabela-classificacao"></table>
     </div>
 
     <p style="margin-top:15px;"><strong>Jogos por Jornada</strong></p>
+    <p class="dica">↔ Desliza para ver mais jornadas</p>
     <div class="jornadas-barra" id="jornadas-barra" role="group" aria-label="Jornadas"></div>
     <div class="topo-jogos">
       <span id="jornada-titulo"></span>
