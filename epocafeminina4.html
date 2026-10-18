@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -504,7 +505,7 @@
     ]}
   ]);
 
-  /* Taça de Portugal 2026/2027 — 1.ª Eliminatória, séries A a H (FPF, 17 out 2026) */
+  /* Taça de Portugal 2026/2027 — 1.ª Eliminatória, séries A a H (FPF, 18 out 2026) */
   /* jg = jogo disputado (golos no fim); jp = jogo por disputar (com hora) */
   function jg(h, a, d, v, hs, as) { return { h: h, a: a, d: d, v: v, hs: hs, as: as }; }
   function jp(h, a, d, t, v) { return { h: h, a: a, d: d, t: t, v: v }; }
@@ -517,55 +518,55 @@
         jg("Acd Santo Estêvão", "Sc Braga", "17 out", "Pav. Gimnodesportivo Municipal Chaves", 0, 13),
         jg("Mondinense Fc", "Gd Castanheira", "17 out", "Pav. Municipal de Mondim de Basto", 3, 0),
         jg("Futsal Campo/Gil Vicente Fc", "Gd Macedense", "17 out", "Pav. Municipal de Campo", 6, 1),
-        jp("Cr Candoso", "Casa Povo Freixo", "18 out", "16:00", "Pav. Desportivo do C.R. Candoso"),
+        jg("Cr Candoso", "Casa Povo Freixo", "18 out", "Pav. Desportivo do C.R. Candoso", 0, 2),
         jp("Cdrc Tebosa", "Gteam Fc", "18 out", "17:00", "Pav. Gimnodesportivo de Tebosa")
       ]},
       { nome: "B", jogos: [
         jg("Aliados Fc Lordelo", "A-Smart S. Martinho Recezinhos", "17 out", "Pav. Multiusos Rota dos Móveis", 6, 1),
-        jp("Gcr Vermoim", "Cd Aves 1930", "18 out", "16:00", "Pav. Municipal da Maia"),
+        jg("Gcr Vermoim", "Cd Aves 1930", "18 out", "Pav. Municipal da Maia", 0, 9),
         jp("Asm Vila Marim", "Arc Gueifães", "18 out", "17:00", "Pav. Municipal Desportos - Vila Real"),
-        jp("Uds Roriz", "Ccd Ordem", "18 out", "18:00", "Pav. C.D. Aves"),
+        jg("Uds Roriz", "Ccd Ordem", "18 out", "Pav. C.D. Aves", 3, 1),
         jp("Adcr Caxinas Poça Barca", "Gdcr Escolas Arreigada", "18 out", "21:00", "Pav. do Centro Comunitário das Caxinas")
       ]},
       { nome: "C", jogos: [
         jg("Ascrd Casa Benfica Viseu", "Sc S. João Ver", "17 out", "Pav. Escola Sec. Infante D. Henrique", 4, 1),
-        jp("Hda Cinfães Futsal", "Juventus Triana Fc", "18 out", "16:00", "Pav. Mun. Armando Costa"),
-        jp("Lusitano Fc Vildemoinhos", "Gd Magrelos", "18 out", "18:00", "Pav. Desportivo Cidade Viseu"),
+        jg("Hda Cinfães Futsal", "Juventus Triana Fc", "18 out", "Pav. Mun. Armando Costa", 10, 2),
+        jg("Lusitano Fc Vildemoinhos", "Gd Magrelos", "18 out", "Pav. Desportivo Cidade Viseu", 0, 4),
         jp("Matosinhos Fc", "Escola Dc Gondomar", "18 out", "18:00", "Pav. Municipal Custóias"),
-        jp("Ass. Marius Latour/Lfip", "Ud Estrelas Rio Mau", "18 out", "19:00", "Pav. Esc. Sec. Fontes Pereira de Melo")
+        jg("Ass. Marius Latour/Lfip", "Ud Estrelas Rio Mau", "18 out", "Pav. Esc. Sec. Fontes Pereira de Melo", 5, 2)
       ]},
       { nome: "D", jogos: [
         jg("Casa Benfica Mortágua", "Cf Santa Clara", "17 out", "Pav. Municipal de Mortágua", 9, 0),
         jg("Ccdr Covão Lobo", "Núcleo Ds Guarda", "17 out", "Pav. Gimnodesportivo Covão Lobo", 8, 1),
-        jp("C. Domus Nostra", "Obsc Gresart Futsal Fem", "18 out", "16:00", "Pav. Gimnodesportivo Portomar"),
-        jp("Gigantes S. Mangualde - Adm", "Gcr Casal Cinza", "18 out", "17:00", "Pav. Municipal de Mangualde"),
+        jg("C. Domus Nostra", "Obsc Gresart Futsal Fem", "18 out", "Pav. Gimnodesportivo Portomar", 1, 12),
+        jg("Gigantes S. Mangualde - Adm", "Gcr Casal Cinza", "18 out", "Pav. Municipal de Mangualde", 0, 2),
         jg("Crc Lageosa Mondego", "Gdcr Miro", "18 out", "Pav. Municipal Celorico da Beira", 2, 1)
       ]},
       { nome: "E", jogos: [
         jg("Gd Valverde", "Ccr Quinta Sobrado Palmeiros", "17 out", "Pav. Gimnodesportivo de Valverde", 0, 1),
         jg("Juventude Ouriense", "Núcleo Scp Pombal", "17 out", "Pav. Municipal do Caneiro", 3, 2),
         jg("Gd Ilha", "Cri Alhadense", "17 out", "Pav. Gimnodesportivo Bajouca", 0, 6),
-        jp("Ad Fundão", "Nda Vidais Futsal", "18 out", "16:00", "Pav. Municipal Fundão"),
-        jp("Scr Gaeirense", "Norte E Soure Cscd Paleão", "18 out", "18:00", "Pav. Gimnodesportivo Sociedade Cultural Recreativa Gaeirense")
+        jg("Ad Fundão", "Nda Vidais Futsal", "18 out", "Pav. Municipal Fundão", 7, 2),
+        jg("Scr Gaeirense", "Norte E Soure Cscd Paleão", "18 out", "Pav. Gimnodesportivo Sociedade Cultural Recreativa Gaeirense", 1, 6)
       ]},
       { nome: "F", jogos: [
         jg("Cd Nacional", "Eléctrico Fc", "17 out", "Pav. da Ribeira Brava", 4, 2),
         jg("Ua Povoense", "C. Santo Ant.º Cavaleiros", "17 out", "Pav. Escola Eb 2/3 Aristides Sousa Mendes", 4, 1),
         jg("Ass. Moradores Portela", "Acdr Arneiros", "17 out", "Pav. Escola Secundária Portela", 1, 3),
-        jp("Vitória C. Santarém", "Cf \"Os Avisenses\"", "18 out", "15:00", "Pav. Municipal Santarém Nave"),
+        jg("Vitória C. Santarém", "Cf \"Os Avisenses\"", "18 out", "Pav. Municipal Santarém Nave", 8, 2),
         jp("Sporting Cp", "Casa Slb Portalegre", "18 out", "19:00", "Pav. João Rocha")
       ]},
       { nome: "G", jogos: [
         jg("Amodin - Adn", "Cf Os Belenenses", "16 out", "Pav. Municipal Nº 2 - Montijo", 0, 11),
         jg("Gd Unidos Caxienses", "Ad Reguilas Tires Futsal", "17 out", "Pav. Desportivo Unidos Caxienses", 21, 1),
-        jp("Gdat Barroca D'alva", "Soc. Musical 3 Agosto 1885", "18 out", "15:00", "Pav. Municipal Alcochete"),
-        jp("Dragões Futsal", "Crd Miratejo", "18 out", "16:00", "Pav. Desp. J F Avenidas Novas (Bº Rego)"),
+        jg("Gdat Barroca D'alva", "Soc. Musical 3 Agosto 1885", "18 out", "Pav. Municipal Alcochete", 0, 16),
+        jg("Dragões Futsal", "Crd Miratejo", "18 out", "Pav. Desp. J F Avenidas Novas (Bº Rego)", 6, 0),
         jp("Fc Beira Mar", "Oriental Rc", "18 out", "19:30", "Pav. Esc. Sec. Stº. António Charneca")
       ]},
       { nome: "H", jogos: [
         jg("Crc Forte Casa", "Srbu Parchalense", "17 out", "Pav. Municipal Forte da Casa", 0, 3),
-        jp("Cd Pinhalnovense", "Juventude S. Campinense", "18 out", "16:00", "Pav. Municipal de Palmela"),
-        jp("Sc Ferreirense", "A. Casa Benfica Charneca Caparica", "18 out", "18:00", "Pav. dos Desportos de Ferreira do Alentejo"),
+        jg("Cd Pinhalnovense", "Juventude S. Campinense", "18 out", "Pav. Municipal de Palmela", 0, 12),
+        jg("Sc Ferreirense", "A. Casa Benfica Charneca Caparica", "18 out", "Pav. dos Desportos de Ferreira do Alentejo", 2, 5),
         jp("Sc Farense", "Cda Vendas Novas", "18 out", "19:00", "Pav. Multiusos 25 de Abril")
       ]}
     ]
