@@ -123,7 +123,7 @@
             padding: 0 6px;
         }
 
-        /* Cartões retangulares (CRC, Jogos, Instalar, Sobre mim) */
+        /* Cartões retangulares */
         .card-menu-alt,
         .card-full {
             background-color: var(--cor-cartao-base);
@@ -231,16 +231,20 @@
     </div>
 </details>
 
-<!-- CARTÕES FINAIS RETANGULARES -->
-<div class="card-full" onclick="openPage('aplicacao.html')">
-    <i class="fas fa-mobile-alt"></i>
-    <p>Instalar como Aplicação</p>
-</div>
+<!-- ÚLTIMO ACORDEÃO COM DOIS CARTÕES -->
+<details class="accordion">
+    <summary>📱 Instalar aplicação <br> Falar comigo / Sobre mim</summary>
 
-<div class="card-full" onclick="openPage('falarcomigo.html')">
-    <i class="fas fa-envelope"></i>
-    <p>Sobre mim / Falar comigo</p>
-</div>
+    <div class="card-full" onclick="openPage('aplicacao.html')">
+        <i class="fas fa-mobile-alt"></i>
+        <p>Instalar como Aplicação</p>
+    </div>
+
+    <div class="card-full" onclick="openPage('falarcomigo.html')">
+        <i class="fas fa-envelope"></i>
+        <p>Sobre mim / Falar comigo</p>
+    </div>
+</details>
 
 <div class="card-full" style="text-align:center;">
     <p style="font-size:14px; opacity:0.8; margin-top:8px;">Site em manutenção ativa</p>
