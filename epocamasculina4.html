@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico da Competição — CRC Lajeosa</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTEGNRDBJW');
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--verde-base);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    .club-logo {
+      width: 120px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: var(--dourado);
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px 6px;
+    }
+
+    /* Cartões castanhos premium */
+    .card {
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 14px 10px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+      text-align: left !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
+    }
+
+    .card h3 {
+      color: var(--dourado);
+      margin-top: 0;
+    }
+
+    .card img {
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin: 10px auto;
+      border-radius: 12px;
+      border: 2px solid var(--dourado);
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+
+    /* Classificação e jornadas (mesmas cores da página) */
+    .tabela-wrap {
+      overflow-x: auto;
+      margin: 10px 0;
+    }
+
+    .tabela {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .tabela th {
+      color: var(--dourado);
+      padding: 8px 5px;
+      text-align: center;
+      border-bottom: 1px solid rgba(227,193,90,0.4);
+    }
+
+    .tabela td {
+      padding: 8px 5px;
+      text-align: center;
+      border-bottom: 1px solid rgba(227,193,90,0.2);
+      white-space: nowrap;
+    }
+
+    .tabela th:nth-child(2),
+    .tabela td:nth-child(2) {
+      text-align: left;
+      white-space: normal;
+      min-width: 130px;
+    }
+
+    .tabela tr.lajeosa td {
+      color: var(--dourado);
+      font-weight: bold;
+      background-color: rgba(227,193,90,0.15);
+    }
+
+    .tabela tr.lajeosa td:first-child {
+      box-shadow: inset 4px 0 0 var(--dourado);
+    }
+
+    .jornadas-barra {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px 0 10px;
+    }
+
+    .jornadas-barra button,
+    .btn-lajeosa {
+      font-size: 14px;
+      font-weight: bold;
+      min-width: 40px;
+      padding: 8px 10px;
+      border: 1px solid rgba(227,193,90,0.4);
+      border-radius: 10px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+    }
+
+    .jornadas-barra button[aria-pressed="true"],
+    .btn-lajeosa[aria-pressed="true"] {
+      background-color: var(--dourado);
+      color: var(--cor-cartao-castanho-escuro);
+    }
+
+    .topo-jogos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .jogo {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(227,193,90,0.2);
+    }
+
+    .jogo.lajeosa {
+      background-color: rgba(227,193,90,0.15);
+      box-shadow: inset 4px 0 0 var(--dourado);
+      padding-left: 12px;
+      border-radius: 6px;
+    }
+
+    .jogo-linha {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .jogo-linha .casa {
+      text-align: right;
+    }
+
+    .jogo-linha .marcador {
+      font-weight: bold;
+      font-size: 18px;
+      white-space: nowrap;
+    }
+
+    .jogo-linha .vencedor {
+      font-weight: bold;
+    }
+
+    .jogo-info {
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+
+    .nota {
+      font-size: 13px;
+      opacity: 0.8;
+      margin: 8px 0 0;
+    }
+
+    .dica {
+      font-size: 13px;
+      opacity: 0.8;
+      margin: 0 0 4px;
+    }
+
+    .aviso {
+      margin: 6px 0;
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--dourado);
+    }
+
+    .separador {
+      height: 6px;
+      border-radius: 3px;
+      background-color: var(--verde-base);
+      margin: 22px 0;
+    }
+
+    .fase {
+      margin: 12px 0 2px;
+      font-weight: bold;
+      color: var(--dourado);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="assets/CRC Lajeosa logo.jpg" class="club-logo">
+  <h1>Histórico da Competição</h1>
+  <a href="clube_masculino.html" class="back-button">⬅ Voltar ao Clube</a>
+</header>
+
+<div class="content">
+
+  <!-- ========================= -->
+  <!--        MASCULINOS         -->
+  <!-- ========================= -->
+
+  <div class="card">
+    <h3>👨 Sénior Masculino — Época 2026/2027</h3>
+
+    <!-- Liga: competitionId=30352, seasonId=106 -->
+    <p><strong>Classificação Atual</strong></p>
+    <p class="dica">↔ Desliza para ver mais colunas</p>
+    <div class="tabela-wrap">
+      <table class="tabela" id="tabela-classificacao"></table>
+    </div>
+
+    <p style="margin-top:15px;"><strong>Jogos por Jornada</strong></p>
+    <p class="dica">↔ Desliza para ver mais jornadas</p>
+    <div class="jornadas-barra" id="jornadas-barra" role="group" aria-label="Jornadas"></div>
+    <div class="topo-jogos">
+      <span id="jornada-titulo"></span>
+      <button class="btn-lajeosa" id="btn-lajeosa" aria-pressed="false">Só Lajeosa</button>
+    </div>
+    <div id="jornada-jogos"></div>
+    <p class="nota">Dados do Centro de Resultados da FPF, recolhidos a 18 out 2026. Os resultados só se tornam oficiais quinze dias após cada encontro.</p>
+
+    <p style="margin-top:10px;">
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30352&seasonId=106"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver liga completa na FPF
+      </a>
+    </p>
+
+    <div class="separador"></div>
+
+    <!-- Taça Distrital: competitionId=30351, seasonId=106 -->
+    <p style="margin-top:0;"><strong>Taça Distrital Sénior Masculino</strong></p>
+    <p class="aviso">A Lajeosa está na série A.</p>
+    <div class="jornadas-barra" id="taca-series-barra" role="group" aria-label="Séries"></div>
+    <p class="fase" id="taca-serie-titulo"></p>
+    <p class="dica">↔ Desliza para ver mais colunas</p>
+    <div class="tabela-wrap">
+      <table class="tabela" id="tabela-taca"></table>
+    </div>
+
+    <p style="margin-top:15px;"><strong>Jogos por Jornada</strong></p>
+    <div class="jornadas-barra" id="taca-jornadas-barra" role="group" aria-label="Jornadas da taça"></div>
+    <div id="taca-jornada-jogos"></div>
+
+    <p style="margin-top:6px;">
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30351&seasonId=106"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver Taça Distrital na FPF
+      </a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>👨 Sénior Masculino — Época 2025/2026</h3>
+    <p><strong>Classificação Final — LIGA FUTSAL SÉNIOR MASCULINO DAPPIN</strong></p>
+
+    <ul>
+      <li><strong>Posição Final:</strong> 7.º lugar</li>
+      <li><strong>Pontos:</strong> 4</li>
+      <li><strong>Jogos:</strong> 14</li>
+      <li><strong>Vitórias:</strong> 1</li>
+      <li><strong>Empates:</strong> 1</li>
+      <li><strong>Derrotas:</strong> 12</li>
+      <li><strong>Golos Marcados:</strong> 35</li>
+      <li><strong>Golos Sofridos:</strong> 61</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+  /* ====== DADOS: Sénior Masculino 2026/2027 (FPF, 18 out 2026) ====== */
+  var EQUIPAS = {
+    EST: "Acd Estrela Almeida",
+    AGU: "Adrc Aguiar Beira/Viagens Victor Correia",
+    PEN: "Adrc Penaverdense",
+    MED: "Agd Mêda",
+    CLM: "Crc Lageosa Mondego - A.",
+    GCC: "Gcr Casal Cinza",
+    SAM: "Gd Sameiro",
+    SAB: "Sc Sabugal"
+  };
+
+  var PAVILHOES = {
+    "ma": "Pav. Desportivo de Manteigas",
+    "fo": "Pav. Escola Secundária Fornos Alg.",
+    "me": "Pav. Gimnodesportivo Municipal Meda",
+    "ce": "Pav. Municipal Celorico da Beira",
+    "sa": "Pav. Municipal do Sabugal",
+    "pe": "Pav. Municipal Penalva do Castelo",
+    "al": "Pav. Gimnodesportivo Almeida",
+    "ca": "Pavilhão de Casal de Cinza",
+    "be": "Pav. Gimnodesportivo Belmonte"
+  };
+
+  /* g(casa, fora, data, pavilhão, golosCasa, golosFora, hora)
+     Sem golos = jogo por disputar. Hora por omissão: 21:00. */
+  function g(h, a, d, v, hs, as, t) {
+    var jogado = (hs !== undefined && hs !== null);
+    return { h: h, a: a, d: d, v: v, hs: jogado ? hs : null, as: jogado ? as : null, t: jogado ? "" : (t || "21:00") };
+  }
+
+  /* Liga: 14 jornadas */
+  var JORNADAS = [
+    [g("SAM","AGU","14 nov","ma"), g("PEN","SAB","14 nov","fo"), g("MED","EST","14 nov","me"), g("CLM","GCC","14 nov","ce")],
+    [g("SAB","MED","21 nov","sa"), g("AGU","PEN","21 nov","pe"), g("GCC","SAM","21 nov","ca"), g("EST","CLM","21 nov","al")],
+    [g("MED","AGU","28 nov","me"), g("EST","SAB","28 nov","al"), g("PEN","GCC","28 nov","fo"), g("SAM","CLM","28 nov","ma")],
+    [g("AGU","SAB","12 dez","pe"), g("GCC","MED","12 dez","ca"), g("CLM","PEN","12 dez","ce"), g("SAM","EST","12 dez","ma")],
+    [g("EST","AGU","19 dez","al"), g("SAB","GCC","19 dez","sa"), g("PEN","SAM","19 dez","fo"), g("MED","CLM","19 dez","me")],
+    [g("GCC","AGU","9 jan","ca"), g("CLM","SAB","9 jan","ce"), g("SAM","MED","9 jan","ma"), g("PEN","EST","9 jan","fo")],
+    [g("MED","PEN","16 jan","me"), g("EST","GCC","16 jan","al"), g("SAB","SAM","16 jan","sa"), g("AGU","CLM","16 jan","pe")],
+    [g("EST","MED","23 jan","al"), g("SAB","PEN","23 jan","sa"), g("AGU","SAM","23 jan","pe"), g("GCC","CLM","23 jan","ca")],
+    [g("PEN","AGU","30 jan","fo"), g("MED","SAB","30 jan","me"), g("CLM","EST","30 jan","ce"), g("SAM","GCC","30 jan","ma")],
+    [g("AGU","MED","6 fev","pe"), g("GCC","PEN","6 fev","ca"), g("SAB","EST","6 fev","sa"), g("CLM","SAM","6 fev","ce")],
+    [g("SAB","AGU","13 fev","sa"), g("MED","GCC","13 fev","me"), g("EST","SAM","13 fev","al"), g("PEN","CLM","13 fev","fo")],
+    [g("GCC","SAB","20 fev","ca"), g("CLM","MED","20 fev","ce"), g("SAM","PEN","20 fev","ma"), g("AGU","EST","20 fev","pe")],
+    [g("EST","PEN","27 fev","al"), g("AGU","GCC","27 fev","pe"), g("MED","SAM","27 fev","me"), g("SAB","CLM","27 fev","sa")],
+    [g("CLM","AGU","13 mar","ce"), g("SAM","SAB","13 mar","ma"), g("PEN","MED","13 mar","fo"), g("GCC","EST","13 mar","ca")]
+  ];
+
+  /* [posição, equipa, J, V, E, D, GM, GS, Pts] — sem jogos disputados, todas empatadas */
+  var CLASSIFICACAO = [
+    [1,"EST",0,0,0,0,0,0,0],
+    [1,"AGU",0,0,0,0,0,0,0],
+    [1,"PEN",0,0,0,0,0,0,0],
+    [1,"MED",0,0,0,0,0,0,0],
+    [1,"CLM",0,0,0,0,0,0,0],
+    [1,"GCC",0,0,0,0,0,0,0],
+    [1,"SAM",0,0,0,0,0,0,0],
+    [1,"SAB",0,0,0,0,0,0,0]
+  ];
+
+  /* Taça Distrital: duas séries, três jornadas cada */
+  var TACA = [
+    { nome: "A",
+      classificacao: [
+        [1,"SAB",1,1,0,0,5,1,3],
+        [2,"EST",1,1,0,0,2,1,3],
+        [3,"PEN",1,0,0,1,1,2,0],
+        [4,"CLM",1,0,0,1,1,5,0]
+      ],
+      jornadas: [
+        [g("CLM","SAB","10 out","ce",1,5), g("EST","PEN","10 out","al",2,1)],
+        [g("SAB","EST","24 out","sa"), g("PEN","CLM","24 out","fo")],
+        [g("PEN","SAB","31 out","fo"), g("CLM","EST","31 out","ce")]
+      ] },
+    { nome: "B",
+      classificacao: [
+        [1,"SAM",1,1,0,0,5,0,3],
+        [2,"AGU",1,1,0,0,6,4,3],
+        [3,"MED",1,0,0,1,0,5,0],
+        [4,"GCC",1,0,0,1,4,6,0]
+      ],
+      jornadas: [
+        [g("GCC","AGU","10 out","ca",4,6), g("MED","SAM","10 out","me",0,5)],
+        [g("AGU","MED","24 out","pe"), g("SAM","GCC","24 out","ma")],
+        [g("SAM","AGU","31 out","be"), g("GCC","MED","31 out","ca")]
+      ] }
+  ];
+
+  /* ====== FUNÇÕES COMUNS ====== */
+  function tabelaHtml(linhas) {
+    var html = "<tr><th>#</th><th>Equipa</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GM</th><th>GS</th><th>Pts</th></tr>";
+    linhas.forEach(function (r) {
+      html += '<tr class="' + (r[1] === "CLM" ? "lajeosa" : "") + '"><td>' + r[0] + "</td><td>" + EQUIPAS[r[1]] + "</td>";
+      for (var k = 2; k <= 7; k++) html += "<td>" + r[k] + "</td>";
+      html += "</tr>";
+    });
+    return html;
+  }
+
+  function cartaoJogo(x, numJornada) {
+    var lajeosa = (x.h === "CLM" || x.a === "CLM");
+    var jogado = (x.hs !== null);
+    var meio = jogado ? '<span class="marcador">' + x.hs + " - " + x.as + "</span>"
+                      : '<span class="marcador">' + x.t + "</span>";
+    var cCasa = (jogado && x.hs > x.as) ? "casa vencedor" : "casa";
+    var cFora = (jogado && x.as > x.hs) ? "vencedor" : "";
+    return '<div class="jogo' + (lajeosa ? " lajeosa" : "") + '">' +
+      '<div class="jogo-linha"><span class="' + cCasa + '">' + EQUIPAS[x.h] + "</span>" + meio +
+      '<span class="' + cFora + '">' + EQUIPAS[x.a] + "</span></div>" +
+      '<div class="jogo-info">' + (numJornada ? "Jornada " + numJornada + " · " : "") + x.d + " · " + PAVILHOES[x.v] + "</div></div>";
+  }
+
+  function primeiraPorJogar(jornadas) {
+    for (var i = 0; i < jornadas.length; i++) {
+      if (jornadas[i].some(function (x) { return x.hs === null; })) return i;
+    }
+    return jornadas.length - 1;
+  }
+
+  function barraBotoes(n, selecionada, rotulos) {
+    var html = "";
+    for (var i = 0; i < n; i++) {
+      html += '<button data-i="' + i + '" aria-pressed="' + (i === selecionada) + '">' + (rotulos ? rotulos[i] : (i + 1)) + "</button>";
+    }
+    return html;
+  }
+
+  /* ====== LIGA ====== */
+  document.getElementById("tabela-classificacao").innerHTML = tabelaHtml(CLASSIFICACAO);
+
+  var selecionada = primeiraPorJogar(JORNADAS);
+  var soLajeosa = false;
+
+  function desenhar() {
+    document.getElementById("jornadas-barra").innerHTML = barraBotoes(JORNADAS.length, soLajeosa ? -1 : selecionada);
+    document.getElementById("btn-lajeosa").setAttribute("aria-pressed", soLajeosa);
+
+    var saida = "";
+    if (soLajeosa) {
+      document.getElementById("jornada-titulo").textContent = "Todos os jogos da Lajeosa";
+      JORNADAS.forEach(function (j, i) {
+        var x = j.filter(function (y) { return y.h === "CLM" || y.a === "CLM"; })[0];
+        if (x) saida += cartaoJogo(x, i + 1);
+      });
+    } else {
+      document.getElementById("jornada-titulo").textContent = "Jornada " + (selecionada + 1);
+      JORNADAS[selecionada].forEach(function (x) { saida += cartaoJogo(x); });
+    }
+    document.getElementById("jornada-jogos").innerHTML = saida;
+  }
+
+  document.getElementById("jornadas-barra").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    selecionada = parseInt(b.getAttribute("data-i"), 10);
+    soLajeosa = false;
+    desenhar();
+  });
+
+  document.getElementById("btn-lajeosa").addEventListener("click", function () {
+    soLajeosa = !soLajeosa;
+    desenhar();
+  });
+
+  /* ====== TAÇA DISTRITAL ====== */
+  var tSerie = 0; /* série A (Lajeosa) */
+  var tJornada = primeiraPorJogar(TACA[tSerie].jornadas);
+
+  function desenharTaca() {
+    var s = TACA[tSerie];
+    document.getElementById("taca-series-barra").innerHTML =
+      barraBotoes(TACA.length, tSerie, TACA.map(function (t) { return "Série " + t.nome; }));
+    document.getElementById("taca-serie-titulo").textContent = "Classificação — Série " + s.nome;
+    document.getElementById("tabela-taca").innerHTML = tabelaHtml(s.classificacao);
+    document.getElementById("taca-jornadas-barra").innerHTML = barraBotoes(s.jornadas.length, tJornada);
+    var saida = "";
+    s.jornadas[tJornada].forEach(function (x) { saida += cartaoJogo(x, tJornada + 1); });
+    document.getElementById("taca-jornada-jogos").innerHTML = saida;
+  }
+
+  document.getElementById("taca-series-barra").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    tSerie = parseInt(b.getAttribute("data-i"), 10);
+    tJornada = primeiraPorJogar(TACA[tSerie].jornadas);
+    desenharTaca();
+  });
+
+  document.getElementById("taca-jornadas-barra").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    tJornada = parseInt(b.getAttribute("data-i"), 10);
+    desenharTaca();
+  });
+
+  desenhar();
+  desenharTaca();
+</script>
+
+</body>
+  </html>
+  
