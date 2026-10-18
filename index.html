@@ -174,19 +174,23 @@
 
     <p id="dataAtual" style="color:var(--dourado); font-size:14px; font-weight:bold; margin-top:4px;"></p>
 
-    <p class="instrucao">📂 Toque em cada categoria para revelar os menus</p>
+    <!-- BLOCO ARRUMADO -->
+    <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px;">
 
-    <p style="color:var(--dourado); font-size:13px; margin-top:2px; cursor:pointer;"
-       onclick="openPage('changelog.html')">
-        📜 Clique para ver histórico de alterações na app
-    </p>
-    <!-- NOVO LINK WHATSAPP (mesmo estilo, mesmo tamanho) -->
-    <p style="color:var(--dourado); font-size:13px; margin-top:2px;">
-        <a href="https://whatsapp.com/channel/0029Vb82Q4v8PgsKSqxQHb46"
-           style="color:var(--dourado); text-decoration:none; font-weight:bold;">
-           💬 Canal da Lajeosa no WhatsApp
-        </a>
-    </p>
+        <p class="instrucao">📂 Toque em cada categoria para revelar os menus</p>
+
+        <p style="color:var(--dourado); font-size:13px; cursor:pointer;"
+           onclick="openPage('changelog.html')">
+            📜 Clique para ver histórico de alterações na app
+        </p>
+
+        <!-- LINK WHATSAPP QUE NÃO FECHA A APP -->
+        <p style="color:var(--dourado); font-size:13px; cursor:pointer;"
+           onclick="window.open('https://whatsapp.com/channel/0029Vb82Q4v8PgsKSqxQHb46', '_blank');">
+            💬 Canal da Lajeosa no WhatsApp
+        </p>
+
+    </div>
 </header>
 
 <!-- INSTITUIÇÕES -->
