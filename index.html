@@ -180,16 +180,24 @@
 
      <!--   <p class="instrucao">📂 Toque em cada categoria para revelar os menus</p> -->
 
-        <p style="color:var(--dourado); font-size:13px; cursor:pointer;"
-           onclick="openPage('changelog.html')">
-            📜 Clique para ver a evolução da app
-        </p>
+        <details class="accordion">
+    <summary>Histórico da app / canal WhatsApp</summary>
 
-        <!-- LINK WHATSAPP QUE NÃO FECHA A APP -->
-        <p style="color:var(--dourado); font-size:13px; cursor:pointer;"
-           onclick="window.open('https://whatsapp.com/channel/0029Vb82Q4v8PgsKSqxQHb46', '_blank');">
-            💬 Canal Lajeosa no WhatsApp
-        </p>
+    <div class="grid" style="padding-top:0;">
+
+        <div class="card-menu-alt" onclick="openPage('changelog.html')">
+            <i class="fas fa-scroll"></i>
+            <p>Evolução da app</p>
+        </div>
+
+        <div class="card-menu-alt"
+             onclick="window.open('https://whatsapp.com/channel/0029Vb82Q4v8PgsKSqxQHb46','_blank');">
+            <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+            <p>Canal da Lajeosa no WhatsApp</p>
+        </div>
+
+    </div>
+        </details>
 
     </div>
 </header>
