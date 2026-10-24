@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
@@ -230,7 +229,6 @@
     }
   </style>
 </head>
-
 <body>
 
 <header>
@@ -289,7 +287,8 @@
 
     <!-- Taça de Portugal 2026/2027: competitionId=25536, seasonId=106 (a edição 2025/2026 usa seasonId=105) -->
     <p style="margin-top:0;"><strong>Taça de Portugal Sénior Feminino</strong></p>
-    <p class="aviso">A Lajeosa está na série D.</p>
+    <p class="aviso" id="serie-aviso"></p>
+    <div class="jornadas-barra" id="fases-barra" role="group" aria-label="Eliminatórias"></div>
     <p class="dica">↔ Desliza para ver mais séries</p>
     <div class="jornadas-barra" id="series-barra" role="group" aria-label="Séries"></div>
     <p class="fase" id="serie-titulo"></p>
@@ -329,7 +328,7 @@
 </div>
 
 <script>
-  /* ====== DADOS: Sénior Feminino 2026/2027 (FPF, 17 out 2026) ====== */
+    /* ====== DADOS: Sénior Feminino 2026/2027 (FPF, 17 out 2026) ====== */
   var NOME_LAJEOSA = "Crc Lageosa Mondego - A.";
 
   var EQUIPAS = {
@@ -504,16 +503,13 @@
       { h: "Crc Lageosa Mondego - A.", a: "Gcr Casal Cinza", d: "1 dez", t: "18:30", v: "Pav. Municipal Celorico da Beira" }
     ]}
   ]);
-
-  /* Taça de Portugal 2026/2027 — 1.ª Eliminatória, séries A a H (FPF, 18 out 2026) */
+  /* Taça de Portugal 2026/2027 (FPF) */
   /* jg = jogo disputado (golos no fim); jp = jogo por disputar (com hora) */
   function jg(h, a, d, v, hs, as) { return { h: h, a: a, d: d, v: v, hs: hs, as: as }; }
   function jp(h, a, d, t, v) { return { h: h, a: a, d: d, t: t, v: v }; }
 
-    var TACA_PT = {
-    fase: "1.ª Eliminatória",
-    serieLajeosa: 3, /* série D */
-    series: [
+  var TACA_PT = [
+    { fase: "1.ª Eliminatória", series: [
       { nome: "A", jogos: [
         jg("Acd Santo Estêvão", "Sc Braga", "17 out", "Pav. Gimnodesportivo Municipal Chaves", 0, 13),
         jg("Mondinense Fc", "Gd Castanheira", "17 out", "Pav. Municipal de Mondim de Basto", 3, 0),
@@ -569,20 +565,73 @@
         jg("Sc Ferreirense", "A. Casa Benfica Charneca Caparica", "18 out", "Pav. dos Desportos de Ferreira do Alentejo", 2, 5),
         jg("Sc Farense", "Cda Vendas Novas", "18 out", "Pav. Multiusos 25 de Abril", 3, 1)
       ]}
-    ]
-  };
+    ]},
+    { fase: "2.ª Eliminatória", series: [
+      { nome: "Norte", jogos: [
+        jp("Ass. Marius Latour/Lfip", "Adcr Caxinas Poça Barca", "7 nov", "16:00", "Pav. Esc. Sec. Fontes Pereira de Melo"),
+        jp("Asm Vila Marim", "Cdrc Tebosa", "7 nov", "16:00", "Pav. Municipal Desportos - Vila Real"),
+        jp("Escola Dc Gondomar", "Uds Roriz", "7 nov", "17:00", "Pav. Municipal S. Pedro Cova"),
+        jp("Gd Boticas", "Casa Povo Freixo", "7 nov", "17:00", "Recinto a indicar"),
+        jp("Sc Braga", "Gd Magrelos", "7 nov", "19:00", "Amco Arena"),
+        jp("Aliados Fc Lordelo", "Mondinense Fc", "7 nov", "19:30", "Pav. Multiusos Rota dos Móveis"),
+        jp("Hda Cinfães Futsal", "Futsal Campo/Gil Vicente Fc", "7 nov", "20:00", "Pav. Mun. Armando Costa"),
+        jp("Cd Aves 1930", "Ascrd Casa Benfica Viseu", "8 nov", "18:00", "Pav. C.D. Aves")
+      ]},
+      { nome: "Centro", jogos: [
+        jp("Arca", "Cri Alhadense", "7 nov", "16:00", "Recinto a indicar"),
+        jp("Norte E Soure Cscd Paleão", "Casa Benfica Mortágua", "7 nov", "17:30", "Pav. Desportivo Encosta do Sol"),
+        jp("Gcr Casal Cinza", "Gd Tabuense", "7 nov", "18:00", "Pavilhão de Casal de Cinza"),
+        jp("Sc Ferreira Zêzere", "Juventude Ouriense", "7 nov", "18:00", "Pav. Municipal Ferreira do Zêzere"),
+        jp("Ad Fundão", "Obsc Gresart Futsal Fem", "7 nov", "18:00", "Pav. Associação Desportiva do Fundão"),
+        jp("Cr Golpilheira", "Crc Lageosa Mondego", "8 nov", "17:00", "Recinto a indicar"),
+        jp("Ccr Quinta Sobrado Palmeiros", "Ccdr Covão Lobo", "8 nov", "18:00", "Recinto a indicar")
+      ]},
+      { nome: "Sul", jogos: [
+        jp("Oriental Rc", "Soc. Musical 3 Agosto 1885", "7 nov", "16:00", "Pav. dos Lóios"),
+        jp("Cf Os Belenenses", "Sc Farense", "7 nov", "16:00", "Pav. Acácio Rosa"),
+        jp("Sporting Cp", "Gd Unidos Caxienses", "7 nov", "16:00", "Pav. João Rocha"),
+        jp("Srbu Parchalense", "Acdr Arneiros", "7 nov", "17:00", "Pav. Escola Eb 2/3 Parchal"),
+        jp("Juventude S. Campinense", "Ua Povoense", "7 nov", "18:00", "Pav. Multiusos 25 de Abril"),
+        jp("Vitória C. Santarém", "Dragões Futsal", "7 nov", "19:00", "Pav. Municipal Santarém Nave"),
+        jp("A. Casa Benfica Charneca Caparica", "Cd Nacional", "8 nov", "15:00", "Pav. Municipal Charneca Caparica")
+      ]}
+    ]}
+  ];
 
-  var serieSel = TACA_PT.serieLajeosa;
+  function serieDaLajeosa(fase) {
+    for (var i = 0; i < fase.series.length; i++) {
+      if (fase.series[i].jogos.some(function (x) { return /lageosa/i.test(x.h + " " + x.a); })) return i;
+    }
+    return 0;
+  }
+
+  var faseSel = TACA_PT.length - 1; /* eliminatória mais recente */
+  var serieSel = serieDaLajeosa(TACA_PT[faseSel]);
 
   function desenharSeries() {
+    var f = TACA_PT[faseSel];
+    var fases = "";
+    TACA_PT.forEach(function (x, i) {
+      fases += '<button data-i="' + i + '" aria-pressed="' + (i === faseSel) + '">' + x.fase + "</button>";
+    });
+    document.getElementById("fases-barra").innerHTML = fases;
+    document.getElementById("serie-aviso").textContent = "A Lajeosa está na série " + f.series[serieDaLajeosa(f)].nome + ".";
     var barra = "";
-    TACA_PT.series.forEach(function (s, i) {
+    f.series.forEach(function (s, i) {
       barra += '<button data-i="' + i + '" aria-pressed="' + (i === serieSel) + '">' + s.nome + "</button>";
     });
     document.getElementById("series-barra").innerHTML = barra;
-    document.getElementById("serie-titulo").textContent = TACA_PT.fase + " — Série " + TACA_PT.series[serieSel].nome;
-    document.getElementById("series-jogos").innerHTML = TACA_PT.series[serieSel].jogos.map(jogoTaca).join("");
+    document.getElementById("serie-titulo").textContent = f.fase + " — Série " + f.series[serieSel].nome;
+    document.getElementById("series-jogos").innerHTML = f.series[serieSel].jogos.map(jogoTaca).join("");
   }
+
+  document.getElementById("fases-barra").addEventListener("click", function (e) {
+    var b = e.target.closest("button");
+    if (!b) return;
+    faseSel = parseInt(b.getAttribute("data-i"), 10);
+    serieSel = serieDaLajeosa(TACA_PT[faseSel]);
+    desenharSeries();
+  });
 
   document.getElementById("series-barra").addEventListener("click", function (e) {
     var b = e.target.closest("button");
