@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
@@ -229,9 +229,9 @@
     }
   </style>
 </head>
-<body>
 
-<header>
+<body>
+ <header>
   <img src="assets/CRC Lajeosa logo.jpg" class="club-logo">
   <h1>Histórico da Competição</h1>
   <a href="clube_feminino.html" class="back-button">⬅ Voltar ao Clube</a>
@@ -328,7 +328,7 @@
 </div>
 
 <script>
-    /* ====== DADOS: Sénior Feminino 2026/2027 (FPF, 17 out 2026) ====== */
+  /* ====== DADOS: Sénior Feminino 2026/2027 (FPF, 17 out 2026) ====== */
   var NOME_LAJEOSA = "Crc Lageosa Mondego - A.";
 
   var EQUIPAS = {
@@ -365,7 +365,7 @@
   var JORNADAS = [
     [g("PEN","ASC","3 out","fo",3,6), g("CLM","EST","3 out","ce",4,0), g("NDS","MAC","4 out","in",2,0), g("SVF","TRA","17 out","vi",2,3)],
     [g("EST","NDS","10 out","al",0,7), g("MAC","PEN","10 out","ma",4,3), g("ASC","SVF","8 dez","to",null,null,"16:00"), g("TRA","GCC","9 jan","tr")],
-    [g("NDS","CLM","24 out","in"), g("GCC","ASC","24 out","ca"), g("PEN","EST","24 out","fo"), g("SVF","MAC","25 out","vi",null,null,"18:00")],
+    [g("NDS","CLM","24 out","in",3,2), g("GCC","ASC","24 out","ca",6,1), g("PEN","EST","24 out","fo",3,2), g("SVF","MAC","25 out","vi",null,null,"18:00")],
     [g("ASC","TRA","31 out","to"), g("EST","SVF","31 out","al"), g("CLM","PEN","31 out","ce"), g("MAC","GCC","1 nov","ma",null,null,"17:00")],
     [g("TRA","MAC","14 nov","tr"), g("SVF","CLM","14 nov","vi"), g("GCC","EST","14 nov","ca"), g("PEN","NDS","14 nov","fo")],
     [g("NDS","SVF","21 nov","in"), g("EST","TRA","21 nov","al"), g("MAC","ASC","21 nov","ma"), g("CLM","GCC","21 nov","ce")],
@@ -385,15 +385,15 @@
 
   /* [equipa, J, V, E, D, GM, GS, Pts] */
   var CLASSIFICACAO = [
-    ["NDS",2,2,0,0,9,0,6],
-    ["GCC",1,1,0,0,5,2,3],
-    ["ASC",1,1,0,0,6,3,3],
-    ["CLM",1,1,0,0,4,0,3],
+    ["NDS",3,3,0,0,12,2,9],
+    ["GCC",2,2,0,0,11,3,6],
+    ["ASC",2,1,0,1,7,9,3],
     ["MAC",2,1,0,1,4,5,3],
+    ["CLM",2,1,0,1,6,3,3],
     ["TRA",2,1,0,1,5,7,3],
-    ["PEN",2,0,0,2,6,10,0],
+    ["PEN",3,1,0,2,9,12,3],
     ["SVF",1,0,0,1,2,3,0],
-    ["EST",2,0,0,2,0,11,0]
+    ["EST",3,0,0,3,2,14,0]
   ];
 
   /* ====== CLASSIFICAÇÃO ====== */
@@ -470,7 +470,7 @@
     soLajeosa = !soLajeosa;
     desenhar();
   });
-
+ 
   /* ====== TAÇAS ====== */
   /* Cada fase: nome + jogos. Jogo por disputar = sem golos (hs/as), com hora em t. */
   function jogoTaca(x) {
@@ -503,6 +503,7 @@
       { h: "Crc Lageosa Mondego - A.", a: "Gcr Casal Cinza", d: "1 dez", t: "18:30", v: "Pav. Municipal Celorico da Beira" }
     ]}
   ]);
+
   /* Taça de Portugal 2026/2027 (FPF) */
   /* jg = jogo disputado (golos no fim); jp = jogo por disputar (com hora) */
   function jg(h, a, d, v, hs, as) { return { h: h, a: a, d: d, v: v, hs: hs, as: as }; }
