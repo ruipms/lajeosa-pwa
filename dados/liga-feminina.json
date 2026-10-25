@@ -1,0 +1,178 @@
+{
+  "atualizado": "2026-10-25",
+  "classificacao": [
+    {"equipa":"Núcleo Desp. Social","j":3,"v":3,"e":0,"d":0,"gm":12,"gs":2,"pts":9},
+    {"equipa":"Gcr Casal Cinza","j":2,"v":2,"e":0,"d":0,"gm":11,"gs":3,"pts":6},
+    {"equipa":"Ar Santo Cristo","j":2,"v":1,"e":0,"d":1,"gm":7,"gs":9,"pts":3},
+    {"equipa":"Gd Macedense","j":2,"v":1,"e":0,"d":1,"gm":4,"gs":5,"pts":3},
+    {"equipa":"Crc Lageosa Mondego - A.","j":2,"v":1,"e":0,"d":1,"gm":6,"gs":3,"pts":3},
+    {"equipa":"Gd Trancoso","j":2,"v":1,"e":0,"d":1,"gm":5,"gs":7,"pts":3},
+    {"equipa":"Adrc Penaverdense","j":3,"v":1,"e":0,"d":2,"gm":9,"gs":12,"pts":3},
+    {"equipa":"Sc Vilar Formoso","j":1,"v":0,"e":0,"d":1,"gm":2,"gs":3,"pts":0},
+    {"equipa":"Acd Estrela Almeida","j":3,"v":0,"e":0,"d":3,"gm":2,"gs":14,"pts":0}
+  ],
+  "jornadas": [
+    {
+      "numero": 1,
+      "jogos": [
+        {"casa":"Adrc Penaverdense","fora":"Ar Santo Cristo","data":"3 out","golos":[3,6],"local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Acd Estrela Almeida","data":"3 out","golos":[4,0],"local":"Pav. Municipal Celorico da Beira"},
+        {"casa":"Núcleo Desp. Social","fora":"Gd Macedense","data":"4 out","golos":[2,0],"local":"Pav. Gimnodesportivo Inatel"},
+        {"casa":"Sc Vilar Formoso","fora":"Gd Trancoso","data":"17 out","golos":[2,3],"local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"}
+      ]
+    },
+    {
+      "numero": 2,
+      "jogos": [
+        {"casa":"Acd Estrela Almeida","fora":"Núcleo Desp. Social","data":"10 out","golos":[0,7],"local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Gd Macedense","fora":"Adrc Penaverdense","data":"10 out","golos":[4,3],"local":"Pav. Municipal Macedo Cavaleiros"},
+        {"casa":"Ar Santo Cristo","fora":"Sc Vilar Formoso","data":"8 dez","hora":"16:00","local":"Pav. Municipal Torre Moncorvo"},
+        {"casa":"Gd Trancoso","fora":"Gcr Casal Cinza","data":"9 jan","hora":"18:30","local":"Pav. Multiusos de Trancoso"}
+      ]
+    },
+    {
+      "numero": 3,
+      "jogos": [
+        {"casa":"Núcleo Desp. Social","fora":"Crc Lageosa Mondego - A.","data":"24 out","golos":[3,2],"local":"Pav. Gimnodesportivo Inatel"},
+        {"casa":"Gcr Casal Cinza","fora":"Ar Santo Cristo","data":"24 out","golos":[6,1],"local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Adrc Penaverdense","fora":"Acd Estrela Almeida","data":"24 out","golos":[3,2],"local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Sc Vilar Formoso","fora":"Gd Macedense","data":"25 out","hora":"18:00","local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"}
+      ]
+    },
+    {
+      "numero": 4,
+      "jogos": [
+        {"casa":"Ar Santo Cristo","fora":"Gd Trancoso","data":"31 out","hora":"18:30","local":"Pav. Municipal Torre Moncorvo"},
+        {"casa":"Acd Estrela Almeida","fora":"Sc Vilar Formoso","data":"31 out","hora":"18:30","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Adrc Penaverdense","data":"31 out","hora":"18:30","local":"Pav. Municipal Celorico da Beira"},
+        {"casa":"Gd Macedense","fora":"Gcr Casal Cinza","data":"1 nov","hora":"17:00","local":"Pav. Municipal Macedo Cavaleiros"}
+      ]
+    },
+    {
+      "numero": 5,
+      "jogos": [
+        {"casa":"Gd Trancoso","fora":"Gd Macedense","data":"14 nov","hora":"18:30","local":"Pav. Multiusos de Trancoso"},
+        {"casa":"Sc Vilar Formoso","fora":"Crc Lageosa Mondego - A.","data":"14 nov","hora":"18:30","local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"},
+        {"casa":"Gcr Casal Cinza","fora":"Acd Estrela Almeida","data":"14 nov","hora":"18:30","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Adrc Penaverdense","fora":"Núcleo Desp. Social","data":"14 nov","hora":"18:30","local":"Pav. Escola Secundária Fornos Alg."}
+      ]
+    },
+    {
+      "numero": 6,
+      "jogos": [
+        {"casa":"Núcleo Desp. Social","fora":"Sc Vilar Formoso","data":"21 nov","hora":"18:30","local":"Pav. Gimnodesportivo Inatel"},
+        {"casa":"Acd Estrela Almeida","fora":"Gd Trancoso","data":"21 nov","hora":"18:30","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Gd Macedense","fora":"Ar Santo Cristo","data":"21 nov","hora":"18:30","local":"Pav. Municipal Macedo Cavaleiros"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Gcr Casal Cinza","data":"21 nov","hora":"18:30","local":"Pav. Municipal Celorico da Beira"}
+      ]
+    },
+    {
+      "numero": 7,
+      "jogos": [
+        {"casa":"Gd Trancoso","fora":"Crc Lageosa Mondego - A.","data":"28 nov","hora":"18:30","local":"Pav. Multiusos de Trancoso"},
+        {"casa":"Sc Vilar Formoso","fora":"Adrc Penaverdense","data":"28 nov","hora":"18:30","local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"},
+        {"casa":"Gcr Casal Cinza","fora":"Núcleo Desp. Social","data":"28 nov","hora":"18:30","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Ar Santo Cristo","fora":"Acd Estrela Almeida","data":"28 nov","hora":"18:30","local":"Pav. Municipal Torre Moncorvo"}
+      ]
+    },
+    {
+      "numero": 8,
+      "jogos": [
+        {"casa":"Núcleo Desp. Social","fora":"Gd Trancoso","data":"5 dez","hora":"18:30","local":"Pav. Gimnodesportivo Inatel"},
+        {"casa":"Adrc Penaverdense","fora":"Gcr Casal Cinza","data":"5 dez","hora":"18:30","local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Acd Estrela Almeida","fora":"Gd Macedense","data":"5 dez","hora":"18:30","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Ar Santo Cristo","data":"5 dez","hora":"18:30","local":"Pav. Municipal Celorico da Beira"}
+      ]
+    },
+    {
+      "numero": 9,
+      "jogos": [
+        {"casa":"Gd Trancoso","fora":"Adrc Penaverdense","data":"12 dez","hora":"18:30","local":"Pav. Multiusos de Trancoso"},
+        {"casa":"Gcr Casal Cinza","fora":"Sc Vilar Formoso","data":"12 dez","hora":"18:30","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Ar Santo Cristo","fora":"Núcleo Desp. Social","data":"12 dez","hora":"18:30","local":"Pav. Municipal Torre Moncorvo"},
+        {"casa":"Gd Macedense","fora":"Crc Lageosa Mondego - A.","data":"12 dez","hora":"18:30","local":"Pav. Municipal Macedo Cavaleiros"}
+      ]
+    },
+    {
+      "numero": 10,
+      "jogos": [
+        {"casa":"Gd Trancoso","fora":"Sc Vilar Formoso","data":"19 dez","hora":"18:30","local":"Pav. Multiusos de Trancoso"},
+        {"casa":"Ar Santo Cristo","fora":"Adrc Penaverdense","data":"19 dez","hora":"18:30","local":"Pav. Municipal Torre Moncorvo"},
+        {"casa":"Acd Estrela Almeida","fora":"Crc Lageosa Mondego - A.","data":"19 dez","hora":"18:30","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Gd Macedense","fora":"Núcleo Desp. Social","data":"19 dez","hora":"18:30","local":"Pav. Municipal Macedo Cavaleiros"}
+      ]
+    },
+    {
+      "numero": 11,
+      "jogos": [
+        {"casa":"Gcr Casal Cinza","fora":"Gd Trancoso","data":"10 out","golos":[5,2],"local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Adrc Penaverdense","fora":"Gd Macedense","data":"9 jan","hora":"18:30","local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Sc Vilar Formoso","fora":"Ar Santo Cristo","data":"9 jan","hora":"18:30","local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"},
+        {"casa":"Núcleo Desp. Social","fora":"Acd Estrela Almeida","data":"9 jan","hora":"18:30","local":"Pav. Gimnodesportivo Inatel"}
+      ]
+    },
+    {
+      "numero": 12,
+      "jogos": [
+        {"casa":"Ar Santo Cristo","fora":"Gcr Casal Cinza","data":"16 jan","hora":"18:30","local":"Pav. Municipal Torre Moncorvo"},
+        {"casa":"Acd Estrela Almeida","fora":"Adrc Penaverdense","data":"16 jan","hora":"18:30","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Gd Macedense","fora":"Sc Vilar Formoso","data":"16 jan","hora":"18:30","local":"Pav. Municipal Macedo Cavaleiros"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Núcleo Desp. Social","data":"16 jan","hora":"18:30","local":"Pav. Municipal Celorico da Beira"}
+      ]
+    },
+    {
+      "numero": 13,
+      "jogos": [
+        {"casa":"Gd Trancoso","fora":"Ar Santo Cristo","data":"23 jan","hora":"18:30","local":"Pav. Multiusos de Trancoso"},
+        {"casa":"Sc Vilar Formoso","fora":"Acd Estrela Almeida","data":"23 jan","hora":"18:30","local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"},
+        {"casa":"Gcr Casal Cinza","fora":"Gd Macedense","data":"23 jan","hora":"18:30","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Adrc Penaverdense","fora":"Crc Lageosa Mondego - A.","data":"23 jan","hora":"18:30","local":"Pav. Escola Secundária Fornos Alg."}
+      ]
+    },
+    {
+      "numero": 14,
+      "jogos": [
+        {"casa":"Núcleo Desp. Social","fora":"Adrc Penaverdense","data":"30 jan","hora":"18:30","local":"Pav. Gimnodesportivo Inatel"},
+        {"casa":"Acd Estrela Almeida","fora":"Gcr Casal Cinza","data":"30 jan","hora":"18:30","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Gd Macedense","fora":"Gd Trancoso","data":"30 jan","hora":"18:30","local":"Pav. Municipal Macedo Cavaleiros"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Sc Vilar Formoso","data":"30 jan","hora":"18:30","local":"Pav. Municipal Celorico da Beira"}
+      ]
+    },
+    {
+      "numero": 15,
+      "jogos": [
+        {"casa":"Gd Trancoso","fora":"Acd Estrela Almeida","data":"13 fev","hora":"18:30","local":"Pav. Multiusos de Trancoso"},
+        {"casa":"Sc Vilar Formoso","fora":"Núcleo Desp. Social","data":"13 fev","hora":"18:30","local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"},
+        {"casa":"Gcr Casal Cinza","fora":"Crc Lageosa Mondego - A.","data":"13 fev","hora":"18:30","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Ar Santo Cristo","fora":"Gd Macedense","data":"13 fev","hora":"18:30","local":"Pav. Municipal Torre Moncorvo"}
+      ]
+    },
+    {
+      "numero": 16,
+      "jogos": [
+        {"casa":"Núcleo Desp. Social","fora":"Gcr Casal Cinza","data":"20 fev","hora":"18:30","local":"Pav. Gimnodesportivo Inatel"},
+        {"casa":"Adrc Penaverdense","fora":"Sc Vilar Formoso","data":"20 fev","hora":"18:30","local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Acd Estrela Almeida","fora":"Ar Santo Cristo","data":"20 fev","hora":"18:30","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Gd Trancoso","data":"20 fev","hora":"18:30","local":"Pav. Municipal Celorico da Beira"}
+      ]
+    },
+    {
+      "numero": 17,
+      "jogos": [
+        {"casa":"Gd Trancoso","fora":"Núcleo Desp. Social","data":"27 fev","hora":"18:30","local":"Pav. Multiusos de Trancoso"},
+        {"casa":"Gcr Casal Cinza","fora":"Adrc Penaverdense","data":"27 fev","hora":"18:30","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Ar Santo Cristo","fora":"Crc Lageosa Mondego - A.","data":"27 fev","hora":"18:30","local":"Pav. Municipal Torre Moncorvo"},
+        {"casa":"Gd Macedense","fora":"Acd Estrela Almeida","data":"27 fev","hora":"18:30","local":"Pav. Municipal Macedo Cavaleiros"}
+      ]
+    },
+    {
+      "numero": 18,
+      "jogos": [
+        {"casa":"Sc Vilar Formoso","fora":"Gcr Casal Cinza","data":"6 mar","hora":"18:30","local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"},
+        {"casa":"Núcleo Desp. Social","fora":"Ar Santo Cristo","data":"6 mar","hora":"18:30","local":"Pav. Gimnodesportivo Inatel"},
+        {"casa":"Adrc Penaverdense","fora":"Gd Trancoso","data":"6 mar","hora":"18:30","local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Gd Macedense","data":"6 mar","hora":"18:30","local":"Pav. Municipal Celorico da Beira"}
+      ]
+    }
+  ]
+}
