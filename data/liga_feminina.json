@@ -1,0 +1,590 @@
+{
+  "competicao": "Liga Futsal Sénior Feminino JUVAN",
+  "epoca": "2026/2027",
+  "ultima_atualizacao": "2026-10-25",
+
+  "equipas": [
+    "Núcleo Desp. Social",
+    "Ar Santo Cristo",
+    "Gcr Casal Cinza",
+    "Crc Lageosa Mondego - A.",
+    "Gd Macedense",
+    "Gd Trancoso",
+    "Adrc Penaverdense",
+    "Sc Vilar Formoso",
+    "Acd Estrela Almeida"
+  ],
+
+  "classificacao": [
+    {
+      "pos": 1,
+      "equipa": "Núcleo Desp. Social",
+      "j": 3,
+      "v": 3,
+      "e": 0,
+      "d": 0,
+      "gm": 12,
+      "gs": 2,
+      "pts": 9
+    },
+    {
+      "pos": 2,
+      "equipa": "Gcr Casal Cinza",
+      "j": 2,
+      "v": 2,
+      "e": 0,
+      "d": 0,
+      "gm": 11,
+      "gs": 3,
+      "pts": 6
+    },
+    {
+      "pos": 3,
+      "equipa": "Ar Santo Cristo",
+      "j": 2,
+      "v": 1,
+      "e": 0,
+      "d": 1,
+      "gm": 7,
+      "gs": 9,
+      "pts": 3
+    },
+    {
+      "pos": 4,
+      "equipa": "Gd Macedense",
+      "j": 2,
+      "v": 1,
+      "e": 0,
+      "d": 1,
+      "gm": 4,
+      "gs": 5,
+      "pts": 3
+    },
+    {
+      "pos": 5,
+      "equipa": "Crc Lageosa Mondego - A.",
+      "j": 2,
+      "v": 1,
+      "e": 0,
+      "d": 1,
+      "gm": 6,
+      "gs": 3,
+      "pts": 3
+    },
+    {
+      "pos": 6,
+      "equipa": "Gd Trancoso",
+      "j": 2,
+      "v": 1,
+      "e": 0,
+      "d": 1,
+      "gm": 5,
+      "gs": 7,
+      "pts": 3
+    },
+    {
+      "pos": 7,
+      "equipa": "Adrc Penaverdense",
+      "j": 3,
+      "v": 1,
+      "e": 0,
+      "d": 2,
+      "gm": 9,
+      "gs": 12,
+      "pts": 3
+    },
+    {
+      "pos": 8,
+      "equipa": "Sc Vilar Formoso",
+      "j": 1,
+      "v": 0,
+      "e": 0,
+      "d": 1,
+      "gm": 2,
+      "gs": 3,
+      "pts": 0
+    },
+    {
+      "pos": 9,
+      "equipa": "Acd Estrela Almeida",
+      "j": 3,
+      "v": 0,
+      "e": 0,
+      "d": 3,
+      "gm": 2,
+      "gs": 14,
+      "pts": 0
+    }
+  ],
+
+  "jornadas": [
+    {
+  "jornada": 1,
+  "jogos": [
+    {
+      "casa": "Adrc Penaverdense",
+      "fora": "Ar Santo Cristo",
+      "gm": 3,
+      "gf": 6,
+      "data": "2026-10-03",
+      "hora": "18:30",
+      "pavilhao": "Pav. Escola Secundária Fornos Alg."
+    },
+    {
+      "casa": "Crc Lageosa Mondego - A.",
+      "fora": "Acd Estrela Almeida",
+      "gm": 4,
+      "gf": 0,
+      "data": "2026-10-03",
+      "hora": "18:30",
+      "pavilhao": "Pav. Municipal Celorico da Beira"
+    },
+    {
+      "casa": "Núcleo Desp. Social",
+      "fora": "Gd Macedense",
+      "gm": 2,
+      "gf": 0,
+      "data": "2026-10-04",
+      "hora": "18:30",
+      "pavilhao": "Pav. Gimnodesportivo Inatel"
+    },
+    {
+      "casa": "Sc Vilar Formoso",
+      "fora": "Gd Trancoso",
+      "gm": 2,
+      "gf": 3,
+      "data": "2026-10-17",
+      "hora": "18:30",
+      "pavilhao": "Pav. Gimnodesportivo Fronteira da Paz"
+    }
+  ]
+},
+{
+  "jornada": 2,
+  "jogos": [
+    {
+      "casa": "Acd Estrela Almeida",
+      "fora": "Núcleo Desp. Social",
+      "gm": 0,
+      "gf": 7,
+      "data": "2026-10-10",
+      "hora": "18:30",
+      "pavilhao": "Pav. Gimnodesportivo Almeida"
+    },
+    {
+      "casa": "Gd Macedense",
+      "fora": "Adrc Penaverdense",
+      "gm": 4,
+      "gf": 3,
+      "data": "2026-10-10",
+      "hora": "18:30",
+      "pavilhao": "Pav. Municipal Macedo Cavaleiros"
+    },
+    {
+      "casa": "Ar Santo Cristo",
+      "fora": "Sc Vilar Formoso",
+      "gm": null,
+      "gf": null,
+      "data": "2026-12-08",
+      "hora": "16:00",
+      "pavilhao": "Pav. Municipal Torre Moncorvo"
+    },
+    {
+      "casa": "Gd Trancoso",
+      "fora": "Gcr Casal Cinza",
+      "gm": null,
+      "gf": null,
+      "data": "2027-01-09",
+      "hora": "18:30",
+      "pavilhao": "Pav. Multiusos de Trancoso"
+    }
+  ]
+},
+{
+  "jornada": 3,
+  "jogos": [
+    {
+      "casa": "Núcleo Desp. Social",
+      "fora": "Crc Lageosa Mondego - A.",
+      "gm": 3,
+      "gf": 2,
+      "data": "2026-10-24",
+      "hora": "18:30",
+      "pavilhao": "Pav. Gimnodesportivo Inatel"
+    },
+    {
+      "casa": "Gcr Casal Cinza",
+      "fora": "Ar Santo Cristo",
+      "gm": 6,
+      "gf": 1,
+      "data": "2026-10-24",
+      "hora": "18:30",
+      "pavilhao": "Pavilhão de Casal de Cinza"
+    },
+    {
+      "casa": "Adrc Penaverdense",
+      "fora": "Acd Estrela Almeida",
+      "gm": 3,
+      "gf": 2,
+      "data": "2026-10-24",
+      "hora": "18:30",
+      "pavilhao": "Pav. Escola Secundária Fornos Alg."
+    },
+    {
+      "casa": "Sc Vilar Formoso",
+      "fora": "Gd Macedense",
+      "gm": null,
+      "gf": null,
+      "data": "2026-10-25",
+      "hora": "18:00",
+      "pavilhao": "Pav. Gimnodesportivo Fronteira da Paz"
+    }
+  ]
+},
+{
+  "jornada": 4,
+  "jogos": [
+    {
+      "casa": "Ar Santo Cristo",
+      "fora": "Gd Trancoso",
+      "gm": null,
+      "gf": null,
+      "data": "2026-10-31",
+      "hora": "18:30",
+      "pavilhao": "Pav. Municipal Torre Moncorvo"
+    },
+    {
+      "casa": "Acd Estrela Almeida",
+      "fora": "Sc Vilar Formoso",
+      "gm": null,
+      "gf": null,
+      "data": "2026-10-31",
+      "hora": "18:30",
+      "pavilhao": "Pav. Gimnodesportivo Almeida"
+    },
+    {
+      "casa": "Crc Lageosa Mondego - A.",
+      "fora": "Adrc Penaverdense",
+      "gm": null,
+      "gf": null,
+      "data": "2026-10-31",
+      "hora": "18:30",
+      "pavilhao": "Pav. Municipal Celorico da Beira"
+    },
+    {
+      "casa": "Gd Macedense",
+      "fora": "Gcr Casal Cinza",
+      "gm": null,
+      "gf": null,
+      "data": "2026-11-01",
+      "hora": "17:00",
+      "pavilhao": "Pav. Municipal Macedo Cavaleiros"
+    }
+  ]
+},
+{
+  "jornada": 5,
+  "jogos": [
+    {
+      "casa": "Gd Trancoso",
+      "fora": "Gd Macedense",
+      "data": "2026-11-14"
+    },
+    {
+      "casa": "Sc Vilar Formoso",
+      "fora": "Crc Lageosa Mondego - A.",
+      "data": "2026-11-14"
+    },
+    {
+      "casa": "Gcr Casal Cinza",
+      "fora": "Acd Estrela Almeida",
+      "data": "2026-11-14"
+    },
+    {
+      "casa": "Adrc Penaverdense",
+      "fora": "Núcleo Desp. Social",
+      "data": "2026-11-14"
+    }
+  ]
+},
+{
+  "jornada": 6,
+  "jogos": [
+    {
+      "casa": "Núcleo Desp. Social",
+      "fora": "Sc Vilar Formoso"
+    },
+    {
+      "casa": "Acd Estrela Almeida",
+      "fora": "Gd Trancoso"
+    },
+    {
+      "casa": "Gd Macedense",
+      "fora": "Ar Santo Cristo"
+    },
+    {
+      "casa": "Crc Lageosa Mondego - A.",
+      "fora": "Gcr Casal Cinza"
+    }
+  ]
+},
+{
+  "jornada": 7,
+  "jogos": [
+    {
+      "casa": "Gd Trancoso",
+      "fora": "Crc Lageosa Mondego - A."
+    },
+    {
+      "casa": "Sc Vilar Formoso",
+      "fora": "Adrc Penaverdense"
+    },
+    {
+      "casa": "Gcr Casal Cinza",
+      "fora": "Núcleo Desp. Social"
+    },
+    {
+      "casa": "Ar Santo Cristo",
+      "fora": "Acd Estrela Almeida"
+    }
+  ]
+},
+{
+  "jornada": 8,
+  "jogos": [
+    {
+      "casa": "Núcleo Desp. Social",
+      "fora": "Gd Trancoso"
+    },
+    {
+      "casa": "Adrc Penaverdense",
+      "fora": "Gcr Casal Cinza"
+    },
+    {
+      "casa": "Acd Estrela Almeida",
+      "fora": "Gd Macedense"
+    },
+    {
+      "casa": "Crc Lageosa Mondego - A.",
+      "fora": "Ar Santo Cristo"
+    }
+  ]
+},
+{
+  "jornada": 9,
+  "jogos": [
+    {
+      "casa": "Gd Trancoso",
+      "fora": "Adrc Penaverdense"
+    },
+    {
+      "casa": "Gcr Casal Cinza",
+      "fora": "Sc Vilar Formoso"
+    },
+    {
+      "casa": "Ar Santo Cristo",
+      "fora": "Núcleo Desp. Social"
+    },
+    {
+      "casa": "Gd Macedense",
+      "fora": "Crc Lageosa Mondego - A."
+    }
+  ]
+},
+      {
+  "jornada": 10,
+  "jogos": [
+    {
+      "casa": "Gd Trancoso",
+      "fora": "Sc Vilar Formoso"
+    },
+    {
+      "casa": "Ar Santo Cristo",
+      "fora": "Adrc Penaverdense"
+    },
+    {
+      "casa": "Acd Estrela Almeida",
+      "fora": "Crc Lageosa Mondego - A."
+    },
+    {
+      "casa": "Gd Macedense",
+      "fora": "Núcleo Desp. Social"
+    }
+  ]
+},
+{
+  "jornada": 11,
+  "jogos": [
+    {
+      "casa": "Gcr Casal Cinza",
+      "fora": "Gd Trancoso",
+      "gm": 5,
+      "gf": 2,
+      "data": "2027-01-10",
+      "hora": "18:30",
+      "pavilhao": "Pavilhão de Casal de Cinza"
+    },
+    {
+      "casa": "Adrc Penaverdense",
+      "fora": "Gd Macedense"
+    },
+    {
+      "casa": "Sc Vilar Formoso",
+      "fora": "Ar Santo Cristo"
+    },
+    {
+      "casa": "Núcleo Desp. Social",
+      "fora": "Acd Estrela Almeida"
+    }
+  ]
+},
+{
+  "jornada": 12,
+  "jogos": [
+    {
+      "casa": "Ar Santo Cristo",
+      "fora": "Gcr Casal Cinza"
+    },
+    {
+      "casa": "Acd Estrela Almeida",
+      "fora": "Adrc Penaverdense"
+    },
+    {
+      "casa": "Gd Macedense",
+      "fora": "Sc Vilar Formoso"
+    },
+    {
+      "casa": "Crc Lageosa Mondego - A.",
+      "fora": "Núcleo Desp. Social"
+    }
+  ]
+},
+{
+  "jornada": 13,
+  "jogos": [
+    {
+      "casa": "Gd Trancoso",
+      "fora": "Ar Santo Cristo"
+    },
+    {
+      "casa": "Sc Vilar Formoso",
+      "fora": "Acd Estrela Almeida"
+    },
+    {
+      "casa": "Gcr Casal Cinza",
+      "fora": "Gd Macedense"
+    },
+    {
+      "casa": "Adrc Penaverdense",
+      "fora": "Crc Lageosa Mondego - A."
+    }
+  ]
+},
+{
+  "jornada": 14,
+  "jogos": [
+    {
+      "casa": "Núcleo Desp. Social",
+      "fora": "Adrc Penaverdense"
+    },
+    {
+      "casa": "Acd Estrela Almeida",
+      "fora": "Gcr Casal Cinza"
+    },
+    {
+      "casa": "Gd Macedense",
+      "fora": "Gd Trancoso"
+    },
+    {
+      "casa": "Crc Lageosa Mondego - A.",
+      "fora": "Sc Vilar Formoso"
+    }
+  ]
+},
+{
+  "jornada": 15,
+  "jogos": [
+    {
+      "casa": "Gd Trancoso",
+      "fora": "Acd Estrela Almeida"
+    },
+    {
+      "casa": "Sc Vilar Formoso",
+      "fora": "Núcleo Desp. Social"
+    },
+    {
+      "casa": "Gcr Casal Cinza",
+      "fora": "Crc Lageosa Mondego - A."
+    },
+    {
+      "casa": "Ar Santo Cristo",
+      "fora": "Gd Macedense"
+    }
+  ]
+},
+{
+  "jornada": 16,
+  "jogos": [
+    {
+      "casa": "Núcleo Desp. Social",
+      "fora": "Gcr Casal Cinza"
+    },
+    {
+      "casa": "Adrc Penaverdense",
+      "fora": "Sc Vilar Formoso"
+    },
+    {
+      "casa": "Acd Estrela Almeida",
+      "fora": "Ar Santo Cristo"
+    },
+    {
+      "casa": "Crc Lageosa Mondego - A.",
+      "fora": "Gd Trancoso"
+    }
+  ]
+},
+{
+  "jornada": 17,
+  "jogos": [
+    {
+      "casa": "Gd Trancoso",
+      "fora": "Núcleo Desp. Social"
+    },
+    {
+      "casa": "Gcr Casal Cinza",
+      "fora": "Adrc Penaverdense"
+    },
+    {
+      "casa": "Ar Santo Cristo",
+      "fora": "Crc Lageosa Mondego - A."
+    },
+    {
+      "casa": "Gd Macedense",
+      "fora": "Acd Estrela Almeida"
+    }
+  ]
+},
+{
+  "jornada": 18,
+  "jogos": [
+    {
+      "casa": "Sc Vilar Formoso",
+      "fora": "Gcr Casal Cinza"
+    },
+    {
+      "casa": "Núcleo Desp. Social",
+      "fora": "Ar Santo Cristo"
+    },
+    {
+      "casa": "Adrc Penaverdense",
+      "fora": "Gd Trancoso"
+    },
+    {
+      "casa": "Crc Lageosa Mondego - A.",
+      "fora": "Gd Macedense"
+    }
+  ]
+}
+
+  ]
+}
