@@ -1,0 +1,13 @@
+{
+  "atualizado": "2026-10-25",
+  "fases": [
+    {
+      "nome": "Pré-Eliminatória",
+      "jogos": [
+        {"casa":"Sc Vilar Formoso","fora":"Gd Trancoso","data":"1 dez","hora":"18:30","local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"},
+        {"casa":"Adrc Penaverdense","fora":"Nds Guarda/Comunilog","data":"1 dez","hora":"18:30","local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Gcr Casal Cinza","data":"1 dez","hora":"18:30","local":"Pav. Municipal Celorico da Beira"}
+      ]
+    }
+  ]
+}
