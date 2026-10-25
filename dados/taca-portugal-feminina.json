@@ -1,0 +1,131 @@
+{
+  "atualizado": "2026-10-25",
+  "fases": [
+    {
+      "nome": "1.ª Eliminatória",
+      "series": [
+        {
+          "nome": "A",
+          "jogos": [
+            {"casa":"Acd Santo Estêvão","fora":"Sc Braga","data":"17 out","golos":[0,13],"local":"Pav. Gimnodesportivo Municipal Chaves"},
+            {"casa":"Mondinense Fc","fora":"Gd Castanheira","data":"17 out","golos":[3,0],"local":"Pav. Municipal de Mondim de Basto"},
+            {"casa":"Futsal Campo/Gil Vicente Fc","fora":"Gd Macedense","data":"17 out","golos":[6,1],"local":"Pav. Municipal de Campo"},
+            {"casa":"Cr Candoso","fora":"Casa Povo Freixo","data":"18 out","golos":[0,2],"local":"Pav. Desportivo do C.R. Candoso"},
+            {"casa":"Cdrc Tebosa","fora":"Gteam Fc","data":"18 out","golos":[1,0],"local":"Pav. Gimnodesportivo de Tebosa"}
+          ]
+        },
+        {
+          "nome": "B",
+          "jogos": [
+            {"casa":"Aliados Fc Lordelo","fora":"A-Smart S. Martinho Recezinhos","data":"17 out","golos":[6,1],"local":"Pav. Multiusos Rota dos Móveis"},
+            {"casa":"Gcr Vermoim","fora":"Cd Aves 1930","data":"18 out","golos":[0,9],"local":"Pav. Municipal da Maia"},
+            {"casa":"Asm Vila Marim","fora":"Arc Gueifães","data":"18 out","golos":[3,3],"local":"Pav. Municipal Desportos - Vila Real","penaltis":[3,2]},
+            {"casa":"Uds Roriz","fora":"Ccd Ordem","data":"18 out","golos":[3,1],"local":"Pav. C.D. Aves"},
+            {"casa":"Adcr Caxinas Poça Barca","fora":"Gdcr Escolas Arreigada","data":"18 out","golos":[2,1],"local":"Pav. do Centro Comunitário das Caxinas"}
+          ]
+        },
+        {
+          "nome": "C",
+          "jogos": [
+            {"casa":"Ascrd Casa Benfica Viseu","fora":"Sc S. João Ver","data":"17 out","golos":[4,1],"local":"Pav. Escola Sec. Infante D. Henrique"},
+            {"casa":"Hda Cinfães Futsal","fora":"Juventus Triana Fc","data":"18 out","golos":[10,2],"local":"Pav. Mun. Armando Costa"},
+            {"casa":"Lusitano Fc Vildemoinhos","fora":"Gd Magrelos","data":"18 out","golos":[0,4],"local":"Pav. Desportivo Cidade Viseu"},
+            {"casa":"Matosinhos Fc","fora":"Escola Dc Gondomar","data":"18 out","golos":[1,4],"local":"Pav. Municipal Custóias"},
+            {"casa":"Ass. Marius Latour/Lfip","fora":"Ud Estrelas Rio Mau","data":"18 out","golos":[5,2],"local":"Pav. Esc. Sec. Fontes Pereira de Melo"}
+          ]
+        },
+        {
+          "nome": "D",
+          "jogos": [
+            {"casa":"Casa Benfica Mortágua","fora":"Cf Santa Clara","data":"17 out","golos":[9,0],"local":"Pav. Municipal de Mortágua"},
+            {"casa":"Ccdr Covão Lobo","fora":"Núcleo Ds Guarda","data":"17 out","golos":[8,1],"local":"Pav. Gimnodesportivo Covão Lobo"},
+            {"casa":"C. Domus Nostra","fora":"Obsc Gresart Futsal Fem","data":"18 out","golos":[1,12],"local":"Pav. Gimnodesportivo Portomar"},
+            {"casa":"Gigantes S. Mangualde - Adm","fora":"Gcr Casal Cinza","data":"18 out","golos":[0,2],"local":"Pav. Municipal de Mangualde"},
+            {"casa":"Crc Lageosa Mondego","fora":"Gdcr Miro","data":"18 out","golos":[2,1],"local":"Pav. Municipal Celorico da Beira"}
+          ]
+        },
+        {
+          "nome": "E",
+          "jogos": [
+            {"casa":"Gd Valverde","fora":"Ccr Quinta Sobrado Palmeiros","data":"17 out","golos":[0,1],"local":"Pav. Gimnodesportivo de Valverde"},
+            {"casa":"Juventude Ouriense","fora":"Núcleo Scp Pombal","data":"17 out","golos":[3,2],"local":"Pav. Municipal do Caneiro"},
+            {"casa":"Gd Ilha","fora":"Cri Alhadense","data":"17 out","golos":[0,6],"local":"Pav. Gimnodesportivo Bajouca"},
+            {"casa":"Ad Fundão","fora":"Nda Vidais Futsal","data":"18 out","golos":[7,2],"local":"Pav. Municipal Fundão"},
+            {"casa":"Scr Gaeirense","fora":"Norte E Soure Cscd Paleão","data":"18 out","golos":[1,6],"local":"Pav. Gimnodesportivo Sociedade Cultural Recreativa Gaeirense"}
+          ]
+        },
+        {
+          "nome": "F",
+          "jogos": [
+            {"casa":"Cd Nacional","fora":"Eléctrico Fc","data":"17 out","golos":[4,2],"local":"Pav. da Ribeira Brava"},
+            {"casa":"Ua Povoense","fora":"C. Santo Ant.º Cavaleiros","data":"17 out","golos":[4,1],"local":"Pav. Escola Eb 2/3 Aristides Sousa Mendes"},
+            {"casa":"Ass. Moradores Portela","fora":"Acdr Arneiros","data":"17 out","golos":[1,3],"local":"Pav. Escola Secundária Portela"},
+            {"casa":"Vitória C. Santarém","fora":"Cf \"Os Avisenses\"","data":"18 out","golos":[8,2],"local":"Pav. Municipal Santarém Nave"},
+            {"casa":"Sporting Cp","fora":"Casa Slb Portalegre","data":"18 out","golos":[10,0],"local":"Pav. João Rocha"}
+          ]
+        },
+        {
+          "nome": "G",
+          "jogos": [
+            {"casa":"Amodin - Adn","fora":"Cf Os Belenenses","data":"16 out","golos":[0,11],"local":"Pav. Municipal Nº 2 - Montijo"},
+            {"casa":"Gd Unidos Caxienses","fora":"Ad Reguilas Tires Futsal","data":"17 out","golos":[21,1],"local":"Pav. Desportivo Unidos Caxienses"},
+            {"casa":"Gdat Barroca D'alva","fora":"Soc. Musical 3 Agosto 1885","data":"18 out","golos":[0,16],"local":"Pav. Municipal Alcochete"},
+            {"casa":"Dragões Futsal","fora":"Crd Miratejo","data":"18 out","golos":[6,0],"local":"Pav. Desp. J F Avenidas Novas (Bº Rego)"},
+            {"casa":"Fc Beira Mar","fora":"Oriental Rc","data":"18 out","golos":[0,10],"local":"Pav. Esc. Sec. Stº. António Charneca"}
+          ]
+        },
+        {
+          "nome": "H",
+          "jogos": [
+            {"casa":"Crc Forte Casa","fora":"Srbu Parchalense","data":"17 out","golos":[0,3],"local":"Pav. Municipal Forte da Casa"},
+            {"casa":"Cd Pinhalnovense","fora":"Juventude S. Campinense","data":"18 out","golos":[0,12],"local":"Pav. Municipal de Palmela"},
+            {"casa":"Sc Ferreirense","fora":"A. Casa Benfica Charneca Caparica","data":"18 out","golos":[2,5],"local":"Pav. dos Desportos de Ferreira do Alentejo"},
+            {"casa":"Sc Farense","fora":"Cda Vendas Novas","data":"18 out","golos":[3,1],"local":"Pav. Multiusos 25 de Abril"}
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "2.ª Eliminatória",
+      "series": [
+        {
+          "nome": "Norte",
+          "jogos": [
+            {"casa":"Ass. Marius Latour/Lfip","fora":"Adcr Caxinas Poça Barca","data":"7 nov","hora":"16:00","local":"Pav. Esc. Sec. Fontes Pereira de Melo"},
+            {"casa":"Asm Vila Marim","fora":"Cdrc Tebosa","data":"7 nov","hora":"16:00","local":"Pav. Municipal Desportos - Vila Real"},
+            {"casa":"Escola Dc Gondomar","fora":"Uds Roriz","data":"7 nov","hora":"17:00","local":"Pav. Municipal S. Pedro Cova"},
+            {"casa":"Gd Boticas","fora":"Casa Povo Freixo","data":"7 nov","hora":"17:00","local":"Recinto a indicar"},
+            {"casa":"Sc Braga","fora":"Gd Magrelos","data":"7 nov","hora":"19:00","local":"Amco Arena"},
+            {"casa":"Aliados Fc Lordelo","fora":"Mondinense Fc","data":"7 nov","hora":"19:30","local":"Pav. Multiusos Rota dos Móveis"},
+            {"casa":"Hda Cinfães Futsal","fora":"Futsal Campo/Gil Vicente Fc","data":"7 nov","hora":"20:00","local":"Pav. Mun. Armando Costa"},
+            {"casa":"Cd Aves 1930","fora":"Ascrd Casa Benfica Viseu","data":"8 nov","hora":"18:00","local":"Pav. C.D. Aves"}
+          ]
+        },
+        {
+          "nome": "Centro",
+          "jogos": [
+            {"casa":"Arca","fora":"Cri Alhadense","data":"7 nov","hora":"16:00","local":"Recinto a indicar"},
+            {"casa":"Norte E Soure Cscd Paleão","fora":"Casa Benfica Mortágua","data":"7 nov","hora":"17:30","local":"Pav. Desportivo Encosta do Sol"},
+            {"casa":"Gcr Casal Cinza","fora":"Gd Tabuense","data":"7 nov","hora":"18:00","local":"Pavilhão de Casal de Cinza"},
+            {"casa":"Sc Ferreira Zêzere","fora":"Juventude Ouriense","data":"7 nov","hora":"18:00","local":"Pav. Municipal Ferreira do Zêzere"},
+            {"casa":"Ad Fundão","fora":"Obsc Gresart Futsal Fem","data":"7 nov","hora":"18:00","local":"Pav. Associação Desportiva do Fundão"},
+            {"casa":"Cr Golpilheira","fora":"Crc Lageosa Mondego","data":"8 nov","hora":"17:00","local":"Recinto a indicar"},
+            {"casa":"Ccr Quinta Sobrado Palmeiros","fora":"Ccdr Covão Lobo","data":"8 nov","hora":"18:00","local":"Recinto a indicar"}
+          ]
+        },
+        {
+          "nome": "Sul",
+          "jogos": [
+            {"casa":"Oriental Rc","fora":"Soc. Musical 3 Agosto 1885","data":"7 nov","hora":"16:00","local":"Pav. dos Lóios"},
+            {"casa":"Cf Os Belenenses","fora":"Sc Farense","data":"7 nov","hora":"16:00","local":"Pav. Acácio Rosa"},
+            {"casa":"Sporting Cp","fora":"Gd Unidos Caxienses","data":"7 nov","hora":"16:00","local":"Pav. João Rocha"},
+            {"casa":"Srbu Parchalense","fora":"Acdr Arneiros","data":"7 nov","hora":"17:00","local":"Pav. Escola Eb 2/3 Parchal"},
+            {"casa":"Juventude S. Campinense","fora":"Ua Povoense","data":"7 nov","hora":"18:00","local":"Pav. Multiusos 25 de Abril"},
+            {"casa":"Vitória C. Santarém","fora":"Dragões Futsal","data":"7 nov","hora":"19:00","local":"Pav. Municipal Santarém Nave"},
+            {"casa":"A. Casa Benfica Charneca Caparica","fora":"Cd Nacional","data":"8 nov","hora":"15:00","local":"Pav. Municipal Charneca Caparica"}
+          ]
+        }
+      ]
+    }
+  ]
+}
