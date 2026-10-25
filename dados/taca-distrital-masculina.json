@@ -1,0 +1,69 @@
+{
+  "atualizado": "2026-10-25",
+  "series": [
+    {
+      "nome": "A",
+      "classificacao": [
+        {"pos":1,"equipa":"Sc Sabugal","j":2,"v":2,"e":0,"d":0,"gm":10,"gs":3,"pts":6},
+        {"pos":2,"equipa":"Acd Estrela Almeida","j":2,"v":1,"e":0,"d":1,"gm":4,"gs":6,"pts":3},
+        {"pos":3,"equipa":"Adrc Penaverdense","j":2,"v":1,"e":0,"d":1,"gm":4,"gs":3,"pts":3},
+        {"pos":4,"equipa":"Crc Lageosa Mondego - A.","j":2,"v":0,"e":0,"d":2,"gm":2,"gs":8,"pts":0}
+      ],
+      "jornadas": [
+        {
+          "numero": 1,
+          "jogos": [
+            {"casa":"Crc Lageosa Mondego - A.","fora":"Sc Sabugal","data":"10 out","golos":[1,5],"local":"Pav. Municipal Celorico da Beira"},
+            {"casa":"Acd Estrela Almeida","fora":"Adrc Penaverdense","data":"10 out","golos":[2,1],"local":"Pav. Gimnodesportivo Almeida"}
+          ]
+        },
+        {
+          "numero": 2,
+          "jogos": [
+            {"casa":"Sc Sabugal","fora":"Acd Estrela Almeida","data":"24 out","golos":[5,2],"local":"Pav. Municipal do Sabugal"},
+            {"casa":"Adrc Penaverdense","fora":"Crc Lageosa Mondego - A.","data":"24 out","golos":[3,1],"local":"Pav. Escola Secundária Fornos Alg."}
+          ]
+        },
+        {
+          "numero": 3,
+          "jogos": [
+            {"casa":"Adrc Penaverdense","fora":"Sc Sabugal","data":"31 out","hora":"21:00","local":"Pav. Escola Secundária Fornos Alg."},
+            {"casa":"Crc Lageosa Mondego - A.","fora":"Acd Estrela Almeida","data":"31 out","hora":"21:00","local":"Pav. Municipal Celorico da Beira"}
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "B",
+      "classificacao": [
+        {"pos":1,"equipa":"Gd Sameiro","j":2,"v":2,"e":0,"d":0,"gm":8,"gs":2,"pts":6},
+        {"pos":2,"equipa":"Adrc Aguiar Beira/Viagens Victor Correia","j":2,"v":2,"e":0,"d":0,"gm":16,"gs":4,"pts":6},
+        {"pos":3,"equipa":"Gcr Casal Cinza","j":2,"v":0,"e":0,"d":2,"gm":6,"gs":9,"pts":0},
+        {"pos":4,"equipa":"Agd Mêda","j":2,"v":0,"e":0,"d":2,"gm":0,"gs":15,"pts":0}
+      ],
+      "jornadas": [
+        {
+          "numero": 1,
+          "jogos": [
+            {"casa":"Gcr Casal Cinza","fora":"Adrc Aguiar Beira/Viagens Victor Correia","data":"10 out","golos":[4,6],"local":"Pavilhão de Casal de Cinza"},
+            {"casa":"Agd Mêda","fora":"Gd Sameiro","data":"10 out","golos":[0,5],"local":"Pav. Gimnodesportivo Municipal Meda"}
+          ]
+        },
+        {
+          "numero": 2,
+          "jogos": [
+            {"casa":"Adrc Aguiar Beira/Viagens Victor Correia","fora":"Agd Mêda","data":"24 out","golos":[10,0],"local":"Pav. Municipal Penalva do Castelo"},
+            {"casa":"Gd Sameiro","fora":"Gcr Casal Cinza","data":"24 out","golos":[3,2],"local":"Pav. Desportivo de Manteigas"}
+          ]
+        },
+        {
+          "numero": 3,
+          "jogos": [
+            {"casa":"Gd Sameiro","fora":"Adrc Aguiar Beira/Viagens Victor Correia","data":"31 out","hora":"21:00","local":"Pav. Gimnodesportivo Belmonte"},
+            {"casa":"Gcr Casal Cinza","fora":"Agd Mêda","data":"31 out","hora":"21:00","local":"Pavilhão de Casal de Cinza"}
+          ]
+        }
+      ]
+    }
+  ]
+}
