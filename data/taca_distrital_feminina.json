@@ -4,8 +4,12 @@
   "ultima_atualizacao": "2026-10-25",
 
   "fases": [
+
     {
+      "id": 1,
       "nome": "Pré-Eliminatória",
+      "estado": "agendada",
+
       "jogos": [
         {
           "casa": "Sc Vilar Formoso",
@@ -35,6 +39,52 @@
           "pavilhao": "Pav. Municipal Celorico da Beira"
         }
       ]
+    },
+
+    {
+      "id": 2,
+      "nome": "Meias-Finais",
+      "estado": "por_sortear",
+
+      "jogos": [
+        {
+          "casa": null,
+          "fora": null,
+          "gm": null,
+          "gf": null,
+          "data": null,
+          "hora": null,
+          "pavilhao": null
+        },
+        {
+          "casa": null,
+          "fora": null,
+          "gm": null,
+          "gf": null,
+          "data": null,
+          "hora": null,
+          "pavilhao": null
+        }
+      ]
+    },
+
+    {
+      "id": 3,
+      "nome": "Final",
+      "estado": "por_sortear",
+
+      "jogos": [
+        {
+          "casa": null,
+          "fora": null,
+          "gm": null,
+          "gf": null,
+          "data": null,
+          "hora": null,
+          "pavilhao": null
+        }
+      ]
     }
+
   ]
 }
