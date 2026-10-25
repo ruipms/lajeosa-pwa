@@ -1,0 +1,40 @@
+{
+  "competicao": "Taça Distrital Sénior Feminino",
+  "epoca": "2026/2027",
+  "ultima_atualizacao": "2026-10-25",
+
+  "fases": [
+    {
+      "nome": "Pré-Eliminatória",
+      "jogos": [
+        {
+          "casa": "Sc Vilar Formoso",
+          "fora": "Gd Trancoso",
+          "gm": null,
+          "gf": null,
+          "data": "2026-12-01",
+          "hora": "18:30",
+          "pavilhao": "Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"
+        },
+        {
+          "casa": "Adrc Penaverdense",
+          "fora": "Nds Guarda/Comunilog",
+          "gm": null,
+          "gf": null,
+          "data": "2026-12-01",
+          "hora": "18:30",
+          "pavilhao": "Pav. Escola Secundária Fornos Alg."
+        },
+        {
+          "casa": "Crc Lageosa Mondego - A.",
+          "fora": "Gcr Casal Cinza",
+          "gm": null,
+          "gf": null,
+          "data": "2026-12-01",
+          "hora": "18:30",
+          "pavilhao": "Pav. Municipal Celorico da Beira"
+        }
+      ]
+    }
+  ]
+}
