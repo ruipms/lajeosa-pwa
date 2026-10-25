@@ -1,0 +1,141 @@
+{
+  "atualizado": "2026-10-25",
+  "classificacao": [
+    {"pos":1,"equipa":"Acd Estrela Almeida","j":0,"v":0,"e":0,"d":0,"gm":0,"gs":0,"pts":0},
+    {"pos":1,"equipa":"Adrc Aguiar Beira/Viagens Victor Correia","j":0,"v":0,"e":0,"d":0,"gm":0,"gs":0,"pts":0},
+    {"pos":1,"equipa":"Adrc Penaverdense","j":0,"v":0,"e":0,"d":0,"gm":0,"gs":0,"pts":0},
+    {"pos":1,"equipa":"Agd Mêda","j":0,"v":0,"e":0,"d":0,"gm":0,"gs":0,"pts":0},
+    {"pos":1,"equipa":"Crc Lageosa Mondego - A.","j":0,"v":0,"e":0,"d":0,"gm":0,"gs":0,"pts":0},
+    {"pos":1,"equipa":"Gcr Casal Cinza","j":0,"v":0,"e":0,"d":0,"gm":0,"gs":0,"pts":0},
+    {"pos":1,"equipa":"Gd Sameiro","j":0,"v":0,"e":0,"d":0,"gm":0,"gs":0,"pts":0},
+    {"pos":1,"equipa":"Sc Sabugal","j":0,"v":0,"e":0,"d":0,"gm":0,"gs":0,"pts":0}
+  ],
+  "jornadas": [
+    {
+      "numero": 1,
+      "jogos": [
+        {"casa":"Gd Sameiro","fora":"Adrc Aguiar Beira/Viagens Victor Correia","data":"14 nov","hora":"21:00","local":"Pav. Desportivo de Manteigas"},
+        {"casa":"Adrc Penaverdense","fora":"Sc Sabugal","data":"14 nov","hora":"21:00","local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Agd Mêda","fora":"Acd Estrela Almeida","data":"14 nov","hora":"21:00","local":"Pav. Gimnodesportivo Municipal Meda"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Gcr Casal Cinza","data":"14 nov","hora":"21:00","local":"Pav. Municipal Celorico da Beira"}
+      ]
+    },
+    {
+      "numero": 2,
+      "jogos": [
+        {"casa":"Sc Sabugal","fora":"Agd Mêda","data":"21 nov","hora":"21:00","local":"Pav. Municipal do Sabugal"},
+        {"casa":"Adrc Aguiar Beira/Viagens Victor Correia","fora":"Adrc Penaverdense","data":"21 nov","hora":"21:00","local":"Pav. Municipal Penalva do Castelo"},
+        {"casa":"Gcr Casal Cinza","fora":"Gd Sameiro","data":"21 nov","hora":"21:00","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Acd Estrela Almeida","fora":"Crc Lageosa Mondego - A.","data":"21 nov","hora":"21:00","local":"Pav. Gimnodesportivo Almeida"}
+      ]
+    },
+    {
+      "numero": 3,
+      "jogos": [
+        {"casa":"Agd Mêda","fora":"Adrc Aguiar Beira/Viagens Victor Correia","data":"28 nov","hora":"21:00","local":"Pav. Gimnodesportivo Municipal Meda"},
+        {"casa":"Acd Estrela Almeida","fora":"Sc Sabugal","data":"28 nov","hora":"21:00","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Adrc Penaverdense","fora":"Gcr Casal Cinza","data":"28 nov","hora":"21:00","local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Gd Sameiro","fora":"Crc Lageosa Mondego - A.","data":"28 nov","hora":"21:00","local":"Pav. Desportivo de Manteigas"}
+      ]
+    },
+    {
+      "numero": 4,
+      "jogos": [
+        {"casa":"Adrc Aguiar Beira/Viagens Victor Correia","fora":"Sc Sabugal","data":"12 dez","hora":"21:00","local":"Pav. Municipal Penalva do Castelo"},
+        {"casa":"Gcr Casal Cinza","fora":"Agd Mêda","data":"12 dez","hora":"21:00","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Adrc Penaverdense","data":"12 dez","hora":"21:00","local":"Pav. Municipal Celorico da Beira"},
+        {"casa":"Gd Sameiro","fora":"Acd Estrela Almeida","data":"12 dez","hora":"21:00","local":"Pav. Desportivo de Manteigas"}
+      ]
+    },
+    {
+      "numero": 5,
+      "jogos": [
+        {"casa":"Acd Estrela Almeida","fora":"Adrc Aguiar Beira/Viagens Victor Correia","data":"19 dez","hora":"21:00","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Sc Sabugal","fora":"Gcr Casal Cinza","data":"19 dez","hora":"21:00","local":"Pav. Municipal do Sabugal"},
+        {"casa":"Adrc Penaverdense","fora":"Gd Sameiro","data":"19 dez","hora":"21:00","local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Agd Mêda","fora":"Crc Lageosa Mondego - A.","data":"19 dez","hora":"21:00","local":"Pav. Gimnodesportivo Municipal Meda"}
+      ]
+    },
+    {
+      "numero": 6,
+      "jogos": [
+        {"casa":"Gcr Casal Cinza","fora":"Adrc Aguiar Beira/Viagens Victor Correia","data":"9 jan","hora":"21:00","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Sc Sabugal","data":"9 jan","hora":"21:00","local":"Pav. Municipal Celorico da Beira"},
+        {"casa":"Gd Sameiro","fora":"Agd Mêda","data":"9 jan","hora":"21:00","local":"Pav. Desportivo de Manteigas"},
+        {"casa":"Adrc Penaverdense","fora":"Acd Estrela Almeida","data":"9 jan","hora":"21:00","local":"Pav. Escola Secundária Fornos Alg."}
+      ]
+    },
+    {
+      "numero": 7,
+      "jogos": [
+        {"casa":"Agd Mêda","fora":"Adrc Penaverdense","data":"16 jan","hora":"21:00","local":"Pav. Gimnodesportivo Municipal Meda"},
+        {"casa":"Acd Estrela Almeida","fora":"Gcr Casal Cinza","data":"16 jan","hora":"21:00","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Sc Sabugal","fora":"Gd Sameiro","data":"16 jan","hora":"21:00","local":"Pav. Municipal do Sabugal"},
+        {"casa":"Adrc Aguiar Beira/Viagens Victor Correia","fora":"Crc Lageosa Mondego - A.","data":"16 jan","hora":"21:00","local":"Pav. Municipal Penalva do Castelo"}
+      ]
+    },
+    {
+      "numero": 8,
+      "jogos": [
+        {"casa":"Acd Estrela Almeida","fora":"Agd Mêda","data":"23 jan","hora":"21:00","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Sc Sabugal","fora":"Adrc Penaverdense","data":"23 jan","hora":"21:00","local":"Pav. Municipal do Sabugal"},
+        {"casa":"Adrc Aguiar Beira/Viagens Victor Correia","fora":"Gd Sameiro","data":"23 jan","hora":"21:00","local":"Pav. Municipal Penalva do Castelo"},
+        {"casa":"Gcr Casal Cinza","fora":"Crc Lageosa Mondego - A.","data":"23 jan","hora":"21:00","local":"Pavilhão de Casal de Cinza"}
+      ]
+    },
+    {
+      "numero": 9,
+      "jogos": [
+        {"casa":"Adrc Penaverdense","fora":"Adrc Aguiar Beira/Viagens Victor Correia","data":"30 jan","hora":"21:00","local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Agd Mêda","fora":"Sc Sabugal","data":"30 jan","hora":"21:00","local":"Pav. Gimnodesportivo Municipal Meda"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Acd Estrela Almeida","data":"30 jan","hora":"21:00","local":"Pav. Municipal Celorico da Beira"},
+        {"casa":"Gd Sameiro","fora":"Gcr Casal Cinza","data":"30 jan","hora":"21:00","local":"Pav. Desportivo de Manteigas"}
+      ]
+    },
+    {
+      "numero": 10,
+      "jogos": [
+        {"casa":"Adrc Aguiar Beira/Viagens Victor Correia","fora":"Agd Mêda","data":"6 fev","hora":"21:00","local":"Pav. Municipal Penalva do Castelo"},
+        {"casa":"Gcr Casal Cinza","fora":"Adrc Penaverdense","data":"6 fev","hora":"21:00","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Sc Sabugal","fora":"Acd Estrela Almeida","data":"6 fev","hora":"21:00","local":"Pav. Municipal do Sabugal"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Gd Sameiro","data":"6 fev","hora":"21:00","local":"Pav. Municipal Celorico da Beira"}
+      ]
+    },
+    {
+      "numero": 11,
+      "jogos": [
+        {"casa":"Sc Sabugal","fora":"Adrc Aguiar Beira/Viagens Victor Correia","data":"13 fev","hora":"21:00","local":"Pav. Municipal do Sabugal"},
+        {"casa":"Agd Mêda","fora":"Gcr Casal Cinza","data":"13 fev","hora":"21:00","local":"Pav. Gimnodesportivo Municipal Meda"},
+        {"casa":"Acd Estrela Almeida","fora":"Gd Sameiro","data":"13 fev","hora":"21:00","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Adrc Penaverdense","fora":"Crc Lageosa Mondego - A.","data":"13 fev","hora":"21:00","local":"Pav. Escola Secundária Fornos Alg."}
+      ]
+    },
+    {
+      "numero": 12,
+      "jogos": [
+        {"casa":"Gcr Casal Cinza","fora":"Sc Sabugal","data":"20 fev","hora":"21:00","local":"Pavilhão de Casal de Cinza"},
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Agd Mêda","data":"20 fev","hora":"21:00","local":"Pav. Municipal Celorico da Beira"},
+        {"casa":"Gd Sameiro","fora":"Adrc Penaverdense","data":"20 fev","hora":"21:00","local":"Pav. Desportivo de Manteigas"},
+        {"casa":"Adrc Aguiar Beira/Viagens Victor Correia","fora":"Acd Estrela Almeida","data":"20 fev","hora":"21:00","local":"Pav. Municipal Penalva do Castelo"}
+      ]
+    },
+    {
+      "numero": 13,
+      "jogos": [
+        {"casa":"Acd Estrela Almeida","fora":"Adrc Penaverdense","data":"27 fev","hora":"21:00","local":"Pav. Gimnodesportivo Almeida"},
+        {"casa":"Adrc Aguiar Beira/Viagens Victor Correia","fora":"Gcr Casal Cinza","data":"27 fev","hora":"21:00","local":"Pav. Municipal Penalva do Castelo"},
+        {"casa":"Agd Mêda","fora":"Gd Sameiro","data":"27 fev","hora":"21:00","local":"Pav. Gimnodesportivo Municipal Meda"},
+        {"casa":"Sc Sabugal","fora":"Crc Lageosa Mondego - A.","data":"27 fev","hora":"21:00","local":"Pav. Municipal do Sabugal"}
+      ]
+    },
+    {
+      "numero": 14,
+      "jogos": [
+        {"casa":"Crc Lageosa Mondego - A.","fora":"Adrc Aguiar Beira/Viagens Victor Correia","data":"13 mar","hora":"21:00","local":"Pav. Municipal Celorico da Beira"},
+        {"casa":"Gd Sameiro","fora":"Sc Sabugal","data":"13 mar","hora":"21:00","local":"Pav. Desportivo de Manteigas"},
+        {"casa":"Adrc Penaverdense","fora":"Agd Mêda","data":"13 mar","hora":"21:00","local":"Pav. Escola Secundária Fornos Alg."},
+        {"casa":"Gcr Casal Cinza","fora":"Acd Estrela Almeida","data":"13 mar","hora":"21:00","local":"Pavilhão de Casal de Cinza"}
+      ]
+    }
+  ]
+}
