@@ -1,0 +1,634 @@
+{
+  "competicao": "Taça de Portugal Sénior Feminino",
+  "epoca": "2026/2027",
+  "ultima_atualizacao": "2026-11-08",
+
+  "eliminatorias": [
+
+    {
+      "nome": "1.ª Eliminatória",
+      "estado": "concluida",
+
+      "series": [
+
+        {
+          "nome": "A",
+
+          "jogos": [
+            {
+              "casa": "Acd Santo Estêvão",
+              "fora": "Sc Braga",
+              "gm": 0,
+              "gf": 13,
+              "data": "2026-10-17",
+              "pavilhao": "Pav. Gimnodesportivo Municipal Chaves"
+            },
+            {
+              "casa": "Mondinense Fc",
+              "fora": "Gd Castanheira",
+              "gm": 3,
+              "gf": 0,
+              "data": "2026-10-17",
+              "pavilhao": "Pav. Municipal de Mondim de Basto"
+            },
+            {
+              "casa": "Futsal Campo/Gil Vicente Fc",
+              "fora": "Gd Macedense",
+              "gm": 6,
+              "gf": 1,
+              "data": "2026-10-17",
+              "pavilhao": "Pav. Municipal de Campo"
+            },
+            {
+              "casa": "Cr Candoso",
+              "fora": "Casa Povo Freixo",
+              "gm": 0,
+              "gf": 2,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Desportivo do C.R. Candoso"
+            },
+            {
+              "casa": "Cdrc Tebosa",
+              "fora": "Gteam Fc",
+              "gm": 1,
+              "gf": 0,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Gimnodesportivo de Tebosa"
+            }
+          ]
+        },
+
+        {
+          "nome": "B",
+
+          "jogos": [
+            {
+              "casa": "Aliados Fc Lordelo",
+              "fora": "A-Smart S. Martinho Recezinhos",
+              "gm": 6,
+              "gf": 1,
+              "data": "2026-10-17",
+              "pavilhao": "Pav. Multiusos Rota dos Móveis"
+            },
+            {
+              "casa": "Gcr Vermoim",
+              "fora": "Cd Aves 1930",
+              "gm": 0,
+              "gf": 9,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Municipal da Maia"
+            },
+            {
+              "casa": "Asm Vila Marim",
+              "fora": "Arc Gueifães",
+              "gm": 3,
+              "gf": 3,
+              "obs": "Asm Vila Marim venceu nos penáltis (3-2)",
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Municipal Desportos - Vila Real"
+            },
+            {
+              "casa": "Uds Roriz",
+              "fora": "Ccd Ordem",
+              "gm": 3,
+              "gf": 1,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. C.D. Aves"
+            },
+            {
+              "casa": "Adcr Caxinas Poça Barca",
+              "fora": "Gdcr Escolas Arreigada",
+              "gm": 2,
+              "gf": 1,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. do Centro Comunitário das Caxinas"
+            }
+          ]
+        },
+
+        {
+          "nome": "C",
+
+          "jogos": [
+            {
+              "casa": "Ascrd Casa Benfica Viseu",
+              "fora": "Sc S. João Ver",
+              "gm": 4,
+              "gf": 1,
+              "data": "2026-10-17",
+              "pavilhao": "Pav. Escola Sec. Infante D. Henrique"
+            },
+            {
+              "casa": "Hda Cinfães Futsal",
+              "fora": "Juventus Triana Fc",
+              "gm": 10,
+              "gf": 2,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Mun. Armando Costa"
+            },
+            {
+              "casa": "Lusitano Fc Vildemoinhos",
+              "fora": "Gd Magrelos",
+              "gm": 0,
+              "gf": 4,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Desportivo Cidade Viseu"
+            },
+            {
+              "casa": "Matosinhos Fc",
+              "fora": "Escola Dc Gondomar",
+              "gm": 1,
+              "gf": 4,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Municipal Custóias"
+            },
+            {
+              "casa": "Ass. Marius Latour/Lfip",
+              "fora": "Ud Estrelas Rio Mau",
+              "gm": 5,
+              "gf": 2,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Esc. Sec. Fontes Pereira de Melo"
+            }
+          ]
+        }
+        ,
+        {
+          "nome": "D",
+
+          "jogos": [
+            {
+              "casa": "Casa Benfica Mortágua",
+              "fora": "Cf Santa Clara",
+              "gm": 9,
+              "gf": 0,
+              "data": "2026-10-17",
+              "pavilhao": "Pav. Municipal de Mortágua"
+            },
+            {
+              "casa": "Ccdr Covão Lobo",
+              "fora": "Núcleo Ds Guarda",
+              "gm": 8,
+              "gf": 1,
+              "data": "2026-10-17",
+              "pavilhao": "Pav. Gimnodesportivo Covão Lobo"
+            },
+            {
+              "casa": "C. Domus Nostra",
+              "fora": "Obsc Gresart Futsal Fem",
+              "gm": 1,
+              "gf": 12,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Gimnodesportivo Portomar"
+            },
+            {
+              "casa": "Gigantes S. Mangualde - Adm",
+              "fora": "Gcr Casal Cinza",
+              "gm": 0,
+              "gf": 2,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Municipal de Mangualde"
+            },
+            {
+              "casa": "Crc Lageosa Mondego",
+              "fora": "Gdcr Miro",
+              "gm": 2,
+              "gf": 1,
+              "data": "2026-10-18",
+              "pavilhao": "Pav. Municipal Celorico da Beira"
+            }
+          ]
+        },
+
+        {
+          "nome": "E",
+
+          "jogos": [
+            {
+              "casa": "Gd Valverde",
+              "fora": "Ccr Quinta Sobrado Palmeiros",
+              "gm": 0,
+              "gf": 1,
+              "data": "2026-10-17"
+            },
+            {
+              "casa": "Juventude Ouriense",
+              "fora": "Núcleo Scp Pombal",
+              "gm": 3,
+              "gf": 2,
+              "data": "2026-10-17"
+            },
+            {
+              "casa": "Gd Ilha",
+              "fora": "Cri Alhadense",
+              "gm": 0,
+              "gf": 6,
+              "data": "2026-10-17"
+            },
+            {
+              "casa": "Ad Fundão",
+              "fora": "Nda Vidais Futsal",
+              "gm": 7,
+              "gf": 2,
+              "data": "2026-10-18"
+            },
+            {
+              "casa": "Scr Gaeirense",
+              "fora": "Norte E Soure Cscd Paleão",
+              "gm": 1,
+              "gf": 6,
+              "data": "2026-10-18"
+            }
+          ]
+        },
+
+        {
+          "nome": "F",
+
+          "jogos": [
+            {
+              "casa": "Cd Nacional",
+              "fora": "Eléctrico Fc",
+              "gm": 4,
+              "gf": 2,
+              "data": "2026-10-17"
+            },
+            {
+              "casa": "Ua Povoense",
+              "fora": "C. Santo Ant.º Cavaleiros",
+              "gm": 4,
+              "gf": 1,
+              "data": "2026-10-17"
+            },
+            {
+              "casa": "Ass. Moradores Portela",
+              "fora": "Acdr Arneiros",
+              "gm": 1,
+              "gf": 3,
+              "data": "2026-10-17"
+            },
+            {
+              "casa": "Vitória C. Santarém",
+              "fora": "Cf Os Avisenses",
+              "gm": 8,
+              "gf": 2,
+              "data": "2026-10-18"
+            },
+            {
+              "casa": "Sporting Cp",
+              "fora": "Casa Slb Portalegre",
+              "gm": 10,
+              "gf": 0,
+              "data": "2026-10-18"
+            }
+          ]
+        },
+
+        {
+          "nome": "G",
+
+          "jogos": [
+            {
+              "casa": "Amodin - Adn",
+              "fora": "Cf Os Belenenses",
+              "gm": 0,
+              "gf": 11,
+              "data": "2026-10-16"
+            },
+            {
+              "casa": "Gd Unidos Caxienses",
+              "fora": "Ad Reguilas Tires Futsal",
+              "gm": 21,
+              "gf": 1,
+              "data": "2026-10-17"
+            },
+            {
+              "casa": "Gdat Barroca D'alva",
+              "fora": "Soc. Musical 3 Agosto 1885",
+              "gm": 0,
+              "gf": 16,
+              "data": "2026-10-18"
+            },
+            {
+              "casa": "Dragões Futsal",
+              "fora": "Crd Miratejo",
+              "gm": 6,
+              "gf": 0,
+              "data": "2026-10-18"
+            },
+            {
+              "casa": "Fc Beira Mar",
+              "fora": "Oriental Rc",
+              "gm": 0,
+              "gf": 10,
+              "data": "2026-10-18"
+            }
+          ]
+        },
+
+        {
+          "nome": "H",
+
+          "jogos": [
+            {
+              "casa": "Crc Forte Casa",
+              "fora": "Srbu Parchalense",
+              "gm": 0,
+              "gf": 3,
+              "data": "2026-10-17"
+            },
+            {
+              "casa": "Cd Pinhalnovense",
+              "fora": "Juventude S. Campinense",
+              "gm": 0,
+              "gf": 12,
+              "data": "2026-10-18"
+            },
+            {
+              "casa": "Sc Ferreirense",
+              "fora": "A. Casa Benfica Charneca Caparica",
+              "gm": 2,
+              "gf": 5,
+              "data": "2026-10-18"
+            },
+            {
+              "casa": "Sc Farense",
+              "fora": "Cda Vendas Novas",
+              "gm": 3,
+              "gf": 1,
+              "data": "2026-10-18"
+            }
+          ]
+        }
+
+      ]
+    }
+    ,
+{
+  "nome": "2.ª Eliminatória",
+  "estado": "agendada",
+
+  "series": [
+
+    {
+      "nome": "Norte",
+
+      "jogos": [
+        {
+          "casa": "Ass. Marius Latour/Lfip",
+          "fora": "Adcr Caxinas Poça Barca",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "16:00",
+          "pavilhao": "Pav. Esc. Sec. Fontes Pereira de Melo"
+        },
+        {
+          "casa": "Asm Vila Marim",
+          "fora": "Cdrc Tebosa",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "16:00",
+          "pavilhao": "Pav. Municipal Desportos - Vila Real"
+        },
+        {
+          "casa": "Escola Dc Gondomar",
+          "fora": "Uds Roriz",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "17:00",
+          "pavilhao": "Pav. Municipal S. Pedro Cova"
+        },
+        {
+          "casa": "Gd Boticas",
+          "fora": "Casa Povo Freixo",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "17:00",
+          "pavilhao": "Recinto a indicar"
+        },
+        {
+          "casa": "Sc Braga",
+          "fora": "Gd Magrelos",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "19:00",
+          "pavilhao": "AMCO Arena"
+        },
+        {
+          "casa": "Aliados Fc Lordelo",
+          "fora": "Mondinense Fc",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "19:30",
+          "pavilhao": "Pav. Multiusos Rota dos Móveis"
+        },
+        {
+          "casa": "Hda Cinfães Futsal",
+          "fora": "Futsal Campo/Gil Vicente Fc",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "20:00",
+          "pavilhao": "Pav. Mun. Armando Costa"
+        },
+        {
+          "casa": "Cd Aves 1930",
+          "fora": "Ascrd Casa Benfica Viseu",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-08",
+          "hora": "18:00",
+          "pavilhao": "Pav. C.D. Aves"
+        }
+      ]
+    },
+
+    {
+      "nome": "Centro",
+
+      "jogos": [
+        {
+          "casa": "Arca",
+          "fora": "Cri Alhadense",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "16:00",
+          "pavilhao": "Recinto a indicar"
+        },
+        {
+          "casa": "Norte E Soure Cscd Paleão",
+          "fora": "Casa Benfica Mortágua",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "17:30",
+          "pavilhao": "Pav. Desportivo Encosta do Sol"
+        },
+        {
+          "casa": "Gcr Casal Cinza",
+          "fora": "Gd Tabuense",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "18:00",
+          "pavilhao": "Pavilhão de Casal de Cinza"
+        },
+        {
+          "casa": "Sc Ferreira Zêzere",
+          "fora": "Juventude Ouriense",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "18:00",
+          "pavilhao": "Pav. Municipal Ferreira do Zêzere"
+        },
+        {
+          "casa": "Ad Fundão",
+          "fora": "Obsc Gresart Futsal Fem",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "18:00",
+          "pavilhao": "Pav. Associação Desportiva do Fundão"
+        },
+        {
+          "casa": "Cr Golpilheira",
+          "fora": "Crc Lageosa Mondego",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-08",
+          "hora": "17:00",
+          "pavilhao": "Recinto a indicar"
+        },
+        {
+          "casa": "Ccr Quinta Sobrado Palmeiros",
+          "fora": "Ccdr Covão Lobo",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-08",
+          "hora": "18:00",
+          "pavilhao": "Recinto a indicar"
+        }
+      ]
+    },
+
+    {
+      "nome": "Sul",
+
+      "jogos": [
+        {
+          "casa": "Oriental Rc",
+          "fora": "Soc. Musical 3 Agosto 1885",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "16:00",
+          "pavilhao": "Pav. dos Lóios"
+        },
+        {
+          "casa": "Cf Os Belenenses",
+          "fora": "Sc Farense",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "16:00",
+          "pavilhao": "Pav. Acácio Rosa"
+        },
+        {
+          "casa": "Sporting Cp",
+          "fora": "Gd Unidos Caxienses",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "16:00",
+          "pavilhao": "Pav. João Rocha"
+        },
+        {
+          "casa": "Srbu Parchalense",
+          "fora": "Acdr Arneiros",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "17:00",
+          "pavilhao": "Pav. Escola EB 2/3 Parchal"
+        },
+        {
+          "casa": "Juventude S. Campinense",
+          "fora": "Ua Povoense",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "18:00",
+          "pavilhao": "Pav. Multiusos 25 de Abril"
+        },
+        {
+          "casa": "Vitória C. Santarém",
+          "fora": "Dragões Futsal",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-07",
+          "hora": "19:00",
+          "pavilhao": "Pav. Municipal Santarém Nave"
+        },
+        {
+          "casa": "A. Casa Benfica Charneca Caparica",
+          "fora": "Cd Nacional",
+          "gm": null,
+          "gf": null,
+          "data": "2026-11-08",
+          "hora": "15:00",
+          "pavilhao": "Pav. Municipal Charneca Caparica"
+        }
+      ]
+    }
+
+  ]
+}
+    {
+  "nome": "3.ª Eliminatória",
+  "estado": "por_sortear",
+
+  "series": [
+    {
+      "nome": "A",
+      "jogos": []
+    }
+  ]
+},
+{
+  "nome": "4.ª Eliminatória",
+  "estado": "por_sortear",
+
+  "series": [
+    {
+      "nome": "A",
+      "jogos": []
+    }
+  ]
+},
+{
+  "nome": "Quartos-de-Final",
+  "estado": "por_sortear",
+
+  "jogos": []
+},
+{
+  "nome": "Meias-Finais",
+  "estado": "por_sortear",
+
+  "jogos": []
+},
+{
+  "nome": "Final",
+  "estado": "por_sortear",
+
+  "jogos": []
+}
+    
