@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico da Competição — CRC Lajeosa</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-FTEGNRDBJW');
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--verde-base);
+      color: white;
+      text-align: center;
+    }
+
+    header {
+      padding: 20px;
+    }
+
+    .club-logo {
+      width: 120px;
+    }
+
+    .back-button {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: var(--dourado);
+      font-weight: bold;
+    }
+
+    .content {
+      padding: 20px 6px;
+    }
+
+    /* Cartões castanhos premium */
+    .card {
+      background-color: var(--cor-cartao-castanho-escuro) !important;
+      padding: 14px 10px !important;
+      border-radius: 20px !important;
+      margin-bottom: 20px !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      width: auto !important;
+      max-width: none !important;
+      text-align: left !important;
+      color: white !important;
+      border: 1px solid rgba(227,193,90,0.4) !important;
+      box-shadow: 0 0 12px rgba(227,193,90,0.35) !important;
+      border-left: 4px solid var(--dourado) !important;
+    }
+
+    .card h3 {
+      color: var(--dourado);
+      margin-top: 0;
+    }
+
+    .card img {
+      width: 100%;
+      max-width: 500px;
+      display: block;
+      margin: 10px auto;
+      border-radius: 12px;
+      border: 2px solid var(--dourado);
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+
+    /* Classificação e jornadas (mesmas cores da página) */
+    .tabela-wrap {
+      overflow-x: auto;
+      margin: 10px 0;
+    }
+
+    .tabela {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .tabela th {
+      color: var(--dourado);
+      padding: 8px 5px;
+      text-align: center;
+      border-bottom: 1px solid rgba(227,193,90,0.4);
+    }
+
+    .tabela td {
+      padding: 8px 5px;
+      text-align: center;
+      border-bottom: 1px solid rgba(227,193,90,0.2);
+      white-space: nowrap;
+    }
+
+    .tabela th:nth-child(2),
+    .tabela td:nth-child(2) {
+      text-align: left;
+      white-space: normal;
+      min-width: 130px;
+    }
+
+    .tabela tr.lajeosa td {
+      color: var(--dourado);
+      font-weight: bold;
+      background-color: rgba(227,193,90,0.15);
+    }
+
+    .tabela tr.lajeosa td:first-child {
+      box-shadow: inset 4px 0 0 var(--dourado);
+    }
+
+    .jornadas-barra {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding: 4px 0 10px;
+    }
+
+    .jornadas-barra button,
+    .btn-lajeosa {
+      font-size: 14px;
+      font-weight: bold;
+      min-width: 40px;
+      padding: 8px 10px;
+      border: 1px solid rgba(227,193,90,0.4);
+      border-radius: 10px;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+    }
+
+    .jornadas-barra button[aria-pressed="true"],
+    .btn-lajeosa[aria-pressed="true"] {
+      background-color: var(--dourado);
+      color: var(--cor-cartao-castanho-escuro);
+    }
+
+    .topo-jogos {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .jogo {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(227,193,90,0.2);
+    }
+
+    .jogo.lajeosa {
+      background-color: rgba(227,193,90,0.15);
+      box-shadow: inset 4px 0 0 var(--dourado);
+      padding-left: 12px;
+      border-radius: 6px;
+    }
+
+    .jogo-linha {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .jogo-linha .casa {
+      text-align: right;
+    }
+
+    .jogo-linha .marcador {
+      font-weight: bold;
+      font-size: 18px;
+      white-space: nowrap;
+    }
+
+    .jogo-linha .vencedor {
+      font-weight: bold;
+    }
+
+    .jogo-info {
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+
+    .nota {
+      font-size: 13px;
+      opacity: 0.8;
+      margin: 8px 0 0;
+    }
+
+    .dica {
+      font-size: 13px;
+      opacity: 0.8;
+      margin: 0 0 4px;
+    }
+
+    .aviso {
+      margin: 6px 0;
+      font-size: 14px;
+      font-weight: bold;
+      color: var(--dourado);
+    }
+
+    .separador {
+      height: 6px;
+      border-radius: 3px;
+      background-color: var(--verde-base);
+      margin: 22px 0;
+    }
+
+    .fase {
+      margin: 12px 0 2px;
+      font-weight: bold;
+      color: var(--dourado);
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <img src="assets/CRC Lajeosa logo.jpg" class="club-logo">
+  <h1>Histórico da Competição</h1>
+  <a href="clube_feminino.html" class="back-button">⬅ Voltar ao Clube</a>
+</header>
+
+<div class="content">
+
+  <!-- ========================= -->
+  <!--        FEMININOS          -->
+  <!-- ========================= -->
+
+  <div class="card">
+    <h3>👩 Sénior Feminino — Época 2026/2027</h3>
+
+    <p><strong>Classificação Atual</strong></p>
+    <p class="dica">↔ Desliza para ver mais colunas</p>
+    <div class="tabela-wrap">
+      <table class="tabela" id="tabela-classificacao"></table>
+    </div>
+
+    <p style="margin-top:15px;"><strong>Jogos por Jornada</strong></p>
+    <p class="dica">↔ Desliza para ver mais jornadas</p>
+    <div class="jornadas-barra" id="jornadas-barra" role="group" aria-label="Jornadas"></div>
+    <div class="topo-jogos">
+      <span id="jornada-titulo"></span>
+      <button class="btn-lajeosa" id="btn-lajeosa" aria-pressed="false">Só Lajeosa</button>
+    </div>
+    <div id="jornada-jogos"></div>
+    <p class="nota" id="liga-nota">Dados do Centro de Resultados da FPF. Os resultados só se tornam oficiais quinze dias após cada encontro.</p>
+
+    <p style="margin-top:10px;">
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30347&seasonId=106"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver liga completa na FPF
+      </a>
+    </p>
+
+    <div class="separador"></div>
+
+    <!-- Taça Distrital 2026/2027: competitionId=30349, seasonId=106 -->
+    <p style="margin-top:0;"><strong>Taça Distrital Sénior Feminino</strong></p>
+    <div id="taca-distrital"></div>
+    <p style="margin-top:6px;">
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30349&seasonId=106"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver Taça Distrital na FPF
+      </a>
+    </p>
+
+    <div class="separador"></div>
+
+    <!-- Taça de Portugal 2026/2027: competitionId=25536, seasonId=106 (a edição 2025/2026 usa seasonId=105) -->
+    <p style="margin-top:0;"><strong>Taça de Portugal Sénior Feminino</strong></p>
+    <p class="aviso" id="serie-aviso"></p>
+    <div class="jornadas-barra" id="fases-barra" role="group" aria-label="Eliminatórias"></div>
+    <p class="dica">↔ Desliza para ver mais séries</p>
+    <div class="jornadas-barra" id="series-barra" role="group" aria-label="Séries"></div>
+    <p class="fase" id="serie-titulo"></p>
+    <div id="series-jogos"></div>
+    <p style="margin-top:6px;">
+      <a href="https://resultados.fpf.pt/Competition/Details?competitionId=25536&seasonId=106"
+         target="_blank"
+         style="color:var(--dourado); font-weight:bold;">
+         Ver Taça de Portugal na FPF
+      </a>
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>👩 Sénior Feminino — Época 2025/2026</h3>
+    <p><strong>Classificação Final — LIGA FUTSAL SÉNIOR FEMININO JUVAN</strong></p>
+
+    <ul>
+      <li><strong>Posição Final:</strong> 5.º lugar</li>
+      <li><strong>Pontos:</strong> 11</li>
+      <li><strong>Jogos:</strong> 12</li>
+      <li><strong>Vitórias:</strong> 3</li>
+      <li><strong>Empates:</strong> 2</li>
+      <li><strong>Derrotas:</strong> 7</li>
+      <li><strong>Golos Marcados:</strong> 23</li>
+      <li><strong>Golos Sofridos:</strong> 32</li>
+    </ul>
+
+    <a href="https://resultados.fpf.pt/Competition/Details?competitionId=28442&seasonId=105"
+       target="_blank"
+       style="color:var(--dourado); font-weight:bold;">
+       Ver percurso completo na FPF
+    </a>
+
+  </div>
+
+</div>
+
+<script>
+  /* ====== FICHEIROS DE DADOS ====== */
+  var DADOS = {
+    liga: "dados/liga-feminina.json",
+    distrital: "dados/taca-distrital-feminina.json",
+    portugal: "dados/taca-portugal-feminina.json"
+  };
+
+  var MESES = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+
+  function esc(t) {
+    return String(t).replace(/[&<>"]/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
+    });
+  }
+
+  function dataPT(iso) {
+    var p = iso.split("-");
+    return parseInt(p[2], 10) + " " + MESES[parseInt(p[1], 10) - 1] + " " + p[0];
+  }
+
+  function carregar(url) {
+    return fetch(url, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) throw new Error(url + " (" + r.status + ")");
+      return r.json();
+    });
+  }
+
+  function mostrarErro(id) {
+    document.getElementById(id).innerHTML =
+      '<p class="nota">Não foi possível carregar estes dados. Tenta novamente mais tarde.</p>';
+  }
+
+  /* ====== FUNÇÕES COMUNS ====== */
+  function eLajeosa(nome) { return /lageosa/i.test(nome); }
+  function foiJogado(x) { return Array.isArray(x.golos); }
+
+  function cartaoJogo(x, numJornada) {
+    var lajeosa = eLajeosa(x.casa) || eLajeosa(x.fora);
+    var jogado = foiJogado(x);
+    var vencCasa = false, vencFora = false;
+    if (jogado) {
+      if (x.golos[0] > x.golos[1]) vencCasa = true;
+      else if (x.golos[1] > x.golos[0]) vencFora = true;
+      else if (x.penaltis) {
+        if (x.penaltis[0] > x.penaltis[1]) vencCasa = true; else vencFora = true;
+      }
+    }
+    var meio = jogado ? x.golos[0] + " - " + x.golos[1] : (x.hora || "vs");
+    var info = (numJornada ? "Jornada " + numJornada + " · " : "") + esc(x.data) + " · " + esc(x.local);
+    if (x.penaltis) info += " · Penáltis: " + x.penaltis[0] + "-" + x.penaltis[1];
+    return '<div class="jogo' + (lajeosa ? " lajeosa" : "") + '">' +
+      '<div class="jogo-linha"><span class="casa' + (vencCasa ? " vencedor" : "") + '">' + esc(x.casa) + "</span>" +
+      '<span class="marcador">' + esc(meio) + "</span>" +
+      '<span class="' + (vencFora ? "vencedor" : "") + '">' + esc(x.fora) + "</span></div>" +
+      '<div class="jogo-info">' + info + "</div></div>";
+  }
+
+  function tabelaClassificacao(linhas) {
+    var html = "<tr><th>#</th><th>Equipa</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GM</th><th>GS</th><th>Pts</th></tr>";
+    linhas.forEach(function (r, i) {
+      html += '<tr class="' + (eLajeosa(r.equipa) ? "lajeosa" : "") + '"><td>' + (i + 1) + "</td><td>" + esc(r.equipa) + "</td>" +
+        "<td>" + r.j + "</td><td>" + r.v + "</td><td>" + r.e + "</td><td>" + r.d + "</td>" +
+        "<td>" + r.gm + "</td><td>" + r.gs + "</td><td>" + r.pts + "</td></tr>";
+    });
+    return html;
+  }
+
+  function ouvirBotoes(id, fn) {
+    document.getElementById(id).addEventListener("click", function (e) {
+      var b = e.target.closest("button");
+      if (!b) return;
+      fn(parseInt(b.getAttribute("data-i"), 10));
+    });
+  }
+
+  /* ====== LIGA ====== */
+  function iniciarLiga(d) {
+    var jornadas = d.jornadas;
+    var equipas = d.classificacao.map(function (r) { return r.equipa; });
+    var nomeLajeosa = equipas.filter(eLajeosa)[0] || "Lajeosa";
+    var sel = 0, soLajeosa = false;
+
+    /* abre na jornada do próximo jogo por disputar (pela data) */
+    var anoInicio = parseInt(d.atualizado.slice(0, 4), 10);
+    if (parseInt(d.atualizado.slice(5, 7), 10) < 7) anoInicio -= 1;
+    function ordem(texto) {
+      var p = texto.split(" ");
+      var m = MESES.indexOf(p[1]);
+      return ((m >= 6 ? anoInicio : anoInicio + 1) * 12 + m) * 40 + parseInt(p[0], 10);
+    }
+    var proximo = null;
+    jornadas.forEach(function (j, i) {
+      j.jogos.forEach(function (x) {
+        if (foiJogado(x)) return;
+        var o = ordem(x.data);
+        if (proximo === null || o < proximo.o) proximo = { o: o, i: i };
+      });
+    });
+    sel = proximo ? proximo.i : jornadas.length - 1;
+
+    document.getElementById("tabela-classificacao").innerHTML = tabelaClassificacao(d.classificacao);
+    document.getElementById("liga-nota").textContent =
+      "Dados do Centro de Resultados da FPF, atualizados a " + dataPT(d.atualizado) +
+      ". Os resultados só se tornam oficiais quinze dias após cada encontro.";
+
+    function desenhar() {
+      var barra = "";
+      jornadas.forEach(function (j, i) {
+        barra += '<button data-i="' + i + '" aria-pressed="' + (!soLajeosa && i === sel) + '">' + j.numero + "</button>";
+      });
+      document.getElementById("jornadas-barra").innerHTML = barra;
+      document.getElementById("btn-lajeosa").setAttribute("aria-pressed", soLajeosa);
+
+      var saida = "";
+      if (soLajeosa) {
+        document.getElementById("jornada-titulo").textContent = "Todos os jogos da Lajeosa";
+        jornadas.forEach(function (j) {
+          var x = j.jogos.filter(function (y) { return eLajeosa(y.casa) || eLajeosa(y.fora); })[0];
+          saida += x ? cartaoJogo(x, j.numero)
+                     : '<p class="nota">Jornada ' + j.numero + " · " + esc(nomeLajeosa) + " descansa</p>";
+        });
+      } else {
+        var j = jornadas[sel];
+        var ocupadas = {};
+        j.jogos.forEach(function (x) { ocupadas[x.casa] = true; ocupadas[x.fora] = true; });
+        var descansam = equipas.filter(function (n) { return !ocupadas[n]; });
+        document.getElementById("jornada-titulo").textContent = "Jornada " + j.numero;
+        j.jogos.forEach(function (x) { saida += cartaoJogo(x); });
+        if (descansam.length) saida += '<p class="nota">Descansa: ' + esc(descansam.join(", ")) + "</p>";
+      }
+      document.getElementById("jornada-jogos").innerHTML = saida;
+    }
+
+    ouvirBotoes("jornadas-barra", function (i) { sel = i; soLajeosa = false; desenhar(); });
+    document.getElementById("btn-lajeosa").addEventListener("click", function () {
+      soLajeosa = !soLajeosa;
+      desenhar();
+    });
+    desenhar();
+  }
+
+  /* ====== TAÇA DISTRITAL ====== */
+  function iniciarDistrital(d) {
+    var html = "";
+    d.fases.forEach(function (f) {
+      html += '<p class="fase">' + esc(f.nome) + "</p>";
+      f.jogos.forEach(function (x) { html += cartaoJogo(x); });
+    });
+    document.getElementById("taca-distrital").innerHTML = html;
+  }
+
+  /* ====== TAÇA DE PORTUGAL ====== */
+  function iniciarPortugal(d) {
+    var fases = d.fases;
+
+    function serieDaLajeosa(fase) {
+      for (var i = 0; i < fase.series.length; i++) {
+        if (fase.series[i].jogos.some(function (x) { return eLajeosa(x.casa) || eLajeosa(x.fora); })) return i;
+      }
+      return 0;
+    }
+
+    var faseSel = fases.length - 1; /* eliminatória mais recente */
+    var serieSel = serieDaLajeosa(fases[faseSel]);
+
+    function desenhar() {
+      var f = fases[faseSel];
+      var barraFases = "";
+      fases.forEach(function (x, i) {
+        barraFases += '<button data-i="' + i + '" aria-pressed="' + (i === faseSel) + '">' + esc(x.nome) + "</button>";
+      });
+      document.getElementById("fases-barra").innerHTML = barraFases;
+      document.getElementById("serie-aviso").textContent =
+        "A Lajeosa está na série " + f.series[serieDaLajeosa(f)].nome + ".";
+      var barraSeries = "";
+      f.series.forEach(function (s, i) {
+        barraSeries += '<button data-i="' + i + '" aria-pressed="' + (i === serieSel) + '">' + esc(s.nome) + "</button>";
+      });
+      document.getElementById("series-barra").innerHTML = barraSeries;
+      document.getElementById("serie-titulo").textContent = f.nome + " — Série " + f.series[serieSel].nome;
+      var jogos = "";
+      f.series[serieSel].jogos.forEach(function (x) { jogos += cartaoJogo(x); });
+      document.getElementById("series-jogos").innerHTML = jogos;
+    }
+
+    ouvirBotoes("fases-barra", function (i) { faseSel = i; serieSel = serieDaLajeosa(fases[faseSel]); desenhar(); });
+    ouvirBotoes("series-barra", function (i) { serieSel = i; desenhar(); });
+    desenhar();
+  }
+
+  /* ====== ARRANQUE ====== */
+  carregar(DADOS.liga).then(iniciarLiga).catch(function () {
+    document.getElementById("tabela-classificacao").innerHTML = "";
+    mostrarErro("jornada-jogos");
+  });
+
+  carregar(DADOS.distrital).then(iniciarDistrital).catch(function () {
+    mostrarErro("taca-distrital");
+  });
+
+  carregar(DADOS.portugal).then(iniciarPortugal).catch(function () {
+    document.getElementById("serie-aviso").textContent = "";
+    mostrarErro("series-jogos");
+  });
+</script>
+
+</body>
+</html>
