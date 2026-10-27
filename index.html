@@ -78,6 +78,14 @@
             transform: rotate(180deg);
         }
 
+        .subtitulo-menu{
+            display:block;
+            margin-top:6px;
+            font-size:14px;
+            font-weight:normal;
+            color:white;
+            opacity:0.75;
+        }
         /* Grelha dos cartões */
         .grid {
             display: grid;
@@ -181,7 +189,13 @@
      <!--   <p class="instrucao">📂 Toque em cada categoria para revelar os menus</p> -->
 
         <details class="accordion">
-    <summary>Histórico da app / canal WhatsApp</summary>
+   <summary>
+        📢 Atualizações e Comunicações
+        <br>
+        <span class="subtitulo-menu">
+        Histórico da aplicação e canal WhatsApp
+        </span>
+    </summary>
 
     <div class="grid" style="padding-top:0;">
 
@@ -204,7 +218,14 @@
 
 <!-- INSTITUIÇÕES -->
 <details class="accordion">
-    <summary>Junta / Serviços <br> Notícias / Eventos</summary>
+  <summary>
+        🏛️ Junta e Comunidade
+        <br>
+        <span class="subtitulo-menu">
+        Serviços da junta, notícias e eventos locais
+        </span>
+    </summary>
+
     <div class="grid">
         <div class="card-menu" onclick="openPage('junta.html')"><i class="fas fa-landmark"></i><p>Junta de Freguesia</p></div>
         <div class="card-menu" onclick="openPage('servicos.html')"><i class="fas fa-briefcase"></i><p>Serviços na Freguesia</p></div>
@@ -215,7 +236,13 @@
 
 <!-- ALDEIA -->
 <details class="accordion">
-    <summary>Pontos de interesse / História <br> Meteorologia / Redes Sociais</summary>
+    <summary>
+        🏞️ Património, tempo e Informação
+        <br>
+        <span class="subtitulo-menu">
+        A visitar, História, meteorologia e redes sociais
+        </span>
+    </summary>
     <div class="grid">
         <div class="card-menu" onclick="openPage('pontos.html')"><i class="fas fa-map-marker-alt"></i><p>Pontos de Interesse</p></div>
         <div class="card-menu" onclick="openPage('historia.html')"><i class="fas fa-book"></i><p>História e Tradições</p></div>
@@ -226,7 +253,13 @@
 
 <!-- CLUBE -->
 <details class="accordion">
-    <summary>Clube futsal CRC Lajeosa</summary>
+  <summary>
+        ⚽ Clube CRC Lajeosa
+        <br>
+        <span class="subtitulo-menu">
+        Informação e equipas do clube
+        </span>
+    </summary>
     <div class="grid">
         <div class="card-menu-alt" onclick="openPage('clube.html')"><i class="fas fa-futbol"></i><p>CRC Lajeosa do Mondego</p></div>
     </div>
@@ -234,7 +267,13 @@
 
 <!-- UTILIDADE -->
 <details class="accordion">
-    <summary>Comércio / Associações <br>Transportes / Segurança e Avisos / Comboios</summary>
+    <summary>
+        🚍 Mobilidade, Serviços e avisos
+        <br>
+        <span class="subtitulo-menu">
+        Comboios, camioneta, comércio, associações e avisos
+        </span>
+    </summary>
     <div class="grid">
         <div class="card-menu" onclick="openPage('contactos.html')"><i class="fas fa-phone"></i><p>Comércio e serviços</p></div>
         <div class="card-menu" onclick="openPage('associacoes.html')"><i class="fas fa-people-group"></i><p>Associações</p></div>
@@ -246,15 +285,27 @@
 
 <!-- JOGOS -->
 <details class="accordion">
-    <summary>Jogos para passar o tempo</summary>
-    <div class="grid">
+  <summary>
+        🎮 Jogos e Entretenimento
+        <br>
+        <span class="subtitulo-menu">
+        Passatempos, desafios e rankings
+        </span>
+    </summary>
+        <div class="grid">
         <div class="card-menu-alt" onclick="openPage('jogos.html')"><i class="fas fa-gamepad"></i><p>Jogos</p></div>
     </div>
 </details>
 
 <!-- ÚLTIMO ACORDEÃO COM DOIS CARTÕES -->
 <details class="accordion">
-    <summary>Instalar aplicação <br> Falar comigo / Sobre mim</summary>
+    <summary>
+        📱 Aplicação e Informações
+        <br>
+        <span class="subtitulo-menu">
+        Instalação, contacto e informação sobre o projeto
+            </span>
+    </summary>
 
     <div class="card-full" onclick="openPage('aplicacao.html')">
         <i class="fas fa-mobile-alt"></i>
