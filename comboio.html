@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comboios – Lajeosa</title>
+
+<link rel="stylesheet" href="style.css">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background-color:var(--verde-base);
+    color:white;
+    text-align:center;
+    padding-bottom:40px;
+}
+
+header img{
+    width:120px;
+    margin:0 auto;
+    display:block;
+    padding-top:20px;
+}
+
+.btn-voltar{
+    display:block;
+    margin:12px auto 0 auto;
+    padding:10px 18px;
+    border-radius:18px;
+    background-color:var(--cor-cartao-castanho-escuro);
+    border-left:4px solid var(--dourado);
+    color:var(--dourado);
+    font-size:15px;
+    text-decoration:none;
+    width:fit-content;
+    cursor:pointer;
+    box-shadow:0 0 12px rgba(227,193,90,0.35);
+}
+
+.btn-voltar:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 18px rgba(227,193,90,0.55);
+}
+
+.sec-title{
+    color:var(--dourado);
+    font-size:20px;
+    font-weight:bold;
+    margin-top:20px;
+}
+
+.card{
+    background-color:var(--cor-cartao-castanho-escuro);
+    padding:16px;
+    border-radius:18px;
+    margin:16px 20px;
+    border-left:4px solid var(--dourado);
+    text-align:left;
+    box-shadow:0 0 12px rgba(227,193,90,0.35);
+}
+
+.card-title{
+    font-size:18px;
+    font-weight:bold;
+    color:var(--dourado);
+    margin-bottom:6px;
+}
+
+.comboio{
+    background:rgba(255,255,255,0.05);
+    border-radius:12px;
+    padding:12px;
+    margin-bottom:10px;
+}
+
+.atraso{
+    color:#ff9f43;
+    font-weight:bold;
+}
+
+.normal{
+    color:#7bed9f;
+    font-weight:bold;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
+    margin:16px 20px;
+}
+
+.stat-box{
+    background-color:var(--cor-cartao-castanho-escuro);
+    border-left:4px solid var(--dourado);
+    border-radius:16px;
+    padding:14px;
+    box-shadow:0 0 12px rgba(227,193,90,0.35);
+}
+
+.stat-number{
+    font-size:24px;
+    font-weight:bold;
+    color:var(--dourado);
+}
+
+.source{
+    margin-top:8px;
+    font-size:12px;
+    color:var(--dourado);
+    opacity:0.8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <header>
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa">
+
+    <a class="btn-voltar" onclick="openPage('index.html')">
+        ← Voltar
+    </a>
+
+    <h1 style="color:var(--dourado);">Comboios Beira Alta</h1>
+
+    <p style="color:var(--dourado);font-size:14px;">
+        Fonte: comboios.live
+    </p>
+</header>
+
+<h2 class="sec-title">Estado Ferroviário Nacional</h2>
+
+<div class="stats" id="stats">
+    <div class="stat-box">A carregar...</div>
+</div>
+
+<h2 class="sec-title">Guarda</h2>
+<div id="guarda"></div>
+
+<h2 class="sec-title">Celorico da Beira</h2>
+<div id="celorico"></div>
+
+<h2 class="sec-title">Fornos de Algodres</h2>
+<div id="fornos"></div>
+
+<h2 class="sec-title">Mangualde</h2>
+<div id="mangualde"></div>
+
+<script>
+
+const API_TRENES =
+"https://small-glade-3bb9.ruijpms.workers.dev/?feed=comboios-beira-alta";
+
+const API_STATS =
+"https://small-glade-3bb9.ruijpms.workers.dev/?feed=comboios-stats";
+
+function openPage(page){
+    window.location.href = page;
+}
+
+async function carregarEstatisticas(){
+
+    try{
+
+        const resp = await fetch(API_STATS);
+        const stats = await resp.json();
+
+        document.getElementById("stats").innerHTML = `
+            <div class="stat-box">
+                <div class="stat-number">${stats.running}</div>
+                <div>Em circulação</div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-number">${stats.cancelled}</div>
+                <div>Suprimidos</div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-number">${stats.avgDelay}</div>
+                <div>Atraso médio (min)</div>
+            </div>
+
+            <div class="stat-box">
+                <div class="stat-number">${stats.maxDelay}</div>
+                <div>Maior atraso (min)</div>
+            </div>
+        `;
+
+    }catch(e){
+
+        document.getElementById("stats").innerHTML =
+            "<div class='stat-box'>Erro ao carregar estatísticas.</div>";
+
+    }
+}
+
+function renderEstacao(elementoId, comboios){
+
+    const container = document.getElementById(elementoId);
+
+    if(!comboios || comboios.length === 0){
+
+        container.innerHTML = `
+            <div class="card">
+                Sem movimentos disponíveis.
+            </div>
+        `;
+
+        return;
+    }
+
+    let html = `
+        <div class="card">
+    `;
+
+    comboios.forEach(c => {
+
+        let estado = "";
+
+        if(c.atraso && c.atraso > 0){
+
+            estado =
+            `<div class="atraso">
+                ⚠️ Atraso: ${c.atraso} min
+             </div>`;
+        }
+        else{
+
+            estado =
+            `<div class="normal">
+                ✅ Sem atraso registado
+             </div>`;
+        }
+
+        html += `
+            <div class="comboio">
+
+                <div class="card-title">
+                    🚆 ${c.servico} ${c.numero}
+                </div>
+
+                <p>
+                    <strong>${c.origem}</strong>
+                    →
+                    <strong>${c.destino}</strong>
+                </p>
+
+                ${c.chegada ? `
+                    <p><strong>Chegada:</strong> ${c.chegada}</p>
+                ` : ""}
+
+                ${c.partida ? `
+                    <p><strong>Partida:</strong> ${c.partida}</p>
+                ` : ""}
+
+                ${c.eta ? `
+                    <p><strong>ETA:</strong> ${c.eta}</p>
+                ` : ""}
+
+                ${c.etd ? `
+                    <p><strong>ETD:</strong> ${c.etd}</p>
+                ` : ""}
+
+                <p>
+                    <strong>Plataforma:</strong>
+                    ${c.plataforma || "—"}
+                </p>
+
+                ${estado}
+
+            </div>
+        `;
+    });
+
+    html += `
+        <div class="source">
+            Fonte: comboios.live
+        </div>
+        </div>
+    `;
+
+    container.innerHTML = html;
+}
+
+async function carregarComboios(){
+
+    try{
+
+        const resp = await fetch(API_TRENES);
+        const dados = await resp.json();
+
+        renderEstacao(
+            "guarda",
+            dados.stations.guarda
+        );
+
+        renderEstacao(
+            "celorico",
+            dados.stations.celorico
+        );
+
+        renderEstacao(
+            "fornos",
+            dados.stations.fornos
+        );
+
+        renderEstacao(
+            "mangualde",
+            dados.stations.mangualde
+        );
+
+    }catch(e){
+
+        ["guarda","celorico","fornos","mangualde"]
+        .forEach(id => {
+
+            document.getElementById(id).innerHTML = `
+                <div class="card">
+                    Erro ao carregar dados ferroviários.
+                </div>
+            `;
+
+        });
+
+    }
+}
+
+carregarEstatisticas();
+carregarComboios();
+
+setInterval(carregarEstatisticas, 60000);
+setInterval(carregarComboios, 60000);
+
+</script>
+
+</body>
+</html>
