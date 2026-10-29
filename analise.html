@@ -1,514 +1,803 @@
 <!DOCTYPE html>
 <html lang="pt">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analytics — Lajeosa do Mondego</title>
 
-    assets/brasao.png
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>Analytics V2 - Lajeosa do Mondego</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="icon" href="assets/brasao.png">
 
-    <style>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        body{
-            margin:0;
-            font-family:Arial,sans-serif;
-            background-color:#0F3D2E;
-            color:white;
-            text-align:center;
-        }
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        header{
-            padding:20px;
-        }
+<style>
 
-        header img{
-            width:120px;
-        }
+:root{
+    --verde:#0F3D2E;
+    --verde-card:#1F5C45;
+    --verde-hover:#2a7a5e;
+    --dourado:#D4AF37;
+}
 
-        h1{
-            margin-top:10px;
-            font-size:28px;
-            color:#D4AF37;
-        }
+body{
+    margin:0;
+    background:var(--verde);
+    color:white;
+    font-family:Arial,sans-serif;
+    text-align:center;
+}
 
-        .btn-voltar{
-            display:inline-block;
-            margin-top:15px;
-            padding:10px 18px;
-            border-radius:18px;
-            background-color:#1F5C45;
-            border-left:4px solid #D4AF37;
-            color:#D4AF37;
-            cursor:pointer;
-            box-shadow:0 0 12px rgba(212,175,55,0.35);
-            transition:0.2s;
-        }
+header{
+    padding:20px;
+}
 
-        .btn-voltar:hover{
-            transform:translateY(-2px);
-            box-shadow:0 0 18px rgba(212,175,55,0.55);
-        }
+header img{
+    width:120px;
+}
 
-        .sec-title{
-            color:#D4AF37;
-            margin-top:40px;
-            font-size:24px;
-        }
+h1{
+    color:var(--dourado);
+    margin-top:10px;
+}
 
-        .grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-            gap:16px;
-            padding:20px;
-        }
+.sec-title{
+    color:var(--dourado);
+    margin-top:40px;
+    margin-bottom:20px;
+}
 
-        .card{
-            background-color:#1F5C45;
-            padding:20px;
-            border-radius:18px;
-            border-left:4px solid #D4AF37;
-            box-shadow:0 0 12px rgba(212,175,55,0.35);
-            transition:0.2s;
-        }
+.btn-voltar{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 18px;
+    border-radius:18px;
+    background:var(--verde-card);
+    border-left:4px solid var(--dourado);
+    cursor:pointer;
+    color:var(--dourado);
+    box-shadow:0 0 12px rgba(212,175,55,.35);
+}
 
-        .card:hover{
-            transform:translateY(-3px);
-            box-shadow:0 0 18px rgba(212,175,55,0.55);
-        }
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:16px;
+    padding:20px;
+}
 
-        .card i{
-            font-size:36px;
-            color:#D4AF37;
-            margin-bottom:12px;
-        }
+.card{
+    background:var(--verde-card);
+    border-radius:18px;
+    border-left:4px solid var(--dourado);
+    padding:20px;
+    box-shadow:0 0 12px rgba(212,175,55,.35);
+}
 
-        .card h2{
-            font-size:18px;
-            color:#D4AF37;
-            margin-top:12px;
-            margin-bottom:0;
-        }
+.card i{
+    font-size:34px;
+    color:var(--dourado);
+    margin-bottom:10px;
+}
 
-        .valor{
-            font-size:36px;
-            font-weight:bold;
-        }
+.card h3{
+    margin:10px 0 0 0;
+    color:var(--dourado);
+    font-size:17px;
+}
 
-        .card-ranking{
-            background-color:#1F5C45;
-            padding:20px;
-            border-radius:18px;
-            border-left:4px solid #D4AF37;
-            box-shadow:0 0 12px rgba(212,175,55,0.35);
-        }
+.valor{
+    font-size:36px;
+    font-weight:bold;
+}
 
-        .card-ranking h2{
-            font-size:32px;
-            margin-bottom:10px;
-        }
+.card-top{
+    background:var(--verde-card);
+    border-radius:18px;
+    border-left:4px solid var(--dourado);
+    padding:16px;
+    box-shadow:0 0 12px rgba(212,175,55,.35);
+}
 
-        canvas{
-            background-color:#1F5C45;
-            padding:20px;
-            border-radius:18px;
-            margin:20px;
-            box-shadow:0 0 12px rgba(212,175,55,0.35);
-        }
+.card-top .emoji{
+    font-size:34px;
+}
 
-        table{
-            width:90%;
-            margin:auto;
-            margin-top:20px;
-            border-collapse:collapse;
-            background-color:#1F5C45;
-            border-radius:18px;
-            overflow:hidden;
-            color:white;
-        }
+.card-top .nome{
+    margin-top:10px;
+    font-size:14px;
+    word-break:break-word;
+}
 
-        th{
-            padding:12px;
-            color:#D4AF37;
-        }
+.card-top .numero{
+    color:var(--dourado);
+    font-size:24px;
+    font-weight:bold;
+}
 
-        td{
-            padding:10px;
-            border-bottom:1px solid rgba(255,255,255,0.08);
-        }
+.card-small{
+    background:var(--verde-card);
+    border-radius:18px;
+    border-left:4px solid var(--dourado);
+    padding:18px;
+    box-shadow:0 0 12px rgba(212,175,55,.35);
+}
 
-        tr:hover{
-            background-color:rgba(255,255,255,0.05);
-        }
+.card-small h4{
+    color:var(--dourado);
+    margin:0 0 10px 0;
+}
 
-        footer{
-            margin-top:30px;
-            padding:15px;
-            color:#D4AF37;
-            opacity:.7;
-        }
+canvas{
+    background:var(--verde-card);
+    border-radius:18px;
+    padding:20px;
+    margin:20px;
+    box-shadow:0 0 12px rgba(212,175,55,.35);
+}
 
-    </style>
+table{
+    width:92%;
+    margin:auto;
+    border-collapse:collapse;
+    background:var(--verde-card);
+    border-radius:18px;
+    overflow:hidden;
+}
+
+th{
+    background:rgba(0,0,0,.15);
+    color:var(--dourado);
+    padding:12px;
+}
+
+td{
+    padding:10px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+tr:hover{
+    background:rgba(255,255,255,.04);
+}
+
+footer{
+    padding:20px;
+    color:var(--dourado);
+    opacity:.75;
+}
+
+</style>
+
 </head>
 
 <body>
 
 <header>
 
-    assets/brasao.png
+<img src="assets/brasao.png" alt="Brasão">
 
-    <h1>📊 Estatísticas da PWA</h1>
+<h1>📊 Analytics V2</h1>
 
-    <p style="color:#D4AF37;font-size:14px;">
-        Últimos 30 dias
-    </p>
+<p style="color:#D4AF37;">
+Dashboard completa da PWA
+</p>
 
-    <div class="btn-voltar"
-         onclick="window.location.href='index.html'">
+<div class="btn-voltar"
+onclick="window.location.href='index.html'">
 
-        ⬅ Voltar
+⬅ Voltar
 
-    </div>
+</div>
 
 </header>
-<!-- MÉTRICAS -->
+
+<!-- RESUMO -->
 
 <div class="grid">
 
-    <div class="card">
-        <i class="fas fa-users"></i>
-        <div id="activeUsers" class="valor">—</div>
-        <h2>Utilizadores Ativos</h2>
-    </div>
+<div class="card">
+<i class="fas fa-users"></i>
+<div id="activeUsers" class="valor">--</div>
+<h3>Utilizadores</h3>
+</div>
 
-    <div class="card">
-        <i class="fas fa-user-plus"></i>
-        <div id="newUsers" class="valor">—</div>
-        <h2>Novos Utilizadores</h2>
-    </div>
+<div class="card">
+<i class="fas fa-user-plus"></i>
+<div id="newUsers" class="valor">--</div>
+<h3>Novos</h3>
+</div>
 
-    <div class="card">
-        <i class="fas fa-eye"></i>
-        <div id="pageViews" class="valor">—</div>
-        <h2>Visualizações</h2>
-    </div>
+<div class="card">
+<i class="fas fa-eye"></i>
+<div id="pageViews" class="valor">--</div>
+<h3>Visualizações</h3>
+</div>
 
-    <div class="card">
-        <i class="fas fa-bolt"></i>
-        <div id="eventCount" class="valor">—</div>
-        <h2>Eventos</h2>
-    </div>
+<div class="card">
+<i class="fas fa-bolt"></i>
+<div id="eventCount" class="valor">--</div>
+<h3>Eventos</h3>
+</div>
 
 </div>
 
-<h2 class="sec-title">
-    📊 Métricas Gerais
-</h2>
-
-<canvas id="grafico1"></canvas>
+<!-- DISPOSITIVOS -->
 
 <h2 class="sec-title">
-    🏆 Top 3 Páginas
+📱 Dispositivos
 </h2>
 
 <div class="grid">
 
-    <div class="card-ranking">
+<div class="card-small">
+<h4>📱 Mobile</h4>
+<div id="mobileUsers" class="valor">--</div>
+</div>
 
-        <h2>🥇</h2>
+<div class="card-small">
+<h4>💻 Desktop</h4>
+<div id="desktopUsers" class="valor">--</div>
+</div>
 
-        <div id="top1">
-            —
+</div>
+<!-- UTILIZADORES POR DIA -->
+
+<h2 class="sec-title">
+📈 Utilizadores por dia
+</h2>
+
+<canvas id="graficoDaily"></canvas>
+
+<!-- DESTAQUES -->
+
+<h2 class="sec-title">
+⭐ Destaques
+</h2>
+
+<div class="grid">
+
+    <div class="card-small">
+        <h4>🌍 País Principal</h4>
+        <div id="topCountry" class="valor" style="font-size:28px;">
+            --
         </div>
-
     </div>
 
-    <div class="card-ranking">
-
-        <h2>🥈</h2>
-
-        <div id="top2">
-            —
+    <div class="card-small">
+        <h4>📍 Cidade Principal</h4>
+        <div id="topCity" class="valor" style="font-size:28px;">
+            --
         </div>
-
     </div>
 
-    <div class="card-ranking">
-
-        <h2>🥉</h2>
-
-        <div id="top3">
-            —
+    <div class="card-small">
+        <h4>⚡ Evento Principal</h4>
+        <div id="topEvent" class="valor" style="font-size:22px;">
+            --
         </div>
-
     </div>
 
 </div>
 
+<!-- TOP 3 PÁGINAS -->
+
 <h2 class="sec-title">
-    📄 Páginas Mais Vistas
+🏆 Top 3 Páginas (30 dias)
 </h2>
 
-<table id="tabelaPaginas"></table>
+<div class="grid">
+
+    <div class="card-top">
+        <div class="emoji">🥇</div>
+        <div id="top1Nome" class="nome">--</div>
+        <div id="top1Views" class="numero">--</div>
+    </div>
+
+    <div class="card-top">
+        <div class="emoji">🥈</div>
+        <div id="top2Nome" class="nome">--</div>
+        <div id="top2Views" class="numero">--</div>
+    </div>
+
+    <div class="card-top">
+        <div class="emoji">🥉</div>
+        <div id="top3Nome" class="nome">--</div>
+        <div id="top3Views" class="numero">--</div>
+    </div>
+
+</div>
+
+<!-- TOP DA SEMANA -->
 
 <h2 class="sec-title">
-    📊 Visualizações por Página
+🔥 Mais Visitadas (7 dias)
+</h2>
+
+<table id="tabelaSemana">
+
+    <tr>
+        <th>Página</th>
+        <th>Vistas</th>
+    </tr>
+
+</table>
+
+<!-- DISPOSITIVOS -->
+
+<h2 class="sec-title">
+📱 Distribuição por Dispositivo
+</h2>
+
+<canvas id="graficoDevices"></canvas>
+<!-- TOP PÁGINAS (30 DIAS) -->
+
+<h2 class="sec-title">
+📄 Páginas Mais Visitadas (30 dias)
+</h2>
+
+<table id="tabelaPaginas">
+
+<tr>
+    <th>Página</th>
+    <th>Vistas</th>
+</tr>
+
+</table>
+
+<!-- GRÁFICO PÁGINAS -->
+
+<h2 class="sec-title">
+📊 Visualizações por Página
 </h2>
 
 <canvas id="graficoPaginas"></canvas>
 
+<!-- PAÍSES -->
+
+<h2 class="sec-title">
+🌍 Países
+</h2>
+
+<table id="tabelaPaises">
+
+<tr>
+    <th>País</th>
+    <th>Utilizadores</th>
+</tr>
+
+</table>
+
+<!-- CIDADES -->
+
+<h2 class="sec-title">
+📍 Cidades
+</h2>
+
+<table id="tabelaCidades">
+
+<tr>
+    <th>Cidade</th>
+    <th>Utilizadores</th>
+</tr>
+
+</table>
+
+<!-- EVENTOS -->
+
+<h2 class="sec-title">
+⚡ Eventos Mais Utilizados
+</h2>
+
+<table id="tabelaEventos">
+
+<tr>
+    <th>Evento</th>
+    <th>Total</th>
+</tr>
+
+</table>
+
+<!-- RESUMO RÁPIDO -->
+
+<h2 class="sec-title">
+📋 Resumo Rápido
+</h2>
+
+<div class="grid">
+
+    <div class="card-small">
+        <h4>👥 Utilizadores</h4>
+        <div id="resumoUsers" class="valor">
+            --
+        </div>
+    </div>
+
+    <div class="card-small">
+        <h4>📱 Mobile</h4>
+        <div id="resumoMobile" class="valor">
+            --
+        </div>
+    </div>
+
+    <div class="card-small">
+        <h4>🏆 Página Top</h4>
+        <div id="resumoTopPage"
+             style="font-size:18px;">
+            --
+        </div>
+    </div>
+
+</div>
+
 <footer>
-    Lajeosa do Mondego · Painel de Analytics
+
+    📊 Analytics V2 · Lajeosa do Mondego
+
 </footer>
 
 <script>
 
-async function carregarAnalytics() {
+const DASHBOARD_URL =
+"https://small-glade-3bb9.ruijpms.workers.dev/?feed=analytics-dashboard";
 
-    try {
+function limparNomePagina(nome){
 
-        const resp = await fetch(
-            "https://small-glade-3bb9.ruijpms.workers.dev/?feed=analytics"
-        );
+    return nome
+        .replace("/lajeosa-pwa/","")
+        .replace(".html","")
+        .replace("index","Página Inicial")
+        || "Página Inicial";
 
-        const dados = await resp.json();
+}
 
-        const rows =
-            dados.analytics.rows || [];
+</script>
+<script>
 
-        const activeUsers =
-            rows[0]?.metricValues[0]?.value || 0;
+const DASHBOARD_URL =
+"https://small-glade-3bb9.ruijpms.workers.dev/?feed=analytics-dashboard";
 
-        const newUsers =
-            rows[0]?.metricValues[1]?.value || 0;
+function limparNomePagina(nome){
 
-        const pageViews =
-            rows[0]?.metricValues[2]?.value || 0;
+    if(!nome) return "Página";
 
-        const eventCount =
-            rows[0]?.metricValues[3]?.value || 0;
+    nome = nome
+        .replace("/lajeosa-pwa/","")
+        .replace(".html","");
+
+    if(nome === "" || nome === "/"){
+        return "Página Inicial";
+    }
+
+    if(nome === "index"){
+        return "Página Inicial";
+    }
+
+    return nome
+        .replaceAll("_"," ")
+        .replaceAll("-"," ");
+
+}
+
+async function carregarDashboard(){
+
+    try{
+
+        const resp =
+            await fetch(DASHBOARD_URL);
+
+        const data =
+            await resp.json();
+
+        // ============================
+        // RESUMO GERAL
+        // ============================
+
+        const overview =
+            data.overview.rows[0];
 
         document.getElementById(
             "activeUsers"
-        ).textContent = activeUsers;
+        ).textContent =
+            overview.metricValues[0].value;
 
         document.getElementById(
             "newUsers"
-        ).textContent = newUsers;
+        ).textContent =
+            overview.metricValues[1].value;
 
         document.getElementById(
             "pageViews"
-        ).textContent = pageViews;
+        ).textContent =
+            overview.metricValues[2].value;
 
         document.getElementById(
             "eventCount"
-        ).textContent = eventCount;
+        ).textContent =
+            overview.metricValues[3].value;
+
+        document.getElementById(
+            "resumoUsers"
+        ).textContent =
+            overview.metricValues[0].value;
+
+        // ============================
+        // DISPOSITIVOS
+        // ============================
+
+        let mobile = 0;
+        let desktop = 0;
+
+        data.devices.rows.forEach(r => {
+
+            const tipo =
+                r.dimensionValues[0].value;
+
+            const valor =
+                parseInt(
+                    r.metricValues[0].value
+                );
+
+            if(tipo === "mobile")
+                mobile = valor;
+
+            if(tipo === "desktop")
+                desktop = valor;
+
+        });
+
+        document.getElementById(
+            "mobileUsers"
+        ).textContent = mobile;
+
+        document.getElementById(
+            "desktopUsers"
+        ).textContent = desktop;
+
+        document.getElementById(
+            "resumoMobile"
+        ).textContent =
+            mobile;
 
         new Chart(
             document.getElementById(
-                "grafico1"
+                "graficoDevices"
             ),
             {
-                type: "bar",
+                type:"doughnut",
 
-                data: {
-
-                    labels: [
-                        "Ativos",
-                        "Novos",
-                        "Vistas",
-                        "Eventos"
+                data:{
+                    labels:[
+                        "Mobile",
+                        "Desktop"
                     ],
 
-                    datasets: [
+                    datasets:[{
+                        data:[
+                            mobile,
+                            desktop
+                        ],
 
-                        {
+                        backgroundColor:[
+                            "#D4AF37",
+                            "#5DADE2"
+                        ]
+                    }]
+                }
+            }
+        );
 
-                            label:
-                                "Últimos 30 dias",
+        // ============================
+        // UTILIZADORES POR DIA
+        // ============================
 
-                            data: [
-                                activeUsers,
-                                newUsers,
-                                pageViews,
-                                eventCount
-                            ],
+        const labelsDaily = [];
+        const valuesDaily = [];
 
-                            backgroundColor: [
-                                "#D4AF37",
-                                "#D4AF37",
-                                "#D4AF37",
-                                "#D4AF37"
-                            ]
+        data.daily.rows.forEach(r => {
 
-                        }
+            const raw =
+                r.dimensionValues[0].value;
 
-                    ]
+            labelsDaily.push(
+                raw.substring(6,8)
+                + "/"
+                + raw.substring(4,6)
+            );
 
-                },
+            valuesDaily.push(
+                r.metricValues[0].value
+            );
 
-                options: {
+        });
 
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
+        new Chart(
+            document.getElementById(
+                "graficoDaily"
+            ),
+            {
 
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
+                type:"line",
+
+                data:{
+
+                    labels:
+                        labelsDaily,
+
+                    datasets:[{
+
+                        label:
+                            "Utilizadores",
+
+                        data:
+                            valuesDaily,
+
+                        borderColor:
+                            "#D4AF37",
+
+                        backgroundColor:
+                            "rgba(212,175,55,.25)",
+
+                        fill:true,
+
+                        tension:0.3
+
+                    }]
 
                 }
 
             }
         );
 
-    } catch (e) {
+        // ============================
+        // TOP 3 PÁGINAS
+        // ============================
 
-        alert(
-            "Erro ao carregar Analytics."
-        );
+        const top =
+            data.pages.rows;
 
-        console.error(e);
+        if(top[0]){
+            document.getElementById(
+                "top1Nome"
+            ).textContent =
+                limparNomePagina(
+                    top[0]
+                    .dimensionValues[0]
+                    .value
+                );
 
-    }
+            document.getElementById(
+                "top1Views"
+            ).textContent =
+                top[0]
+                .metricValues[0]
+                .value;
+        }
 
-}
+        if(top[1]){
+            document.getElementById(
+                "top2Nome"
+            ).textContent =
+                limparNomePagina(
+                    top[1]
+                    .dimensionValues[0]
+                    .value
+                );
 
-async function carregarPaginas() {
+            document.getElementById(
+                "top2Views"
+            ).textContent =
+                top[1]
+                .metricValues[0]
+                .value;
+        }
 
-    try {
+        if(top[2]){
+            document.getElementById(
+                "top3Nome"
+            ).textContent =
+                limparNomePagina(
+                    top[2]
+                    .dimensionValues[0]
+                    .value
+                );
 
-        const resp =
-            await fetch(
-                "https://small-glade-3bb9.ruijpms.workers.dev/?feed=analytics-pages"
+            document.getElementById(
+                "top3Views"
+            ).textContent =
+                top[2]
+                .metricValues[0]
+                .value;
+        }
+
+        document.getElementById(
+            "resumoTopPage"
+        ).textContent =
+            limparNomePagina(
+                top[0]
+                .dimensionValues[0]
+                .value
             );
+        
+        // ============================
+        // TABELA PÁGINAS 30 DIAS
+        // ============================
 
-        const dados =
-            await resp.json();
-
-        const rows =
-            dados.pages.rows || [];
-
-        let html = `
-            <tr>
-                <th>Página</th>
-                <th>Vistas</th>
-            </tr>
+        let htmlPaginas = `
+        <tr>
+            <th>Página</th>
+            <th>Vistas</th>
+        </tr>
         `;
 
-        const labels = [];
-        const valores = [];
+        const labelsPaginas = [];
+        const valoresPaginas = [];
 
-        rows.forEach(r => {
+        data.pages.rows.forEach(r => {
 
             const pagina =
-                r.dimensionValues[0].value;
+                limparNomePagina(
+                    r.dimensionValues[0].value
+                );
 
             const vistas =
                 r.metricValues[0].value;
 
-            labels.push(pagina);
+            labelsPaginas.push(pagina);
+            valoresPaginas.push(vistas);
 
-            valores.push(vistas);
-
-            html += `
-                <tr>
-                    <td>${pagina}</td>
-                    <td>${vistas}</td>
-                </tr>
+            htmlPaginas += `
+            <tr>
+                <td>${pagina}</td>
+                <td>${vistas}</td>
+            </tr>
             `;
 
         });
 
-        document
-            .getElementById(
-                "tabelaPaginas"
-            )
-            .innerHTML = html;
+        document.getElementById(
+            "tabelaPaginas"
+        ).innerHTML = htmlPaginas;
 
-        if(rows[0]){
-
-            document
-                .getElementById("top1")
-                .textContent =
-                rows[0]
-                .dimensionValues[0]
-                .value;
-
-        }
-
-        if(rows[1]){
-
-            document
-                .getElementById("top2")
-                .textContent =
-                rows[1]
-                .dimensionValues[0]
-                .value;
-
-        }
-
-        if(rows[2]){
-
-            document
-                .getElementById("top3")
-                .textContent =
-                rows[2]
-                .dimensionValues[0]
-                .value;
-
-        }
+        // ============================
+        // GRÁFICO PÁGINAS
+        // ============================
 
         new Chart(
             document.getElementById(
                 "graficoPaginas"
             ),
             {
-                type: "bar",
 
-                data: {
+                type:"bar",
 
-                    labels,
+                data:{
 
-                    datasets: [
+                    labels:
+                        labelsPaginas.slice(0,10),
 
-                        {
+                    datasets:[{
 
-                            label:
-                                "Vistas por página",
+                        label:
+                            "Visualizações",
 
-                            data:
-                                valores,
+                        data:
+                            valoresPaginas.slice(0,10),
 
-                            backgroundColor:
-                                "#D4AF37"
+                        backgroundColor:
+                            "#D4AF37"
 
-                        }
-
-                    ]
+                    }]
 
                 },
 
-                options: {
+                options:{
 
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                    plugins:{
+                        legend:{
+                            display:false
                         }
                     }
 
@@ -517,20 +806,184 @@ async function carregarPaginas() {
             }
         );
 
-    } catch(e){
+        // ============================
+        // TABELA SEMANA
+        // ============================
 
-        alert(
-            "Erro ao carregar páginas mais vistas."
-        );
+        let htmlSemana = `
+        <tr>
+            <th>Página</th>
+            <th>Vistas</th>
+        </tr>
+        `;
+
+        data.pagesWeek.rows.forEach(r => {
+
+            htmlSemana += `
+            <tr>
+                <td>
+                    ${limparNomePagina(
+                        r.dimensionValues[0].value
+                    )}
+                </td>
+                <td>
+                    ${r.metricValues[0].value}
+                </td>
+            </tr>
+            `;
+
+        });
+
+        document.getElementById(
+            "tabelaSemana"
+        ).innerHTML = htmlSemana;
+
+        // ============================
+        // PAÍSES
+        // ============================
+
+        let htmlPaises = `
+        <tr>
+            <th>País</th>
+            <th>Utilizadores</th>
+        </tr>
+        `;
+
+        data.countries.rows.forEach(r => {
+
+            htmlPaises += `
+            <tr>
+                <td>
+                    ${r.dimensionValues[0].value}
+                </td>
+                <td>
+                    ${r.metricValues[0].value}
+                </td>
+            </tr>
+            `;
+
+        });
+
+        document.getElementById(
+            "tabelaPaises"
+        ).innerHTML = htmlPaises;
+
+        if(data.countries.rows[0]){
+
+            document.getElementById(
+                "topCountry"
+            ).textContent =
+                data.countries.rows[0]
+                .dimensionValues[0]
+                .value;
+
+        }
+
+        // ============================
+        // CIDADES
+        // ============================
+
+        let htmlCidades = `
+        <tr>
+            <th>Cidade</th>
+            <th>Utilizadores</th>
+        </tr>
+        `;
+
+        data.cities.rows.forEach(r => {
+
+            const cidade =
+                r.dimensionValues[0].value;
+
+            if(
+                cidade === "(not set)"
+                || cidade === ""
+            ){
+                return;
+            }
+
+            htmlCidades += `
+            <tr>
+                <td>${cidade}</td>
+                <td>
+                    ${r.metricValues[0].value}
+                </td>
+            </tr>
+            `;
+
+        });
+
+        document.getElementById(
+            "tabelaCidades"
+        ).innerHTML = htmlCidades;
+
+        if(data.cities.rows[0]){
+
+            document.getElementById(
+                "topCity"
+            ).textContent =
+                data.cities.rows[0]
+                .dimensionValues[0]
+                .value;
+
+        }
+
+        // ============================
+        // EVENTOS
+        // ============================
+
+        let htmlEventos = `
+        <tr>
+            <th>Evento</th>
+            <th>Total</th>
+        </tr>
+        `;
+
+        data.events.rows.forEach(r => {
+
+            htmlEventos += `
+            <tr>
+                <td>
+                    ${r.dimensionValues[0].value}
+                </td>
+                <td>
+                    ${r.metricValues[0].value}
+                </td>
+            </tr>
+            `;
+
+        });
+
+        document.getElementById(
+            "tabelaEventos"
+        ).innerHTML = htmlEventos;
+
+        if(data.events.rows[0]){
+
+            document.getElementById(
+                "topEvent"
+            ).textContent =
+                data.events.rows[0]
+                .dimensionValues[0]
+                .value;
+
+        }
+
+    }
+
+    catch(e){
 
         console.error(e);
+
+        alert(
+            "Erro ao carregar Analytics V2."
+        );
 
     }
 
 }
 
-carregarAnalytics();
-carregarPaginas();
+carregarDashboard();
 
 </script>
 
