@@ -252,6 +252,13 @@ onclick="window.location.href='index.html'">
 </div>
 
 </div>
+    <!-- INSIGHTS -->
+
+<h2 class="sec-title">
+💡 O que descobrimos
+</h2>
+
+<div id="insights" class="grid"></div>
 <!-- UTILIZADORES POR DIA -->
 
 <h2 class="sec-title">
@@ -569,7 +576,46 @@ async function carregarDashboard(){
             "resumoMobile"
         ).textContent =
             mobile;
+// ============================
+// INSIGHTS
+// ============================
 
+const insights = [];
+
+const totalDispositivos =
+    mobile + desktop;
+
+const percentMobile =
+    Math.round(
+        (mobile / totalDispositivos) * 100
+    );
+
+insights.push(
+    `📱 ${percentMobile}% dos acessos são feitos por telemóvel`
+);
+
+insights.push(
+    `🌍 Existem visitantes de ${data.countries.rowCount} países`
+);
+
+insights.push(
+    `🆕 Foram registados ${overview.metricValues[1].value} novos utilizadores`
+);
+
+insights.push(
+    `🏆 A página mais visitada é ${limparNomePagina(
+        data.pages.rows[0].dimensionValues[0].value
+    )}`
+);
+
+insights.push(
+    `⚡ O evento principal é ${data.events.rows[0].dimensionValues[0].value}`
+);
+
+document.getElementById("insights").innerHTML =
+    insights.map(i =>
+        `<div class="card-small">${i}</div>`
+    ).join("");
         new Chart(
             document.getElementById(
                 "graficoDevices"
