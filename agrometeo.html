@@ -4,166 +4,123 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Agrometeorologia – Lajeosa</title>
-
-<link rel="stylesheet" href="style.css">
+<title>Agrometeorologia</title>
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
+:root{
+    --verde:#0f4d36;
+    --verde-card:#1d5f46;
+    --dourado:#e3c15a;
+    --castanho:#3f2a1d;
+}
+
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
-    font-family:Arial,sans-serif;
-    background-color:var(--verde-base);
+    background:var(--verde);
     color:white;
-    text-align:center;
-    padding-bottom:40px;
+    font-family:Arial,sans-serif;
 }
 
 header{
-    padding:20px;
-}
-
-header img{
-    width:120px;
-    display:block;
-    margin:auto;
+    text-align:center;
+    padding:25px 15px;
 }
 
 h1{
-    margin-top:10px;
+    margin:0;
     color:var(--dourado);
 }
 
 .subtitulo{
+    margin-top:8px;
+    color:#ddd;
+}
+
+.stats{
+    margin:20px;
+    padding:15px;
+    background:var(--castanho);
+    border-left:5px solid var(--dourado);
+    border-radius:12px;
+    text-align:center;
+}
+
+.stats strong{
     color:var(--dourado);
-    font-size:14px;
+    font-size:24px;
 }
 
-.btn-voltar{
-    display:block;
-    margin:12px auto;
-    padding:10px 18px;
-    border-radius:18px;
-    background-color:var(--cor-cartao-castanho-escuro);
-    border-left:4px solid var(--dourado);
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:15px;
+}
+
+.boletim{
+    background:var(--castanho);
+    border-left:5px solid var(--dourado);
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+}
+
+.boletim h2{
     color:var(--dourado);
-    text-decoration:none;
-    width:fit-content;
-    cursor:pointer;
-    box-shadow:0 0 12px rgba(227,193,90,.35);
+    margin-top:0;
 }
 
-.btn-voltar:hover{
-    transform:translateY(-3px);
+.secao{
+    margin-top:15px;
 }
 
-.sec-title{
+.secao h3{
+    margin-bottom:10px;
     color:var(--dourado);
-    font-size:20px;
-    margin-top:25px;
 }
 
-.card{
-    background-color:var(--cor-cartao-castanho-escuro);
-    border-radius:18px;
-    padding:18px;
-    margin:16px 20px;
-    text-align:left;
-    border-left:4px solid var(--dourado);
-    box-shadow:0 0 12px rgba(227,193,90,.35);
-}
-
-.card-title{
-    color:var(--dourado);
-    font-size:18px;
-    font-weight:bold;
-    margin-bottom:12px;
-}
-
-.estado-ok{
-    color:#00cc66;
-    font-weight:bold;
-}
-
-.estado-alerta{
-    color:#ffae00;
-    font-weight:bold;
-}
-
-.metrica{
-    display:flex;
-    justify-content:space-between;
-    padding:8px 0;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.metrica:last-child{
-    border-bottom:none;
-}
-
-.valor{
-    color:var(--dourado);
-    font-weight:bold;
-}
-
-.aviso-item{
-    padding:10px 0;
-    border-bottom:1px solid rgba(255,255,255,.08);
-}
-
-.aviso-item:last-child{
-    border-bottom:none;
-}
-
-.aviso-cultura{
-    color:var(--dourado);
-    font-weight:bold;
+.lista{
+    line-height:1.8;
 }
 
 .badge{
     display:inline-block;
-    margin-top:6px;
-    padding:5px 10px;
-    border-radius:999px;
-    background:#7c4a00;
-    color:#ffd700;
-    font-size:12px;
+    background:#854f00;
+    color:#fff;
+    padding:6px 12px;
+    border-radius:20px;
+    margin-top:10px;
 }
 
 .pdf-btn{
-    display:block;
-    text-align:center;
+    display:inline-block;
     margin-top:15px;
-    background:#7c4a00;
-    color:#ffd700;
-    padding:12px;
-    border-radius:12px;
+    padding:10px 15px;
+    background:var(--dourado);
+    color:black;
     text-decoration:none;
+    border-radius:8px;
     font-weight:bold;
 }
 
-.grafico{
-    height:180px;
-    display:flex;
-    align-items:flex-end;
-    justify-content:space-evenly;
-    gap:8px;
-    margin-top:15px;
+.loading{
+    text-align:center;
+    padding:40px;
+    color:white;
 }
 
-.barra{
-    width:16px;
-    border-radius:6px 6px 0 0;
-    background:#e3c15a;
-}
-
-.fonte{
-    margin-top:10px;
-    color:#cfcfcf;
-    font-size:12px;
+.vazio{
+    text-align:center;
+    padding:25px;
+    background:var(--castanho);
+    border-radius:12px;
 }
 
 </style>
@@ -173,193 +130,174 @@ h1{
 
 <header>
 
-<img src="assets/brasao.png"
-alt="Brasão da Lajeosa">
+<h1>
+🌱 Agrometeorologia
+</h1>
 
-<a class="btn-voltar"
-onclick="openPage('seguranca.html')">
-← Voltar
-</a>
-
-<h1>🌱 Agrometeorologia</h1>
-
-<p class="subtitulo">
-IPMA AgroClima + DGAV
-</p>
+<div class="subtitulo">
+Avisos Agrícolas Oficiais da Guarda
+</div>
 
 </header>
 
-<h2 class="sec-title">
-Estado Agrícola
-</h2>
+<div id="contador" class="stats">
 
-<div class="card">
-
-<div class="card-title">
-<i class="fa-solid fa-seedling"></i>
-Estado Atual
-</div>
-
-<p class="estado-ok">
-✅ Condições agrícolas favoráveis
-</p>
-
-<p>
-Sem fenómenos agroclimáticos críticos para a região
-da Guarda nas próximas horas.
-</p>
+A carregar...
 
 </div>
 
-<h2 class="sec-title">
-Temperaturas Agroclimáticas
-</h2>
+<div id="boletins" class="container">
 
-<div class="card">
+<div class="loading">
 
-<div class="card-title">
-<i class="fa-solid fa-temperature-half"></i>
-Resumo
-</div>
-
-<div class="metrica">
-<span>Máxima prevista</span>
-<span class="valor">25°C</span>
-</div>
-
-<div class="metrica">
-<span>Média prevista</span>
-<span class="valor">18°C</span>
-</div>
-
-<div class="metrica">
-<span>Mínima prevista</span>
-<span class="valor">13°C</span>
-</div>
-
-<div class="fonte">
-Fonte futura: AgroClima (t2m-max / mean / min)
-</div>
+A carregar boletins agrícolas...
 
 </div>
 
-<div class="card">
-
-<div class="card-title">
-<i class="fa-solid fa-chart-line"></i>
-Tendência dos Próximos Dias
-</div>
-
-<div class="grafico">
-
-<div class="barra" style="height:80px"></div>
-<div class="barra" style="height:95px"></div>
-<div class="barra" style="height:75px"></div>
-<div class="barra" style="height:120px"></div>
-<div class="barra" style="height:100px"></div>
-<div class="barra" style="height:130px"></div>
-<div class="barra" style="height:110px"></div>
-
-</div>
-
-</div>
-
-<h2 class="sec-title">
-Avisos Agrícolas
-</h2>
-
-<div class="card">
-
-<div class="card-title">
-<i class="fa-solid fa-tractor"></i>
-EA da Guarda
-</div>
-
-<div class="aviso-item">
-
-<div class="aviso-cultura">
-🫒 Oliveira
-</div>
-
-<div>
-Mosca da Azeitona
-</div>
-
-<span class="badge">
-Aviso DGAV
-</span>
-
-</div>
-
-<div class="aviso-item">
-
-<div class="aviso-cultura">
-🍇 Videira
-</div>
-
-<div>
-Esca
-</div>
-
-<span class="badge">
-Aviso DGAV
-</span>
-
-</div>
-
-<div class="aviso-item">
-
-<div class="aviso-cultura">
-🍎 Macieira
-</div>
-
-<div>
-Mosca da Fruta
-</div>
-
-<span class="badge">
-Aviso DGAV
-</span>
-
-</div>
-
-</div>
-
-<h2 class="sec-title">
-Circular Oficial
-</h2>
-
-<div class="card">
-
-<div class="card-title">
-<i class="fa-solid fa-file-pdf"></i>
-Última Circular da Guarda
-</div>
-
-<p>
-Circular de Avisos da Guarda nº 12
-</p>
-
-<a class="pdf-btn"
-href="#"
-target="_blank">
-
-📄 Abrir Circular
-
-</a>
-
-</div>
-
-<div class="fonte">
-Dados previstos:
-IPMA AgroClima • DGAV • Sistema Nacional de Avisos Agrícolas
 </div>
 
 <script>
 
-function openPage(page){
-    window.location.href = page;
+const API =
+"https://TEU-WORKER.workers.dev/?feed=agrometeo";
+
+function criarLista(texto){
+
+    return texto
+      .split(",")
+      .map(item => item.trim())
+      .filter(item => item)
+      .map(item => `<li>${item}</li>`)
+      .join("");
+
 }
+
+async function carregar(){
+
+    const container =
+      document.getElementById("boletins");
+
+    const contador =
+      document.getElementById("contador");
+
+    try{
+
+        const resp =
+          await fetch(API);
+
+        const dados =
+          await resp.json();
+
+        contador.innerHTML = `
+            <strong>
+                ${dados.totalBoletins}
+            </strong>
+            <br>
+            boletins ativos da EA da Guarda
+        `;
+
+        if(!dados.boletins ||
+           !dados.boletins.length){
+
+            container.innerHTML = `
+
+                <div class="vazio">
+
+                    ✅ Não existem boletins ativos
+                    para a Guarda.
+
+                </div>
+
+            `;
+
+            return;
+        }
+
+        let html = "";
+
+        dados.boletins.forEach(b => {
+
+            html += `
+
+            <div class="boletim">
+
+                <h2>
+                    📄 ${b.circular}
+                </h2>
+
+                <div class="badge">
+                    ${b.ea}
+                </div>
+
+                <div class="secao">
+
+                    <h3>
+
+                        🌾 Culturas
+
+                    </h3>
+
+                    <ul class="lista">
+
+                        ${criarLista(b.cultura)}
+
+                    </ul>
+
+                </div>
+
+                <div class="secao">
+
+                    <h3>
+
+                        🦠 Pragas e Doenças
+
+                    </h3>
+
+                    <ul class="lista">
+
+                        ${criarLista(b.inimigos)}
+
+                    </ul>
+
+                </div>
+
+                <a
+                    class="pdf-btn"
+                    href="${b.pdf}"
+                    target="_blank">
+
+                    📄 Abrir Circular
+
+                </a>
+
+            </div>
+
+            `;
+
+        });
+
+        container.innerHTML = html;
+
+    }
+    catch(err){
+
+        container.innerHTML = `
+
+            <div class="vazio">
+
+                ❌ Erro ao carregar os boletins.
+
+            </div>
+
+        `;
+
+        console.error(err);
+
+    }
+
+}
+
+carregar();
 
 </script>
 
