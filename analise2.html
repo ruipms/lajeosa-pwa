@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Analytics V3 - Lajeosa do Mondego</title>
+
+<link rel="icon" href="assets/brasao.png">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+:root{
+    --verde:#0F3D2E;
+    --verde-card:#1F5C45;
+    --dourado:#D4AF37;
+    --azul:#5DADE2;
+    --brilho:0 0 12px rgba(212,175,55,.35);
+}
+
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    background:var(--verde);
+    color:#fff;
+    font-family:Arial,sans-serif;
+    text-align:center;
+}
+
+header{padding:20px}
+header img{width:120px;max-width:40vw}
+
+h1{color:var(--dourado);margin:10px 0 0}
+
+.sub{color:var(--dourado);margin:6px 0 0}
+.atualizado{font-size:12px;opacity:.7;margin-top:6px}
+
+.btn-voltar{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 18px;
+    border-radius:18px;
+    background:var(--verde-card);
+    border-left:4px solid var(--dourado);
+    cursor:pointer;
+    color:var(--dourado);
+    box-shadow:var(--brilho);
+}
+
+.sec-title{
+    color:var(--dourado);
+    margin:40px 16px 20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:16px;
+    padding:0 20px;
+    max-width:1100px;
+    margin:0 auto;
+}
+
+.grid.g5{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.grid.insights{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+
+.card,.card-top,.card-small{
+    background:var(--verde-card);
+    border-radius:18px;
+    border-left:4px solid var(--dourado);
+    box-shadow:var(--brilho);
+}
+
+.card{padding:20px}
+.card i{font-size:34px;color:var(--dourado);margin-bottom:10px}
+.card h3{margin:10px 0 0;color:var(--dourado);font-size:17px}
+
+.valor{font-size:36px;font-weight:bold}
+
+.card-top{padding:16px}
+.card-top .emoji{font-size:34px}
+.card-top .nome{margin-top:10px;font-size:15px;word-break:break-word}
+.card-top .numero{color:var(--dourado);font-size:24px;font-weight:bold}
+.card-top .numero small{font-size:13px;color:#fff;opacity:.8;font-weight:normal}
+
+.card-small{padding:18px}
+.card-small h4{color:var(--dourado);margin:0 0 10px}
+
+.dev-pct{font-size:42px;font-weight:bold;line-height:1.1}
+.dev-users{opacity:.85;margin-top:4px}
+
+.insight{text-align:left;line-height:1.4}
+
+.chart-card{
+    background:var(--verde-card);
+    border-radius:18px;
+    padding:16px;
+    margin:0 auto;
+    width:92%;
+    max-width:1060px;
+    height:320px;
+    position:relative;
+    box-shadow:var(--brilho);
+}
+.chart-card.alto{height:420px}
+.chart-card.pequeno{max-width:520px;height:340px}
+
+table{
+    width:92%;
+    max-width:1060px;
+    margin:auto;
+    border-collapse:collapse;
+    background:var(--verde-card);
+    border-radius:18px;
+    overflow:hidden;
+}
+th{background:rgba(0,0,0,.15);color:var(--dourado);padding:12px}
+td{padding:10px;border-bottom:1px solid rgba(255,255,255,.08);word-break:break-word}
+td:last-child{font-weight:bold;color:var(--dourado)}
+tr:hover{background:rgba(255,255,255,.04)}
+
+.erro{padding:30px 16px;color:#ffb3b3}
+
+footer{padding:30px 20px;color:var(--dourado);opacity:.75}
+
+@media(max-width:600px){
+    .grid{padding:0 12px;gap:12px}
+    .valor{font-size:30px}
+    .chart-card{width:94%;height:280px}
+    .chart-card.alto{height:380px}
+    th,td{padding:9px 6px;font-size:14px}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- CABEÇALHO -->
+<header>
+    <img src="assets/brasao.png" alt="Brasão" onerror="this.style.display='none'">
+    <h1>📊 Analytics V3</h1>
+    <p class="sub">Dashboard completa da PWA</p>
+    <div class="atualizado" id="atualizado"></div>
+    <div class="btn-voltar" onclick="window.location.href='index.html'">⬅ Voltar</div>
+</header>
+
+<!-- DASHBOARD PRINCIPAL -->
+<div class="grid">
+    <div class="card"><i class="fas fa-users"></i><div id="activeUsers" class="valor">--</div><h3>👥 Utilizadores</h3></div>
+    <div class="card"><i class="fas fa-user-plus"></i><div id="newUsers" class="valor">--</div><h3>🆕 Novos Utilizadores</h3></div>
+    <div class="card"><i class="fas fa-eye"></i><div id="pageViews" class="valor">--</div><h3>📄 Visualizações</h3></div>
+    <div class="card"><i class="fas fa-bolt"></i><div id="eventCount" class="valor">--</div><h3>⚡ Eventos</h3></div>
+</div>
+
+<!-- DISPOSITIVOS -->
+<h2 class="sec-title">📱 Dispositivos</h2>
+<div id="dispositivos" class="grid"></div>
+
+<!-- INSIGHTS -->
+<h2 class="sec-title">💡 O que descobrimos</h2>
+<div id="insights" class="grid insights"></div>
+
+<!-- TENDÊNCIAS DA SEMANA -->
+<h2 class="sec-title">🔥 Tendências da Semana</h2>
+<div id="tendencias" class="grid g5"></div>
+
+<!-- UTILIZADORES POR DIA -->
+<h2 class="sec-title">📈 Utilizadores por dia</h2>
+<div class="chart-card"><canvas id="graficoDaily"></canvas></div>
+
+<!-- DESTAQUES -->
+<h2 class="sec-title">⭐ Destaques</h2>
+<div class="grid">
+    <div class="card-small"><h4>🌍 País Principal</h4><div id="topCountry" class="valor" style="font-size:26px">--</div></div>
+    <div class="card-small"><h4>📍 Cidade Principal</h4><div id="topCity" class="valor" style="font-size:26px">--</div></div>
+    <div class="card-small"><h4>⚡ Evento Principal</h4><div id="topEvent" class="valor" style="font-size:22px">--</div></div>
+</div>
+
+<!-- TOP 3 PÁGINAS -->
+<h2 class="sec-title">🏆 Top 3 Páginas</h2>
+<div id="top3" class="grid"></div>
+
+<!-- DISTRIBUIÇÃO POR DISPOSITIVO -->
+<h2 class="sec-title">📱 Distribuição por Dispositivo</h2>
+<div class="chart-card pequeno"><canvas id="graficoDevices"></canvas></div>
+
+<!-- PÁGINAS MAIS VISITADAS -->
+<h2 class="sec-title">📄 Páginas Mais Visitadas</h2>
+<table id="tabelaPaginas"></table>
+
+<!-- VISUALIZAÇÕES POR PÁGINA -->
+<h2 class="sec-title">📊 Visualizações por Página</h2>
+<div class="chart-card alto"><canvas id="graficoPaginas"></canvas></div>
+
+<!-- PAÍSES -->
+<h2 class="sec-title">🌍 Países</h2>
+<table id="tabelaPaises"></table>
+
+<!-- CIDADES -->
+<h2 class="sec-title">📍 Cidades</h2>
+<table id="tabelaCidades"></table>
+
+<!-- EVENTOS -->
+<h2 class="sec-title">⚡ Eventos</h2>
+<table id="tabelaEventos"></table>
+
+<!-- RESUMO FINAL -->
+<h2 class="sec-title">📋 Resumo Final</h2>
+<div class="grid">
+    <div class="card-small"><h4>👥 Utilizadores</h4><div id="resumoUsers" class="valor">--</div></div>
+    <div class="card-small"><h4>📱 Mobile</h4><div id="resumoMobile" class="valor">--</div></div>
+    <div class="card-small"><h4>🏆 Página Top</h4><div id="resumoTopPage" style="font-size:20px">--</div></div>
+</div>
+
+<footer>📊 Analytics V3 · Lajeosa do Mondego</footer>
+
+<script>
+
+const DASHBOARD_URL =
+"https://small-glade-3bb9.ruijpms.workers.dev/?feed=analytics-dashboard";
+
+Chart.defaults.color = "#FFFFFF";
+Chart.defaults.borderColor = "rgba(255,255,255,0.15)";
+
+/* ============================
+   UTILITÁRIOS
+============================ */
+
+const $ = id => document.getElementById(id);
+
+const esc = s => String(s).replace(/[&<>"']/g, c => (
+    {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]
+));
+
+const fmt = n => Number(n).toLocaleString("pt-PT");
+
+const pct = (v, t) => t ? Math.round(v / t * 100) : 0;
+
+const linhas = bloco => (bloco && bloco.rows) ? bloco.rows : [];
+
+const dimensao = r => r.dimensionValues[0].value;
+
+const metrica = (r, i = 0) => Number(r.metricValues[i].value) || 0;
+
+const MEDALHAS = ["🥇", "🥈", "🥉", "⭐", "⭐"];
+
+/* ============================
+   NOMES AMIGÁVEIS — PÁGINAS
+============================ */
+
+const NOMES_PAGINAS = {
+    index:"Página Inicial",
+    seguranca:"Segurança",
+    transito:"Trânsito",
+    combustiveis:"Combustíveis",
+    meteocritico:"Meteo Crítico",
+    meteorologia:"Meteorologia",
+    clube:"Clube CRC",
+    clube_masculino:"Clube · Masculino",
+    clube_feminino:"Clube · Feminino",
+    clube_formacao:"Clube · Formação",
+    historia_clube:"História do Clube",
+    historia:"História",
+    epocamasculina:"Época Masculina",
+    epocafeminina:"Época Feminina",
+    senior_avisos:"Seniores · Avisos",
+    senior_plantel:"Seniores · Plantel",
+    senior_jogos:"Seniores · Jogos",
+    seniorfem_avisos:"Seniores Fem. · Avisos",
+    seniorfem_plantel:"Seniores Fem. · Plantel",
+    seniorfem_tecnica:"Seniores Fem. · Equipa Técnica",
+    seniorfem_calendario:"Seniores Fem. · Calendário",
+    incendios:"Incêndios",
+    ocorrencias:"Ocorrências",
+    policia:"Polícia",
+    junta:"Junta de Freguesia",
+    noticias:"Notícias",
+    tiroaoalvo:"Tiro ao Alvo",
+    aplicacao:"Aplicação",
+    redessociais:"Redes Sociais",
+    associacoes:"Associações",
+    servicos:"Serviços",
+    horarios:"Horários",
+    comboios:"Comboios",
+    comboio:"Comboios",
+    pontos:"Pontos de Interesse",
+    falarcomigo:"Falar Comigo",
+    changelog:"Novidades",
+    crc_runner_vertical:"CRC Runner",
+    alss:"ALSS"
+};
+
+/* seguranca → seguranca | transito2 → transito | "/" → index */
+function chavePagina(caminho){
+
+    let nome = String(caminho || "")
+        .split("?")[0]
+        .split("#")[0]
+        .replace(/\/+$/, "")
+        .split("/").pop()
+        .replace(/\.html?$/i, "")
+        .toLowerCase();
+
+    if(!nome || nome === "lajeosa-pwa") nome = "index";
+
+    return nome.replace(/\d+$/, "");
+}
+
+function limparNomePagina(caminho){
+
+    const chave = chavePagina(caminho);
+
+    if(NOMES_PAGINAS[chave]) return NOMES_PAGINAS[chave];
+
+    return chave
+        .replace(/[_-]+/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+/* junta páginas com o mesmo nome (ex.: "/" + index.html, transito + transito2) */
+function agruparPaginas(bloco){
+
+    const mapa = {};
+
+    linhas(bloco).forEach(r => {
+        const nome = limparNomePagina(dimensao(r));
+        mapa[nome] = (mapa[nome] || 0) + metrica(r);
+    });
+
+    return Object.entries(mapa)
+        .map(([nome, valor]) => ({ nome, valor }))
+        .sort((a, b) => b.valor - a.valor);
+}
+
+/* ============================
+   NOMES AMIGÁVEIS — EVENTOS
+============================ */
+
+const NOMES_EVENTOS = {
+    page_view:"Visualizações de Página",
+    user_engagement:"Interação do Utilizador",
+    scroll:"Rolagem da Página",
+    pwa_launch_icon:"Abertura pela PWA",
+    pwa_return_open:"Regresso à PWA",
+    pwa_active_tick:"Atividade na PWA",
+    pwa_first_open:"Primeira Abertura da PWA",
+    pwa_install:"Instalação da PWA",
+    pwa_update_trigger:"Atualização da PWA",
+    pwa_open_facebook:"Abertura do Facebook",
+    pwa_open_instagram:"Abertura do Instagram",
+    session_start:"Início de Sessão",
+    first_visit:"Primeira Visita",
+    click:"Cliques"
+};
+
+function limparNomeEvento(evento){
+    return NOMES_EVENTOS[evento]
+        || String(evento).replace(/_/g, " ").replace(/^\w/, c => c.toUpperCase());
+}
+
+/* ============================
+   PAÍSES COM BANDEIRAS
+============================ */
+
+const PAISES = {
+    "Portugal":["Portugal","PT"],
+    "United States":["Estados Unidos","US"],
+    "France":["França","FR"],
+    "Switzerland":["Suíça","CH"],
+    "Germany":["Alemanha","DE"],
+    "Ireland":["Irlanda","IE"],
+    "Sweden":["Suécia","SE"],
+    "Spain":["Espanha","ES"],
+    "United Kingdom":["Reino Unido","GB"],
+    "Brazil":["Brasil","BR"],
+    "Luxembourg":["Luxemburgo","LU"],
+    "Belgium":["Bélgica","BE"],
+    "Netherlands":["Países Baixos","NL"],
+    "Italy":["Itália","IT"],
+    "Canada":["Canadá","CA"],
+    "Angola":["Angola","AO"],
+    "Mozambique":["Moçambique","MZ"],
+    "Cape Verde":["Cabo Verde","CV"],
+    "Andorra":["Andorra","AD"],
+    "Austria":["Áustria","AT"],
+    "Denmark":["Dinamarca","DK"],
+    "Norway":["Noruega","NO"],
+    "Finland":["Finlândia","FI"],
+    "Poland":["Polónia","PL"],
+    "Romania":["Roménia","RO"],
+    "Ukraine":["Ucrânia","UA"],
+    "Russia":["Rússia","RU"],
+    "China":["China","CN"],
+    "Japan":["Japão","JP"],
+    "India":["Índia","IN"],
+    "Australia":["Austrália","AU"],
+    "Mexico":["México","MX"],
+    "Argentina":["Argentina","AR"],
+    "Venezuela":["Venezuela","VE"],
+    "Morocco":["Marrocos","MA"],
+    "South Africa":["África do Sul","ZA"]
+};
+
+const bandeira = codigo =>
+    String.fromCodePoint(...[...codigo].map(c => 127397 + c.charCodeAt(0)));
+
+function nomePais(pais){
+    const p = PAISES[pais];
+    if(p) return bandeira(p[1]) + " " + p[0];
+    return "🌐 " + (pais && pais !== "(not set)" ? pais : "Desconhecido");
+}
+
+/* ============================
+   DISPOSITIVOS
+============================ */
+
+const DISPOSITIVOS = {
+    mobile:{ nome:"Mobile", emoji:"📱", cor:"#D4AF37", artigo:"telemóvel" },
+    desktop:{ nome:"Desktop", emoji:"💻", cor:"#5DADE2", artigo:"computador" },
+    tablet:{ nome:"Tablet", emoji:"📲", cor:"#B07CFF", artigo:"tablet" },
+    smart_tv:{ nome:"Smart TV", emoji:"📺", cor:"#FF7A9A", artigo:"smart TV" }
+};
+
+const infoDisp = k => DISPOSITIVOS[k] || {
+    nome:String(k).replace(/_/g, " ").replace(/^\w/, c => c.toUpperCase()),
+    emoji:"🖥️", cor:"#9BB5AA", artigo:String(k)
+};
+
+/* ============================
+   TABELAS
+============================ */
+
+function preencherTabela(id, cab1, cab2, itens){
+    $(id).innerHTML =
+        `<tr><th>${cab1}</th><th>${cab2}</th></tr>` +
+        itens.map(i => `<tr><td>${i[0]}</td><td>${i[1]}</td></tr>`).join("");
+}
+
+/* ============================
+   GRÁFICOS
+============================ */
+
+function criarGrafico(id, config){
+    const existente = Chart.getChart(id);
+    if(existente) existente.destroy();
+    new Chart($(id), config);
+}
+
+/* ============================
+   CARREGAR DASHBOARD
+============================ */
+
+async function carregarDashboard(){
+
+    try{
+
+        const resp = await fetch(DASHBOARD_URL, { cache:"no-store" });
+        if(!resp.ok) throw new Error("HTTP " + resp.status);
+
+        const data = await resp.json();
+
+        /* ---------- Resumo geral ---------- */
+
+        const ov = linhas(data.overview)[0];
+
+        const utilizadores = ov ? metrica(ov, 0) : 0;
+        const novos        = ov ? metrica(ov, 1) : 0;
+        const vistas       = ov ? metrica(ov, 2) : 0;
+        const eventosTotal = ov ? metrica(ov, 3) : 0;
+
+        $("activeUsers").textContent = fmt(utilizadores);
+        $("newUsers").textContent    = fmt(novos);
+        $("pageViews").textContent   = fmt(vistas);
+        $("eventCount").textContent  = fmt(eventosTotal);
+        $("resumoUsers").textContent = fmt(utilizadores);
+
+        if(data.updated){
+            $("atualizado").textContent = "Atualizado em " +
+                new Date(data.updated).toLocaleString("pt-PT", {
+                    day:"2-digit", month:"2-digit",
+                    hour:"2-digit", minute:"2-digit"
+                });
+        }
+
+        /* ---------- Dados tratados ---------- */
+
+        const dispositivos = linhas(data.devices)
+            .map(r => ({ chave:dimensao(r), valor:metrica(r) }))
+            .sort((a, b) => b.valor - a.valor);
+
+        const totalDisp = dispositivos.reduce((s, d) => s + d.valor, 0);
+
+        const paginas = agruparPaginas(data.pages);
+        const semana  = agruparPaginas(data.pagesWeek);
+
+        const paises = linhas(data.countries)
+            .map(r => ({ nome:dimensao(r), valor:metrica(r) }))
+            .sort((a, b) => b.valor - a.valor);
+
+        const cidades = linhas(data.cities)
+            .map(r => ({ nome:dimensao(r), valor:metrica(r) }))
+            .filter(c => c.nome && c.nome !== "(not set)")
+            .sort((a, b) => b.valor - a.valor);
+
+        const eventos = linhas(data.events)
+            .map(r => ({ chave:dimensao(r), valor:metrica(r) }))
+            .sort((a, b) => b.valor - a.valor);
+
+        const diario = linhas(data.daily)
+            .map(r => ({ data:dimensao(r), valor:metrica(r) }))
+            .sort((a, b) => a.data.localeCompare(b.data));
+
+        const mobile = (dispositivos.find(d => d.chave === "mobile") || {valor:0}).valor;
+
+        /* ---------- Dispositivos (cartões) ---------- */
+
+        $("dispositivos").innerHTML = dispositivos.map(d => {
+            const inf = infoDisp(d.chave);
+            return `
+            <div class="card-small">
+                <h4>${inf.emoji} ${esc(inf.nome)}</h4>
+                <div class="dev-pct" style="color:${inf.cor}">${pct(d.valor, totalDisp)}%</div>
+                <div class="dev-users">${fmt(d.valor)} utilizador${d.valor === 1 ? "" : "es"}</div>
+            </div>`;
+        }).join("");
+
+        $("resumoMobile").textContent = pct(mobile, totalDisp) + "%";
+
+        /* ---------- Insights automáticos ---------- */
+
+        const insights = [];
+
+        if(dispositivos[0]){
+            const inf = infoDisp(dispositivos[0].chave);
+            insights.push(
+                `${inf.emoji} ${pct(dispositivos[0].valor, totalDisp)}% dos acessos são feitos por ${inf.artigo}`
+            );
+        }
+
+        if(paises.length){
+            insights.push(
+                `🌍 Existem visitantes de ${paises.length} ${paises.length === 1 ? "país" : "países"}`
+            );
+        }
+
+        insights.push(`🆕 Foram registados ${fmt(novos)} novos utilizadores`);
+
+        if(paginas[0]){
+            insights.push(`🏆 A página mais visitada é ${esc(paginas[0].nome)}`);
+        }
+
+        if(eventos[0]){
+            insights.push(`⚡ O evento principal é ${esc(limparNomeEvento(eventos[0].chave))}`);
+        }
+
+        $("insights").innerHTML = insights
+            .map(i => `<div class="card-small insight">${i}</div>`)
+            .join("");
+
+        /* ---------- Tendências da semana (TOP 5) ---------- */
+
+        $("tendencias").innerHTML = semana.slice(0, 5).map((p, i) => `
+            <div class="card-top">
+                <div class="emoji">${MEDALHAS[i]}</div>
+                <div class="nome">${esc(p.nome)}</div>
+                <div class="numero">${fmt(p.valor)} <small>visualizações</small></div>
+            </div>`).join("")
+            || `<div class="card-small">Sem dados na última semana.</div>`;
+
+        /* ---------- Utilizadores por dia ---------- */
+
+        criarGrafico("graficoDaily", {
+            type:"line",
+            data:{
+                labels:diario.map(d => d.data.substring(6, 8) + "/" + d.data.substring(4, 6)),
+                datasets:[{
+                    label:"Utilizadores",
+                    data:diario.map(d => d.valor),
+                    borderColor:"#D4AF37",
+                    backgroundColor:"rgba(212,175,55,.25)",
+                    pointBackgroundColor:"#D4AF37",
+                    fill:true,
+                    tension:0.3
+                }]
+            },
+            options:{
+                responsive:true,
+                maintainAspectRatio:false,
+                plugins:{ legend:{ labels:{ color:"#FFFFFF" } } },
+                scales:{
+                    x:{ ticks:{ color:"#FFFFFF", maxRotation:0, autoSkip:true, maxTicksLimit:10 } },
+                    y:{ beginAtZero:true, ticks:{ color:"#FFFFFF", precision:0 } }
+                }
+            }
+        });
+
+        /* ---------- Destaques ---------- */
+
+        if(paises[0]) $("topCountry").textContent = nomePais(paises[0].nome);
+        if(cidades[0]) $("topCity").textContent = cidades[0].nome;
+        if(eventos[0]) $("topEvent").textContent = limparNomeEvento(eventos[0].chave);
+
+        /* ---------- Top 3 páginas ---------- */
+
+        $("top3").innerHTML = paginas.slice(0, 3).map((p, i) => `
+            <div class="card-top">
+                <div class="emoji">${MEDALHAS[i]}</div>
+                <div class="nome">${esc(p.nome)}</div>
+                <div class="numero">${fmt(p.valor)} <small>visualizações</small></div>
+            </div>`).join("");
+
+        if(paginas[0]) $("resumoTopPage").textContent = paginas[0].nome;
+
+        /* ---------- Distribuição por dispositivo (donut) ---------- */
+
+        criarGrafico("graficoDevices", {
+            type:"doughnut",
+            data:{
+                labels:dispositivos.map(d => infoDisp(d.chave).nome),
+                datasets:[{
+                    data:dispositivos.map(d => d.valor),
+                    backgroundColor:dispositivos.map(d => infoDisp(d.chave).cor),
+                    borderColor:"#1F5C45",
+                    borderWidth:3
+                }]
+            },
+            options:{
+                responsive:true,
+                maintainAspectRatio:false,
+                cutout:"60%",
+                plugins:{
+                    legend:{ position:"bottom", labels:{ color:"#FFFFFF", padding:16 } },
+                    tooltip:{
+                        callbacks:{
+                            label:c => ` ${c.label}: ${fmt(c.raw)} (${pct(c.raw, totalDisp)}%)`
+                        }
+                    }
+                }
+            }
+        });
+
+        /* ---------- Tabela e gráfico de páginas ---------- */
+
+        preencherTabela(
+            "tabelaPaginas", "Página", "Vistas",
+            paginas.map(p => [esc(p.nome), fmt(p.valor)])
+        );
+
+        const top10 = paginas.slice(0, 10);
+
+        criarGrafico("graficoPaginas", {
+            type:"bar",
+            data:{
+                labels:top10.map(p => p.nome),
+                datasets:[{
+                    label:"Visualizações",
+                    data:top10.map(p => p.valor),
+                    backgroundColor:"#D4AF37",
+                    borderRadius:6
+                }]
+            },
+            options:{
+                indexAxis:"y",
+                responsive:true,
+                maintainAspectRatio:false,
+                plugins:{ legend:{ display:false } },
+                scales:{
+                    x:{ beginAtZero:true, ticks:{ color:"#FFFFFF", precision:0 } },
+                    y:{ ticks:{ color:"#FFFFFF" }, grid:{ display:false } }
+                }
+            }
+        });
+
+        /* ---------- Países, cidades, eventos ---------- */
+
+        preencherTabela(
+            "tabelaPaises", "País", "Utilizadores",
+            paises.map(p => [esc(nomePais(p.nome)), fmt(p.valor)])
+        );
+
+        preencherTabela(
+            "tabelaCidades", "Cidade", "Utilizadores",
+            cidades.map(c => [esc(c.nome), fmt(c.valor)])
+        );
+
+        preencherTabela(
+            "tabelaEventos", "Evento", "Total",
+            eventos.map(e => [esc(limparNomeEvento(e.chave)), fmt(e.valor)])
+        );
+
+    }
+
+    catch(e){
+
+        console.error(e);
+
+        document.body.insertAdjacentHTML(
+            "afterbegin",
+            `<div class="erro">⚠️ Erro ao carregar Analytics V3. Tenta novamente dentro de instantes.</div>`
+        );
+
+    }
+
+}
+
+carregarDashboard();
+
+</script>
+
+</body>
+</html>
