@@ -12,115 +12,144 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <style>
 
 :root{
-    --verde:#0f4d36;
-    --verde-card:#1d5f46;
-    --dourado:#e3c15a;
-    --castanho:#3f2a1d;
+  --verde:#0b5d42;
+  --castanho:#4b2c1e;
+  --dourado:#e3c15a;
+  --texto:#ffffff;
 }
 
 *{
-    box-sizing:border-box;
+  box-sizing:border-box;
 }
 
 body{
-    margin:0;
-    background:var(--verde);
-    color:white;
-    font-family:Arial,sans-serif;
+  margin:0;
+  background:var(--verde);
+  color:var(--texto);
+  font-family:Arial,sans-serif;
 }
 
 header{
-    text-align:center;
-    padding:25px 15px;
+  text-align:center;
+  padding:25px 15px;
 }
 
 h1{
-    margin:0;
-    color:var(--dourado);
+  margin:0;
+  color:var(--dourado);
 }
 
 .subtitulo{
-    margin-top:8px;
-    color:#ddd;
+  margin-top:8px;
+  color:#ddd;
 }
 
-.stats{
-    margin:20px;
-    padding:15px;
-    background:var(--castanho);
-    border-left:5px solid var(--dourado);
-    border-radius:12px;
-    text-align:center;
+.resumo{
+  margin:20px;
+  padding:15px;
+  text-align:center;
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
 }
 
-.stats strong{
-    color:var(--dourado);
-    font-size:24px;
+.resumo strong{
+  color:var(--dourado);
+  font-size:1.4rem;
 }
 
 .container{
-    max-width:1200px;
-    margin:auto;
-    padding:15px;
+  max-width:1200px;
+  margin:auto;
+  padding:15px;
 }
 
-.boletim{
-    background:var(--castanho);
-    border-left:5px solid var(--dourado);
-    border-radius:12px;
-    padding:20px;
-    margin-bottom:20px;
+.card{
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:20px;
 }
 
-.boletim h2{
-    color:var(--dourado);
-    margin-top:0;
-}
-
-.secao{
-    margin-top:15px;
-}
-
-.secao h3{
-    margin-bottom:10px;
-    color:var(--dourado);
-}
-
-.lista{
-    line-height:1.8;
+.card h2{
+  margin-top:0;
+  color:var(--dourado);
 }
 
 .badge{
-    display:inline-block;
-    background:#854f00;
-    color:#fff;
-    padding:6px 12px;
-    border-radius:20px;
-    margin-top:10px;
+  display:inline-block;
+  background:#9a6300;
+  padding:6px 12px;
+  border-radius:30px;
+  margin-bottom:15px;
+}
+
+.secao{
+  margin-top:15px;
+}
+
+.secao h3{
+  color:var(--dourado);
+  margin-bottom:10px;
+}
+
+ul{
+  margin-top:5px;
+}
+
+li{
+  margin-bottom:8px;
 }
 
 .pdf-btn{
-    display:inline-block;
-    margin-top:15px;
-    padding:10px 15px;
-    background:var(--dourado);
-    color:black;
-    text-decoration:none;
-    border-radius:8px;
-    font-weight:bold;
+  display:inline-block;
+  margin-top:20px;
+  padding:10px 16px;
+  text-decoration:none;
+  background:var(--dourado);
+  color:#000;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+details{
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
+  padding:15px;
+}
+
+summary{
+  cursor:pointer;
+  font-size:18px;
+  color:var(--dourado);
+  font-weight:bold;
+}
+
+.arquivo-item{
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.arquivo-item:last-child{
+  border-bottom:none;
+}
+
+.arquivo-link{
+  color:white;
+  text-decoration:none;
 }
 
 .loading{
-    text-align:center;
-    padding:40px;
-    color:white;
+  text-align:center;
+  padding:40px;
 }
 
-.vazio{
-    text-align:center;
-    padding:25px;
-    background:var(--castanho);
-    border-radius:12px;
+.erro{
+  background:#8b0000;
+  padding:20px;
+  border-radius:12px;
 }
 
 </style>
@@ -130,9 +159,7 @@ h1{
 
 <header>
 
-<h1>
-🌱 Agrometeorologia
-</h1>
+<h1>🌱 Agrometeorologia</h1>
 
 <div class="subtitulo">
 Avisos Agrícolas Oficiais da Guarda
@@ -140,17 +167,25 @@ Avisos Agrícolas Oficiais da Guarda
 
 </header>
 
-<div id="contador" class="stats">
+<div id="resumo" class="resumo">
 
-A carregar...
+A carregar boletins...
 
 </div>
 
-<div id="boletins" class="container">
+<div class="container">
+
+<div id="ultimo">
 
 <div class="loading">
 
-A carregar boletins agrícolas...
+A carregar último boletim...
+
+</div>
+
+</div>
+
+<div id="arquivo-container">
 
 </div>
 
@@ -163,6 +198,8 @@ const API =
 
 function criarLista(texto){
 
+    if(!texto) return "";
+
     return texto
       .split(",")
       .map(item => item.trim())
@@ -174,12 +211,6 @@ function criarLista(texto){
 
 async function carregar(){
 
-    const container =
-      document.getElementById("boletins");
-
-    const contador =
-      document.getElementById("contador");
-
     try{
 
         const resp =
@@ -188,56 +219,50 @@ async function carregar(){
         const dados =
           await resp.json();
 
-        contador.innerHTML = `
-            <strong>
-                ${dados.totalBoletins}
-            </strong>
-            <br>
-            boletins ativos da EA da Guarda
+        document.getElementById("resumo").innerHTML = `
+            <strong>${dados.totalBoletins}</strong><br>
+            boletins disponíveis em ${dados.ano}
         `;
 
-        if(!dados.boletins ||
-           !dados.boletins.length){
+        if(!dados.ultimoBoletim){
 
-            container.innerHTML = `
-
-                <div class="vazio">
-
-                    ✅ Não existem boletins ativos
-                    para a Guarda.
-
+            document.getElementById("ultimo").innerHTML = `
+                <div class="card">
+                    ✅ Não existem boletins ativos.
                 </div>
-
             `;
 
             return;
+
         }
 
-        let html = "";
+        const b = dados.ultimoBoletim;
 
-        dados.boletins.forEach(b => {
+        document.getElementById("ultimo").innerHTML = `
 
-            html += `
-
-            <div class="boletim">
+            <div class="card">
 
                 <h2>
-                    📄 ${b.circular}
+                    🚨 Último Boletim
+                </h2>
+
+                <h2>
+                    ${b.circular}
                 </h2>
 
                 <div class="badge">
+
                     ${b.ea}
+
                 </div>
 
                 <div class="secao">
 
                     <h3>
-
-                        🌾 Culturas
-
+                        🌾 Culturas Afetadas
                     </h3>
 
-                    <ul class="lista">
+                    <ul>
 
                         ${criarLista(b.cultura)}
 
@@ -248,12 +273,10 @@ async function carregar(){
                 <div class="secao">
 
                     <h3>
-
                         🦠 Pragas e Doenças
-
                     </h3>
 
-                    <ul class="lista">
+                    <ul>
 
                         ${criarLista(b.inimigos)}
 
@@ -262,33 +285,68 @@ async function carregar(){
                 </div>
 
                 <a
-                    class="pdf-btn"
-                    href="${b.pdf}"
-                    target="_blank">
+                  class="pdf-btn"
+                  href="${b.pdf}"
+                  target="_blank">
 
-                    📄 Abrir Circular
+                  📄 Abrir Circular
 
                 </a>
 
             </div>
 
+        `;
+
+        let arquivoHTML = "";
+
+        if(dados.arquivo &&
+           dados.arquivo.length){
+
+            arquivoHTML = `
+
+            <details>
+
+                <summary>
+
+                    📚 Arquivo de Boletins
+                    (${dados.arquivo.length})
+
+                </summary>
+
+                ${dados.arquivo.map(item => `
+
+                    <div class="arquivo-item">
+
+                        <a
+                          class="arquivo-link"
+                          href="${item.pdf}"
+                          target="_blank">
+
+                          📄 ${item.circular}
+
+                        </a>
+
+                    </div>
+
+                `).join("")}
+
+            </details>
+
             `;
 
-        });
+        }
 
-        container.innerHTML = html;
+        document.getElementById(
+          "arquivo-container"
+        ).innerHTML = arquivoHTML;
 
     }
     catch(err){
 
-        container.innerHTML = `
-
-            <div class="vazio">
-
-                ❌ Erro ao carregar os boletins.
-
+        document.getElementById("ultimo").innerHTML = `
+            <div class="erro">
+                ❌ Erro ao carregar boletins.
             </div>
-
         `;
 
         console.error(err);
