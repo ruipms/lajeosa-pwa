@@ -1,16 +1,16 @@
 {
-  "atualizado": "2026-10-25",
+  "atualizado": "2026-11-01",
   "classificacao": [
-    {"equipa":"Núcleo Desp. Social","j":3,"v":3,"e":0,"d":0,"gm":12,"gs":2,"pts":9},
-    {"equipa":"Gcr Casal Cinza","j":2,"v":2,"e":0,"d":0,"gm":11,"gs":3,"pts":6},
-    {"equipa":"Ar Santo Cristo","j":2,"v":1,"e":0,"d":1,"gm":7,"gs":9,"pts":3},
-    {"equipa":"Gd Macedense","j":2,"v":1,"e":0,"d":1,"gm":4,"gs":5,"pts":3},
-    {"equipa":"Crc Lageosa Mondego - A.","j":2,"v":1,"e":0,"d":1,"gm":6,"gs":3,"pts":3},
-    {"equipa":"Gd Trancoso","j":2,"v":1,"e":0,"d":1,"gm":5,"gs":7,"pts":3},
-    {"equipa":"Adrc Penaverdense","j":3,"v":1,"e":0,"d":2,"gm":9,"gs":12,"pts":3},
-    {"equipa":"Sc Vilar Formoso","j":1,"v":0,"e":0,"d":1,"gm":2,"gs":3,"pts":0},
-    {"equipa":"Acd Estrela Almeida","j":3,"v":0,"e":0,"d":3,"gm":2,"gs":14,"pts":0}
-  ],
+  {"equipa":"Gcr Casal Cinza","j":3,"v":3,"e":0,"d":0,"gm":15,"gs":6,"pts":9},
+  {"equipa":"Núcleo Desp. Social","j":3,"v":3,"e":0,"d":0,"gm":12,"gs":2,"pts":9},
+  {"equipa":"Gd Macedense","j":4,"v":2,"e":0,"d":2,"gm":15,"gs":11,"pts":6},
+  {"equipa":"Crc Lageosa Mondego - A.","j":3,"v":2,"e":0,"d":1,"gm":11,"gs":6,"pts":6},
+  {"equipa":"Gd Trancoso","j":3,"v":2,"e":0,"d":1,"gm":10,"gs":10,"pts":6},
+  {"equipa":"Ar Santo Cristo","j":3,"v":1,"e":0,"d":2,"gm":10,"gs":14,"pts":3},
+  {"equipa":"Sc Vilar Formoso","j":3,"v":1,"e":0,"d":2,"gm":5,"gs":11,"pts":3},
+  {"equipa":"Adrc Penaverdense","j":4,"v":1,"e":0,"d":3,"gm":12,"gs":17,"pts":3},
+  {"equipa":"Acd Estrela Almeida","j":4,"v":0,"e":0,"d":4,"gm":2,"gs":15,"pts":0}
+],
   "jornadas": [
     {
       "numero": 1,
@@ -36,18 +36,42 @@
         {"casa":"Núcleo Desp. Social","fora":"Crc Lageosa Mondego - A.","data":"24 out","golos":[3,2],"local":"Pav. Gimnodesportivo Inatel"},
         {"casa":"Gcr Casal Cinza","fora":"Ar Santo Cristo","data":"24 out","golos":[6,1],"local":"Pavilhão de Casal de Cinza"},
         {"casa":"Adrc Penaverdense","fora":"Acd Estrela Almeida","data":"24 out","golos":[3,2],"local":"Pav. Escola Secundária Fornos Alg."},
-        {"casa":"Sc Vilar Formoso","fora":"Gd Macedense","data":"25 out","hora":"18:00","local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"}
+        {  "casa":"Sc Vilar Formoso","fora":"Gd Macedense","data":"25 out","golos":[2,8],"local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"}
       ]
     },
     {
-      "numero": 4,
-      "jogos": [
-        {"casa":"Ar Santo Cristo","fora":"Gd Trancoso","data":"31 out","hora":"18:30","local":"Pav. Municipal Torre Moncorvo"},
-        {"casa":"Acd Estrela Almeida","fora":"Sc Vilar Formoso","data":"31 out","hora":"18:30","local":"Pav. Gimnodesportivo Almeida"},
-        {"casa":"Crc Lageosa Mondego - A.","fora":"Adrc Penaverdense","data":"31 out","hora":"18:30","local":"Pav. Municipal Celorico da Beira"},
-        {"casa":"Gd Macedense","fora":"Gcr Casal Cinza","data":"1 nov","hora":"17:00","local":"Pav. Municipal Macedo Cavaleiros"}
-      ]
+  "numero": 4,
+  "jogos": [
+    {
+      "casa":"Ar Santo Cristo",
+      "fora":"Gd Trancoso",
+      "data":"31 out",
+      "golos":[3,5],
+      "local":"Complexo Desportivo de Carviçais"
     },
+    {
+      "casa":"Acd Estrela Almeida",
+      "fora":"Sc Vilar Formoso",
+      "data":"31 out",
+      "golos":[0,1],
+      "local":"Pavilhão Gimnodesportivo Almeida"
+    },
+    {
+      "casa":"Crc Lageosa Mondego - A.",
+      "fora":"Adrc Penaverdense",
+      "data":"31 out",
+      "golos":[5,3],
+      "local":"Pavilhão Municipal Celorico da Beira"
+    },
+    {
+      "casa":"Gd Macedense",
+      "fora":"Gcr Casal Cinza",
+      "data":"1 nov",
+      "golos":[3,4],
+      "local":"Pavilhão Municipal Macedo Cavaleiros"
+    }
+  ]
+},
     {
       "numero": 5,
       "jogos": [
