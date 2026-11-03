@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Agrometeorologia</title>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+:root{
+  --verde:#0b5d42;
+  --castanho:#4b2c1e;
+  --dourado:#e3c15a;
+  --texto:#ffffff;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:var(--verde);
+  color:var(--texto);
+  font-family:Arial,sans-serif;
+}
+
+header{
+  text-align:center;
+  padding:25px 15px;
+}
+
+.voltar{
+  display:inline-block;
+  margin:12px 0 0 15px;
+  padding:10px 16px;
+  background:var(--dourado);
+  color:#000;
+  text-decoration:none;
+  font-weight:bold;
+  font-size:16px;
+  border-radius:8px;
+}
+
+h1{
+  margin:0;
+  color:var(--dourado);
+}
+
+.subtitulo{
+  margin-top:8px;
+  color:#ddd;
+}
+
+.resumo{
+  margin:20px;
+  padding:15px;
+  text-align:center;
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
+}
+
+.resumo strong{
+  color:var(--dourado);
+  font-size:1.4rem;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:15px;
+}
+
+.card{
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin-top:0;
+  color:var(--dourado);
+}
+
+.badge{
+  display:inline-block;
+  background:#9a6300;
+  padding:6px 12px;
+  border-radius:30px;
+  margin-bottom:15px;
+}
+
+.secao{
+  margin-top:15px;
+}
+
+.secao h3{
+  color:var(--dourado);
+  margin-bottom:10px;
+}
+
+ul{
+  margin-top:5px;
+}
+
+li{
+  margin-bottom:8px;
+}
+
+.botoes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+.pdf-btn{
+  display:inline-block;
+  padding:12px 16px;
+  text-decoration:none;
+  background:var(--dourado);
+  color:#000;
+  border:0;
+  border-radius:8px;
+  font-weight:bold;
+  font-size:16px;
+  font-family:inherit;
+  cursor:pointer;
+}
+
+.pdf-btn.sec{
+  background:transparent;
+  color:var(--dourado);
+  border:2px solid var(--dourado);
+}
+
+details{
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
+  padding:15px;
+}
+
+summary{
+  cursor:pointer;
+  font-size:18px;
+  color:var(--dourado);
+  font-weight:bold;
+}
+
+.arquivo-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.arquivo-item:last-child{
+  border-bottom:none;
+}
+
+.arquivo-link{
+  color:white;
+  text-decoration:none;
+}
+
+.ler-mini{
+  flex-shrink:0;
+  background:var(--dourado);
+  color:#000;
+  border:0;
+  border-radius:8px;
+  padding:8px 12px;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.loading{
+  text-align:center;
+  padding:40px;
+}
+
+.erro{
+  background:#8b0000;
+  padding:20px;
+  border-radius:12px;
+}
+
+/* ---------- Modo leitura ---------- */
+
+#leitor{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  background:#fffdf7;
+  color:#222;
+}
+
+#leitor[hidden]{
+  display:none;
+}
+
+#leitor.escuro{
+  background:#16181a;
+  color:#e6e6e6;
+}
+
+.leitor-barra{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  padding-top:max(10px, env(safe-area-inset-top, 0px));
+  background:var(--verde);
+  color:#fff;
+}
+
+.leitor-barra button{
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  border:0;
+  border-radius:8px;
+  min-width:44px;
+  height:44px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.leitor-barra .fechar{
+  background:var(--dourado);
+  color:#000;
+  padding:0 14px;
+  margin-right:auto;
+}
+
+.leitor-scroll{
+  flex:1;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:18px 18px 60px;
+  padding-bottom:max(60px, env(safe-area-inset-bottom, 0px));
+}
+
+.leitor-conteudo{
+  max-width:720px;
+  margin:0 auto;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:19px;
+  line-height:1.7;
+}
+
+.leitor-conteudo h2{
+  margin:0 0 6px;
+  font-size:1.25em;
+  line-height:1.3;
+  color:var(--verde);
+}
+
+#leitor.escuro .leitor-conteudo h2,
+#leitor.escuro .leitor-conteudo h3{
+  color:var(--dourado);
+}
+
+.leitor-conteudo h3{
+  hyphens:none;
+  margin:1.6em 0 .4em;
+  font-size:1.12em;
+  line-height:1.35;
+  color:var(--verde);
+}
+
+.leitor-conteudo p{
+  margin:0 0 1em;
+  text-align:left;
+  hyphens:auto;
+  overflow-wrap:anywhere;
+}
+
+.leitor-conteudo p.item{
+  padding-left:1em;
+  border-left:3px solid var(--dourado);
+}
+
+.leitor-nota{
+  font-family:Arial,sans-serif;
+  font-size:.7em;
+  line-height:1.5;
+  opacity:.75;
+  margin-bottom:1.5em;
+}
+
+.leitor-nota a{
+  color:inherit;
+}
+
+.pg{
+  font-family:Arial,sans-serif;
+  font-size:.65em;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  opacity:.55;
+  margin:2em 0 1em;
+  padding-top:.6em;
+  border-top:1px solid currentColor;
+}
+
+.leitor-estado{
+  text-align:center;
+  padding:40px 10px;
+  font-family:Arial,sans-serif;
+  font-size:.9em;
+}
+
+</style>
+</head>
+
+<body>
+
+<a class="voltar" href="seguranca.html">← Voltar</a>
+
+<header>
+
+<h1>🌱 Agrometeorologia</h1>
+
+<div class="subtitulo">
+Avisos Agrícolas Oficiais da Guarda
+</div>
+
+</header>
+
+<div id="resumo" class="resumo">
+
+A carregar boletins...
+
+</div>
+
+<div class="container">
+
+<div id="ultimo">
+
+<div class="loading">
+
+A carregar último boletim...
+
+</div>
+
+</div>
+
+<div id="arquivo-container">
+
+</div>
+
+</div>
+
+<!-- Leitor de PDF -->
+<div id="leitor" hidden>
+
+  <div class="leitor-barra">
+    <button class="fechar" id="leitor-fechar" type="button">✕ Fechar</button>
+    <button id="leitor-menos" type="button" aria-label="Diminuir letra">A−</button>
+    <button id="leitor-mais" type="button" aria-label="Aumentar letra">A+</button>
+    <button id="leitor-tema" type="button" aria-label="Alternar tema">🌓</button>
+  </div>
+
+  <div class="leitor-scroll" id="leitor-scroll">
+    <div class="leitor-conteudo" id="leitor-conteudo"></div>
+  </div>
+
+</div>
+
+<script>
+
+const API =
+"https://small-glade-3bb9.ruijpms.workers.dev/?feed=agrometeo";
+
+// Proxy no Worker, usado se o servidor do PDF bloquear o acesso direto (CORS)
+const PROXY_PDF =
+"https://small-glade-3bb9.ruijpms.workers.dev/?pdf=";
+
+const PDFJS_URL =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+
+const PDFJS_WORKER =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+
+function esc(s){
+    return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[c]));
+}
+
+function criarLista(texto){
+
+    if(!texto) return "";
+
+    return texto
+      .split(",")
+      .map(item => item.trim())
+      .filter(item => item)
+      .map(item => `<li>${item}</li>`)
+      .join("");
+
+}
+
+async function carregar(){
+
+    try{
+
+        const resp =
+          await fetch(API);
+
+        const dados =
+          await resp.json();
+
+        document.getElementById("resumo").innerHTML = `
+            <strong>${dados.totalBoletins}</strong><br>
+            boletins disponíveis em ${dados.ano}
+        `;
+
+        if(!dados.ultimoBoletim){
+
+            document.getElementById("ultimo").innerHTML = `
+                <div class="card">
+                    ✅ Não existem boletins ativos.
+                </div>
+            `;
+
+            return;
+
+        }
+
+        const b = dados.ultimoBoletim;
+
+        document.getElementById("ultimo").innerHTML = `
+
+            <div class="card">
+
+                <h2>
+                    🚨 Último Boletim
+                </h2>
+
+                <h2>
+                    ${b.circular}
+                </h2>
+
+                <div class="badge">
+
+                    ${b.ea}
+
+                </div>
+
+                <div class="secao">
+
+                    <h3>
+                        🌾 Culturas Afetadas
+                    </h3>
+
+                    <ul>
+
+                        ${criarLista(b.cultura)}
+
+                    </ul>
+
+                </div>
+
+                <div class="secao">
+
+                    <h3>
+                        🦠 Pragas e Doenças
+                    </h3>
+
+                    <ul>
+
+                        ${criarLista(b.inimigos)}
+
+                    </ul>
+
+                </div>
+
+                <div class="botoes">
+
+                    <button
+                      class="pdf-btn ler-pdf"
+                      type="button"
+                      data-pdf="${esc(b.pdf)}"
+                      data-titulo="${esc(b.circular)}">
+
+                      📖 Ler no telemóvel
+
+                    </button>
+
+                    <a
+                      class="pdf-btn sec"
+                      href="${esc(b.pdf)}"
+                      target="_blank"
+                      rel="noopener">
+
+                      📄 PDF original
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+        let arquivoHTML = "";
+
+        if(dados.arquivo &&
+           dados.arquivo.length){
+
+            arquivoHTML = `
+
+            <details>
+
+                <summary>
+
+                    📚 Arquivo de Boletins
+                    (${dados.arquivo.length})
+
+                </summary>
+
+                ${dados.arquivo.map(item => `
+
+                    <div class="arquivo-item">
+
+                        <a
+                          class="arquivo-link"
+                          href="${esc(item.pdf)}"
+                          target="_blank"
+                          rel="noopener">
+
+                          📄 ${item.circular}
+
+                        </a>
+
+                        <button
+                          class="ler-mini ler-pdf"
+                          type="button"
+                          data-pdf="${esc(item.pdf)}"
+                          data-titulo="${esc(item.circular)}">
+
+                          📖 Ler
+
+                        </button>
+
+                    </div>
+
+                `).join("")}
+
+            </details>
+
+            `;
+
+        }
+
+        document.getElementById(
+          "arquivo-container"
+        ).innerHTML = arquivoHTML;
+
+    }
+    catch(err){
+
+        document.getElementById("ultimo").innerHTML = `
+            <div class="erro">
+                ❌ Erro ao carregar boletins.
+            </div>
+        `;
+
+        console.error(err);
+
+    }
+
+}
+
+carregar();
+
+
+/* =====================================================
+   LEITOR DE PDF (modo leitura)
+   ===================================================== */
+
+const leitor      = document.getElementById("leitor");
+const leitorConteudo = document.getElementById("leitor-conteudo");
+const leitorScroll   = document.getElementById("leitor-scroll");
+
+const cacheBlocos = new Map();   // url -> blocos já extraídos
+let pdfjsPromise  = null;
+let pedidoAtual   = 0;           // evita misturar resultados se o utilizador abrir outro PDF
+
+/* ---- preferências (tamanho da letra e tema) ---- */
+
+let tamanhoLetra = 19;
+let temaEscuro   = false;
+
+try{
+    const t = parseInt(localStorage.getItem("leitor-tamanho"), 10);
+    if(t >= 14 && t <= 32) tamanhoLetra = t;
+    temaEscuro = localStorage.getItem("leitor-escuro") === "1";
+}catch(e){}
+
+function aplicarPreferencias(){
+    leitorConteudo.style.fontSize = tamanhoLetra + "px";
+    leitor.classList.toggle("escuro", temaEscuro);
+    try{
+        localStorage.setItem("leitor-tamanho", String(tamanhoLetra));
+        localStorage.setItem("leitor-escuro", temaEscuro ? "1" : "0");
+    }catch(e){}
+}
+
+document.getElementById("leitor-mais").addEventListener("click", () => {
+    tamanhoLetra = Math.min(32, tamanhoLetra + 2);
+    aplicarPreferencias();
+});
+
+document.getElementById("leitor-menos").addEventListener("click", () => {
+    tamanhoLetra = Math.max(14, tamanhoLetra - 2);
+    aplicarPreferencias();
+});
+
+document.getElementById("leitor-tema").addEventListener("click", () => {
+    temaEscuro = !temaEscuro;
+    aplicarPreferencias();
+});
+
+aplicarPreferencias();
+
+/* ---- abrir / fechar ---- */
+
+function mostrarLeitor(){
+    leitor.hidden = false;
+    document.body.style.overflow = "hidden";
+}
+
+function esconderLeitor(){
+    leitor.hidden = true;
+    document.body.style.overflow = "";
+    pedidoAtual++;
+}
+
+// o botão "voltar" do telemóvel fecha o leitor em vez de sair da página
+window.addEventListener("popstate", () => {
+    if(!leitor.hidden) esconderLeitor();
+});
+
+function fecharLeitor(){
+    if(history.state && history.state.leitor){
+        history.back();
+    }else{
+        esconderLeitor();
+    }
+}
+
+document.getElementById("leitor-fechar")
+    .addEventListener("click", fecharLeitor);
+
+document.addEventListener("keydown", e => {
+    if(e.key === "Escape" && !leitor.hidden) fecharLeitor();
+});
+
+// cliques nos botões "Ler" (delegação de eventos)
+document.addEventListener("click", e => {
+    const btn = e.target.closest(".ler-pdf");
+    if(!btn) return;
+    abrirLeitor(btn.dataset.pdf, btn.dataset.titulo);
+});
+
+/* ---- carregar pdf.js só quando é preciso ---- */
+
+function carregarPdfJs(){
+
+    if(window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+
+    if(!pdfjsPromise){
+        pdfjsPromise = new Promise((resolve, reject) => {
+            const s = document.createElement("script");
+            s.src = PDFJS_URL;
+            s.onload = () => {
+                window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+                resolve(window.pdfjsLib);
+            };
+            s.onerror = () => {
+                pdfjsPromise = null;
+                reject(new Error("Não foi possível carregar o leitor de PDF."));
+            };
+            document.head.appendChild(s);
+        });
+    }
+
+    return pdfjsPromise;
+}
+
+/* ---- obter o ficheiro (direto; se falhar, via Worker) ---- */
+
+async function obterPdf(url){
+
+    try{
+        const r = await fetch(url);
+        if(!r.ok) throw new Error("HTTP " + r.status);
+        return await r.arrayBuffer();
+    }
+    catch(e){
+        const r = await fetch(PROXY_PDF + encodeURIComponent(url));
+        if(!r.ok) throw new Error("Proxy HTTP " + r.status);
+        return await r.arrayBuffer();
+    }
+
+}
+
+/* ---- reconstruir colunas, linhas e parágrafos a partir do texto do PDF ---- */
+
+const RE_ITEM = /^([•●▪◦■·\-–]|\d+[.)])\s+/;
+const RE_FIM_FRASE = /[.!?:;)»”"]$/;
+
+function textoDe(runs){
+    return runs.map(r => r.t).join("");
+}
+
+// junta espaços e funde pedaços vizinhos com o mesmo estilo (normal / negrito)
+function normalizarRuns(brutos){
+
+    const out = [];
+    let anteriorEspaco = true;
+
+    for(const r of brutos){
+        let t = r.t.replace(/\s+/g, " ");
+        if(anteriorEspaco && t.startsWith(" ")) t = t.slice(1);
+        if(!t) continue;
+        anteriorEspaco = t.endsWith(" ");
+        const u = out[out.length - 1];
+        if(u && u.b === r.b) u.t += t;
+        else out.push({ t, b: r.b });
+    }
+
+    const ult = out[out.length - 1];
+    if(ult){
+        ult.t = ult.t.replace(/ $/, "");
+        if(!ult.t) out.pop();
+    }
+
+    return out;
+
+}
+
+// altura de letra mais comum (ponderada pelo número de caracteres)
+function medianaPonderada(itens){
+
+    const arr = itens
+        .map(i => [i.h, i.s.length])
+        .sort((a, b) => a[0] - b[0]);
+
+    const total = arr.reduce((s, a) => s + a[1], 0);
+    let acc = 0;
+
+    for(const [h, n] of arr){
+        acc += n;
+        if(acc >= total / 2) return h;
+    }
+
+    return 10;
+
+}
+
+// agrupa os itens em "faixas" horizontais (mesma altura na página)
+function agruparPorY(itens, corpo){
+
+    const s = [...itens].sort((a, b) => (b.y - a.y) || (a.x - b.x));
+    const rows = [];
+
+    for(const it of s){
+        const r = rows[rows.length - 1];
+        if(r && Math.abs(r.y - it.y) <= Math.max(r.h, it.h) * 0.4){
+            r.itens.push(it);
+            r.h = Math.max(r.h, it.h);
+        }else{
+            rows.push({ y: it.y, h: it.h, itens: [it] });
+        }
+    }
+
+    rows.forEach(r => {
+        r.itens.sort((a, b) => a.x - b.x);
+        r.segs = [];
+        for(const it of r.itens){
+            const u = r.segs[r.segs.length - 1];
+            if(u && it.x - u.b < corpo * 0.5){
+                u.b = Math.max(u.b, it.x + it.w);
+            }else{
+                r.segs.push({ a: it.x, b: it.x + it.w });
+            }
+        }
+    });
+
+    return rows;
+
+}
+
+// procura corredores verticais vazios (espaço entre colunas) em toda a página
+function detetarCalhas(rows, corpo){
+
+    if(rows.length < 6) return [];
+
+    let min = Infinity, max = -Infinity;
+
+    rows.forEach(r => r.segs.forEach(s => {
+        if(s.a < min) min = s.a;
+        if(s.b > max) max = s.b;
+    }));
+
+    const larg = max - min;
+    if(larg < corpo * 14) return [];
+
+    const n = Math.ceil(larg) + 2;
+    const cob = new Float32Array(n);
+
+    rows.forEach(r => r.segs.forEach(s => {
+        const a = Math.max(0, Math.floor(s.a - min));
+        const b = Math.min(n - 1, Math.ceil(s.b - min));
+        for(let k = a; k <= b; k++) cob[k] += r.h;
+    }));
+
+    let pico = 0;
+    for(let k = 0; k < n; k++) if(cob[k] > pico) pico = cob[k];
+
+    const lim = pico * 0.4;
+
+    const maxEsq = new Float32Array(n);
+    const maxDir = new Float32Array(n);
+    for(let k = 0; k < n; k++) maxEsq[k] = Math.max(cob[k], k ? maxEsq[k - 1] : 0);
+    for(let k = n - 1; k >= 0; k--) maxDir[k] = Math.max(cob[k], k < n - 1 ? maxDir[k + 1] : 0);
+
+    const calhas = [];
+    let k = 0;
+
+    while(k < n){
+
+        if(cob[k] > lim){ k++; continue; }
+
+        let e = k;
+        while(e + 1 < n && cob[e + 1] <= lim) e++;
+        const s = k;
+        k = e + 1;
+
+        if(s === 0 || e === n - 1) continue;
+
+        let minV = Infinity;
+        for(let j = s; j <= e; j++) if(cob[j] < minV) minV = cob[j];
+
+        const tol = minV + corpo * 0.5;
+
+        let melhor = null;
+        let j = s;
+        while(j <= e){
+            if(cob[j] <= tol){
+                let f = j;
+                while(f + 1 <= e && cob[f + 1] <= tol) f++;
+                if(!melhor || f - j > melhor.f - melhor.j) melhor = { j, f };
+                j = f + 1;
+            }else{
+                j++;
+            }
+        }
+
+        if(!melhor || melhor.j < 1) continue;
+        if(melhor.f - melhor.j + 1 < corpo * 0.6) continue;
+        if(melhor.j < larg * 0.12 || melhor.f > larg * 0.88) continue;
+        if(maxEsq[melhor.j - 1] < pico * 0.3) continue;
+        if(maxDir[melhor.f + 1] < pico * 0.3) continue;
+        if(minV > 0.5 * Math.min(maxEsq[melhor.j - 1], maxDir[melhor.f + 1])) continue;
+
+        calhas.push({ ini: min + melhor.j, fim: min + melhor.f + 1 });
+
+    }
+
+    return calhas;
+
+}
+
+function colunaDe(it, calhas){
+    const c = it.x + it.w / 2;
+    let col = 0;
+    for(const g of calhas){
+        if(c > (g.ini + g.fim) / 2) col++;
+    }
+    return col;
+}
+
+// transforma um conjunto de itens numa linha de texto (com negrito preservado)
+function criarLinha(its){
+
+    its = [...its].sort((a, b) => a.x - b.x);
+
+    const h = Math.max(...its.map(i => i.h));
+    const brutos = [];
+    const add = (t, b) => { if(t) brutos.push({ t, b }); };
+
+    let fim = null;
+    let prev = null;
+
+    for(const it of its){
+        if(prev){
+            const gap = it.x - fim;
+            if(gap > h * 3) add(" · ", false);
+            else if(gap > h * 0.1) add(" ", prev.b && it.b);
+        }
+        add(it.s, it.b);
+        fim = Math.max(fim === null ? -Infinity : fim, it.x + it.w);
+        prev = it;
+    }
+
+    const runs = normalizarRuns(brutos);
+
+    return {
+        y: its[0].y,
+        h,
+        x0: its[0].x,
+        x1: fim,
+        runs,
+        plain: textoDe(runs),
+        tudoNeg: runs.length > 0 && runs.every(r => r.b || !r.t.trim())
+    };
+
+}
+
+// devolve "fluxos" de leitura: listas de linhas na ordem certa (coluna a coluna)
+function fluxosDaPagina(itens, corpo){
+
+    const rows = agruparPorY(itens, corpo);
+    const calhas = detetarCalhas(rows, corpo);
+
+    const linhaDe = its => criarLinha(its);
+
+    if(!calhas.length){
+        return [rows.map(r => linhaDe(r.itens)
