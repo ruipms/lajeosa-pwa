@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,62 +9,49 @@
 <style>
 
 body{
-    background:#0b5d42;
-    color:white;
-    font-family:Arial,sans-serif;
-    padding:20px;
-    margin:0;
+  font-family:Arial,sans-serif;
+  padding:20px;
+  background:#0b5d42;
+  color:white;
 }
 
 h1{
-    color:#e3c15a;
+  color:#e3c15a;
 }
 
 button{
-    background:#e3c15a;
-    color:black;
-    border:none;
-    padding:12px 20px;
-    border-radius:8px;
-    font-size:16px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-button:hover{
-    opacity:0.9;
+  background:#e3c15a;
+  color:black;
+  border:none;
+  padding:12px 20px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
 }
 
 #estado{
-    margin-top:15px;
-    color:#e3c15a;
-    font-weight:bold;
+  margin-top:15px;
+  color:#ffd966;
 }
 
 #resultado{
-    margin-top:20px;
-    background:white;
-    color:black;
-    padding:15px;
-    border-radius:10px;
-    min-height:200px;
-    max-height:600px;
-    overflow:auto;
-    white-space:pre-wrap;
-    line-height:1.5;
+  margin-top:20px;
+  background:white;
+  color:black;
+  padding:15px;
+  border-radius:10px;
+  white-space:pre-wrap;
+  min-height:250px;
+  max-height:600px;
+  overflow:auto;
 }
 
 </style>
-
 </head>
 
 <body>
 
 <h1>📖 Teste PDF DGAV</h1>
-
-<p>
-Este teste tenta ler diretamente a Circular nº 12 da Guarda usando PDF.js.
-</p>
 
 <button onclick="lerPDF()">
 📖 Ler Circular nº 12
@@ -76,92 +62,70 @@ A aguardar...
 </div>
 
 <div id="resultado">
-O texto extraído aparecerá aqui.
+O texto aparecerá aqui.
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.min.js"></script>
+<script type="module">
 
-<script>
+import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.min.mjs';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.worker.min.js";
+window.lerPDF = async function(){
 
-async function lerPDF(){
+  const PDF_URL =
+  "https://snaabackoffice.dgav.pt/snaabackoffice/Content/docs/circulares/Circular%20n%C2%BA%2012%20Guarda.pdf";
 
-    const PDF_URL =
-    "https://snaabackoffice.dgav.pt/snaabackoffice/Content/docs/circulares/Circular%20n%C2%BA%2012%20Guarda.pdf";
+  const estado =
+  document.getElementById("estado");
 
-    const estado =
-    document.getElementById("estado");
+  const resultado =
+  document.getElementById("resultado");
 
-    const resultado =
-    document.getElementById("resultado");
+  try{
 
-    try{
+      estado.textContent =
+      "📄 A descarregar PDF...";
 
-        estado.innerHTML =
-        "📄 A descarregar PDF...";
+      const pdf =
+      await pdfjsLib.getDocument(PDF_URL).promise;
 
-        resultado.innerHTML = "";
+      let texto = "";
 
-        const pdf =
-        await pdfjsLib
-        .getDocument(PDF_URL)
-        .promise;
+      for(let i=1;i<=pdf.numPages;i++){
 
-        estado.innerHTML =
-        `✅ PDF carregado (${pdf.numPages} páginas)`;
+          estado.textContent =
+          `📖 A processar página ${i}/${pdf.numPages}`;
 
-        let texto = "";
+          const page =
+          await pdf.getPage(i);
 
-        for(let pagina = 1;
-            pagina <= pdf.numPages;
-            pagina++){
+          const content =
+          await page.getTextContent();
 
-            estado.innerHTML =
-            `📖 A processar página ${pagina} de ${pdf.numPages}`;
-
-            const page =
-            await pdf.getPage(pagina);
-
-            const content =
-            await page.getTextContent();
-
-            const pageText =
-            content.items
+          texto += content.items
             .map(item => item.str)
             .join(" ");
 
-            texto +=
-            "\n\n========================\n";
+          texto += "\n\n";
+      }
 
-            texto +=
-            "PÁGINA " + pagina;
+      resultado.textContent =
+      texto;
 
-            texto +=
-            "\n========================\n\n";
+      estado.textContent =
+      "✅ Extração concluída";
 
-            texto += pageText;
-        }
+  }
+  catch(err){
 
-        resultado.textContent =
-        texto;
+      console.error(err);
 
-        estado.innerHTML =
-        "✅ Extração concluída com sucesso";
+      estado.textContent =
+      "❌ Erro";
 
-    }
-    catch(err){
+      resultado.textContent =
+      err.message;
 
-        console.error(err);
-
-        estado.innerHTML =
-        "❌ Erro ao ler PDF";
-
-        resultado.textContent =
-        err.message;
-
-    }
+  }
 
 }
 
