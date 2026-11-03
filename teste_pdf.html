@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Teste PDF DGAV</title>
+
+<style>
+
+body{
+    background:#0b5d42;
+    color:white;
+    font-family:Arial,sans-serif;
+    padding:20px;
+    margin:0;
+}
+
+h1{
+    color:#e3c15a;
+}
+
+button{
+    background:#e3c15a;
+    color:black;
+    border:none;
+    padding:12px 20px;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+button:hover{
+    opacity:0.9;
+}
+
+#estado{
+    margin-top:15px;
+    color:#e3c15a;
+    font-weight:bold;
+}
+
+#resultado{
+    margin-top:20px;
+    background:white;
+    color:black;
+    padding:15px;
+    border-radius:10px;
+    min-height:200px;
+    max-height:600px;
+    overflow:auto;
+    white-space:pre-wrap;
+    line-height:1.5;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>📖 Teste PDF DGAV</h1>
+
+<p>
+Este teste tenta ler diretamente a Circular nº 12 da Guarda usando PDF.js.
+</p>
+
+<button onclick="lerPDF()">
+📖 Ler Circular nº 12
+</button>
+
+<div id="estado">
+A aguardar...
+</div>
+
+<div id="resultado">
+O texto extraído aparecerá aqui.
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.min.js"></script>
+
+<script>
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.worker.min.js";
+
+async function lerPDF(){
+
+    const PDF_URL =
+    "https://snaabackoffice.dgav.pt/snaabackoffice/Content/docs/circulares/Circular%20n%C2%BA%2012%20Guarda.pdf";
+
+    const estado =
+    document.getElementById("estado");
+
+    const resultado =
+    document.getElementById("resultado");
+
+    try{
+
+        estado.innerHTML =
+        "📄 A descarregar PDF...";
+
+        resultado.innerHTML = "";
+
+        const pdf =
+        await pdfjsLib
+        .getDocument(PDF_URL)
+        .promise;
+
+        estado.innerHTML =
+        `✅ PDF carregado (${pdf.numPages} páginas)`;
+
+        let texto = "";
+
+        for(let pagina = 1;
+            pagina <= pdf.numPages;
+            pagina++){
+
+            estado.innerHTML =
+            `📖 A processar página ${pagina} de ${pdf.numPages}`;
+
+            const page =
+            await pdf.getPage(pagina);
+
+            const content =
+            await page.getTextContent();
+
+            const pageText =
+            content.items
+            .map(item => item.str)
+            .join(" ");
+
+            texto +=
+            "\n\n========================\n";
+
+            texto +=
+            "PÁGINA " + pagina;
+
+            texto +=
+            "\n========================\n\n";
+
+            texto += pageText;
+        }
+
+        resultado.textContent =
+        texto;
+
+        estado.innerHTML =
+        "✅ Extração concluída com sucesso";
+
+    }
+    catch(err){
+
+        console.error(err);
+
+        estado.innerHTML =
+        "❌ Erro ao ler PDF";
+
+        resultado.textContent =
+        err.message;
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
