@@ -4,46 +4,311 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Teste PDF DGAV</title>
+<title>Agrometeorologia</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
+:root{
+  --verde:#0b5d42;
+  --castanho:#4b2c1e;
+  --dourado:#e3c15a;
+  --texto:#ffffff;
+}
+
+*{
+  box-sizing:border-box;
+}
+
 body{
+  margin:0;
+  background:var(--verde);
+  color:var(--texto);
   font-family:Arial,sans-serif;
-  padding:20px;
-  background:#0b5d42;
-  color:white;
+}
+
+header{
+  text-align:center;
+  padding:25px 15px;
 }
 
 h1{
-  color:#e3c15a;
+  margin:0;
+  color:var(--dourado);
 }
 
-button{
-  background:#e3c15a;
-  color:black;
-  border:none;
-  padding:12px 20px;
+.subtitulo{
+  margin-top:8px;
+  color:#ddd;
+}
+
+.resumo{
+  margin:20px;
+  padding:15px;
+  text-align:center;
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
+}
+
+.resumo strong{
+  color:var(--dourado);
+  font-size:1.4rem;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:15px;
+}
+
+.card{
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin-top:0;
+  color:var(--dourado);
+}
+
+.badge{
+  display:inline-block;
+  background:#9a6300;
+  padding:6px 12px;
+  border-radius:30px;
+  margin-bottom:15px;
+}
+
+.secao{
+  margin-top:15px;
+}
+
+.secao h3{
+  color:var(--dourado);
+  margin-bottom:10px;
+}
+
+ul{
+  margin-top:5px;
+}
+
+li{
+  margin-bottom:8px;
+}
+
+.botoes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+.pdf-btn{
+  display:inline-block;
+  padding:12px 16px;
+  text-decoration:none;
+  background:var(--dourado);
+  color:#000;
+  border:0;
   border-radius:8px;
+  font-weight:bold;
+  font-size:16px;
+  font-family:inherit;
   cursor:pointer;
+}
+
+.pdf-btn.sec{
+  background:transparent;
+  color:var(--dourado);
+  border:2px solid var(--dourado);
+}
+
+details{
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
+  padding:15px;
+}
+
+summary{
+  cursor:pointer;
+  font-size:18px;
+  color:var(--dourado);
   font-weight:bold;
 }
 
-#estado{
-  margin-top:15px;
-  color:#ffd966;
+.arquivo-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.1);
 }
 
-#resultado{
-  margin-top:20px;
-  background:white;
-  color:black;
-  padding:15px;
-  border-radius:10px;
-  white-space:pre-wrap;
-  min-height:250px;
-  max-height:600px;
-  overflow:auto;
+.arquivo-item:last-child{
+  border-bottom:none;
+}
+
+.arquivo-link{
+  color:white;
+  text-decoration:none;
+}
+
+.ler-mini{
+  flex-shrink:0;
+  background:var(--dourado);
+  color:#000;
+  border:0;
+  border-radius:8px;
+  padding:8px 12px;
+  font-weight:bold;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.loading{
+  text-align:center;
+  padding:40px;
+}
+
+.erro{
+  background:#8b0000;
+  padding:20px;
+  border-radius:12px;
+}
+
+/* ---------- Modo leitura ---------- */
+
+#leitor{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  background:#fffdf7;
+  color:#222;
+}
+
+#leitor[hidden]{
+  display:none;
+}
+
+#leitor.escuro{
+  background:#16181a;
+  color:#e6e6e6;
+}
+
+.leitor-barra{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 12px;
+  padding-top:max(10px, env(safe-area-inset-top, 0px));
+  background:var(--verde);
+  color:#fff;
+}
+
+.leitor-barra button{
+  background:rgba(255,255,255,.15);
+  color:#fff;
+  border:0;
+  border-radius:8px;
+  min-width:44px;
+  height:44px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.leitor-barra .fechar{
+  background:var(--dourado);
+  color:#000;
+  padding:0 14px;
+  margin-right:auto;
+}
+
+.leitor-scroll{
+  flex:1;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding:18px 18px 60px;
+  padding-bottom:max(60px, env(safe-area-inset-bottom, 0px));
+}
+
+.leitor-conteudo{
+  max-width:720px;
+  margin:0 auto;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:19px;
+  line-height:1.7;
+}
+
+.leitor-conteudo h2{
+  margin:0 0 6px;
+  font-size:1.25em;
+  line-height:1.3;
+  color:var(--verde);
+}
+
+#leitor.escuro .leitor-conteudo h2,
+#leitor.escuro .leitor-conteudo h3{
+  color:var(--dourado);
+}
+
+.leitor-conteudo h3{
+  margin:1.6em 0 .4em;
+  font-size:1.12em;
+  line-height:1.35;
+  color:var(--verde);
+}
+
+.leitor-conteudo p{
+  margin:0 0 1em;
+  text-align:left;
+  hyphens:auto;
+  overflow-wrap:anywhere;
+}
+
+.leitor-conteudo p.item{
+  padding-left:1em;
+  border-left:3px solid var(--dourado);
+}
+
+.leitor-nota{
+  font-family:Arial,sans-serif;
+  font-size:.7em;
+  line-height:1.5;
+  opacity:.75;
+  margin-bottom:1.5em;
+}
+
+.leitor-nota a{
+  color:inherit;
+}
+
+.pg{
+  font-family:Arial,sans-serif;
+  font-size:.65em;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  opacity:.55;
+  margin:2em 0 1em;
+  padding-top:.6em;
+  border-top:1px solid currentColor;
+}
+
+.leitor-estado{
+  text-align:center;
+  padding:40px 10px;
+  font-family:Arial,sans-serif;
+  font-size:.9em;
 }
 
 </style>
@@ -51,81 +316,628 @@ button{
 
 <body>
 
-<h1>📖 Teste PDF DGAV</h1>
+<header>
 
-<button onclick="lerPDF()">
-📖 Ler Circular nº 12
-</button>
+<h1>🌱 Agrometeorologia</h1>
 
-<div id="estado">
-A aguardar...
+<div class="subtitulo">
+Avisos Agrícolas Oficiais da Guarda
 </div>
 
-<div id="resultado">
-O texto aparecerá aqui.
+</header>
+
+<div id="resumo" class="resumo">
+
+A carregar boletins...
+
 </div>
 
-<script type="module">
+<div class="container">
 
-import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.8.69/pdf.min.mjs';
+<div id="ultimo">
 
-window.lerPDF = async function(){
+<div class="loading">
 
-  const PDF_URL =
-  "https://snaabackoffice.dgav.pt/snaabackoffice/Content/docs/circulares/Circular%20n%C2%BA%2012%20Guarda.pdf";
+A carregar último boletim...
 
-  const estado =
-  document.getElementById("estado");
+</div>
 
-  const resultado =
-  document.getElementById("resultado");
+</div>
 
-  try{
+<div id="arquivo-container">
 
-      estado.textContent =
-      "📄 A descarregar PDF...";
+</div>
 
-      const pdf =
-      await pdfjsLib.getDocument(PDF_URL).promise;
+</div>
 
-      let texto = "";
+<!-- Leitor de PDF -->
+<div id="leitor" hidden>
 
-      for(let i=1;i<=pdf.numPages;i++){
+  <div class="leitor-barra">
+    <button class="fechar" id="leitor-fechar" type="button">✕ Fechar</button>
+    <button id="leitor-menos" type="button" aria-label="Diminuir letra">A−</button>
+    <button id="leitor-mais" type="button" aria-label="Aumentar letra">A+</button>
+    <button id="leitor-tema" type="button" aria-label="Alternar tema">🌓</button>
+  </div>
 
-          estado.textContent =
-          `📖 A processar página ${i}/${pdf.numPages}`;
+  <div class="leitor-scroll" id="leitor-scroll">
+    <div class="leitor-conteudo" id="leitor-conteudo"></div>
+  </div>
 
-          const page =
-          await pdf.getPage(i);
+</div>
 
-          const content =
-          await page.getTextContent();
+<script>
 
-          texto += content.items
-            .map(item => item.str)
-            .join(" ");
+const API =
+"https://small-glade-3bb9.ruijpms.workers.dev/?feed=agrometeo";
 
-          texto += "\n\n";
-      }
+// Proxy no Worker, usado se o servidor do PDF bloquear o acesso direto (CORS)
+const PROXY_PDF =
+"https://small-glade-3bb9.ruijpms.workers.dev/?pdf=";
 
-      resultado.textContent =
-      texto;
+const PDFJS_URL =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
 
-      estado.textContent =
-      "✅ Extração concluída";
+const PDFJS_WORKER =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 
-  }
-  catch(err){
+function esc(s){
+    return String(s ?? "").replace(/[&<>"']/g, c => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+    }[c]));
+}
 
-      console.error(err);
+function criarLista(texto){
 
-      estado.textContent =
-      "❌ Erro";
+    if(!texto) return "";
 
-      resultado.textContent =
-      err.message;
+    return texto
+      .split(",")
+      .map(item => item.trim())
+      .filter(item => item)
+      .map(item => `<li>${item}</li>`)
+      .join("");
 
-  }
+}
+
+async function carregar(){
+
+    try{
+
+        const resp =
+          await fetch(API);
+
+        const dados =
+          await resp.json();
+
+        document.getElementById("resumo").innerHTML = `
+            <strong>${dados.totalBoletins}</strong><br>
+            boletins disponíveis em ${dados.ano}
+        `;
+
+        if(!dados.ultimoBoletim){
+
+            document.getElementById("ultimo").innerHTML = `
+                <div class="card">
+                    ✅ Não existem boletins ativos.
+                </div>
+            `;
+
+            return;
+
+        }
+
+        const b = dados.ultimoBoletim;
+
+        document.getElementById("ultimo").innerHTML = `
+
+            <div class="card">
+
+                <h2>
+                    🚨 Último Boletim
+                </h2>
+
+                <h2>
+                    ${b.circular}
+                </h2>
+
+                <div class="badge">
+
+                    ${b.ea}
+
+                </div>
+
+                <div class="secao">
+
+                    <h3>
+                        🌾 Culturas Afetadas
+                    </h3>
+
+                    <ul>
+
+                        ${criarLista(b.cultura)}
+
+                    </ul>
+
+                </div>
+
+                <div class="secao">
+
+                    <h3>
+                        🦠 Pragas e Doenças
+                    </h3>
+
+                    <ul>
+
+                        ${criarLista(b.inimigos)}
+
+                    </ul>
+
+                </div>
+
+                <div class="botoes">
+
+                    <button
+                      class="pdf-btn ler-pdf"
+                      type="button"
+                      data-pdf="${esc(b.pdf)}"
+                      data-titulo="${esc(b.circular)}">
+
+                      📖 Ler no telemóvel
+
+                    </button>
+
+                    <a
+                      class="pdf-btn sec"
+                      href="${esc(b.pdf)}"
+                      target="_blank"
+                      rel="noopener">
+
+                      📄 PDF original
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        `;
+
+        let arquivoHTML = "";
+
+        if(dados.arquivo &&
+           dados.arquivo.length){
+
+            arquivoHTML = `
+
+            <details>
+
+                <summary>
+
+                    📚 Arquivo de Boletins
+                    (${dados.arquivo.length})
+
+                </summary>
+
+                ${dados.arquivo.map(item => `
+
+                    <div class="arquivo-item">
+
+                        <a
+                          class="arquivo-link"
+                          href="${esc(item.pdf)}"
+                          target="_blank"
+                          rel="noopener">
+
+                          📄 ${item.circular}
+
+                        </a>
+
+                        <button
+                          class="ler-mini ler-pdf"
+                          type="button"
+                          data-pdf="${esc(item.pdf)}"
+                          data-titulo="${esc(item.circular)}">
+
+                          📖 Ler
+
+                        </button>
+
+                    </div>
+
+                `).join("")}
+
+            </details>
+
+            `;
+
+        }
+
+        document.getElementById(
+          "arquivo-container"
+        ).innerHTML = arquivoHTML;
+
+    }
+    catch(err){
+
+        document.getElementById("ultimo").innerHTML = `
+            <div class="erro">
+                ❌ Erro ao carregar boletins.
+            </div>
+        `;
+
+        console.error(err);
+
+    }
+
+}
+
+carregar();
+
+
+/* =====================================================
+   LEITOR DE PDF (modo leitura)
+   ===================================================== */
+
+const leitor      = document.getElementById("leitor");
+const leitorConteudo = document.getElementById("leitor-conteudo");
+const leitorScroll   = document.getElementById("leitor-scroll");
+
+const cacheBlocos = new Map();   // url -> blocos já extraídos
+let pdfjsPromise  = null;
+let pedidoAtual   = 0;           // evita misturar resultados se o utilizador abrir outro PDF
+
+/* ---- preferências (tamanho da letra e tema) ---- */
+
+let tamanhoLetra = 19;
+let temaEscuro   = false;
+
+try{
+    const t = parseInt(localStorage.getItem("leitor-tamanho"), 10);
+    if(t >= 14 && t <= 32) tamanhoLetra = t;
+    temaEscuro = localStorage.getItem("leitor-escuro") === "1";
+}catch(e){}
+
+function aplicarPreferencias(){
+    leitorConteudo.style.fontSize = tamanhoLetra + "px";
+    leitor.classList.toggle("escuro", temaEscuro);
+    try{
+        localStorage.setItem("leitor-tamanho", String(tamanhoLetra));
+        localStorage.setItem("leitor-escuro", temaEscuro ? "1" : "0");
+    }catch(e){}
+}
+
+document.getElementById("leitor-mais").addEventListener("click", () => {
+    tamanhoLetra = Math.min(32, tamanhoLetra + 2);
+    aplicarPreferencias();
+});
+
+document.getElementById("leitor-menos").addEventListener("click", () => {
+    tamanhoLetra = Math.max(14, tamanhoLetra - 2);
+    aplicarPreferencias();
+});
+
+document.getElementById("leitor-tema").addEventListener("click", () => {
+    temaEscuro = !temaEscuro;
+    aplicarPreferencias();
+});
+
+aplicarPreferencias();
+
+/* ---- abrir / fechar ---- */
+
+function mostrarLeitor(){
+    leitor.hidden = false;
+    document.body.style.overflow = "hidden";
+}
+
+function esconderLeitor(){
+    leitor.hidden = true;
+    document.body.style.overflow = "";
+    pedidoAtual++;
+}
+
+// o botão "voltar" do telemóvel fecha o leitor em vez de sair da página
+window.addEventListener("popstate", () => {
+    if(!leitor.hidden) esconderLeitor();
+});
+
+function fecharLeitor(){
+    if(history.state && history.state.leitor){
+        history.back();
+    }else{
+        esconderLeitor();
+    }
+}
+
+document.getElementById("leitor-fechar")
+    .addEventListener("click", fecharLeitor);
+
+document.addEventListener("keydown", e => {
+    if(e.key === "Escape" && !leitor.hidden) fecharLeitor();
+});
+
+// cliques nos botões "Ler" (delegação de eventos)
+document.addEventListener("click", e => {
+    const btn = e.target.closest(".ler-pdf");
+    if(!btn) return;
+    abrirLeitor(btn.dataset.pdf, btn.dataset.titulo);
+});
+
+/* ---- carregar pdf.js só quando é preciso ---- */
+
+function carregarPdfJs(){
+
+    if(window.pdfjsLib) return Promise.resolve(window.pdfjsLib);
+
+    if(!pdfjsPromise){
+        pdfjsPromise = new Promise((resolve, reject) => {
+            const s = document.createElement("script");
+            s.src = PDFJS_URL;
+            s.onload = () => {
+                window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS_WORKER;
+                resolve(window.pdfjsLib);
+            };
+            s.onerror = () => {
+                pdfjsPromise = null;
+                reject(new Error("Não foi possível carregar o leitor de PDF."));
+            };
+            document.head.appendChild(s);
+        });
+    }
+
+    return pdfjsPromise;
+}
+
+/* ---- obter o ficheiro (direto; se falhar, via Worker) ---- */
+
+async function obterPdf(url){
+
+    try{
+        const r = await fetch(url);
+        if(!r.ok) throw new Error("HTTP " + r.status);
+        return await r.arrayBuffer();
+    }
+    catch(e){
+        const r = await fetch(PROXY_PDF + encodeURIComponent(url));
+        if(!r.ok) throw new Error("Proxy HTTP " + r.status);
+        return await r.arrayBuffer();
+    }
+
+}
+
+/* ---- reconstruir linhas e parágrafos a partir do texto do PDF ---- */
+
+function agruparLinhas(itens){
+
+    itens.sort((a, b) => (b.y - a.y) || (a.x - b.x));
+
+    const linhas = [];
+
+    for(const it of itens){
+        const l = linhas[linhas.length - 1];
+        if(l && Math.abs(l.y - it.y) <= Math.max(l.h, it.h) * 0.4){
+            l.itens.push(it);
+            l.h = Math.max(l.h, it.h);
+        }else{
+            linhas.push({ y: it.y, h: it.h, itens: [it] });
+        }
+    }
+
+    linhas.forEach(l => {
+
+        l.itens.sort((a, b) => a.x - b.x);
+
+        let t = "";
+        let fim = null;
+
+        for(const it of l.itens){
+            if(fim !== null){
+                const gap = it.x - fim;
+                if(gap > l.h * 3){
+                    t += " · ";                       // colunas / células de tabela
+                }else if(gap > l.h * 0.1 && !/\s$/.test(t) && !/^\s/.test(it.s)){
+                    t += " ";
+                }
+            }
+            t += it.s;
+            fim = it.x + it.w;
+        }
+
+        l.texto = t.replace(/\s+/g, " ").trim();
+
+    });
+
+    return linhas.filter(l => l.texto);
+
+}
+
+const RE_ITEM = /^([•●▪◦■·\-–]|\d+[.)])\s+/;
+
+function construirBlocos(paginas){
+
+    const todas = paginas.map(agruparLinhas);
+
+    // altura de letra mais comum = texto corrente; maiores = títulos
+    const alturas = todas.flat().map(l => l.h).sort((a, b) => a - b);
+    const corpo = alturas[Math.floor(alturas.length / 2)] || 10;
+
+    const blocos = [];
+
+    todas.forEach((linhas, pi) => {
+
+        if(pi > 0) blocos.push({ t: "pg", texto: "Página " + (pi + 1) });
+
+        let prev = null;
+
+        linhas.forEach(l => {
+
+            const titulo = l.h > corpo * 1.15 && l.texto.length < 120;
+            const item   = RE_ITEM.test(l.texto);
+            const ultimo = blocos[blocos.length - 1];
+            const gapGrande = prev && (prev.y - l.y) > prev.h * 1.8;
+
+            let novo;
+            if(!ultimo || ultimo.t === "pg" || gapGrande) novo = true;
+            else if(titulo) novo = ultimo.t !== "h";
+            else if(item)   novo = true;
+            else            novo = ultimo.t === "h";
+
+            if(novo){
+                blocos.push({ t: titulo ? "h" : (item ? "item" : "p"), texto: l.texto });
+            }else{
+                // junta linhas do mesmo parágrafo (e une palavras partidas com hífen)
+                if(/\S-$/.test(ultimo.texto) && /^[a-zà-ú]/.test(l.texto)){
+                    ultimo.texto = ultimo.texto.slice(0, -1) + l.texto;
+                }else{
+                    ultimo.texto += " " + l.texto;
+                }
+            }
+
+            prev = l;
+
+        });
+
+    });
+
+    return blocos;
+
+}
+
+async function extrairBlocos(url){
+
+    if(cacheBlocos.has(url)) return cacheBlocos.get(url);
+
+    const [pdfjs, buffer] = await Promise.all([
+        carregarPdfJs(),
+        obterPdf(url)
+    ]);
+
+    const pdf = await pdfjs.getDocument({ data: buffer }).promise;
+
+    const paginas = [];
+
+    for(let n = 1; n <= pdf.numPages; n++){
+        const page = await pdf.getPage(n);
+        const tc = await page.getTextContent();
+        paginas.push(
+            tc.items
+              .filter(i => typeof i.str === "string" && i.str.trim() !== "")
+              .map(i => ({
+                  s: i.str,
+                  x: i.transform[4],
+                  y: i.transform[5],
+                  h: Math.abs(i.transform[3]) || i.height || 10,
+                  w: i.width || 0
+              }))
+        );
+    }
+
+    const blocos = construirBlocos(paginas);
+
+    cacheBlocos.set(url, blocos);
+
+    return blocos;
+
+}
+
+/* ---- desenhar o conteúdo no leitor ---- */
+
+function estado(msg){
+    leitorConteudo.innerHTML = "";
+    const d = document.createElement("div");
+    d.className = "leitor-estado";
+    d.textContent = msg;
+    leitorConteudo.appendChild(d);
+}
+
+function cabecalho(titulo, url){
+
+    const h = document.createElement("h2");
+    h.textContent = titulo || "Boletim";
+    leitorConteudo.appendChild(h);
+
+    const nota = document.createElement("div");
+    nota.className = "leitor-nota";
+    nota.append("Texto extraído automaticamente do PDF. Tabelas e esquemas podem aparecer simplificados; em caso de dúvida consulte o ");
+    const a = document.createElement("a");
+    a.href = url;
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = "PDF original";
+    nota.appendChild(a);
+    nota.append(".");
+    leitorConteudo.appendChild(nota);
+
+}
+
+function desenhar(blocos, titulo, url){
+
+    leitorConteudo.innerHTML = "";
+    cabecalho(titulo, url);
+
+    blocos.forEach(b => {
+
+        let el;
+
+        if(b.t === "pg"){
+            el = document.createElement("div");
+            el.className = "pg";
+        }else if(b.t === "h"){
+            el = document.createElement("h3");
+        }else{
+            el = document.createElement("p");
+            if(b.t === "item") el.className = "item";
+        }
+
+        el.textContent = b.texto;
+        leitorConteudo.appendChild(el);
+
+    });
+
+}
+
+async function abrirLeitor(url, titulo){
+
+    const meuPedido = ++pedidoAtual;
+
+    if(leitor.hidden){
+        history.pushState({ leitor: true }, "");
+        mostrarLeitor();
+    }
+
+    leitorScroll.scrollTop = 0;
+    estado("A ler o documento...");
+
+    try{
+
+        const blocos = await extrairBlocos(url);
+
+        if(meuPedido !== pedidoAtual) return;
+
+        if(!blocos.length){
+            estado("Este PDF não tem texto selecionável (pode ser uma imagem digitalizada). Use o botão \"PDF original\".");
+            return;
+        }
+
+        desenhar(blocos, titulo, url);
+
+    }
+    catch(err){
+
+        console.error(err);
+
+        if(meuPedido !== pedidoAtual) return;
+
+        leitorConteudo.innerHTML = "";
+        cabecalho(titulo, url);
+
+        const d = document.createElement("div");
+        d.className = "leitor-estado";
+        d.textContent = "Não foi possível ler este PDF no modo leitura. Abra o PDF original.";
+        leitorConteudo.appendChild(d);
+
+    }
 
 }
 
