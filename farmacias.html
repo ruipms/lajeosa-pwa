@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Farmácias de Serviço</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag(){
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+:root{
+  --verde:#0b5d42;
+  --castanho:#4b2c1e;
+  --dourado:#e3c15a;
+  --texto:#ffffff;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  background:var(--verde);
+  color:var(--texto);
+  font-family:Arial,sans-serif;
+}
+
+.voltar{
+  display:inline-block;
+  margin:12px 0 0 15px;
+  padding:10px 16px;
+  background:var(--dourado);
+  color:#000;
+  text-decoration:none;
+  font-weight:bold;
+  border-radius:8px;
+}
+
+header{
+  text-align:center;
+  padding:20px 15px;
+}
+
+h1{
+  margin:0;
+  color:var(--dourado);
+}
+
+.subtitulo{
+  margin-top:8px;
+  color:#ddd;
+}
+
+.resumo{
+  margin:20px;
+  padding:15px;
+  text-align:center;
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:15px;
+}
+
+.card{
+  background:var(--castanho);
+  border-left:5px solid var(--dourado);
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin:0 0 15px 0;
+  color:var(--dourado);
+}
+
+.linha{
+  margin:10px 0;
+  line-height:1.5;
+}
+
+.botoes{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  background:var(--dourado);
+  color:#000;
+  padding:12px 16px;
+  border-radius:8px;
+  font-weight:bold;
+}
+
+.btn.sec{
+  background:transparent;
+  color:var(--dourado);
+  border:2px solid var(--dourado);
+}
+
+.loading{
+  text-align:center;
+  padding:40px;
+}
+
+.erro{
+  background:#8b0000;
+  padding:15px;
+  border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<a class="voltar" href="saude.html">
+← Voltar
+</a>
+
+<header>
+
+<h1>💊 Farmácias de Serviço</h1>
+
+<div class="subtitulo">
+Concelho da Guarda
+</div>
+
+</header>
+
+<div id="resumo" class="resumo">
+
+A carregar informação...
+
+</div>
+
+<div class="container">
+
+<div id="farmacias">
+
+<div class="loading">
+A carregar farmácias...
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const API =
+"https://small-glade-3bb9.ruijpms.workers.dev/?feed=farmacias";
+
+function mapaLink(morada){
+
+    return "https://www.google.com/maps/search/?api=1&query=" +
+           encodeURIComponent(morada);
+
+}
+
+async function carregar(){
+
+    try{
+
+        const resp = await fetch(API);
+
+        if(!resp.ok){
+            throw new Error(
+              "HTTP " + resp.status
+            );
+        }
+
+        const dados =
+          await resp.json();
+
+        document.getElementById("resumo").innerHTML = `
+            <strong>${dados.total}</strong><br>
+            farmácias disponíveis
+        `;
+
+        const html =
+          dados.farmacias.map(f => `
+
+            <div class="card">
+
+                <h2>
+                    💊 ${f.nome}
+                </h2>
+
+                <div class="linha">
+
+                    <strong>📍 Morada</strong><br>
+                    ${f.morada}
+
+                </div>
+
+                <div class="linha">
+
+                    <strong>☎️ Telefone</strong><br>
+                    ${f.telefone}
+
+                </div>
+
+                <div class="linha">
+
+                    <strong>🕒 Horário</strong><br>
+                    ${f.horario}
+
+                </div>
+
+                <div class="botoes">
+
+                    <a
+                      class="btn"
+                      href="tel:${f.telefone}">
+
+                      📞 Telefonar
+
+                    </a>
+
+                    <a
+                      class="btn sec"
+                      href="${mapaLink(f.morada)}"
+                      target="_blank"
+                      rel="noopener">
+
+                      🗺️ Abrir Mapa
+
+                    </a>
+
+                </div>
+
+            </div>
+
+          `).join("");
+
+        document.getElementById(
+          "farmacias"
+        ).innerHTML = html;
+
+    }
+    catch(err){
+
+        document.getElementById(
+          "farmacias"
+        ).innerHTML = `
+
+            <div class="erro">
+
+                ❌ Erro ao carregar farmácias.
+
+            </div>
+
+        `;
+
+        console.error(err);
+
+    }
+
+}
+
+carregar();
+
+</script>
+
+</body>
+</html>
