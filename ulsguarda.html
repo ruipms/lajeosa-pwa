@@ -3,194 +3,201 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ULS Guarda</title>
+<title>ULS Guarda</title>
 
-    <!-- Google tag -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
+<!-- Google tag -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
 
-      function gtag(){
-        dataLayer.push(arguments);
-      }
+<script>
+window.dataLayer = window.dataLayer || [];
 
-      gtag('js', new Date());
-      gtag('config', 'G-FTEGNRDBJW');
-    </script>
+function gtag(){
+    dataLayer.push(arguments);
+}
 
-    <!-- Carregar estilo global -->
-    <link rel="stylesheet" href="style.css">
+gtag('js', new Date());
+gtag('config', 'G-FTEGNRDBJW');
+</script>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<!-- Carregar estilo global -->
+<link rel="stylesheet" href="style.css">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+.card-full a{
+    color:#e3c15a;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.card-full a:hover{
+    text-decoration:underline;
+}
+
+.info-linha{
+    margin:15px 0;
+    line-height:1.6;
+}
+
+</style>
 
 </head>
 
 <body>
 
-    <div style="padding:15px;">
-        <button class="btn-voltar"
-                onclick="window.location.href='index.html'">
-            ← Voltar
-        </button>
-    </div>
+<div style="padding:15px;">
 
-    <header style="text-align:center;padding:10px 20px 25px;">
+    <button class="btn-voltar"
+            onclick="window.location.href='index.html'">
 
-        <h1>🏥 ULS Guarda</h1>
+        ← Voltar
 
-        <p style="opacity:0.85;">
-            Unidade Local de Saúde da Guarda
-        </p>
+    </button>
 
-    </header>
+</div>
 
-    <div class="card-full">
+<header style="text-align:center;padding:10px 20px 25px;">
 
-        <i class="fas fa-hospital"></i>
+    <h1>🏥 ULS Guarda</h1>
 
-        <h2>Hospital Nossa Senhora da Assunção</h2>
+    <p style="opacity:0.85;">
+        Unidade Local de Saúde da Guarda
+    </p>
 
-        <p>
+</header>
 
-            <strong>📍 Morada</strong>
+<div class="card-full">
+
+    <i class="fas fa-hospital"></i>
+
+    <h2>
+        Hospital Nossa Senhora da Assunção
+    </h2>
+
+    <div class="info-linha">
+
+        <strong>📍 Morada</strong>
+
+        <br>
+
+        <a href="https://maps.google.com/?q=Rua+Dona+Alexandrina+Soares+de+Albergaria+6270-498+Seia"
+           target="_blank">
+
+            Rua Dona Alexandrina Soares de Albergaria
             <br>
+            6270-498 Seia
 
-            <a href="https://maps.google.com/?q=Rua+Dona+Alexandrina+Soares+de+Albergaria+6270-498+Seia"
-               target="_blank">
-
-                Rua Dona Alexandrina Soares de Albergaria
-                <br>
-                6270-498 Seia
-
-            </a>
-
-        </p>
-
-        <p>
-
-            <strong>☎️ Telefone</strong>
-            <br>
-
-            <a href="tel:238320700">
-
-                238 320 700
-
-            </a>
-
-        </p>
-
-        <p>
-
-            <strong>📠 Fax</strong>
-            <br>
-
-            238 320 788
-
-        </p>
-
-        <p>
-
-            <strong>📧 Email</strong>
-            <br>
-
-            <a href="mailto:geral.seia@ulsguarda.min-saude.pt">
-
-                geral.seia@ulsguarda.min-saude.pt
-
-            </a>
-
-        </p>
-
-        <div class="grid">
-
-            <div class="card-menu-alt"
-                 onclick="window.open('tel:238320700')">
-
-                <i class="fas fa-phone"></i>
-                <p>Telefonar</p>
-
-            </div>
-
-            <div class="card-menu-alt"
-                 onclick="window.open('https://maps.google.com/?q=Rua+Dona+Alexandrina+Soares+de+Albergaria+6270-498+Seia')">
-
-                <i class="fas fa-map-location-dot"></i>
-                <p>Abrir Mapa</p>
-
-            </div>
-
-            <div class="card-menu-alt"
-                 onclick="window.open('mailto:geral.seia@ulsguarda.min-saude.pt')">
-
-                <i class="fas fa-envelope"></i>
-                <p>Email</p>
-
-            </div>
-
-        </div>
+        </a>
 
     </div>
 
-    <br>
+    <div class="info-linha">
 
-    <div class="card-full">
+        <strong>☎️ Telefone</strong>
 
-        <i class="fas fa-user-doctor"></i>
+        <br>
 
-        <h2>Cuidados de Saúde Primários</h2>
+        <a href="tel:238320700">
 
-        <p>
+            238 320 700
 
-            Consulte os Centros de Saúde, Unidades de Saúde Familiar
-            e restantes serviços de Cuidados de Saúde Primários da
-            ULS Guarda.
-
-        </p>
-
-        <div class="card-menu-alt"
-             onclick="window.open('https://www.ulsguarda.min-saude.pt/category/servicos/cuidados-de-saude-primarios/','_blank')">
-
-            <i class="fas fa-stethoscope"></i>
-
-            <p>
-                Consultar Serviços
-            </p>
-
-        </div>
+        </a>
 
     </div>
 
-    <br>
+    <div class="info-linha">
 
-    <div class="card-full">
+        <strong>📠 Fax</strong>
 
-        <i class="fas fa-globe"></i>
+        <br>
 
-        <h2>Portal ULS Guarda</h2>
-
-        <p>
-
-            Aceda ao portal oficial da Unidade Local de Saúde da Guarda.
-
-        </p>
-
-        <div class="card-menu-alt"
-             onclick="window.open('https://www.ulsguarda.min-saude.pt/','_blank')">
-
-            <i class="fas fa-arrow-up-right-from-square"></i>
-
-            <p>
-                Abrir Portal
-            </p>
-
-        </div>
+        238 320 788
 
     </div>
+
+    <div class="info-linha">
+
+        <strong>📧 Email</strong>
+
+        <br>
+
+        <a href="mailto:geral.seia@ulsguarda.min-saude.pt">
+
+            geral.seia@ulsguarda.min-saude.pt
+
+        </a>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="card-full">
+
+    <i class="fas fa-user-doctor"></i>
+
+    <h2>
+        Cuidados de Saúde Primários
+    </h2>
+
+    <p>
+
+        Consulte os Centros de Saúde,
+        Unidades de Saúde Familiar e restantes
+        serviços de Cuidados de Saúde Primários
+        da ULS Guarda.
+
+    </p>
+
+    <div class="card-menu-alt"
+         onclick="window.open('https://www.ulsguarda.min-saude.pt/category/servicos/cuidados-de-saude-primarios/','_blank')">
+
+        <i class="fas fa-stethoscope"></i>
+
+        <p>
+            Consultar Serviços
+        </p>
+
+    </div>
+
+</div>
+
+<br>
+
+<div class="card-full">
+
+    <i class="fas fa-globe"></i>
+
+    <h2>
+        Portal ULS Guarda
+    </h2>
+
+    <p>
+
+        Aceda ao portal oficial da Unidade Local de Saúde da Guarda.
+
+    </p>
+
+    <div class="card-menu-alt"
+         onclick="window.open('https://www.ulsguarda.min-saude.pt/','_blank')">
+
+        <i class="fas fa-arrow-up-right-from-square"></i>
+
+        <p>
+            Abrir Portal
+        </p>
+
+    </div>
+
+</div>
 
 </body>
 
