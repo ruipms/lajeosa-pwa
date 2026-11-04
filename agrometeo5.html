@@ -986,66 +986,44 @@ function criarLinha(its){
 // devolve "fluxos" de leitura: listas de linhas na ordem certa (coluna a coluna)
 function fluxosDaPagina(itens, corpo){
 
-    const rows = agruparPorY(itens, corpo);
-    const calhas = detetarCalhas(rows, corpo);
+    if(!itens.length) return [];
 
-    const linhaDe = its => criarLinha(its);
+    // Determinar largura da página
+    const minX = Math.min(...itens.map(i => i.x));
+    const maxX = Math.max(...itens.map(i => i.x + i.w));
 
-    if(!calhas.length){
-        return [rows.map(r => linhaDe(r.itens)).filter(l => l.plain)];
-    }
+    const largura = maxX - minX;
 
-    const fluxos = [];
-    let span = [];
-    let banda = [];
+    // Centro aproximado da página
+    const meio = minX + (largura / 2);
 
-    const fecharSpan = () => {
-        if(span.length) fluxos.push(span);
-        span = [];
-    };
+    // Dividir em duas colunas
+    const esquerda = itens.filter(i => i.x < meio);
+    const direita  = itens.filter(i => i.x >= meio);
 
-    const fecharBanda = () => {
+    function criarFluxo(coluna){
 
-        if(!banda.length) return;
+        const rows = agruparPorY(coluna, corpo);
 
-        const cols = Array.from({ length: calhas.length + 1 }, () => []);
-
-        banda.forEach(r => {
-            const por = cols.map(() => []);
-            r.itens.forEach(it => por[colunaDe(it, calhas)].push(it));
-            por.forEach((its, c) => {
-                if(!its.length) return;
-                const l = linhaDe(its);
-                if(l.plain) cols[c].push(l);
-            });
-        });
-
-        cols.forEach(c => { if(c.length) fluxos.push(c); });
-        banda = [];
-
-    };
-
-    for(const r of rows){
-
-        const atravessa = r.segs.some(s =>
-            calhas.some(g => s.a < g.fim && s.b > g.ini)
-        );
-
-        if(atravessa){
-            fecharBanda();
-            const l = linhaDe(r.itens);
-            if(l.plain) span.push(l);
-        }else{
-            fecharSpan();
-            banda.push(r);
-        }
+        return rows.map(r =>
+            criarLinha(r.itens)
+        )
+        .filter(l => l.plain);
 
     }
 
-    fecharSpan();
-    fecharBanda();
+    const fluxoEsquerda =
+        criarFluxo(esquerda);
 
-    return fluxos;
+    const fluxoDireita =
+        criarFluxo(direita);
+
+    // Ler coluna esquerda completa
+    // e só depois a direita
+    return [
+        fluxoEsquerda,
+        fluxoDireita
+    ];
 
 }
 
