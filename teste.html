@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lajeosa do Mondego</title>
+
+    <!-- Carregar estilo global -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google tag -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-FTEGNRDBJW');
+    </script>
+
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="assets/brasao.png">
+
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--verde-base);
+            color: white;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        header img {
+            width: 140px;
+        }
+
+        h1 {
+            margin-top: 10px;
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--dourado);
+        }
+
+        .instrucao {
+            color: var(--dourado);
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 14px;
+        }
+
+        /* Acordeões */
+        details.accordion summary {
+            color: var(--dourado);
+            font-size: 18px;
+            font-weight: bold;
+            padding: 20px 0 10px 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        details.accordion summary::after {
+            content: "▼";
+            font-size: 16px;
+            color: var(--dourado);
+            transition: transform 0.25s ease;
+        }
+
+        details[open] summary::after {
+            transform: rotate(180deg);
+        }
+
+        .subtitulo-menu{
+            display:block;
+            margin-top:6px;
+            font-size:14px;
+            font-weight:normal;
+            color:white;
+            opacity:0.75;
+        }
+        /* Grelha dos cartões */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            padding: 10px 20px 20px 20px;
+        }
+
+        /* Cartões quadrados */
+        .card-menu {
+            background-color: var(--cor-cartao-base);
+            padding: 18px;
+            border-radius: 18px;
+            cursor: pointer;
+            transition: 0.2s;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
+
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-menu:hover {
+            background-color: var(--cor-cartao-base-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(227,193,90,0.55);
+        }
+
+        .card-menu i {
+            font-size: 36px;
+            color: var(--dourado);
+        }
+
+        .card-menu p {
+            font-size: 17px;
+            margin-top: 8px;
+            overflow-wrap: break-word;
+            padding: 0 6px;
+        }
+
+        /* Cartões retangulares */
+        .card-menu-alt,
+        .card-full {
+            background-color: var(--cor-cartao-base);
+            padding: 18px;
+            border-radius: 18px;
+            margin: 16px 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            border-left: 4px solid var(--dourado);
+            box-shadow: 0 0 12px rgba(227,193,90,0.35);
+
+            height: auto;
+            aspect-ratio: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .card-menu-alt:hover,
+        .card-full:hover {
+            background-color: var(--cor-cartao-base-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 0 18px rgba(227,193,90,0.55);
+        }
+
+        .card-full i {
+            font-size: 36px;
+            color: var(--dourado);
+            margin-bottom: 8px;
+        }
+
+        footer {
+            margin-top: 30px;
+            padding: 10px;
+            font-size: 14px;
+            opacity: 0.7;
+            color: var(--dourado);
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <img src="assets/brasao.png" alt="Brasão da Lajeosa do Mondego">
+    <h1>Lajeosa do Mondego</h1>
+
+    <p id="dataAtual" style="color:var(--dourado); font-size:14px; font-weight:bold; margin-top:4px;"></p>
+     <p class="instrucao">📂 Toque nas categorias para ver os menus
+
+    <!-- BLOCO ARRUMADO -->
+    <div style="margin-top:12px; display:flex; flex-direction:column; gap:6px;">
+
+     <!--   <p class="instrucao">📂 Toque em cada categoria para revelar os menus</p> -->
+
+        <details class="accordion">
+   <summary>
+        📢 Atualizações e Comunicações
+        <br>
+        <span class="subtitulo-menu">
+        Histórico da aplicação e canal WhatsApp
+        </span>
+    </summary>
+
+    <div class="grid" style="padding-top:0;">
+
+        <div class="card-menu-alt" onclick="openPage('changelog.html')">
+            <i class="fas fa-scroll"></i>
+            <p>Evolução da app</p>
+        </div>
+
+        <div class="card-menu-alt"
+             onclick="window.open('https://whatsapp.com/channel/0029Vb82Q4v8PgsKSqxQHb46','_blank');">
+            <i class="fab fa-whatsapp" style="color:#25D366;"></i>
+            <p>Canal da Lajeosa no WhatsApp</p>
+        </div>
+
+    </div>
+        </details>
+
+    </div>
+</header>
+
+<!-- ALDEIA E INSTITUIÇÕES -->
+<details class="accordion">
+  <summary>
+        Aldeia e comunidade
+        <br>
+        <span class="subtitulo-menu">
+        Aldeia, Junta, História e eventos
+        </span>
+    </summary>
+
+    <div class="grid">
+        <div class="card-menu" onclick="openPage('junta.html')"><i class="fas fa-landmark"></i><p>Junta de Freguesia</p></div>
+        <div class="card-menu" onclick="openPage('historia.html')"><i class="fas fa-book"></i><p>História e Tradições</p></div>
+        <div class="card-menu" onclick="openPage('pontos.html')"><i class="fas fa-map-marker-alt"></i><p>Pontos de Interesse</p></div>
+        <div class="card-menu" onclick="openPage('eventos.html')"><i class="fas fa-calendar-alt"></i><p>Eventos</p></div>
+        <div class="card-menu" onclick="openPage('redessociais.html')"><i class="fas fa-share-alt"></i><p>Lajeosa nas redes sociais</p></div>
+    </div>
+</details>
+
+<!-- COMÉRCIO E SERVIÇOS -->
+<details class="accordion">
+    <summary>
+        Comércio e Serviços
+        <br>
+        <span class="subtitulo-menu">
+        Comerciantes, serviços e associações
+        </span>
+    </summary>
+    <div class="grid">
+        <div class="card-menu" onclick="openPage('servicos.html')"><i class="fas fa-briefcase"></i><p>Serviços na Freguesia</p></div>
+        <div class="card-menu" onclick="openPage('contactos.html')"><i class="fas fa-phone"></i><p>Comércio e serviços</p></div>
+        <div class="card-menu" onclick="openPage('associacoes.html')"><i class="fas fa-people-group"></i><p>Associações</p></div>   
+    </div>
+</details>
+
+<!-- CLUBE -->
+<details class="accordion">
+  <summary>
+        ⚽ Clube CRC Lajeosa
+        <br>
+        <span class="subtitulo-menu">
+        Informação e equipas do clube
+        </span>
+    </summary>
+    <div class="grid">
+        <div class="card-menu-alt" onclick="openPage('clube.html')"><i class="fas fa-futbol"></i><p>CRC Lajeosa do Mondego</p></div>
+    </div>
+</details>
+
+<!-- UTILIDADE PÚBLICA-->
+<details class="accordion">
+    <summary>
+        Transportes
+        <br>
+        <span class="subtitulo-menu">
+        Comboios e camioneta
+        </span>
+    </summary>
+    <div class="grid">
+         <div class="card-menu" onclick="openPage('horarios.html')"><i class="fas fa-bus"></i><p>Horários da Camioneta</p></div>
+         <div class="card-menu" onclick="openPage('comboios2.html')"><i class="fas fa-train"></i><p>Comboios</p></div>
+    </div>
+</details>
+<!-- AVISOS -->
+<details class="accordion">
+    <summary>
+        Meteorologia
+        <br>
+        <span class="subtitulo-menu">
+        O tempo e alertas meteorológicos
+        </span>
+    </summary>
+    <div class="grid">
+        <div class="card-menu" onclick="openPage('meteorologia.html')"><i class="fas fa-cloud-sun"></i><p>Meteorologia</p></div>
+         <div class="card-menu" onclick="openPage('meteocritico.html')"><i class="fas fa-cloud-bolt"></i><p>Alertas Meteorológicos</p>
+    </div>
+
+    </div>
+
+  <!--SEGURANÇA -->
+<details class="accordion">
+    <summary>
+        Notícias e alertas
+        <br>
+        <span class="subtitulo-menu">
+        Noticias, trânsito, incêndios, combustíveis
+        </span>
+    </summary>
+    <div class="grid">
+         <div class="card-menu" onclick="openPage('noticias.html')"><i class="fas fa-newspaper"></i><p>Notícias</p></div>
+         <div class="card-menu" onclick="openPage('seguranca.html')"><i class="fas fa-triangle-exclamation"></i><p>Alertas e informações</p></div>
+    </div>
+<!-- SAÚDE -->
+<details class="accordion">
+    <summary>
+        Saúde
+        <br>
+        <span class="subtitulo-menu">
+        Farmácias e ULS Guarda
+        </span>
+    </summary>
+    <div class="grid">
+        <div class="card-menu" onclick="openPage('farmacias.html')"> <i class="fas fa-prescription-bottle-medical"></i> <p>Farmácias de Serviço</p> </div>
+        <div class="card-menu" onclick="openPage('ulsguarda.html')"> <i class="fas fa-hospital"></i> <p>ULS da Guarda</p> </div>
+    </div>
+</details>
+
+<!-- JOGOS -->
+<details class="accordion">
+  <summary>
+        🎮 Jogos e Entretenimento
+        <br>
+        <span class="subtitulo-menu">
+        Passatempos, desafios e rankings
+        </span>
+    </summary>
+        <div class="grid">
+        <div class="card-menu-alt" onclick="openPage('jogos.html')"><i class="fas fa-gamepad"></i><p>Jogos</p></div>
+    </div>
+</details>
+
+<!-- ÚLTIMO ACORDEÃO COM DOIS CARTÕES -->
+<details class="accordion">
+    <summary>
+        📱 Aplicação e Informações
+        <br>
+        <span class="subtitulo-menu">
+        Instalação, contacto e informação sobre o projeto
+            </span>
+    </summary>
+
+    <div class="card-full" onclick="openPage('aplicacao.html')">
+        <i class="fas fa-mobile-alt"></i>
+        <p>Instalar como Aplicação</p>
+    </div>
+
+    <div class="card-full" onclick="openPage('falarcomigo.html')">
+        <i class="fas fa-envelope"></i>
+        <p>Sobre mim / Falar comigo</p>
+    </div>
+</details>
+
+<!--<div class="card-full" style="text-align:center;">
+    <p style="font-size:14px; opacity:0.8; margin-top:8px;">Site em manutenção ativa</p>
+</div>-->
+
+<footer>
+    2026 Lajeosa do Mondego — ©RMS
+</footer>
+
+<script>
+    function openPage(page) {
+        window.location.href = page;
+    }
+
+    const hoje = new Date();
+    document.getElementById('dataAtual').textContent =
+        `${String(hoje.getDate()).padStart(2,'0')}/${String(hoje.getMonth()+1).padStart(2,'0')}/${hoje.getFullYear()}`;
+
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js');
+    }
+</script>
+
+</body>
+</html>
