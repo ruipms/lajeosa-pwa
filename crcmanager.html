@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CRC Manager</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+    dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<style>
+
+.card-jogo{
+    background-color: var(--cor-cartao-castanho-escuro);
+    border-left:4px solid var(--dourado);
+    border-radius:18px;
+    margin:16px 20px;
+    padding:18px;
+    box-shadow:0 0 12px rgba(227,193,90,0.35);
+}
+
+.estatisticas{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:10px;
+}
+
+.estat{
+    background:rgba(255,255,255,0.05);
+    padding:12px;
+    border-radius:12px;
+}
+
+.estat strong{
+    display:block;
+    font-size:24px;
+    color:var(--dourado);
+}
+
+.btn-jogar{
+    display:block;
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    background:var(--dourado);
+    color:black;
+    font-weight:bold;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.plantel-item{
+    padding:10px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.plantel-item:last-child{
+    border-bottom:none;
+}
+
+.resultado{
+    text-align:center;
+    font-size:20px;
+    margin-top:15px;
+}
+
+.vitoria{
+    color:#00cc66;
+}
+
+.empate{
+    color:#ffcc00;
+}
+
+.derrota{
+    color:#ff6666;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div style="padding:15px;">
+    <button class="btn-voltar"
+            onclick="window.location.href='index.html'">
+
+        ← Voltar
+
+    </button>
+</div>
+
+<header style="text-align:center;">
+
+    <h1>⚽ CRC Manager</h1>
+
+    <p style="color:var(--dourado);">
+        Leva o CRC Lajeosa ao topo
+    </p>
+
+</header>
+
+<div class="card-jogo">
+
+    <div class="estatisticas">
+
+        <div class="estat">
+            <strong id="dinheiro">5000€</strong>
+            Dinheiro
+        </div>
+
+        <div class="estat">
+            <strong id="pontos">0</strong>
+            Pontos
+        </div>
+
+        <div class="estat">
+            <strong id="jornada">1</strong>
+            Jornada
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card-jogo">
+
+    <h2>👥 Plantel</h2>
+
+    <div id="plantel"></div>
+
+</div>
+
+<div class="card-jogo">
+
+    <h2>📅 Próximo jogo</h2>
+
+    <div id="adversario"></div>
+
+    <button class="btn-jogar"
+            onclick="jogarJornada()">
+
+        ▶️ Jogar Jornada
+
+    </button>
+
+    <div id="resultado"
+         class="resultado">
+
+    </div>
+
+</div>
+
+<div class="card-jogo">
+
+    <button class="btn-jogar"
+            onclick="reiniciar()">
+
+        🔄 Nova Carreira
+
+    </button>
+
+</div>
+
+<script>
+
+const equipaBase = {
+
+    dinheiro: 5000,
+    pontos: 0,
+    jornada: 1,
+
+    jogadores: [
+
+        {
+          nome: "João",
+          ataque: 72,
+          defesa: 60,
+          forma: 80
+        },
+
+        {
+          nome: "Pedro",
+          ataque: 65,
+          defesa: 72,
+          forma: 76
+        },
+
+        {
+          nome: "André",
+          ataque: 81,
+          defesa: 58,
+          forma: 74
+        },
+
+        {
+          nome: "Tiago",
+          ataque: 70,
+          defesa: 70,
+          forma: 79
+        },
+
+        {
+          nome: "Ricardo",
+          ataque: 77,
+          defesa: 63,
+          forma: 82
+        }
+
+    ]
+
+};
+
+const adversarios = [
+    "Gouveia FC",
+    "Manteigas FC",
+    "Sabugal",
+    "Seia FC",
+    "Pinhel",
+    "Trancoso",
+    "Fornos",
+    "Celorico"
+];
+
+let jogo =
+JSON.parse(
+localStorage.getItem("crc-manager")
+) || equipaBase;
+
+function guardar(){
+
+    localStorage.setItem(
+      "crc-manager",
+      JSON.stringify(jogo)
+    );
+
+}
+
+function atualizar(){
+
+    document.getElementById(
+      "dinheiro"
+    ).textContent =
+    jogo.dinheiro + "€";
+
+    document.getElementById(
+      "pontos"
+    ).textContent =
+    jogo.pontos;
+
+    document.getElementById(
+      "jornada"
+    ).textContent =
+    jogo.jornada;
+
+    const plantel =
+    document.getElementById("plantel");
+
+    plantel.innerHTML =
+    jogo.jogadores.map(j => `
+
+        <div class="plantel-item">
+
+            <strong>${j.nome}</strong>
+
+            <br>
+
+            ⚔️ ${j.ataque}
+
+            🛡️ ${j.defesa}
+
+            💪 ${j.forma}
+
+        </div>
+
+    `).join("");
+
+    document.getElementById(
+      "adversario"
+    ).innerHTML =
+
+    `CRC Lajeosa vs ${
+        adversarios[
+            jogo.jornada %
+            adversarios.length
+        ]
+    }`;
+
+}
+
+function jogarJornada(){
+
+    const forca =
+    jogo.jogadores.reduce(
+      (s,j)=>
+      s +
+      ((j.ataque+j.defesa+j.forma)/3),
+      0
+    );
+
+    const adversario =
+    Math.floor(
+      Math.random()*400
+    ) + 250;
+
+    const golosCRC =
+    Math.floor(
+      (forca/100) +
+      (Math.random()*4)
+    );
+
+    const golosADV =
+    Math.floor(
+      (adversario/100) +
+      (Math.random()*4)
+    );
+
+    let classe = "";
+    let texto  = "";
+
+    if(golosCRC > golosADV){
+
+        jogo.pontos += 3;
+
+        classe = "vitoria";
+
+        texto =
+        "✅ Vitória (+3 pontos)";
+
+    }
+    else if(golosCRC === golosADV){
+
+        jogo.pontos += 1;
+
+        classe = "empate";
+
+        texto =
+        "🤝 Empate (+1 ponto)";
+
+    }
+    else{
+
+        classe = "derrota";
+
+        texto =
+        "❌ Derrota";
+
+    }
+
+    document.getElementById(
+      "resultado"
+    ).innerHTML = `
+
+      CRC Lajeosa
+      ${golosCRC}
+      -
+      ${golosADV}
+
+      ${
+       adversarios[
+        jogo.jornada %
+        adversarios.length
+       ]
+      }
+
+      <br><br>
+
+      <span class="${classe}">
+      ${texto}
+      </span>
+
+    `;
+
+    jogo.jornada++;
+
+    guardar();
+
+    atualizar();
+
+}
+
+function reiniciar(){
+
+    if(
+      confirm(
+      "Começar nova carreira?"
+      )
+    ){
+
+      jogo =
+      JSON.parse(
+       JSON.stringify(
+        equipaBase
+       )
+      );
+
+      localStorage.removeItem(
+       "crc-manager"
+      );
+
+      atualizar();
+
+      document.getElementById(
+       "resultado"
+      ).innerHTML = "";
+
+    }
+
+}
+
+atualizar();
+
+</script>
+
+</body>
+</html>
