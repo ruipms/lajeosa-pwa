@@ -433,13 +433,7 @@ function atualizarClassificacao(){
 
     tabela[0].pontos = jogo.pontos;
 
-    // simular evolução das equipas adversárias
-    for(let i = 1; i < tabela.length; i++){
-
-        tabela[i].pontos +=
-            Math.floor(Math.random() * 2);
-
-    }
+   
 
     tabela.sort(
         (a,b) => b.pontos - a.pontos
@@ -594,6 +588,13 @@ Math.floor(
     `;
 
     jogo.jornada++;
+
+    for(let i = 1; i < classificacao.length; i++){
+
+    classificacao[i].pontos +=
+        Math.floor(Math.random() * 3);
+
+}
 
     guardar();
 
