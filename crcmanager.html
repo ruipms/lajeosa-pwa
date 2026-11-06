@@ -542,22 +542,31 @@ function reiniciar(){
       )
     ){
 
-      jogo =
-      JSON.parse(
-       JSON.stringify(
-        equipaBase
-       )
+      jogo = JSON.parse(
+        JSON.stringify(
+          equipaBase
+        )
       );
+
+      treinoSelecionado = "ofensivo";
 
       localStorage.removeItem(
-       "crc-manager"
+        "crc-manager"
       );
 
-      atualizar();
+      document.getElementById(
+        "treino"
+      ).value = "ofensivo";
+
+      mostrarTreino();
 
       document.getElementById(
-       "resultado"
+        "resultado"
       ).innerHTML = "";
+
+      guardar();
+
+      atualizar();
 
     }
 
