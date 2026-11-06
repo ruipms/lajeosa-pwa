@@ -378,6 +378,8 @@ function mostrarTreino(){
         ⚔️ +5 Ataque
         <br>
         🛡️ -2 Defesa
+        <br>
+        💰 Custo: 100€
         <br><br>
         Mais golos marcados, mas também mais golos sofridos.
         `;
@@ -390,6 +392,8 @@ function mostrarTreino(){
         🛡️ +5 Defesa
         <br>
         ⚔️ -2 Ataque
+        <br>
+        💰 Custo: 100€
         <br><br>
         Menos golos sofridos, mas também menos capacidade atacante.
         `;
@@ -404,6 +408,8 @@ function mostrarTreino(){
         ⚔️ -1 Ataque
         <br>
         🛡️ -1 Defesa
+        <br>
+        💰 Custo: 250€
         <br><br>
         Equipa mais consistente.
         `;
@@ -507,12 +513,14 @@ function jogarJornada(){
 
         jogo.dinheiro += premio;
 
-        alert(
-            "🏆 FIM DA ÉPOCA\n\n" +
-            "Posição Final: " + posicao + "º\n" +
-            "Pontos: " + jogo.pontos + "\n\n" +
-            "Prémio: " + premio + "€"
-        );
+       alert(
+    "🏆 FIM DA ÉPOCA\n\n" +
+    "Posição Final: " + posicao + "º\n" +
+    "Pontos: " + jogo.pontos + "\n" +
+    "Dinheiro: " + jogo.dinheiro + "€\n\n" +
+    "Prémio: " + premio + "€\n\n" +
+    "Carrega em 'Nova Carreira' para iniciar uma nova época."
+);
 
         guardar();
         atualizar();
