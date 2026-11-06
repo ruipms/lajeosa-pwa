@@ -434,13 +434,21 @@ function mostrarTreino(){
 
 function atualizarClassificacao(){
 
-  const equipaCRC =
-tabela.find(
-    e => e.nome === "CRC Lajeosa"
-);
+    const tabela =
+    JSON.parse(
+        JSON.stringify(classificacao)
+    );
 
-equipaCRC.pontos = jogo.pontos;
-   
+    const equipaCRC =
+    tabela.find(
+        e => e.nome === "CRC Lajeosa"
+    );
+
+    if(equipaCRC){
+
+        equipaCRC.pontos = jogo.pontos;
+
+    }
 
     tabela.sort(
         (a,b) => b.pontos - a.pontos
