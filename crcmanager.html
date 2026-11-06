@@ -199,6 +199,14 @@ gtag('config', 'G-FTEGNRDBJW');
 
 <div class="card-jogo">
 
+    <h2>🏆 Classificação</h2>
+
+    <div id="classificacao"></div>
+
+</div>
+
+<div class="card-jogo">
+
     <button class="btn-jogar"
             onclick="reiniciar()">
 
@@ -268,6 +276,21 @@ const adversarios = [
     "Celorico"
 ];
 
+let classificacao = [
+
+    { nome: "CRC Lajeosa", pontos: 0 },
+    { nome: "Gouveia FC", pontos: 0 },
+    { nome: "Seia FC", pontos: 0 },
+    { nome: "Sabugal", pontos: 0 },
+    { nome: "Pinhel", pontos: 0 },
+    { nome: "Trancoso", pontos: 0 },
+    { nome: "Fornos", pontos: 0 },
+    { nome: "Celorico", pontos: 0 },
+    { nome: "Manteigas FC", pontos: 0 },
+    { nome: "Guarda FC", pontos: 0 }
+
+];
+
 let jogo =
 JSON.parse(
 localStorage.getItem("crc-manager")
@@ -332,6 +355,7 @@ function atualizar(){
             adversarios.length
         ]
     }`;
+    atualizarClassificacao();
 
 }
 function mostrarTreino(){
@@ -400,6 +424,48 @@ function mostrarTreino(){
     document.getElementById(
       "infoTreino"
     ).innerHTML = texto;
+
+}
+
+function atualizarClassificacao(){
+
+    const tabela = [...classificacao];
+
+    tabela[0].pontos = jogo.pontos;
+
+    // simular evolução das equipas adversárias
+    for(let i = 1; i < tabela.length; i++){
+
+        tabela[i].pontos +=
+            Math.floor(Math.random() * 2);
+
+    }
+
+    tabela.sort(
+        (a,b) => b.pontos - a.pontos
+    );
+
+    document.getElementById(
+        "classificacao"
+    ).innerHTML = tabela.map((e,pos) => `
+
+        <div class="plantel-item">
+
+            <strong>
+                ${pos + 1}º
+            </strong>
+
+            ${e.nome}
+
+            <span style="float:right">
+
+                ${e.pontos} pts
+
+            </span>
+
+        </div>
+
+    `).join("");
 
 }
 function jogarJornada(){
@@ -602,7 +668,9 @@ function reiniciar(){
         ).innerHTML = "";
 
         atualizar();
-
+        classificacao.forEach(
+    equipa => equipa.pontos = 0
+        );
         guardar();
 
     }
