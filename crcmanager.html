@@ -276,7 +276,7 @@ const adversarios = [
     "Celorico"
 ];
 
-let classificacao = [
+const classificacaoBase = [
 
     { nome: "CRC Lajeosa", pontos: 0 },
     { nome: "Gouveia FC", pontos: 0 },
@@ -290,6 +290,11 @@ let classificacao = [
     { nome: "Guarda FC", pontos: 0 }
 
 ];
+
+let classificacao =
+JSON.parse(
+    JSON.stringify(classificacaoBase)
+);
 
 let jogo =
 JSON.parse(
@@ -429,7 +434,11 @@ function mostrarTreino(){
 
 function atualizarClassificacao(){
 
-    const tabela = [...classificacao];
+   const tabela =
+JSON.parse(
+    JSON.stringify(classificacao)
+);
+
 
     tabela[0].pontos = jogo.pontos;
 
@@ -606,10 +615,8 @@ function reiniciar(){
 
     if(confirm("Começar nova carreira?")){
 
-        // apagar gravação anterior
         localStorage.removeItem("crc-manager");
 
-        // criar jogo novo
         jogo = {
             dinheiro: 5000,
             pontos: 0,
@@ -656,6 +663,12 @@ function reiniciar(){
 
         };
 
+        // RESET DA CLASSIFICAÇÃO
+       classificacao =
+        JSON.parse(
+            JSON.stringify(classificacaoBase)
+        );
+
         treinoSelecionado = "ofensivo";
 
         document.getElementById(
@@ -668,11 +681,9 @@ function reiniciar(){
             "resultado"
         ).innerHTML = "";
 
-        atualizar();
-        classificacao.forEach(
-    equipa => equipa.pontos = 0
-        );
         guardar();
+
+        atualizar();
 
     }
 
