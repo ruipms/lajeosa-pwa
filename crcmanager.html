@@ -473,21 +473,64 @@ JSON.parse(
 }
 function jogarJornada(){
 
-  let forca =
-jogo.jogadores.reduce(
-  (s,j)=>
-  s +
-  ((j.ataque+j.defesa+j.forma)/3),
-  0
-);
+    // Fim da época
+    if(jogo.jornada > 18){
+
+        classificacao[0].pontos = jogo.pontos;
+
+        classificacao.sort(
+            (a,b) => b.pontos - a.pontos
+        );
+
+        const posicao =
+        classificacao.findIndex(
+            e => e.nome === "CRC Lajeosa"
+        ) + 1;
+
+        let premio = 0;
+
+        if(posicao === 1){
+            premio = 5000;
+        }
+        else if(posicao <= 3){
+            premio = 3000;
+        }
+        else{
+            premio = 1000;
+        }
+
+        jogo.dinheiro += premio;
+
+        alert(
+            "🏆 FIM DA ÉPOCA\n\n" +
+            "Posição Final: " + posicao + "º\n" +
+            "Pontos: " + jogo.pontos + "\n\n" +
+            "Prémio: " + premio + "€"
+        );
+
+        guardar();
+        atualizar();
+
+        return;
+    }
+
+    let forca =
+    jogo.jogadores.reduce(
+        (s,j)=>
+        s +
+        ((j.ataque+j.defesa+j.forma)/3),
+        0
+    );
 
 let bonusAtaque = 0;
 let bonusDefesa = 0;
+let custoTreino = 0;
 
 if(treinoSelecionado === "ofensivo"){
 
     bonusAtaque = 1.5;
     bonusDefesa = -1;
+    custoTreino = 100;
 
 }
 
@@ -495,6 +538,7 @@ if(treinoSelecionado === "defensivo"){
 
     bonusAtaque = -1;
     bonusDefesa = 1.5;
+    custoTreino = 100;
 
 }
 
@@ -502,6 +546,7 @@ if(treinoSelecionado === "fisico"){
 
     bonusAtaque = 0.5;
     bonusDefesa = 0.5;
+    custoTreino = 250;
 
 }
 
@@ -509,13 +554,22 @@ if(treinoSelecionado === "moral"){
 
     bonusAtaque = 1;
     bonusDefesa = 1;
+    custoTreino = 500;
 
-    if(jogo.dinheiro >= 500){
+}
+/* NOVO BLOCO */
 
-        jogo.dinheiro -= 500;
+if(jogo.dinheiro < custoTreino){
 
-    }
+    alert(
+        "💰 Não tens dinheiro suficiente para este treino."
+    );
 
+    return;
+
+}
+
+jogo.dinheiro -= custoTreino;
 }
     const adversario =
     Math.floor(
@@ -545,32 +599,35 @@ Math.floor(
 
     if(golosCRC > golosADV){
 
-        jogo.pontos += 3;
+    jogo.pontos += 3;
 
-        classe = "vitoria";
+    jogo.dinheiro += 500;
 
-        texto =
-        "✅ Vitória (+3 pontos)";
+    classe = "vitoria";
 
-    }
-    else if(golosCRC === golosADV){
+    texto =
+    "✅ Vitória (+3 pontos, +500€)";
+}
+   else if(golosCRC === golosADV){
 
-        jogo.pontos += 1;
+    jogo.pontos += 1;
 
-        classe = "empate";
+    jogo.dinheiro += 250;
 
-        texto =
-        "🤝 Empate (+1 ponto)";
+    classe = "empate";
 
-    }
-    else{
+    texto =
+    "🤝 Empate (+1 ponto, +250€)";
+}
+   else{
 
-        classe = "derrota";
+    jogo.dinheiro += 100;
 
-        texto =
-        "❌ Derrota";
+    classe = "derrota";
 
-    }
+    texto =
+    "❌ Derrota (+100€)";
+}
 
     document.getElementById(
       "resultado"
