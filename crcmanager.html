@@ -434,14 +434,12 @@ function mostrarTreino(){
 
 function atualizarClassificacao(){
 
-   const tabela =
-JSON.parse(
-    JSON.stringify(classificacao)
+  const equipaCRC =
+tabela.find(
+    e => e.nome === "CRC Lajeosa"
 );
 
-
-    tabela[0].pontos = jogo.pontos;
-
+equipaCRC.pontos = jogo.pontos;
    
 
     tabela.sort(
@@ -570,7 +568,7 @@ if(jogo.dinheiro < custoTreino){
 }
 
 jogo.dinheiro -= custoTreino;
-}
+
     const adversario =
     Math.floor(
       Math.random()*400
