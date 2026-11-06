@@ -146,6 +146,7 @@ gtag('config', 'G-FTEGNRDBJW');
     <h2>👥 Plantel</h2>
 
     <div id="plantel"></div>
+</div>
 
 <div class="card-jogo">
 
@@ -536,41 +537,78 @@ Math.floor(
 
 function reiniciar(){
 
-    if(
-      confirm(
-      "Começar nova carreira?"
-      )
-    ){
+    if(confirm("Começar nova carreira?")){
 
-      jogo = JSON.parse(
-        JSON.stringify(
-          equipaBase
-        )
-      );
+        // apagar gravação anterior
+        localStorage.removeItem("crc-manager");
 
-      treinoSelecionado = "ofensivo";
+        // criar jogo novo
+        jogo = {
+            dinheiro: 5000,
+            pontos: 0,
+            jornada: 1,
 
-      localStorage.removeItem(
-        "crc-manager"
-      );
+            jogadores: [
 
-      document.getElementById(
-        "treino"
-      ).value = "ofensivo";
+                {
+                    nome: "João",
+                    ataque: 72,
+                    defesa: 60,
+                    forma: 80
+                },
 
-      mostrarTreino();
+                {
+                    nome: "Pedro",
+                    ataque: 65,
+                    defesa: 72,
+                    forma: 76
+                },
 
-      document.getElementById(
-        "resultado"
-      ).innerHTML = "";
+                {
+                    nome: "André",
+                    ataque: 81,
+                    defesa: 58,
+                    forma: 74
+                },
 
-      guardar();
+                {
+                    nome: "Tiago",
+                    ataque: 70,
+                    defesa: 70,
+                    forma: 79
+                },
 
-      atualizar();
+                {
+                    nome: "Ricardo",
+                    ataque: 77,
+                    defesa: 63,
+                    forma: 82
+                }
+
+            ]
+
+        };
+
+        treinoSelecionado = "ofensivo";
+
+        document.getElementById(
+            "treino"
+        ).value = "ofensivo";
+
+        mostrarTreino();
+
+        document.getElementById(
+            "resultado"
+        ).innerHTML = "";
+
+        atualizar();
+
+        guardar();
 
     }
 
 }
+
 mostrarTreino();
 atualizar();
 
