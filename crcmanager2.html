@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CRC Manager</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FTEGNRDBJW"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+
+function gtag(){
+    dataLayer.push(arguments);
+}
+
+gtag('js', new Date());
+gtag('config', 'G-FTEGNRDBJW');
+</script>
+
+<style>
+
+.card-jogo{
+    background-color: var(--cor-cartao-castanho-escuro);
+    border-left:4px solid var(--dourado);
+    border-radius:18px;
+    margin:16px 20px;
+    padding:18px;
+    box-shadow:0 0 12px rgba(227,193,90,0.35);
+}
+
+.estatisticas{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:10px;
+}
+
+.estat{
+    background:rgba(255,255,255,0.05);
+    padding:12px;
+    border-radius:12px;
+}
+
+.estat strong{
+    display:block;
+    font-size:24px;
+    color:var(--dourado);
+}
+
+.btn-jogar{
+    display:block;
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    background:var(--dourado);
+    color:black;
+    font-weight:bold;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.btn-jogar:disabled{
+    opacity:0.5;
+    cursor:not-allowed;
+}
+
+.plantel-item{
+    padding:10px;
+    border-bottom:1px solid rgba(255,255,255,.1);
+}
+
+.plantel-item:last-child{
+    border-bottom:none;
+}
+
+.resultado{
+    text-align:center;
+    font-size:20px;
+    margin-top:15px;
+}
+
+.resumo-dinheiro{
+    font-size:15px;
+    margin-top:12px;
+    padding:10px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.05);
+    line-height:1.7;
+}
+
+.vitoria{
+    color:#00cc66;
+}
+
+.empate{
+    color:#ffcc00;
+}
+
+.derrota{
+    color:#ff6666;
+}
+
+/* Animações do dinheiro no topo */
+.flash-perda{
+    animation:flashPerda 1s ease;
+}
+
+.flash-ganho{
+    animation:flashGanho 1s ease;
+}
+
+@keyframes flashPerda{
+    0%   { color:#ff6666; transform:scale(1.25); }
+    100% { transform:scale(1); }
+}
+
+@keyframes flashGanho{
+    0%   { color:#00cc66; transform:scale(1.25); }
+    100% { transform:scale(1); }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div style="padding:15px;">
+    <button class="btn-voltar"
+            onclick="window.location.href='index.html'">
+
+        ← Voltar
+
+    </button>
+</div>
+
+<header style="text-align:center;">
+
+    <h1>⚽ CRC Manager</h1>
+
+    <p style="color:var(--dourado);">
+        Leva o CRC Lajeosa ao topo
+    </p>
+
+</header>
+
+<div class="card-jogo">
+
+    <div class="estatisticas">
+
+        <div class="estat">
+            <strong id="dinheiro">5000€</strong>
+            Dinheiro
+        </div>
+
+        <div class="estat">
+            <strong id="pontos">0</strong>
+            Pontos
+        </div>
+
+        <div class="estat">
+            <strong id="jornada">1</strong>
+            Jornada
+        </div>
+
+    </div>
+
+</div>
+
+<div class="card-jogo">
+
+    <h2>👥 Plantel</h2>
+
+    <div id="plantel"></div>
+</div>
+
+<div class="card-jogo">
+
+    <h2>🏋️ Treino Semanal</h2>
+
+    <select id="treino" onchange="mostrarTreino()">
+
+        <option value="ofensivo">
+            ⚔️ Ofensivo
+        </option>
+
+        <option value="defensivo">
+            🛡️ Defensivo
+        </option>
+
+        <option value="fisico">
+            🏃 Físico
+        </option>
+
+        <option value="moral">
+            😊 Moral
+        </option>
+
+    </select>
+
+    <p id="infoTreino"></p>
+
+</div>
+
+<div class="card-jogo">
+
+    <h2>📅 Próximo jogo</h2>
+
+    <div id="adversario"></div>
+
+    <button class="btn-jogar"
+            id="btnJogar"
+            onclick="jogarJornada()">
+
+        ▶️ Jogar Jornada
+
+    </button>
+
+    <div id="resultado"
+         class="resultado">
+
+    </div>
+
+</div>
+
+<div class="card-jogo">
+
+    <h2>🏆 Classificação</h2>
+
+    <div id="classificacao"></div>
+
+</div>
+
+<div class="card-jogo">
+
+    <button class="btn-jogar"
+            onclick="reiniciar()">
+
+        🔄 Nova Carreira
+
+    </button>
+
+</div>
+
+<script>
+
+/* ============================================
+   DADOS BASE
+   ============================================ */
+
+const SAVE_KEY = "crc-manager-v2";
+const TOTAL_JORNADAS = 18;
+
+const equipaBase = {
+
+    dinheiro: 5000,
+    pontos: 0,
+    jornada: 1,
+
+    jogadores: [
+
+        { nome: "João",    ataque: 72, defesa: 60, forma: 80 },
+        { nome: "Pedro",   ataque: 65, defesa: 72, forma: 76 },
+        { nome: "André",   ataque: 81, defesa: 58, forma: 74 },
+        { nome: "Tiago",   ataque: 70, defesa: 70, forma: 79 },
+        { nome: "Ricardo", ataque: 77, defesa: 63, forma: 82 }
+
+    ]
+
+};
+
+const adversarios = [
+    "Gouveia FC",
+    "Manteigas FC",
+    "Sabugal",
+    "Seia FC",
+    "Pinhel",
+    "Trancoso",
+    "Fornos",
+    "Celorico"
+];
+
+const classificacaoBase = [
+
+    { nome: "CRC Lajeosa", pontos: 0 },
+    { nome: "Gouveia FC", pontos: 0 },
+    { nome: "Seia FC", pontos: 0 },
+    { nome: "Sabugal", pontos: 0 },
+    { nome: "Pinhel", pontos: 0 },
+    { nome: "Trancoso", pontos: 0 },
+    { nome: "Fornos", pontos: 0 },
+    { nome: "Celorico", pontos: 0 },
+    { nome: "Manteigas FC", pontos: 0 },
+    { nome: "Guarda FC", pontos: 0 }
+
+];
+
+/* ============================================
+   ESTADO + GUARDAR / CARREGAR
+   (a classificação agora é guardada dentro do jogo)
+   ============================================ */
+
+function copiar(obj){
+    return JSON.parse(JSON.stringify(obj));
+}
+
+function novoJogo(){
+
+    const j = copiar(equipaBase);
+
+    j.classificacao = copiar(classificacaoBase);
+    j.epocaTerminada = false;
+
+    return j;
+
+}
+
+function carregar(){
+
+    try{
+
+        const guardado = JSON.parse(
+            localStorage.getItem(SAVE_KEY)
+        );
+
+        // Só aceita o save se tiver a estrutura completa
+        if(
+            guardado &&
+            Array.isArray(guardado.jogadores) &&
+            Array.isArray(guardado.classificacao) &&
+            typeof guardado.dinheiro === "number" &&
+            typeof guardado.pontos === "number" &&
+            typeof guardado.jornada === "number"
+        ){
+            return guardado;
+        }
+
+    }catch(e){}
+
+    // Save inexistente, antigo ou corrompido → começa limpo
+    return novoJogo();
+
+}
+
+let jogo = carregar();
+let classificacao = jogo.classificacao;
+let treinoSelecionado = "ofensivo";
+
+function guardar(){
+
+    jogo.classificacao = classificacao;
+
+    try{
+        localStorage.setItem(
+            SAVE_KEY,
+            JSON.stringify(jogo)
+        );
+    }catch(e){}
+
+}
+
+/* ============================================
+   INTERFACE
+   ============================================ */
+
+function atualizar(){
+
+    document.getElementById("dinheiro").textContent =
+        jogo.dinheiro + "€";
+
+    document.getElementById("pontos").textContent =
+        jogo.pontos;
+
+    document.getElementById("jornada").textContent =
+        Math.min(jogo.jornada, TOTAL_JORNADAS) +
+        "/" + TOTAL_JORNADAS;
+
+    document.getElementById("plantel").innerHTML =
+        jogo.jogadores.map(j => `
+
+            <div class="plantel-item">
+
+                <strong>${j.nome}</strong>
+
+                <br>
+
+                ⚔️ ${j.ataque}
+
+                🛡️ ${j.defesa}
+
+                💪 ${j.forma}
+
+            </div>
+
+        `).join("");
+
+    const btn = document.getElementById("btnJogar");
+
+    if(jogo.epocaTerminada){
+
+        document.getElementById("adversario").innerHTML =
+            "🏁 Época terminada";
+
+        btn.disabled = true;
+        btn.textContent = "🏁 Época terminada";
+
+    }else{
+
+        document.getElementById("adversario").innerHTML =
+            `CRC Lajeosa vs ${
+                adversarios[
+                    jogo.jornada % adversarios.length
+                ]
+            }`;
+
+        btn.disabled = false;
+        btn.textContent = "▶️ Jogar Jornada";
+
+    }
+
+    atualizarClassificacao();
+
+}
+
+function mostrarTreino(){
+
+    treinoSelecionado =
+        document.getElementById("treino").value;
+
+    let texto = "";
+
+    if(treinoSelecionado === "ofensivo"){
+
+        texto = `
+        ⚔️ +1.5 Ataque (no jogo)
+        <br>
+        🛡️ -1 Defesa (no jogo)
+        <br>
+        💰 Custo: 100€
+        <br><br>
+        Mais golos marcados, mas também mais golos sofridos.
+        `;
+
+    }
+
+    if(treinoSelecionado === "defensivo"){
+
+        texto = `
+        🛡️ +1.5 Defesa (no jogo)
+        <br>
+        ⚔️ -1 Ataque (no jogo)
+        <br>
+        💰 Custo: 100€
+        <br><br>
+        Menos golos sofridos, mas também menos capacidade atacante.
+        `;
+
+    }
+
+    if(treinoSelecionado === "fisico"){
+
+        texto = `
+        🏃 +0.5 Ataque
+        <br>
+        🛡️ +0.5 Defesa
+        <br>
+        💰 Custo: 250€
+        <br><br>
+        Equipa mais consistente.
+        `;
+
+    }
+
+    if(treinoSelecionado === "moral"){
+
+        texto = `
+        😊 +1 Ataque
+        <br>
+        😊 +1 Defesa
+        <br>
+        💰 Custo: 500€
+        <br><br>
+        Equipa mais motivada.
+        `;
+
+    }
+
+    document.getElementById("infoTreino").innerHTML = texto;
+
+}
+
+function atualizarClassificacao(){
+
+    // Trabalha sobre uma cópia, para não estragar a ordem original
+    const tabela = copiar(classificacao);
+
+    const equipaCRC =
+        tabela.find(e => e.nome === "CRC Lajeosa");
+
+    if(equipaCRC){
+        equipaCRC.pontos = jogo.pontos;
+    }
+
+    tabela.sort((a,b) => b.pontos - a.pontos);
+
+    document.getElementById("classificacao").innerHTML =
+        tabela.map((e,pos) => `
+
+            <div class="plantel-item">
+
+                <strong>
+                    ${pos + 1}º
+                </strong>
+
+                ${e.nome}
+
+                <span style="float:right">
+
+                    ${e.pontos} pts
+
+                </span>
+
+            </div>
+
+        `).join("");
+
+}
+
+// Faz o valor do dinheiro piscar (vermelho se desceu, verde se subiu)
+function animarDinheiro(antes, depois){
+
+    const el = document.getElementById("dinheiro");
+
+    el.classList.remove("flash-perda","flash-ganho");
+
+    // força o browser a reiniciar a animação
+    void el.offsetWidth;
+
+    el.classList.add(
+        depois < antes ? "flash-perda" : "flash-ganho"
+    );
+
+}
+
+/* ============================================
+   LÓGICA DO JOGO
+   ============================================ */
+
+function terminarEpoca(){
+
+    // Cópia ordenada (o CRC usa os pontos reais do jogo)
+    const tabela = copiar(classificacao);
+
+    tabela.find(e => e.nome === "CRC Lajeosa").pontos =
+        jogo.pontos;
+
+    tabela.sort((a,b) => b.pontos - a.pontos);
+
+    const posicao =
+        tabela.findIndex(e => e.nome === "CRC Lajeosa") + 1;
+
+    let premio = 0;
+
+    if(posicao === 1){
+        premio = 5000;
+    }
+    else if(posicao <= 3){
+        premio = 3000;
+    }
+    else{
+        premio = 1000;
+    }
+
+    const dinheiroAntes = jogo.dinheiro;
+
+    jogo.dinheiro += premio;
+    jogo.epocaTerminada = true;
+
+    guardar();
+    atualizar();
+
+    animarDinheiro(dinheiroAntes, jogo.dinheiro);
+
+    alert(
+        "🏆 FIM DA ÉPOCA\n\n" +
+        "Posição Final: " + posicao + "º\n" +
+        "Pontos: " + jogo.pontos + "\n" +
+        "Prémio: +" + premio + "€\n" +
+        "Dinheiro: " + jogo.dinheiro + "€\n\n" +
+        "Carrega em 'Nova Carreira' para iniciar uma nova época."
+    );
+
+}
+
+function jogarJornada(){
+
+    // Época já terminada → não dá prémio outra vez
+    if(jogo.epocaTerminada){
+
+        alert("A época já terminou. Carrega em 'Nova Carreira'.");
+        return;
+
+    }
+
+    // Fim da época
+    if(jogo.jornada > TOTAL_JORNADAS){
+
+        terminarEpoca();
+        return;
+
+    }
+
+    const forca =
+        jogo.jogadores.reduce(
+            (s,j) =>
+                s + ((j.ataque + j.defesa + j.forma) / 3),
+            0
+        );
+
+    let bonusAtaque = 0;
+    let bonusDefesa = 0;
+    let custoTreino = 0;
+
+    if(treinoSelecionado === "ofensivo"){
+
+        bonusAtaque = 1.5;
+        bonusDefesa = -1;
+        custoTreino = 100;
+
+    }
+
+    if(treinoSelecionado === "defensivo"){
+
+        bonusAtaque = -1;
+        bonusDefesa = 1.5;
+        custoTreino = 100;
+
+    }
+
+    if(treinoSelecionado === "fisico"){
+
+        bonusAtaque = 0.5;
+        bonusDefesa = 0.5;
+        custoTreino = 250;
+
+    }
+
+    if(treinoSelecionado === "moral"){
+
+        bonusAtaque = 1;
+        bonusDefesa = 1;
+        custoTreino = 500;
+
+    }
+
+    if(jogo.dinheiro < custoTreino){
+
+        alert(
+            "💰 Não tens dinheiro suficiente para este treino."
+        );
+
+        return;
+
+    }
+
+    // Dinheiro antes de qualquer alteração (para mostrar no resumo)
+    const dinheiroAntes = jogo.dinheiro;
+
+    jogo.dinheiro -= custoTreino;
+
+    const adversario =
+        Math.floor(Math.random() * 400) + 250;
+
+    const golosCRC =
+        Math.max(
+            0,
+            Math.floor(
+                (forca / 100) +
+                bonusAtaque +
+                (Math.random() * 4)
+            )
+        );
+
+    const golosADV =
+        Math.max(
+            0,
+            Math.floor(
+                (adversario / 100) -
+                bonusDefesa +
+                (Math.random() * 4)
+            )
+        );
+
+    let classe = "";
+    let texto  = "";
+    let ganho  = 0;
+
+    if(golosCRC > golosADV){
+
+        jogo.pontos += 3;
+        ganho = 500;
+
+        classe = "vitoria";
+        texto = "✅ Vitória (+3 pontos)";
+
+    }
+    else if(golosCRC === golosADV){
+
+        jogo.pontos += 1;
+        ganho = 250;
+
+        classe = "empate";
+        texto = "🤝 Empate (+1 ponto)";
+
+    }
+    else{
+
+        ganho = 100;
+
+        classe = "derrota";
+        texto = "❌ Derrota";
+
+    }
+
+    jogo.dinheiro += ganho;
+
+    const saldo = ganho - custoTreino;
+
+    const classeSaldo =
+        saldo > 0 ? "vitoria" :
+        saldo < 0 ? "derrota" : "empate";
+
+    document.getElementById("resultado").innerHTML = `
+
+        CRC Lajeosa
+        ${golosCRC}
+        -
+        ${golosADV}
+
+        ${adversarios[jogo.jornada % adversarios.length]}
+
+        <br><br>
+
+        <span class="${classe}">
+            ${texto}
+        </span>
+
+        <div class="resumo-dinheiro">
+
+            🏋️ Treino:
+            <span class="derrota">-${custoTreino}€</span>
+            <br>
+
+            ⚽ Jogo:
+            <span class="vitoria">+${ganho}€</span>
+            <br>
+
+            📊 Saldo da jornada:
+            <span class="${classeSaldo}">
+                ${saldo >= 0 ? "+" : ""}${saldo}€
+            </span>
+            <br>
+
+            💰 ${dinheiroAntes}€ → <strong>${jogo.dinheiro}€</strong>
+
+        </div>
+
+    `;
+
+    jogo.jornada++;
+
+    // Outras equipas somam pontos (a CRC é o índice 0)
+    for(let i = 1; i < classificacao.length; i++){
+
+        classificacao[i].pontos +=
+            Math.floor(Math.random() * 3);
+
+    }
+
+    guardar();
+    atualizar();
+
+    animarDinheiro(dinheiroAntes, jogo.dinheiro);
+
+}
+
+function reiniciar(){
+
+    if(confirm("Começar nova carreira?")){
+
+        localStorage.removeItem(SAVE_KEY);
+
+        // Limpa também o save da versão antiga
+        localStorage.removeItem("crc-manager");
+
+        jogo = novoJogo();
+        classificacao = jogo.classificacao;
+
+        treinoSelecionado = "ofensivo";
+
+        document.getElementById("treino").value = "ofensivo";
+
+        mostrarTreino();
+
+        document.getElementById("resultado").innerHTML = "";
+
+        guardar();
+        atualizar();
+
+    }
+
+}
+
+/* ============================================
+   ARRANQUE
+   ============================================ */
+
+// Remove o save antigo (versão anterior) que causava dados misturados
+localStorage.removeItem("crc-manager");
+
+mostrarTreino();
+atualizar();
+
+</script>
+
+</body>
+</html>
