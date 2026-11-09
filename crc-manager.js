@@ -2,11 +2,18 @@
    CRC MANAGER
    ============================================ */
 
-const VERSAO_SAVE = 3;
-const SAVE_KEY = "crc-manager-v3";
+const VERSAO_SAVE = 4;
+const SAVE_KEY = "crc-manager-v4";
+const KEY_V3 = "crc-manager-v3";
 const CHAVES_ANTIGAS = ["crc-manager", "crc-manager-v2"];
 
 const NOME_CLUBE = "CRC Lajeosa";
+
+const TITULARES = 5;
+const MIN_PLANTEL = 8;
+const MAX_PLANTEL = 10;
+
+const CHANCE_LESAO = 0.06;   // por jogador em campo, por jornada
 
 /* ============================================
    EQUIPAS
@@ -36,39 +43,40 @@ const TOTAL_JORNADAS = (EQUIPAS.length - 1) * 2;
 /* ============================================
    TREINOS
    ataque / defesa = pontos somados no jogo
+   recupera = forma extra para todo o plantel
    ============================================ */
 
 const TREINOS = {
 
     ofensivo: {
-        icone: "⚔️",
         ataque: 4,
         defesa: -2,
         custo: 100,
+        recupera: 0,
         desc: "Mais golos marcados, mas também mais golos sofridos."
     },
 
     defensivo: {
-        icone: "🛡️",
         ataque: -2,
         defesa: 4,
         custo: 100,
+        recupera: 0,
         desc: "Menos golos sofridos, mas menos capacidade atacante."
     },
 
     fisico: {
-        icone: "🏃",
         ataque: 2,
         defesa: 2,
         custo: 250,
-        desc: "Equipa mais consistente."
+        recupera: 3,
+        desc: "Equipa mais consistente e menos cansada."
     },
 
     moral: {
-        icone: "😊",
         ataque: 3,
         defesa: 3,
         custo: 500,
+        recupera: 0,
         desc: "Equipa mais motivada."
     }
 
@@ -76,6 +84,7 @@ const TREINOS = {
 
 /* ============================================
    JOGO BASE
+   Os 5 primeiros são titulares, os restantes suplentes
    ============================================ */
 
 const JOGO_BASE = {
@@ -85,15 +94,26 @@ const JOGO_BASE = {
 
     jogadores: [
 
-        { nome: "João",    ataque: 72, defesa: 60, forma: 80 },
-        { nome: "Pedro",   ataque: 65, defesa: 72, forma: 76 },
-        { nome: "André",   ataque: 81, defesa: 58, forma: 74 },
-        { nome: "Tiago",   ataque: 70, defesa: 70, forma: 79 },
-        { nome: "Ricardo", ataque: 77, defesa: 63, forma: 82 }
+        { nome: "João",    ataque: 72, defesa: 60, forma: 80, lesao: 0 },
+        { nome: "Pedro",   ataque: 65, defesa: 72, forma: 76, lesao: 0 },
+        { nome: "André",   ataque: 81, defesa: 58, forma: 74, lesao: 0 },
+        { nome: "Tiago",   ataque: 70, defesa: 70, forma: 79, lesao: 0 },
+        { nome: "Ricardo", ataque: 77, defesa: 63, forma: 82, lesao: 0 },
+
+        { nome: "Miguel",  ataque: 62, defesa: 64, forma: 78, lesao: 0 },
+        { nome: "Rui",     ataque: 66, defesa: 61, forma: 77, lesao: 0 },
+        { nome: "Diogo",   ataque: 60, defesa: 67, forma: 80, lesao: 0 }
 
     ]
 
 };
+
+const NOMES_JOGADORES = [
+    "Bruno", "Hugo", "Nuno", "Fábio", "Gonçalo", "Rafael",
+    "Filipe", "Daniel", "Vasco", "Luís", "Sérgio", "Paulo",
+    "Carlos", "Marco", "Telmo", "Duarte", "Simão", "Alex",
+    "Cláudio", "Rodrigo", "Edgar", "Ivo", "Jorge", "Mário"
+];
 
 /* ============================================
    UTILITÁRIOS
@@ -183,19 +203,118 @@ function gerarCalendario(){
 
 }
 
+function novaTabela(){
+
+    return EQUIPAS.map(e => ({
+        nome: e.nome,
+        j: 0,
+        v: 0,
+        e: 0,
+        d: 0,
+        gm: 0,
+        gs: 0,
+        pontos: 0
+    }));
+
+}
+
+/* ============================================
+   PLANTEL: QUEM ESTÁ EM CAMPO
+   Os 5 primeiros jogadores saudáveis jogam.
+   Se um titular estiver lesionado, entra o
+   suplente seguinte automaticamente.
+   ============================================ */
+
+function emCampo(){
+
+    const idx = [];
+
+    jogo.jogadores.forEach((j, i) => {
+        if(j.lesao <= 0 && idx.length < TITULARES) idx.push(i);
+    });
+
+    // caso raro: faltam jogadores saudáveis
+    if(idx.length < TITULARES){
+
+        jogo.jogadores.forEach((j, i) => {
+            if(j.lesao > 0 && idx.length < TITULARES) idx.push(i);
+        });
+
+    }
+
+    return idx;
+
+}
+
+/* ============================================
+   MERCADO (1 contratação por época)
+   ============================================ */
+
+function precoJogador(ataque, defesa){
+
+    return Math.max(
+        1500,
+        Math.round((ataque + defesa - 110) * 75 / 50) * 50
+    );
+
+}
+
+function gerarMercado(plantel){
+
+    const usados = new Set(plantel.map(j => j.nome));
+
+    const nomes = embaralhar(
+        NOMES_JOGADORES.filter(n => !usados.has(n))
+    );
+
+    const candidatos = [];
+
+    for(let i = 0; i < 3; i++){
+
+        const ataque = 60 + Math.floor(Math.random() * 25);
+        const defesa = 56 + Math.floor(Math.random() * 25);
+
+        candidatos.push({
+            nome: nomes[i],
+            ataque: ataque,
+            defesa: defesa,
+            forma: 80,
+            lesao: 0,
+            preco: precoJogador(ataque, defesa)
+        });
+
+    }
+
+    return { comprou: false, contratado: null, candidatos: candidatos };
+
+}
+
 /* ============================================
    SIMULAÇÃO
    ============================================ */
 
 function statsCRC(treino){
 
-    const n = jogo.jogadores.length;
+    const campo = emCampo().map(i => {
 
-    const media = campo =>
-        jogo.jogadores.reduce((s, j) => s + j[campo], 0) / n;
+        const j = jogo.jogadores[i];
 
-    // forma acima de 75 ajuda um pouco, abaixo prejudica
-    const fator = 1 + (media("forma") - 75) / 500;
+        // jogar lesionado (caso raro) rende muito menos
+        const k = j.lesao > 0 ? 0.6 : 1;
+
+        return {
+            ataque: j.ataque * k,
+            defesa: j.defesa * k,
+            forma: j.forma
+        };
+
+    });
+
+    const media = campo_ =>
+        campo.reduce((s, j) => s + j[campo_], 0) / campo.length;
+
+    // forma acima de 75 ajuda, abaixo prejudica
+    const fator = 1 + (media("forma") - 75) / 300;
 
     return {
         ataque: media("ataque") * fator + treino.ataque,
@@ -210,7 +329,15 @@ function statsEquipa(nome, treino){
         return statsCRC(treino);
     }
 
-    return EQUIPAS.find(e => e.nome === nome);
+    const e = EQUIPAS.find(x => x.nome === nome);
+
+    // os adversários melhoram 1 ponto por época
+    const nivel = jogo.epoca - 1;
+
+    return {
+        ataque: e.ataque + nivel,
+        defesa: e.defesa + nivel
+    };
 
 }
 
@@ -242,6 +369,61 @@ function simularJogo(casa, fora){
         )
 
     };
+
+}
+
+/* Cansaço e lesões depois de cada jornada.
+   Devolve notícias para mostrar ao utilizador. */
+function aplicarDesgaste(treino){
+
+    const campo = emCampo();
+    const noticias = [];
+
+    jogo.jogadores.forEach((j, i) => {
+
+        if(j.lesao > 0){
+
+            // lesionado: conta uma jornada e recupera um pouco
+            j.lesao--;
+            j.forma = Math.min(100, j.forma + 3);
+
+            if(j.lesao === 0){
+                noticias.push(`✅ ${j.nome} recuperou da lesão`);
+            }
+
+        }
+        else if(campo.includes(i)){
+
+            // jogou: fica mais cansado
+            j.forma = Math.max(40, j.forma - 2);
+
+            if(Math.random() < CHANCE_LESAO){
+
+                j.lesao = Math.random() < 0.5 ? 1 : 2;
+
+                noticias.push(
+                    `🤕 ${j.nome} lesionou-se ` +
+                    `(${j.lesao} jornada${j.lesao > 1 ? "s" : ""})`
+                );
+
+            }
+
+        }
+        else{
+
+            // descansou: recupera forma
+            j.forma = Math.min(100, j.forma + 3);
+
+        }
+
+        // treino físico: recuperação extra para todos
+        if(treino.recupera){
+            j.forma = Math.min(100, j.forma + treino.recupera);
+        }
+
+    });
+
+    return noticias;
 
 }
 
@@ -315,49 +497,83 @@ function novoJogo(){
     const j = copiar(JOGO_BASE);
 
     j.versao = VERSAO_SAVE;
+    j.epoca = 1;
     j.calendario = gerarCalendario();
-
-    j.tabela = EQUIPAS.map(e => ({
-        nome: e.nome,
-        j: 0,
-        v: 0,
-        e: 0,
-        d: 0,
-        gm: 0,
-        gs: 0,
-        pontos: 0
-    }));
-
+    j.tabela = novaTabela();
     j.epocaTerminada = false;
+    j.mercado = gerarMercado(j.jogadores);
 
     return j;
 
 }
 
-function carregar(){
+function saveValido(g){
+
+    return !!(
+        g &&
+        g.versao === VERSAO_SAVE &&
+        Array.isArray(g.jogadores) &&
+        g.jogadores.length >= TITULARES &&
+        g.jogadores.every(j => typeof j.lesao === "number") &&
+        Array.isArray(g.calendario) &&
+        g.calendario.length === TOTAL_JORNADAS &&
+        Array.isArray(g.tabela) &&
+        g.tabela.length === EQUIPAS.length &&
+        typeof g.dinheiro === "number" &&
+        typeof g.jornada === "number" &&
+        typeof g.epoca === "number" &&
+        g.mercado &&
+        Array.isArray(g.mercado.candidatos)
+    );
+
+}
+
+function lerSave(chave){
 
     try{
+        return JSON.parse(localStorage.getItem(chave));
+    }catch(e){
+        return null;
+    }
 
-        const g = JSON.parse(
-            localStorage.getItem(SAVE_KEY)
-        );
+}
 
-        // Só aceita o save se tiver a estrutura completa
-        if(
-            g &&
-            g.versao === VERSAO_SAVE &&
-            Array.isArray(g.jogadores) &&
-            Array.isArray(g.calendario) &&
-            g.calendario.length === TOTAL_JORNADAS &&
-            Array.isArray(g.tabela) &&
-            g.tabela.length === EQUIPAS.length &&
-            typeof g.dinheiro === "number" &&
-            typeof g.jornada === "number"
-        ){
-            return g;
+// Passa uma carreira da versão 3 (sem suplentes) para a 4
+function migrarV3(g){
+
+    g.jogadores.forEach(j => { j.lesao = 0; });
+
+    copiar(JOGO_BASE).jogadores.slice(TITULARES).forEach(s => {
+
+        if(!g.jogadores.some(j => j.nome === s.nome)){
+            g.jogadores.push(s);
         }
 
-    }catch(e){}
+    });
+
+    g.versao = VERSAO_SAVE;
+    g.epoca = 1;
+    g.mercado = gerarMercado(g.jogadores);
+
+    return g;
+
+}
+
+function carregar(){
+
+    const atual = lerSave(SAVE_KEY);
+
+    if(saveValido(atual)) return atual;
+
+    const v3 = lerSave(KEY_V3);
+
+    if(v3 && v3.versao === 3 && Array.isArray(v3.jogadores)){
+
+        const migrado = migrarV3(v3);
+
+        if(saveValido(migrado)) return migrado;
+
+    }
 
     // Save inexistente, antigo ou corrompido → começa limpo
     return novoJogo();
@@ -366,6 +582,7 @@ function carregar(){
 
 let jogo = carregar();
 let treinoSelecionado = "ofensivo";
+let selecionado = null;   // jogador escolhido para trocar
 
 function guardar(){
 
@@ -410,34 +627,18 @@ function atualizar(){
         Math.min(jogo.jornada, TOTAL_JORNADAS) +
         "/" + TOTAL_JORNADAS;
 
-    document.getElementById("plantel").innerHTML =
-        jogo.jogadores.map(j => `
-
-            <div class="plantel-item">
-
-                <strong>${j.nome}</strong>
-
-                <br>
-
-                ⚔️ ${j.ataque}
-
-                🛡️ ${j.defesa}
-
-                💪 ${j.forma}
-
-            </div>
-
-        `).join("");
+    atualizarPlantel();
+    atualizarMercado();
 
     const btn = document.getElementById("btnJogar");
     const adv = document.getElementById("adversario");
 
     if(jogo.epocaTerminada){
 
-        adv.innerHTML = "🏁 Época terminada";
+        adv.innerHTML = `🏁 Época ${jogo.epoca} terminada`;
 
-        btn.disabled = true;
-        btn.textContent = "🏁 Época terminada";
+        btn.disabled = false;
+        btn.textContent = `➡️ Começar Época ${jogo.epoca + 1}`;
 
     }else{
 
@@ -447,7 +648,7 @@ function atualizar(){
             p.casa === NOME_CLUBE ? "🏠 Em casa" : "✈️ Fora";
 
         adv.innerHTML = `
-            <small>Jornada ${jogo.jornada} · ${local}</small>
+            <small>Época ${jogo.epoca} · Jornada ${jogo.jornada} · ${local}</small>
             <br>
             ${p.casa} vs ${p.fora}
         `;
@@ -458,6 +659,137 @@ function atualizar(){
     }
 
     atualizarClassificacao();
+
+}
+
+function atualizarPlantel(){
+
+    const campo = emCampo();
+
+    let html = "";
+
+    jogo.jogadores.forEach((j, i) => {
+
+        if(i === 0){
+            html += `<div class="sec-plantel">Titulares</div>`;
+        }
+
+        if(i === TITULARES){
+            html += `<div class="sec-plantel">Suplentes</div>`;
+        }
+
+        const lesionado = j.lesao > 0;
+        const entra = i >= TITULARES && campo.includes(i);
+
+        let tag = "";
+
+        if(lesionado){
+            tag = `<span class="tag tag-les">🤕 ${j.lesao} jornada${j.lesao > 1 ? "s" : ""}</span>`;
+        }
+        else if(entra){
+            tag = `<span class="tag tag-entra">⬆️ joga</span>`;
+        }
+
+        html += `
+
+            <div class="plantel-item jog
+                        ${selecionado === i ? "sel" : ""}
+                        ${lesionado ? "lesionado" : ""}"
+                 onclick="selecionarJogador(${i})">
+
+                <strong>${j.nome}</strong>
+                ${tag}
+
+                <br>
+
+                ⚔️ ${j.ataque}
+
+                🛡️ ${j.defesa}
+
+                💪 ${Math.round(j.forma)}
+
+            </div>
+
+        `;
+
+    });
+
+    if(selecionado !== null && jogo.jogadores.length > MIN_PLANTEL){
+
+        html += `
+            <button class="btn-sec" onclick="dispensar()">
+                🗑️ Dispensar ${jogo.jogadores[selecionado].nome}
+            </button>
+        `;
+
+    }
+
+    document.getElementById("plantel").innerHTML = html;
+
+}
+
+function atualizarMercado(){
+
+    const m = jogo.mercado;
+    const cheio = jogo.jogadores.length >= MAX_PLANTEL;
+
+    let html = "";
+
+    if(m.comprou){
+
+        html = `
+            <p>
+                ✅ Contrataste <strong>${m.contratado.nome}</strong>
+                por ${m.contratado.preco}€.
+                <br>
+                <small>Só podes contratar 1 jogador por época.</small>
+            </p>
+        `;
+
+    }else{
+
+        html = m.candidatos.map((c, i) => {
+
+            const bloqueado = jogo.dinheiro < c.preco || cheio;
+
+            return `
+
+                <div class="plantel-item linha-mercado">
+
+                    <div>
+                        <strong>${c.nome}</strong>
+                        <br>
+                        ⚔️ ${c.ataque} 🛡️ ${c.defesa} 💪 ${c.forma}
+                    </div>
+
+                    <button class="btn-comprar"
+                            onclick="contratar(${i})"
+                            ${bloqueado ? "disabled" : ""}>
+                        ${c.preco}€
+                    </button>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+        if(cheio){
+
+            html += `
+                <p>
+                    <small>
+                        Plantel cheio (${MAX_PLANTEL}).
+                        Dispensa um jogador para contratar.
+                    </small>
+                </p>
+            `;
+
+        }
+
+    }
+
+    document.getElementById("mercado").innerHTML = html;
 
 }
 
@@ -475,6 +807,7 @@ function mostrarTreino(){
         <br>
         🛡️ ${sinal(t.defesa)} Defesa
         <br>
+        ${t.recupera ? `💪 +${t.recupera} Forma a todo o plantel<br>` : ""}
         💰 Custo: ${t.custo}€
         <br><br>
         ${t.desc}
@@ -540,6 +873,100 @@ function animarDinheiro(antes, depois){
 }
 
 /* ============================================
+   AÇÕES DO PLANTEL E MERCADO
+   ============================================ */
+
+// Toca num jogador e noutro para os trocar de lugar
+function selecionarJogador(i){
+
+    if(selecionado === null){
+
+        selecionado = i;
+
+    }
+    else if(selecionado === i){
+
+        selecionado = null;
+
+    }
+    else{
+
+        const a = jogo.jogadores;
+
+        [a[selecionado], a[i]] = [a[i], a[selecionado]];
+
+        selecionado = null;
+
+        guardar();
+
+    }
+
+    atualizar();
+
+}
+
+function dispensar(){
+
+    if(
+        selecionado === null ||
+        jogo.jogadores.length <= MIN_PLANTEL
+    ){
+        return;
+    }
+
+    const j = jogo.jogadores[selecionado];
+
+    if(!confirm(`Dispensar ${j.nome}? Não recebes dinheiro.`)){
+        return;
+    }
+
+    jogo.jogadores.splice(selecionado, 1);
+
+    selecionado = null;
+
+    guardar();
+    atualizar();
+
+}
+
+function contratar(i){
+
+    const m = jogo.mercado;
+    const c = m.candidatos[i];
+
+    if(
+        m.comprou ||
+        !c ||
+        jogo.dinheiro < c.preco ||
+        jogo.jogadores.length >= MAX_PLANTEL
+    ){
+        return;
+    }
+
+    const dinheiroAntes = jogo.dinheiro;
+
+    jogo.dinheiro -= c.preco;
+
+    // entra como suplente (fim da lista)
+    jogo.jogadores.push({
+        nome: c.nome,
+        ataque: c.ataque,
+        defesa: c.defesa,
+        forma: c.forma,
+        lesao: 0
+    });
+
+    m.comprou = true;
+    m.contratado = { nome: c.nome, preco: c.preco };
+
+    guardar();
+    atualizar();
+
+    animarDinheiro(dinheiroAntes, jogo.dinheiro);
+
+}
+
+/* ============================================
    LÓGICA DO JOGO
    ============================================ */
 
@@ -552,10 +979,45 @@ function premioDaPosicao(posicao){
 
 }
 
+// Continua a carreira: mantém plantel e dinheiro
+function novaEpoca(){
+
+    jogo.epoca++;
+    jogo.jornada = 1;
+    jogo.calendario = gerarCalendario();
+    jogo.tabela = novaTabela();
+    jogo.epocaTerminada = false;
+
+    jogo.jogadores.forEach(j => {
+        j.lesao = 0;
+        j.forma = 80;
+    });
+
+    jogo.mercado = gerarMercado(jogo.jogadores);
+
+    selecionado = null;
+
+    document.getElementById("resultado").innerHTML = `
+        <div class="resumo-dinheiro">
+            🆕 <strong>Época ${jogo.epoca}</strong>
+            <br>
+            <small>
+                Os adversários estão um pouco mais fortes.
+                Há novos jogadores no mercado.
+            </small>
+        </div>
+    `;
+
+    guardar();
+    atualizar();
+
+}
+
 function jogarJornada(){
 
-    // Época já terminada → não dá prémio outra vez
+    // Época terminada → botão serve para começar a seguinte
     if(jogo.epocaTerminada){
+        novaEpoca();
         return;
     }
 
@@ -596,6 +1058,11 @@ function jogarJornada(){
         };
 
     });
+
+    // Cansaço e lesões (depois do jogo)
+    const noticias = aplicarDesgaste(treino);
+
+    selecionado = null;
 
     // Jogo do CRC
     const meu = resultados.find(
@@ -655,14 +1122,16 @@ function jogarJornada(){
         fimEpocaHTML = `
             <div class="resumo-dinheiro">
 
-                🏆 <strong>FIM DA ÉPOCA</strong>
+                🏆 <strong>FIM DA ÉPOCA ${jogo.epoca}</strong>
                 <br>
                 Posição final: <strong>${posicao}º</strong>
                 <br>
                 Prémio: <span class="vitoria">+${premio}€</span>
                 <br>
                 <small>
-                    Carrega em "Nova Carreira" para começar outra época.
+                    Carrega em "Começar Época ${jogo.epoca + 1}" para
+                    continuar com o mesmo plantel, ou em "Nova Carreira"
+                    para recomeçar do zero.
                 </small>
 
             </div>
@@ -685,6 +1154,13 @@ function jogarJornada(){
                 ${r.fora}
             </div>
         `).join("");
+
+    const noticiasHTML = noticias.length ? `
+        <div class="outros-jogos">
+            <small>🩺 Notícias do plantel</small>
+            ${noticias.map(n => `<div class="outro-jogo">${n}</div>`).join("")}
+        </div>
+    ` : "";
 
     document.getElementById("resultado").innerHTML = `
 
@@ -724,6 +1200,8 @@ function jogarJornada(){
 
         </div>
 
+        ${noticiasHTML}
+
         ${fimEpocaHTML}
 
         <div class="outros-jogos">
@@ -749,6 +1227,7 @@ function reiniciar(){
         jogo = novoJogo();
 
         treinoSelecionado = "ofensivo";
+        selecionado = null;
 
         document.getElementById("treino").value = "ofensivo";
 
@@ -767,10 +1246,12 @@ function reiniciar(){
    ARRANQUE
    ============================================ */
 
-// Remove saves de versões anteriores (estrutura incompatível)
-CHAVES_ANTIGAS.forEach(k => {
-    try{ localStorage.removeItem(k); }catch(e){}
-});
-
 mostrarTreino();
 atualizar();
+
+// Guarda já na versão atual e limpa saves de versões anteriores
+guardar();
+
+CHAVES_ANTIGAS.concat([KEY_V3]).forEach(k => {
+    try{ localStorage.removeItem(k); }catch(e){}
+});

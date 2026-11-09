@@ -162,6 +162,83 @@ gtag('config', 'G-FTEGNRDBJW');
     font-weight:bold;
 }
 
+/* Plantel e mercado */
+.dica{
+    font-size:13px;
+    opacity:0.75;
+    margin:4px 0 10px;
+}
+
+.sec-plantel{
+    margin-top:10px;
+    font-size:12px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--dourado);
+}
+
+.jog{
+    cursor:pointer;
+    border-radius:10px;
+}
+
+.jog.sel{
+    outline:2px solid var(--dourado);
+    background:rgba(227,193,90,0.15);
+}
+
+.jog.lesionado{
+    opacity:0.6;
+}
+
+.tag{
+    font-size:12px;
+    padding:2px 8px;
+    border-radius:10px;
+    margin-left:6px;
+}
+
+.tag-les{
+    background:rgba(255,102,102,0.2);
+    color:#ff6666;
+}
+
+.tag-entra{
+    background:rgba(0,204,102,0.2);
+    color:#00cc66;
+}
+
+.linha-mercado{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.btn-comprar,
+.btn-sec{
+    padding:10px 14px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    background:var(--dourado);
+    color:black;
+}
+
+.btn-comprar:disabled{
+    opacity:0.4;
+    cursor:not-allowed;
+}
+
+.btn-sec{
+    display:block;
+    width:100%;
+    margin-top:12px;
+    background:rgba(255,102,102,0.25);
+    color:#ff6666;
+}
+
 /* Animações do dinheiro no topo */
 .flash-perda{
     animation:flashPerda 1s ease;
@@ -233,7 +310,26 @@ gtag('config', 'G-FTEGNRDBJW');
 
     <h2>👥 Plantel</h2>
 
+    <p class="dica">
+        Toca num jogador e noutro para os trocar.
+        Os 5 primeiros jogam; se um estiver lesionado,
+        entra o suplente seguinte. Quem joga cansa-se,
+        quem descansa recupera forma.
+    </p>
+
     <div id="plantel"></div>
+</div>
+
+<div class="card-jogo">
+
+    <h2>🛒 Mercado</h2>
+
+    <p class="dica">
+        Podes contratar 1 jogador por época.
+    </p>
+
+    <div id="mercado"></div>
+
 </div>
 
 <div class="card-jogo">
