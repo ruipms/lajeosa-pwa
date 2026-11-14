@@ -1243,6 +1243,35 @@ function reiniciar(){
 }
 
 /* ============================================
+   INSTRUÇÕES
+   Abrem sozinhas só na primeira visita
+   ============================================ */
+
+const KEY_INSTRUCOES = "crc-manager-instrucoes-vistas";
+
+function abrirInstrucoes(){
+
+    document.getElementById("modalInstrucoes")
+        .classList.add("aberto");
+
+}
+
+function fecharInstrucoes(){
+
+    document.getElementById("modalInstrucoes")
+        .classList.remove("aberto");
+
+    try{
+        localStorage.setItem(KEY_INSTRUCOES, "1");
+    }catch(e){}
+
+}
+
+document.addEventListener("keydown", e => {
+    if(e.key === "Escape") fecharInstrucoes();
+});
+
+/* ============================================
    ARRANQUE
    ============================================ */
 
@@ -1255,3 +1284,10 @@ guardar();
 CHAVES_ANTIGAS.concat([KEY_V3]).forEach(k => {
     try{ localStorage.removeItem(k); }catch(e){}
 });
+
+// Primeira visita: mostra as instruções
+try{
+    if(!localStorage.getItem(KEY_INSTRUCOES)){
+        abrirInstrucoes();
+    }
+}catch(e){}
