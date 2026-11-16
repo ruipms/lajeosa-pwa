@@ -1,15 +1,15 @@
 {
   "atualizado": "2026-11-01",
   "classificacao": [
-  {"equipa":"Gcr Casal Cinza","j":3,"v":3,"e":0,"d":0,"gm":15,"gs":6,"pts":9},
-  {"equipa":"Núcleo Desp. Social","j":3,"v":3,"e":0,"d":0,"gm":12,"gs":2,"pts":9},
-  {"equipa":"Gd Macedense","j":4,"v":2,"e":0,"d":2,"gm":15,"gs":11,"pts":6},
-  {"equipa":"Crc Lageosa Mondego - A.","j":3,"v":2,"e":0,"d":1,"gm":11,"gs":6,"pts":6},
-  {"equipa":"Gd Trancoso","j":3,"v":2,"e":0,"d":1,"gm":10,"gs":10,"pts":6},
+  {"equipa":"Gcr Casal Cinza","j":4,"v":4,"e":0,"d":0,"gm":28,"gs":6,"pts":12},
+  {"equipa":"Núcleo Desp. Social","j":4,"v":4,"e":0,"d":0,"gm":14,"gs":3,"pts":12},
+  {"equipa":"Crc Lageosa Mondego - A.","j":4,"v":3,"e":0,"d":1,"gm":16,"gs":8,"pts":9},
+  {"equipa":"Gd Trancoso","j":4,"v":3,"e":0,"d":1,"gm":11,"gs":10,"pts":9},
+  {"equipa":"Gd Macedense","j":5,"v":2,"e":0,"d":3,"gm":15,"gs":12,"pts":6},
   {"equipa":"Ar Santo Cristo","j":3,"v":1,"e":0,"d":2,"gm":10,"gs":14,"pts":3},
-  {"equipa":"Sc Vilar Formoso","j":3,"v":1,"e":0,"d":2,"gm":5,"gs":11,"pts":3},
-  {"equipa":"Adrc Penaverdense","j":4,"v":1,"e":0,"d":3,"gm":12,"gs":17,"pts":3},
-  {"equipa":"Acd Estrela Almeida","j":4,"v":0,"e":0,"d":4,"gm":2,"gs":15,"pts":0}
+  {"equipa":"Sc Vilar Formoso","j":4,"v":1,"e":0,"d":3,"gm":7,"gs":16,"pts":3},
+  {"equipa":"Adrc Penaverdense","j":5,"v":1,"e":0,"d":4,"gm":13,"gs":19,"pts":3},
+  {"equipa":"Acd Estrela Almeida","j":5,"v":0,"e":0,"d":5,"gm":2,"gs":28,"pts":0}
 ],
   "jornadas": [
     {
@@ -73,14 +73,38 @@
   ]
 },
     {
-      "numero": 5,
-      "jogos": [
-        {"casa":"Gd Trancoso","fora":"Gd Macedense","data":"14 nov","hora":"18:30","local":"Pav. Multiusos de Trancoso"},
-        {"casa":"Sc Vilar Formoso","fora":"Crc Lageosa Mondego - A.","data":"14 nov","hora":"18:30","local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"},
-        {"casa":"Gcr Casal Cinza","fora":"Acd Estrela Almeida","data":"14 nov","hora":"18:30","local":"Pavilhão de Casal de Cinza"},
-        {"casa":"Adrc Penaverdense","fora":"Núcleo Desp. Social","data":"14 nov","hora":"18:30","local":"Pav. Escola Secundária Fornos Alg."}
-      ]
+  "numero": 5,
+  "jogos": [
+    {
+      "casa":"Gd Trancoso",
+      "fora":"Gd Macedense",
+      "data":"14 nov",
+      "golos":[1,0],
+      "local":"Pav. Multiusos de Trancoso"
     },
+    {
+      "casa":"Sc Vilar Formoso",
+      "fora":"Crc Lageosa Mondego - A.",
+      "data":"14 nov",
+      "golos":[2,5],
+      "local":"Pav. Gimnodesportivo Fronteira da Paz, Vilar Formoso"
+    },
+    {
+      "casa":"Gcr Casal Cinza",
+      "fora":"Acd Estrela Almeida",
+      "data":"14 nov",
+      "golos":[13,0],
+      "local":"Pavilhão de Casal de Cinza"
+    },
+    {
+      "casa":"Adrc Penaverdense",
+      "fora":"Núcleo Desp. Social",
+      "data":"14 nov",
+      "golos":[1,2],
+      "local":"Pav. Escola Secundária Fornos Alg."
+    }
+  ]
+},
     {
       "numero": 6,
       "jogos": [
