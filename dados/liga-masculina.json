@@ -1,14 +1,14 @@
 {
-  "atualizado": "2026-11-14",
+  "atualizado": "2026-11-24",
   "classificacao": [
-  {"pos":1,"equipa":"Acd Estrela Almeida","j":1,"v":1,"e":0,"d":0,"gm":5,"gs":2,"pts":3},
-  {"pos":2,"equipa":"Sc Sabugal","j":1,"v":1,"e":0,"d":0,"gm":3,"gs":1,"pts":3},
-  {"pos":3,"equipa":"Gcr Casal Cinza","j":1,"v":1,"e":0,"d":0,"gm":5,"gs":2,"pts":3},
-  {"pos":4,"equipa":"Adrc Aguiar Beira/Viagens Victor Correia","j":1,"v":0,"e":1,"d":0,"gm":3,"gs":3,"pts":1},
-  {"pos":5,"equipa":"Gd Sameiro","j":1,"v":0,"e":1,"d":0,"gm":3,"gs":3,"pts":1},
-  {"pos":6,"equipa":"Adrc Penaverdense","j":1,"v":0,"e":0,"d":1,"gm":1,"gs":3,"pts":0},
-  {"pos":7,"equipa":"Agd Mêda","j":1,"v":0,"e":0,"d":1,"gm":2,"gs":5,"pts":0},
-  {"pos":8,"equipa":"Crc Lageosa Mondego - A.","j":1,"v":0,"e":0,"d":1,"gm":2,"gs":5,"pts":0}
+  {"pos":1,"equipa":"Sc Sabugal","j":2,"v":2,"e":0,"d":0,"gm":19,"gs":3,"pts":6},
+  {"pos":2,"equipa":"Acd Estrela Almeida","j":2,"v":2,"e":0,"d":0,"gm":12,"gs":5,"pts":6},
+  {"pos":3,"equipa":"Gd Sameiro","j":2,"v":1,"e":1,"d":0,"gm":6,"gs":4,"pts":4},
+  {"pos":4,"equipa":"Adrc Aguiar Beira/Viagens Victor Correia","j":2,"v":1,"e":1,"d":0,"gm":10,"gs":7,"pts":4},
+  {"pos":5,"equipa":"Gcr Casal Cinza","j":2,"v":1,"e":0,"d":1,"gm":6,"gs":5,"pts":3},
+  {"pos":6,"equipa":"Adrc Penaverdense","j":2,"v":0,"e":0,"d":2,"gm":5,"gs":10,"pts":0},
+  {"pos":7,"equipa":"Crc Lageosa Mondego - A.","j":2,"v":0,"e":0,"d":2,"gm":5,"gs":12,"pts":0},
+  {"pos":8,"equipa":"Agd Mêda","j":2,"v":0,"e":0,"d":2,"gm":4,"gs":21,"pts":0}
 ],
   "jornadas": [
     {
@@ -45,14 +45,38 @@
   ]
 },
     {
-      "numero": 2,
-      "jogos": [
-        {"casa":"Sc Sabugal","fora":"Agd Mêda","data":"21 nov","hora":"21:00","local":"Pav. Municipal do Sabugal"},
-        {"casa":"Adrc Aguiar Beira/Viagens Victor Correia","fora":"Adrc Penaverdense","data":"21 nov","hora":"21:00","local":"Pav. Municipal Penalva do Castelo"},
-        {"casa":"Gcr Casal Cinza","fora":"Gd Sameiro","data":"21 nov","hora":"21:00","local":"Pavilhão de Casal de Cinza"},
-        {"casa":"Acd Estrela Almeida","fora":"Crc Lageosa Mondego - A.","data":"21 nov","hora":"21:00","local":"Pav. Gimnodesportivo Almeida"}
-      ]
+  "numero": 2,
+  "jogos": [
+    {
+      "casa":"Sc Sabugal",
+      "fora":"Agd Mêda",
+      "data":"21 nov",
+      "golos":[16,2],
+      "local":"Pav. Municipal do Sabugal"
     },
+    {
+      "casa":"Adrc Aguiar Beira/Viagens Victor Correia",
+      "fora":"Adrc Penaverdense",
+      "data":"21 nov",
+      "golos":[7,4],
+      "local":"Pav. Municipal Penalva do Castelo"
+    },
+    {
+      "casa":"Gcr Casal Cinza",
+      "fora":"Gd Sameiro",
+      "data":"21 nov",
+      "golos":[1,3],
+      "local":"Pavilhão de Casal de Cinza"
+    },
+    {
+      "casa":"Acd Estrela Almeida",
+      "fora":"Crc Lageosa Mondego - A.",
+      "data":"21 nov",
+      "golos":[7,3],
+      "local":"Pav. Gimnodesportivo Almeida"
+    }
+  ]
+},
     {
       "numero": 3,
       "jogos": [
