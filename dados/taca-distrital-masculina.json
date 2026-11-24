@@ -1,5 +1,5 @@
 {
-  "atualizado": "2026-10-31",
+  "atualizado": "2026-11-24",
   "series": [
     {
       "nome": "A",
@@ -135,6 +135,39 @@
               "local":"Pavilhão de Casal de Cinza"
             }
           ]
+        }
+      ]
+    }
+  ],
+  "fases": [
+    {
+      "nome": "Meia-Final",
+      "jogos": [
+        {
+          "casa":"Sc Sabugal",
+          "fora":"Adrc Aguiar Beira/Viagens Victor Correia",
+          "data":"5 dez",
+          "hora":"18:00",
+          "local":"Pavilhão de Casal de Cinza"
+        },
+        {
+          "casa":"Gd Sameiro",
+          "fora":"Adrc Penaverdense",
+          "data":"5 dez",
+          "hora":"21:00",
+          "local":"Pavilhão de Casal de Cinza"
+        }
+      ]
+    },
+    {
+      "nome": "Final",
+      "jogos": [
+        {
+          "casa":"Vencedor Jogo 1",
+          "fora":"Vencedor Jogo 2",
+          "data":"6 dez",
+          "hora":"18:00",
+          "local":"Pavilhão de Casal de Cinza"
         }
       ]
     }
