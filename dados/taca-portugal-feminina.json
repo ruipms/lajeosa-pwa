@@ -1,5 +1,5 @@
 {
-  "atualizado": "2026-11-09",
+  "atualizado": "2026-11-25",
   "fases": [
     {
       "nome": "1.ª Eliminatória",
@@ -123,6 +123,32 @@
             {"casa":"Vitória C. Santarém","fora":"Dragões Futsal","data":"7 nov","hora":"19:00","golos":[1,2],"local":"Pav. Municipal Santarém Nave"},
             {"casa":"Oriental Rc","fora":"Soc. Musical 3 Agosto 1885","data":"8 nov","hora":"16:00","golos":[2,6],"local":"Pav. dos Lóios"},
             {"casa":"A. Casa Benfica Charneca Caparica","fora":"Cd Nacional","data":"8 nov","hora":"15:00","local":"Pav. Municipal Charneca Caparica"}
+          ]
+        }
+      ]
+    },
+    {
+      "nome": "3.ª Eliminatória",
+      "series": [
+        {
+          "nome": "Geral",
+          "jogos": [
+            {"casa":"Soc. Musical 3 Agosto 1885","fora":"Aliados Fc Lordelo","data":"12 dez","hora":"15:00","local":"Pav. dos Lóios"},
+            {"casa":"Cd Nacional","fora":"Cr Leões Porto Salvo","data":"12 dez","hora":"15:30","local":"Pav. Bartolomeu Perestrelo"},
+            {"casa":"Srbu Parchalense","fora":"Sl Benfica","data":"12 dez","hora":"16:00","local":"Pav. Escola Eb 2/3 Parchal"},
+            {"casa":"Asm Vila Marim","fora":"Gd Árvore","data":"12 dez","hora":"16:00","local":"Pav. Municipal Desportos - Vila Real"},
+            {"casa":"Adcr Caxinas Poça Barca","fora":"Cd Aves 1930","data":"12 dez","hora":"18:00","local":"Pav. do Centro Comunitário das Caxinas"},
+            {"casa":"Casa Povo Freixo","fora":"Feijó/Ltintas","data":"12 dez","hora":"18:00","local":"Pav. E. Eb - 2,3 S.Julião do Freixo"},
+            {"casa":"Escola Dc Gondomar","fora":"Novasemente Gd","data":"12 dez","hora":"18:00","local":"Pav. Municipal Jovim"},
+            {"casa":"Casa Benfica Mortágua","fora":"Juventude Ouriense","data":"12 dez","hora":"18:00","local":"Pav. Municipal de Mortágua"},
+            {"casa":"Gcr Casal Cinza","fora":"Atlético Cp","data":"12 dez","hora":"18:00","local":"Pavilhão de Casal de Cinza"},
+            {"casa":"Ccr Quinta Sobrado Palmeiros","fora":"Santa Luzia Fc","data":"12 dez","hora":"19:00","local":"Pav. Gimnod. Quinta Sobrado"},
+            {"casa":"Sc Braga","fora":"Ua Povoense","data":"12 dez","hora":"20:00","local":"Amco Arena"},
+            {"casa":"Hda Cinfães Futsal","fora":"Scu Torreense","data":"12 dez","hora":"20:00","local":"Pav. Mun. Armando Costa"},
+            {"casa":"Sporting Cp","fora":"Gcr Nun'álvares","data":"12 dez","hora":"20:00","local":"Pav. João Villaret"},
+            {"casa":"Cr Golpilheira","fora":"Cria","data":"12 dez","hora":"20:00","local":"Pav. Desportivo Municipal Golpilheira"},
+            {"casa":"Obsc Gresart Futsal Fem","fora":"Maia Fc/Mercainox","data":"12 dez","hora":"20:00","local":"Pav. Municipal de Oliveira do Bairro"},
+            {"casa":"Cf Os Belenenses","fora":"Dragões Futsal","data":"13 dez","hora":"15:00","local":"Pav. Acácio Rosa"}
           ]
         }
       ]
