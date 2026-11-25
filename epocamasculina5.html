@@ -287,6 +287,7 @@
     <p style="margin-top:15px;"><strong>Jogos por Jornada</strong></p>
     <div class="jornadas-barra" id="taca-jornadas-barra" role="group" aria-label="Jornadas da taça"></div>
     <div id="taca-jornada-jogos"></div>
+    <div id="taca-fases"></div>
 
     <p style="margin-top:6px;">
       <a href="https://resultados.fpf.pt/Competition/Details?competitionId=30351&seasonId=106"
@@ -498,6 +499,18 @@
       document.getElementById("taca-jornada-jogos").innerHTML = jogos;
     }
 
+    function desenharFases() {
+  var el = document.getElementById("taca-fases");
+  if (!d.fases || !d.fases.length) { el.innerHTML = ""; return; }
+  var html = '<p style="margin-top:15px;"><strong>Fase Final</strong></p>';
+  d.fases.forEach(function (f) {
+    html += '<p class="fase">' + esc(f.nome) + "</p>";
+    f.jogos.forEach(function (x) { html += cartaoJogo(x); });
+  });
+  el.innerHTML = html;
+}
+desenharFases();
+    
     ouvirBotoes("taca-series-barra", function (i) { serieSel = i; jornSel = primeiraPorJogar(series[i]); desenhar(); });
     ouvirBotoes("taca-jornadas-barra", function (i) { jornSel = i; desenhar(); });
     desenhar();
